@@ -4,10 +4,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :job_title
       t.date :date_of_birth
-      t.string :mobile_number
+      t.string :mobile
       t.string :about_me
-      t.boolean :is_admin
-      t.boolean :is_enabled
+      t.boolean :admin
+      t.boolean :enabled
 
       t.timestamps
     end
