@@ -1,3 +1,4 @@
+# fix- Remove file
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
