@@ -1,3 +1,6 @@
+# fix- Add to .gitignore
+# fix- Add an example file to be pushed to github
 company:
+  # fix- Capitalize name
   name: vinsol
   domain: vinsol.com
