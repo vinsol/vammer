@@ -1,3 +1,4 @@
+# fix- Remove comments and extra code. Keep only development configuration in example file
 # PostgreSQL. Versions 8.2 and up are supported.
 #
 # Install the pg driver:
