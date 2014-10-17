@@ -18,11 +18,11 @@ password = STDIN.gets.chomp
 puts 'confirm password'
 confirm_password = STDIN.gets.chomp
 
-# fix- #admin should not be mass-assignable. Assign it after initializing object
+# fix- #admin should not be mass-assignable. Assign it after initializing object -DONE
 user = User.new(name: name, email: email_id, password: password, password_confirmation: confirm_password, admin: true)
 if user.save
-  # fix- Add email to the message. Make it more descriptive.
-  puts 'user is saved'
+  # fix- Add email to the message. Make it more descriptive. -DONE
+  puts "Admin with email id #{user.email} is saved"
 else
   puts user.errors.full_messages
 end

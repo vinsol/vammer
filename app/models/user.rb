@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -10,4 +11,5 @@ class User < ActiveRecord::Base
       errors.add(:email, 'domain does not match with companies domain')
     end
   end
+
 end
