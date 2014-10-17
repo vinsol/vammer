@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
-  # fix- Remove comments -DONE
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # fix- Rename to email_in_company_domain -DONE
   validate :email_in_company_domain
 
   def email_in_company_domain
