@@ -1,3 +1,4 @@
+# fix- Remove comments
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
   # def new

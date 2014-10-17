@@ -1,3 +1,5 @@
+# fix- Remove comments
+# fix- Check if following class is required or not
 class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation/new
   # def new
