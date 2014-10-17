@@ -1,5 +1,3 @@
-# fix- Remove comments and extra code. Keep only development configuration in example file -DONE
-
 default: &default
   adapter: postgresql
   encoding: unicode
