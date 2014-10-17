@@ -7,3 +7,5 @@ gem 'pg'
 gem 'therubyracer',  platforms: :ruby
 gem 'devise'
 gem 'byebug'
+gem 'jquery-rails'
+gem 'uglifier'
