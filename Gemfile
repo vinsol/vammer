@@ -8,6 +8,8 @@ gem 'therubyracer',  platforms: :ruby
 gem 'devise'
 
 # fix- Add to development, test groups
-gem 'byebug'
+group :test, :development do
+  gem 'byebug'
+end
 
 gem 'jquery-rails'
