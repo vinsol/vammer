@@ -11,29 +11,29 @@
         </div>
       <% end %>
 
-    <%= f.hidden_field :reset_password_token %>
+      <%= f.hidden_field :reset_password_token %>
 
-    <div class="control-group">
-      <%= f.label :name, class: "col-lg-4 control-label" %>
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <br>
+      <div class="control-group">
+        <%= f.label :name, class: "col-lg-4 control-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <br>
 
-    <div class="control-group">
-      <%= f.label :password, "password", class: "col-lg-4 control-label" %>
-      <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control" %>
-    </div>
-    <br>
+      <div class="control-group">
+        <%= f.label :password, "password", class: "col-lg-4 control-label" %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control" %>
+      </div>
+      <br>
 
-    <div class="control-group">
-      <%= f.label :password_confirmation, "Confirm password", class: "col-lg-4 control-label" %>
-      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-    </div>
-    <br>
+      <div class="control-group">
+        <%= f.label :password_confirmation, "Confirm password", class: "col-lg-4 control-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+      <br>
 
-    <div class="control-group col-md-offset-4">
-      <%= f.submit "Set password", class: "btn btn-primary" %>
-    </div>
+      <div class="control-group col-md-offset-4">
+        <%= f.submit "Set password", class: "btn btn-primary" %>
+      </div>
       <%= render "users/shared/links" %>
     <% end %>
   </div>
