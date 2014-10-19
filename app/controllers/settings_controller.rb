@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
-  before_action :authenticate_user!
+
+  before_action :authenticate_user!, :admin?
 
   def new
     if Setting.first
@@ -16,14 +17,17 @@ class SettingsController < ApplicationController
 
   def update
     setting = Setting.first
-    if setting.update_attribute(:value, allowed_params[:value])
-    else
+    unless setting.update_attribute(:value, allowed_params[:value])
       redirect_to :back
     end
   end
 
   def allowed_params
     params.require(:setting).permit(:value, :key)
+  end
+
+  def admin?
+    redirect_to :root unless current_user.admin
   end
 
 end
