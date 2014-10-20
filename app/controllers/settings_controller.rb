@@ -1,13 +1,9 @@
 class SettingsController < ApplicationController
 
-  before_action :authenticate_user!, :admin?
+  before_action :admin
 
   def new
-    if Setting.first
-      @setting = Setting.first
-    else
-      @setting = Setting.new
-    end
+    @setting = Setting.new
   end
 
   def create
@@ -22,11 +18,15 @@ class SettingsController < ApplicationController
     end
   end
 
+  def edit
+    @setting = Setting.first
+  end
+
   def allowed_params
     params.require(:setting).permit(:value, :key)
   end
 
-  def admin?
+  def admin
     redirect_to :root unless current_user.admin
   end
 
