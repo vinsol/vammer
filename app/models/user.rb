@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :validatable, :confirmable
 
   validate :email_domain
+  validates :name, presence: true, on: :update
 
   def email_domain
     company_data = YAML.load_file('config/config.yml')
