@@ -1,0 +1,30 @@
+<div class="col-md-6 col-md-offset-3">
+  <table class="table table-striped table-hover center-align">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <%= link_to "show" %>
+          <% if admin_logged_in %>
+             | <%= link_to "edit" %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table> 
+</div>
