@@ -7,9 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="background">
-  <%= yield %>
-</div>
+  <div class="header">
+    <%= link_to image_tag(Setting.first.value), :root %>
+    <% if user_signed_in? %>
+      <div class="user_name">
+        hi <%= current_user %>
+      </div>
+      <div class="search_header">
+        <%= render "layouts/search_bar" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="container-body">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

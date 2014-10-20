@@ -8,4 +8,8 @@ module ApplicationHelper
     YAML.load_file('config/config.yml')['company']['domain']
   end
 
+  def admin_logged_in
+    current_user.admin
+  end
+
 end
