@@ -15,7 +15,6 @@
  *= require bootstrap
  */
 .header {
-  border-bottom: solid #cccccc 1px;
   background-color: #f8f8f8
 }
 .user_name {
@@ -23,11 +22,11 @@
   margin: 20px 40px;
 }
 .search_header {
-  border-bottom: 1px solid #CCC;
   height: 50px;
 }
 .search_input {
   margin-left: 80px;
+  margin-top: 8px;
 }
 .navbar-position {
   margin-right: -150px;
