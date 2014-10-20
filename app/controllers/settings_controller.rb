@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
 
-  before_action :admin
+  before_action :authenticate_user!, :admin
 
   def new
     @setting = Setting.new
