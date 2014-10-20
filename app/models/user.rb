@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   validate :email_domain
 
+  # fix- Rename to #email_matches_company_domain
   def email_domain
     company_data = YAML.load_file('config/config.yml')
     if company_data['company']['domain'] != email.split('@').last
@@ -13,6 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # fix- Should not be required after removing :confirmable
   def password_required?
     super if confirmed?
   end

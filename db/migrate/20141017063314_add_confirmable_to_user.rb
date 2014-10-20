@@ -1,3 +1,4 @@
+# fix- We will need a migration to remove confirmable fields from User
 class AddConfirmableToUser < ActiveRecord::Migration
   def change
     add_column :users, :confirmation_token, :string

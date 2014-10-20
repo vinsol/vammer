@@ -1,3 +1,4 @@
+# fix- Remove :confirmable from User. Send a link to reset password only, no confirmation of user is required.
 class Users::ConfirmationsController < Devise::ConfirmationsController
 
   def show
