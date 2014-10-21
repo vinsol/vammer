@@ -109,10 +109,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
-  devise
-  jquery-rails
-  pg
+  byebug (= 3.5.1)
+  devise (= 3.4.0)
+  jquery-rails (= 3.1.2)
+  pg (= 0.17.1)
   rails (= 4.1.6)
-  therubyracer
-  uglifier
+  therubyracer (= 0.12.1)
+  uglifier (= 2.5.3)

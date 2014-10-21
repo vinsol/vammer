@@ -3,14 +3,14 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.6'
 
-gem 'pg'
-gem 'therubyracer',  platforms: :ruby
+gem 'pg', '0.17.1'
+gem 'therubyracer', '0.12.1', platforms: :ruby
 
-gem 'devise'
+gem 'devise', '3.4.0'
 
 group :test, :development do
-  gem 'byebug'
+  gem 'byebug', '3.5.1'
 end
 
-gem 'jquery-rails'
-gem 'uglifier'
+gem 'jquery-rails', '3.1.2'
+gem 'uglifier', '2.5.3'
