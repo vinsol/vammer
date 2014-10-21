@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
-
   validate :email_matches_company_domain
 
   # fix- Rename to #email_matches_company_domain -DONE

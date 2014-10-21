@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021100712) do
+ActiveRecord::Schema.define(version: 20141021103802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20141021100712) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-10-20 10:15:59'
+    t.datetime "joining_date",           default: '2014-10-21 10:38:52'
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
