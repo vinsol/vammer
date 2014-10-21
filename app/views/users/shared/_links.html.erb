@@ -1,5 +1,7 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to 'Log in', new_session_path(resource_name) %><br />
+<div class="control-group col-md-offset-4">
+  <%= link_to "Log in", new_session_path(resource_name) %><br />
+</div>
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
@@ -15,6 +17,7 @@
 
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+
   <%= link_to 'Did not receive confirmation instructions?', new_confirmation_path(resource_name) %><br />
 <% end -%>
 
