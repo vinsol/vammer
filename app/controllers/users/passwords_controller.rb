@@ -1,5 +1,6 @@
 class Users::PasswordsController < Devise::PasswordsController
 
+  #NOTE: Lets remove this method and get the user name while registration only
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
     self.resource.name = params[:user][:name]

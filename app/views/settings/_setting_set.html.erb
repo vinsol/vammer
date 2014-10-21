@@ -1,13 +1,16 @@
 <div class="container">
   <div class="col-md-7 col-md-offset-2 vertical-center">
 
-    <%= form_for @setting, html: { class: 'form-horizontal col-lg-10' } do |f|%>
+    <%= form_for @setting, html: { class: 'form-horizontal col-lg-10' } do |f| %>
+      <!-- # fix- Indentation issue -->
     <div class="control-group">
       <%= label_tag :company_name, "Company Name", {class: "col-lg-4 control-label"} %>
       <%= text_field_tag :company_name, get_company_name, disabled: true, class: "form-control col-md-offset-4"%>
     </div>
     <br>
 
+      <!-- # fix- Try adding one more record to settings table for testing purpose. Logo is there, you can add location as another record -->
+      <!-- # fix- Modify the form to be used with multiple records -->
     <%= f.text_field :key, { value: :logo, hidden: true } %>
 
     <div class="control-group">

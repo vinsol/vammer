@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # fix- Why do we have this? Please add some documentation for this.
   def password_required?
     super if confirmed?
   end
