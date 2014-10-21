@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020101344) do
+ActiveRecord::Schema.define(version: 20141021103802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141020101344) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "joining_date",           default: '2014-10-20 10:15:59'
+    t.datetime "joining_date",           default: '2014-10-21 10:38:52'
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -12,4 +12,9 @@ module ApplicationHelper
     current_user.admin
   end
 
+  def link_to_by_order(link, params, criteria)
+    sort_order = params[:direction] == "asc" ? :desc : :asc
+    link_to link, users_path(order: criteria, direction: sort_order)
+  end
+
 end

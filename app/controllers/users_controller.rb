@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
 
   def index
-    @users = User.all.page params[:page]
+    unless params[:direction]
+      @users = User.order(name: :asc).page params[:page]
+    else
+      @users = User.order( params[:order] => params[:direction].to_sym).page params[:page]
+    end
   end
 
 end

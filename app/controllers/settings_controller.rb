@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
 
-  before_action :authenticate_user!, :admin?
+  before_action :admin?
 
   def new
     if Setting.first
