@@ -8,3 +8,4 @@ gem 'therubyracer',  platforms: :ruby
 gem 'devise'
 gem 'byebug'
 gem 'jquery-rails'
+gem "letter_opener", group: :development

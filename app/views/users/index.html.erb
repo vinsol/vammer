@@ -1,4 +1,4 @@
 <% if user_signed_in? %>
-  <!-- # fix: Use Ruby 2 syntax for Hash -->
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <!-- # fix: Use Ruby 2 syntax for Hash -DONE --> 
+  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
 <% end %>
