@@ -1,24 +1,41 @@
 <div class="container">
+
   <div class="col-md-7 col-md-offset-2 vertical-center">
 
-    <%= form_for @setting, html: { class: 'form-horizontal col-lg-10' } do |f|%>
-    <div class="control-group">
-      <%= label_tag :company_name, "Company Name", {class: "col-lg-4 control-label"} %>
-      <%= text_field_tag :company_name, get_company_name, disabled: true, class: "form-control col-md-offset-4"%>
-    </div>
-    <br>
+    <%= form_tag controller: "settings", action: "create" do |f| %>
 
-    <%= f.text_field :key, { value: :logo, hidden: true } %>
+      <!-- # fix- Indentation issue  -DONE -->
 
-    <div class="control-group">
-      <%= f.label :value, "logo", class: "col-lg-4 control-label" %>
-      <%= f.text_field :value, class: "form-control" %>
-    </div>
-    <br>
+      <div class="control-group">
 
-    <div class="control-group col-md-offset-4">
-      <%= f.submit %>
-    </div>
+        <%= label_tag :company_name, "Company Name", {class: "col-lg-4 control-label"} %>
+        <%= text_field_tag :company_name, get_company_details['name'], disabled: true, class: "form-control col-md-offset-4"%>
+
+      </div>
+      <br>
+
+      <!-- # fix- Try adding one more record to settings table for testing purpose. Logo is there, you can add location as another record -DONE -->
+      <!-- # fix- Modify the form to be used with multiple records -DONE -->
+      <% 2.times do |index| %>
+
+        <div class="control-group">
+          <%= label_tag "key[]#{index}", "Key", class: "col-lg-4 control-label" %>
+          <%= text_field_tag "key[]#{index}", "", class: "form-control" %>
+        </div>
+
+        <div class="control-group">
+          <%= label_tag "value[]#{index}", "Value", class: "col-lg-4 control-label" %>
+          <%= text_field_tag "value[]#{index}", "", class: "form-control" %>
+        </div>
+
+        <br>
+      <% end %>
+
+      <div class="control-group col-md-offset-4">
+
+        <%= submit_tag %>
+
+      </div>
 
     <% end %>
   </div>

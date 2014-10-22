@@ -14,9 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def password_required?
-    # super if recovered?
-  end
+  # fix- Why do we have this? Please add some documentation for this. -DONE
 
   def set_token
     set_reset_password_token
