@@ -16,42 +16,43 @@
           <%= link_to_by_order 'Email', params,  'email' %>
 
         </th>
+
         <th>Joining Date</th>
+
         <th>Action</th>
+
       </tr>
 
     </thead>
     <tbody>
-      <div id='change'>
 
-        <% @users.each do |user| %>
+      <% @users.each do |user| %>
 
-      </div>
-      <tr>
-        <td>
+        <tr>
+          <td>
 
-          <%= user.name %>
+            <%= user.name %>
 
-        </td>
-        <td>
+          </td>
+          <td>
 
-          <%= user.email %>
+            <%= user.email %>
 
-        </td>
-        <td>
+          </td>
+          <td>
 
-          <%= user.joining_date.to_date %>
+            <%= user.joining_date.to_date %>
 
-        </td>
-        <td>
+          </td>
+          <td>
 
-          <%= link_to 'show' %>
-          <% if admin_logged_in %>
-             | <%= link_to 'edit' %>
-          <% end %>
+            <%= link_to 'show' %>
+            <% if admin_logged_in or user == current_user%>
+               | <%= link_to 'edit', edit_user_path(user) %>
+            <% end %>
 
-        </td>
-      </tr>
+          </td>
+        </tr>
 
       <% end %>
 
