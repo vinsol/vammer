@@ -26,10 +26,10 @@
             <a href='#'>Group</a>
           </li>
           <li>
-            <a href='#'>People</a>
+            <%= link_to :People, users_path %>
           </li>
           <li>
-            <a href='#'>Edit Profile</a>
+            <%= link_to 'Edit Profile', edit_user_path(current_user) %>
           </li>
 
           <% if admin_logged_in %>
