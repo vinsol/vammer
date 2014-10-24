@@ -6,9 +6,4 @@ module ApplicationHelper
     YAML.load_file('config/config.yml')['company']
   end
 
-  # fix- This should always be update path for settings where multiple records from settings table can be updated in single request
-  def edit_or_create_setting_path
-    edit_setting_path(Setting.first)
-  end
-
 end
