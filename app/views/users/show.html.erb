@@ -1,9 +1,9 @@
 <div class='container'>
   <div class='col-md-6 col-md-offset-3 vertical-center'>
 
-    <%= form_for @user, html: { class: 'form-horizontal col-lg-10'} do |f| %>
+    <%= fields_for @user, html: { class: 'form-horizontal col-lg-10'} do |f| %>
 
-      <h2>edit user details</h2>
+      <h2>user details</h2>
 
       <div class="control-group col-md-offset-4">
         <% @user.errors.full_messages.each do |message| %>
@@ -17,14 +17,14 @@
       <div class='control-group'>
 
         <%= f.label :name, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :name, class: 'form-control' %>
+        <%= f.text_field :name, class: 'form-control', disabled: true %>
 
       </div><br/>
 
       <div class='control-group'>
 
         <%= f.label :about_me, class: 'col-lg-4 control-label' %>
-        <%= f.text_area :about_me, class: 'form-control' %>
+        <%= f.text_area :about_me, class: 'form-control', disabled: true %>
 
       </div><br/>
 
@@ -33,7 +33,7 @@
         <%= f.fields_for :attachment do |attach| %>
 
           <%= f.label :attachment, class: 'col-lg-4 control-label' %>
-          <%= attach.file_field :attachment %>
+          <%= image_tag @user.attachment.attachment %>
           <%= attach.hidden_field :attachment_cache %>
 
         <% end %>
@@ -43,31 +43,35 @@
       <div class='control-group'>
 
         <%= f.label :job_title, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :job_title, class: 'form-control' %>
+        <%= f.text_field :job_title, class: 'form-control', disabled: true %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.label :email, class: 'col-lg-4 control-label' %>
+        <%= f.text_field :email, class: 'form-control', disabled: true %>
 
       </div><br/>
 
       <div class='control-group'>
 
         <%= f.label :date_of_birth, class: 'col-lg-4 control-label' %>
-        <%= date_select :user, :date_of_birth, class: 'form-control' %>
-
+        <%= select_date @user.date_of_birth, class: 'form-control', disabled: true %>
       </div><br/>
 
       <div class='control-group'>
 
         <%= f.label :mobile, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :mobile, class: 'form-control' %>
+        <%= f.text_field :mobile, class: 'form-control', disabled: true %>
 
       </div><br/>
 
       <div class='control-group col-lg-offset-4'>
-
-        <%= f.submit 'Update user' , class: 'btn btn-primary' %>
 
       </div>
 
     <% end %>
 
   </div>
-</div>
+</div>  

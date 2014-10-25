@@ -88,6 +88,7 @@ GEM
     ref (1.0.5)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
+    rmagick (2.13.3)
     slop (3.6.0)
     sprockets (2.12.2)
       hike (~> 1.2)
@@ -114,10 +115,11 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  carrierwave
+  carrierwave (= 0.10.0)
   devise
   jquery-rails
-  kaminari
+  kaminari (= 0.16.1)
   pg
   rails (= 4.1.6)
+  rmagick (= 2.13.3)
   therubyracer

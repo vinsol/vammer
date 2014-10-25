@@ -1,5 +1,9 @@
 class AttachmentUploader < CarrierWave::Uploader::Base
 
+  include CarrierWave::RMagick
+
+  process :resize_to_fill => [50, 50]
+
   storage :file
 
   def store_dir

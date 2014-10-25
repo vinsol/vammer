@@ -8,5 +8,6 @@ gem 'therubyracer',  platforms: :ruby
 gem 'devise'
 gem 'byebug'
 gem 'jquery-rails'
-gem 'kaminari'
-gem 'carrierwave'
+gem 'kaminari', '0.16.1'
+gem 'carrierwave', '0.10.0'
+gem 'rmagick', '2.13.3'
