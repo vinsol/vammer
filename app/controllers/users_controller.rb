@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
     def authenticate_user_admin
       user = User.find(params[:id])
-      redirect_to :users unless user.admin or user == current_user
+      redirect_to :users unless current_user.admin or user == current_user
     end
 
 end

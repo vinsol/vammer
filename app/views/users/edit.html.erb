@@ -50,7 +50,7 @@
       <div class='control-group'>
 
         <%= f.label :date_of_birth, class: 'col-lg-4 control-label' %>
-        <%= date_select :users, :date_of_birth, class: 'form-control' %>
+        <%= date_select :user, :date_of_birth, start_year: 1960, end_year: (Time.now - 18.year).year, class: 'form-control' %>
 
       </div><br/>
 
@@ -70,4 +70,4 @@
     <% end %>
 
   </div>
-</div>  
+</div>
