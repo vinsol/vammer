@@ -67,9 +67,12 @@
 
       </div><br/>
 
-      <div class='control-group col-lg-offset-4'>
+      <div class='control-group'>
 
-      </div>
+        <%= f.label :joining_date, class: 'col-lg-4 control-label' %>
+        <%= select_date @user.joining_date, class: 'form-control', disabled: true %>
+
+      </div><br/>
 
     <% end %>
 

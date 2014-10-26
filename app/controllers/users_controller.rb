@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    debugger
     @user = User.find(params[:id])
     if @user.update(allowes_params)
       redirect_to :users

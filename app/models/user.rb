@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
 
-  validates :mobile, format: { with: /\A\d+\z/, message: 'only digits are allowed' }, on: :update, allow_blank: true
+  validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
 
   def email_domain
     company_data = YAML.load_file('config/config.yml')
