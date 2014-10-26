@@ -4,3 +4,11 @@
 .center-align td, .center-align th{
   text-align: center;
 }
+.asc {
+  background: url('arrow_mini_up.png') 30px no-repeat;
+  padding: 10px;
+}
+.desc {
+  background: url('arrow_mini_down.png') 30px no-repeat;
+  padding: 10px;
+}
