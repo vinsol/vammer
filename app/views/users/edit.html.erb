@@ -61,6 +61,20 @@
 
       </div><br/>
 
+      <div class='control-group'>
+
+        <%= f.label :admin, class: 'col-lg-4 control-label' %>
+        <%= f.check_box :admin, class: 'form-control' %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.label :enabled, class: 'col-lg-4 control-label' %>
+        <%= f.check_box :enabled, class: 'form-control' %>
+
+      </div><br/>
+
       <div class='control-group col-lg-offset-4'>
 
         <%= f.submit 'Update user' , class: 'btn btn-primary' %>

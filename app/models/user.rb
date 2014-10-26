@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   validate :email_domain
 
-  validate :date_of_birth_greater_than_current_time
+  validate :adult?, on: :update
 
   validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
 
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def date_of_birth_greater_than_current_time
+  def adult?
     if date_of_birth > Time.now - 18.year
       errors.add :date_of_birth, 'must be greater than 18 years'
       false

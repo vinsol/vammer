@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   private
 
     def allowes_params
-      params[:user].permit!
+      params.require(:user).permit(:name, :date_of_birth, :mobile, :about_me, :job_title, :admin, :enabled, attachment_attributes: [:attachment_cache, :id, :attachment])
     end
 
     def authenticate_user_admin
