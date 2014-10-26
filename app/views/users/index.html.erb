@@ -28,31 +28,35 @@
 
       <% @users.each do |user| %>
 
-        <tr>
-          <td>
+        <% if current_user.admin or (!current_user.admin and user.enabled) %>
 
-            <%= user.name %>
+          <tr>
+            <td>
 
-          </td>
-          <td>
+              <%= user.name %>
 
-            <%= user.email %>
+            </td>
+            <td>
 
-          </td>
-          <td>
+              <%= user.email %>
 
-            <%= user.joining_date.to_date %>
+            </td>
+            <td>
 
-          </td>
-          <td>
+              <%= user.joining_date.to_date %>
 
-            <%= link_to 'show' %>
-            <% if admin_logged_in or user == current_user%>
-               | <%= link_to 'edit', edit_user_path(user) %>
-            <% end %>
+            </td>
+            <td>
 
-          </td>
-        </tr>
+              <%= link_to 'show' %>
+              <% if admin_logged_in or user == current_user%>
+                 | <%= link_to 'edit', edit_user_path(user) %>
+              <% end %>
+
+            </td>
+          </tr>
+
+          <% end %>
 
       <% end %>
 

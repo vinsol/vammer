@@ -61,19 +61,22 @@
 
       </div><br/>
 
-      <div class='control-group'>
+      <% if admin_logged_in %>
 
-        <%= f.label :admin, class: 'col-lg-4 control-label' %>
-        <%= f.check_box :admin, class: 'form-control' %>
+        <div class='control-group'>
 
-      </div><br/>
+          <%= f.label :admin, class: 'col-lg-4 control-label' %>
+          <%= f.check_box :admin %>
 
-      <div class='control-group'>
+        </div><br/>
 
-        <%= f.label :enabled, class: 'col-lg-4 control-label' %>
-        <%= f.check_box :enabled, class: 'form-control' %>
+        <div class='control-group'>
 
-      </div><br/>
+          <%= f.label :enabled, class: 'col-lg-4 control-label' %>
+          <%= f.check_box :enabled %>
+
+        </div><br/>
+      <% end %>
 
       <div class='control-group col-lg-offset-4'>
 
