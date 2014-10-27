@@ -21,3 +21,5 @@ gem 'letter_opener', '1.2.0', group: :development
 gem 'kaminari', '0.16.1'
 
 gem 'carrierwave', '0.10.0'
+
+gem 'rmagick', '2.13.3'

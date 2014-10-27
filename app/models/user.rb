@@ -29,11 +29,12 @@ class User < ActiveRecord::Base
   end
 
   def adult?
-    if date_of_birth > Time.now - 18.year
-      errors.add :date_of_birth, 'must be greater than 18 years'
-      false
+    if date_of_birth
+      if date_of_birth > Time.now - 18.year
+        errors.add :date_of_birth, 'must be greater than 18 years'
+        false
+      end
     end
   end
-
 
 end

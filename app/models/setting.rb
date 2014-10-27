@@ -1,6 +1,6 @@
 class Setting < ActiveRecord::Base
 
-  before_save :uploaded_path_url?
+  # before_save :uploaded_path_url?
 
   def uploaded_path_url?
     if value.split('.').last == 'jpg'
