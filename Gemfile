@@ -13,4 +13,7 @@ group :test, :development do
 end
 
 gem 'jquery-rails', '3.1.2'
+
 gem 'uglifier', '2.5.3'
+
+gem "letter_opener", '1.2.0', group: :development
