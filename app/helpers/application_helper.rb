@@ -1,8 +1,7 @@
 module ApplicationHelper
 
-  # fix- Better to return company's complete detail from one method -DONE
-  #   e.g. #company_config returning a hash of all the config including name, domain.
-  def get_company_details
+  #FIX: Rename. Use just #company_config.
+  def company_config
     YAML.load_file('config/config.yml')['company']
   end
 

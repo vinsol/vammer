@@ -19,3 +19,6 @@ if user.save
 else
   puts user.errors.full_messages
 end
+
+Setting.find_or_create_by(key: :logo)
+puts 'setting for logo is saved'
