@@ -9,6 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.password = SecureRandom.hex
     resource_saved = resource.save
     yield resource if block_given?
+    debugger
     if resource_saved
       if resource.active_for_authentication?
         resource.send_reset_password_instructions
