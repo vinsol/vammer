@@ -1,0 +1,43 @@
+<div class='container'>
+
+  <div class='col-md-7 col-md-offset-2 vertical-center'>
+
+    <%= form_tag({controller: :settings, action: :update}, {method: :put}) do %>
+
+      <!-- # fix- Indentation issue  -DONE -->
+
+      <div class='control-group'>
+
+        <%= label_tag :company_name, 'Company Name', {class: 'col-lg-4 control-label'} %>
+        <%= text_field_tag :company_name, get_company_details['name'], disabled: true, class: 'form-control col-md-offset-4'%>
+
+      </div>
+      <br>
+
+      <!-- # fix- Try adding one more record to settings table for testing purpose. Logo is there, you can add location as another record -DONE -->
+      <!-- # fix- Modify the form to be used with multiple records -DONE -->
+      <div class='control-group'>
+        <%= fields_for 'settings[]', @first_setting do |first| %>
+          <%= first.label :value, 'Logo', class: 'col-lg-4 control-label' %>
+          <%= first.text_field :value, class: 'form-control' %>
+        <% end %>
+      </div>
+      <br />
+      <div class='control-group'>
+        <%= fields_for 'settings[]',@second_setting do |second| %>
+          <%= second.label :value, 'Location', class: 'col-lg-4 control-label' %>
+          <%= second.text_field :value, class: 'form-control' %>
+        <% end %>
+      </div>
+
+        <br />
+
+      <div class='control-group col-md-offset-4'>
+
+        <%= submit_tag %>
+
+      </div>
+
+    <% end %>
+  </div>
+</div>

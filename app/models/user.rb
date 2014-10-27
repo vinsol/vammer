@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :validatable
 
   validate :email_matches_company_domain
+  validates :name, presence: true, on: :update
 
   # fix- Rename to #email_matches_company_domain -DONE
   def email_matches_company_domain
@@ -12,8 +13,6 @@ class User < ActiveRecord::Base
       errors.add(:email, 'domain does not match with companies domain')
     end
   end
-
-  # fix- Should not be required after removing :confirmable -DONE
 
   def set_token
     set_reset_password_token
