@@ -9,7 +9,9 @@
 <body>
 
   <div class="header">
-    <%= link_to image_tag(Setting.first.value), :root %>
+    <% if Setting.find_by(key: :logo) %>
+      <%= link_to image_tag(Setting.find_by(key: :logo).value), :root %>
+    <% end %>
     <% if user_signed_in? %>
       <div class="user-name">
         hi <%= current_user.name %>
