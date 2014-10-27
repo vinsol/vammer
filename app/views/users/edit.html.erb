@@ -76,6 +76,14 @@
           <%= f.check_box :enabled %>
 
         </div><br/>
+
+        <div class='control-group'>
+
+          <%= f.label :joining_date, class: 'col-lg-4 control-label' %>
+          <%= date_select :user, :joining_date, start_year: 1978, end_year: Time.now.year, class: 'form-control' %>
+
+        </div><br/>
+
       <% end %>
 
       <div class='control-group col-lg-offset-4'>
