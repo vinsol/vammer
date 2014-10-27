@@ -3,11 +3,14 @@ class UsersController < ApplicationController
   before_action :authenticate_user_admin, only: [:update, :edit]
 
   def index
+    @users = current_user.admin ? User.all : User.where(enabled: true)
+
     if params[:direction]
-      @users = User.order( params[:order] => params[:direction].to_sym).page params[:page]
+      @users = @users.order( params[:order] => params[:direction].to_sym).page params[:page]
     else
-      @users = User.order(name: :asc).page params[:page]
+      @users = @users.order(name: :asc).page params[:page]
     end
+
   end
 
   def edit
