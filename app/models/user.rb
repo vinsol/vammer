@@ -9,13 +9,12 @@ class User < ActiveRecord::Base
 
   validate :email_domain
 
-  #FIX: We do not need this.
-  validate :adult?, on: :update
-
   validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
 
   #FIX: Use format instead of numericality
-  validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
+  validates :mobile, format: { with: /\A\d+\z/ }, length: {is: 10}, on: :update, allow_blank: true
+
+  START_YEAR = 1970
 
   def email_domain
     company_data = YAML.load_file('config/config.yml')
@@ -28,12 +27,12 @@ class User < ActiveRecord::Base
     set_reset_password_token
   end
 
-  def adult?
-    if date_of_birth > Time.now - 18.year
-      errors.add :date_of_birth, 'must be greater than 18 years'
-      false
-    end
+  def active_for_authentication?
+    super && enabled
   end
 
+  def inactive_message
+    'Sorry, this account is not enabled.'
+  end
 
 end

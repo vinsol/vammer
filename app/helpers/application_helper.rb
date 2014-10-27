@@ -17,4 +17,7 @@ module ApplicationHelper
     link_to link, users_path(order: criteria, direction: sort_order)
   end
 
+  def admin_or_self_user
+    admin_logged_in or user == current_user
+  end
 end
