@@ -7,13 +7,13 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachment
 
-  validate :email_domain
+  validate :email_in_company_domain
 
   validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
 
   validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
 
-  def email_domain
+  def email_in_company_domain
     company_data = YAML.load_file('config/config.yml')
     if company_data['company']['domain'] != email.split('@').last
       errors.add(:email, 'domain does not match with companies domain')
