@@ -7,6 +7,7 @@ class Users::PasswordsController < Devise::PasswordsController
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
     #FIX: Can we use #resource_params instead of params[:user] -DONE
+    self.resource.update(name: resource_params[:name])
 
     yield resource if block_given?
 

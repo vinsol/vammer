@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   before_validation :set_initial_password
 
+  before_save :set_name
+
   def set_initial_password
     self.password ? true : self.password = SecureRandom.hex
   end
