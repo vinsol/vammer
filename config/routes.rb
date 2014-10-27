@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'users/passwords' }
+  devise_for :users, controllers: { passwords: 'users/passwords' }
 
   root 'users#index'
 

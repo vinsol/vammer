@@ -5,11 +5,8 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # this method is overridden because we have to save user's name when we set the password
   def update
-    debugger
-    p 9
     self.resource = resource_class.reset_password_by_token(resource_params)
     #FIX: Can we use #resource_params instead of params[:user] -DONE
-    self.resource.update(name: resource_params[:name])
 
     yield resource if block_given?
 

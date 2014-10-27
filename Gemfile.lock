@@ -113,7 +113,7 @@ DEPENDENCIES
   byebug
   devise
   jquery-rails
-  letter_opener
+  letter_opener (= 1.2.0)
   pg
   rails (= 4.1.6)
   therubyracer
