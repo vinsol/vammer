@@ -27,6 +27,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    #FIX: Move it to a before_action and redirect with flash message when user not found.
+    #FIX: Use #where
     @user = User.find(params[:id])
   end
 
