@@ -9,10 +9,12 @@ class User < ActiveRecord::Base
 
   validate :email_domain
 
+  #FIX: We do not need this.
   validate :adult?, on: :update
 
   validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
 
+  #FIX: Use format instead of numericality
   validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
 
   def email_domain
