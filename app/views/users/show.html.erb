@@ -2,81 +2,20 @@
 <!-- #FIX: Use static text and images -->
 <div class='container'>
   <div class='col-md-6 col-md-offset-3 vertical-center'>
+    <table class='table table-striped table-hover table-bordered center-align'>
 
-    <%= fields_for @user, html: { class: 'form-horizontal col-lg-10'} do |f| %>
+      <h2> User details </h2>
 
-      <h2>user details</h2>
+      <% User::USER_DETAILS.each do |field| %>
+        <tr>
+          <td> <%= field %> </td>
+          <td> <%= @user["#{field}"] %> </td>
+        </tr>
+      <% end %>
 
-      <div class="control-group col-md-offset-4">
-        <% @user.errors.full_messages.each do |message| %>
-          <li>
-            <%= message %>
-          </li>
-        <% end %>
-        <br><br>
-      </div>
+      <td> attachment </td>
+      <td> <%= image_tag(@user.attachment.attachment.url) %> </td>
 
-      <div class='control-group'>
-
-        <%= f.label :name, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :name, class: 'form-control', disabled: true %>
-
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.label :about_me, class: 'col-lg-4 control-label' %>
-        <%= f.text_area :about_me, class: 'form-control', disabled: true %>
-
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.fields_for :attachment do |attach| %>
-
-          <%= f.label :attachment, class: 'col-lg-4 control-label' %>
-          <%= image_tag @user.attachment.attachment %>
-          <%= attach.hidden_field :attachment_cache %>
-
-        <% end %>
-
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.label :job_title, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :job_title, class: 'form-control', disabled: true %>
-
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.label :email, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :email, class: 'form-control', disabled: true %>
-
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.label :date_of_birth, class: 'col-lg-4 control-label' %>
-        <%= select_date @user.date_of_birth, class: 'form-control', disabled: true %>
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.label :mobile, class: 'col-lg-4 control-label' %>
-        <%= f.text_field :mobile, class: 'form-control', disabled: true %>
-
-      </div><br/>
-
-      <div class='control-group'>
-
-        <%= f.label :joining_date, class: 'col-lg-4 control-label' %>
-        <%= select_date @user.joining_date, class: 'form-control', disabled: true %>
-
-      </div><br/>
-
-    <% end %>
-
+    </table>
   </div>
 </div>  
