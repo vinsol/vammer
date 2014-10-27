@@ -14,3 +14,21 @@
  *= require_self
  *= require bootstrap
  */
+.header {
+  background-color: #f8f8f8
+}
+.user-name {
+  float: right;
+  margin: 20px 40px;
+}
+.search-header {
+  height: 50px;
+}
+.search-input {
+  margin-left: 80px;
+  margin-top: 8px;
+}
+.navbar-position {
+  margin-right: -150px;
+  margin-top: -38px;
+}
