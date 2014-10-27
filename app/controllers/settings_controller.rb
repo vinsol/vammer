@@ -5,18 +5,10 @@ class SettingsController < ApplicationController
 
   # fix- This may not be required. Lets discuss. -DONE
 
-  def edit
-
-    @first_setting = Setting.find_or_create_by(key: :logo)
-    @second_setting = Setting.find_or_create_by(key: :location)
-
-    # fix- This will not work. As there may be more than 1 keys i.e. Setting objects. A single Setting object stores 1 key/value pair -DONE
-  end
-
   def update
-    params[:settings].each do |setting|
+    params[:value].each do |setting|
       @setting = Setting.find(setting.first)
-      @setting.update(setting.second)
+      @setting.update(value: setting.second)
     end
     redirect_to '/settings/edit'
     # Move following line of code to before_action. Redirect to root page if no setting object exists.
@@ -30,7 +22,10 @@ class SettingsController < ApplicationController
 
     def authenticate_admin
       #FIX: Set a flash message
-      redirect_to :root unless current_user.admin
+      unless current_user.admin
+        flash[:error] = 'no access as you are not admin'
+        redirect_to :root
+      end
     end
 
 end
