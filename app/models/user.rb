@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
 
   before_validation :set_initial_password
 
-  before_save :set_name
-
   def set_initial_password
     self.password ? true : self.password = SecureRandom.hex
   end
@@ -21,12 +19,6 @@ class User < ActiveRecord::Base
     if company_data['company']['domain'] != email.split('@').last
       errors.add(:email, 'domain does not match with companies domain')
     end
-  end
-
-  # fix- Should not be required after removing :confirmable -DONE
-
-  def set_token
-    set_reset_password_token
   end
 
 end
