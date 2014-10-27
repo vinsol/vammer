@@ -3,6 +3,7 @@ class Users::PasswordsController < Devise::PasswordsController
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
     self.resource.name = params[:user][:name]
+    self.resource.enabled = true
     self.resource.save
     yield resource if block_given?
     if resource.errors.empty?
