@@ -12,15 +12,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # @user = User.find(params[:id])
     unless @user.attachment
       @user.build_attachment
     end
   end
 
   def update
-    # @user = User.find(params[:id])
-    if @user.update(allowes_params)
+    if @user.update(permitted_params)
       redirect_to :users
     else
       render :edit
@@ -29,7 +27,7 @@ class UsersController < ApplicationController
 
   private
 
-    def allowes_params
+    def permitted_params
       params[:user].permit!
     end
 
