@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021103802) do
+ActiveRecord::Schema.define(version: 20141022093107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: true do |t|
+    t.string  "attachment_type"
+    t.integer "attachment_id"
+    t.string  "attachment"
+  end
 
   create_table "settings", force: true do |t|
     t.datetime "created_at"

@@ -1,12 +1,22 @@
 class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
+
+  has_one :attachment, as: :attachment, dependent: :destroy
+
+  accepts_nested_attributes_for :attachment
 
   validate :email_matches_company_domain
+
   validates :name, presence: true, on: :update
 
-  # fix- Rename to #email_matches_company_domain -DONE
+  validate :adult?, on: :update
+
+  validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
+
+  validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
+
   def email_matches_company_domain
     company_data = YAML.load_file('config/config.yml')
     if company_data['company']['domain'] != email.split('@').last
@@ -17,5 +27,13 @@ class User < ActiveRecord::Base
   def set_token
     set_reset_password_token
   end
+
+  def adult?
+    if date_of_birth > Time.now - 18.year
+      errors.add :date_of_birth, 'must be greater than 18 years'
+      false
+    end
+  end
+
 
 end

@@ -19,3 +19,5 @@ gem 'uglifier', '2.5.3'
 gem 'letter_opener', '1.2.0', group: :development
 
 gem 'kaminari', '0.16.1'
+
+gem 'carrierwave', '0.10.0'
