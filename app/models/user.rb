@@ -1,4 +1,5 @@
 require 'securerandom'
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -9,14 +10,8 @@ class User < ActiveRecord::Base
 
   before_validation :set_initial_password
 
-  after_create :send_set_password_email
-
   def set_initial_password
     self.password ? true : self.password = SecureRandom.hex
-  end
-
-  def send_set_password_email
-    send_reset_password_instructions
   end
 
   # fix- Rename to #email_matches_company_domain -DONE
