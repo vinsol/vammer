@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   def index
+    #FIX: Use if instead of unless
     unless params[:direction]
       @users = User.order(name: :asc).page params[:page]
     else
