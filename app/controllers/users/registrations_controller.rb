@@ -1,8 +1,11 @@
 require 'securerandom'
+
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
+    #FIX: Try to move below line in model, a callback may be.
+    # i feel we can completely remove this method then.
     resource.password = SecureRandom.hex
     resource_saved = resource.save
     yield resource if block_given?
@@ -25,6 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  #FIX: Remove this if not overriding
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
