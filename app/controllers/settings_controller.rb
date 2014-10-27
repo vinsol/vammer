@@ -29,6 +29,7 @@ class SettingsController < ApplicationController
   private
 
     def authenticate_admin
+      #FIX: Set a flash message
       redirect_to :root unless current_user.admin
     end
 

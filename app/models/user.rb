@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # fix- Why do we have this? Please add some documentation for this. -DONE
-
   def set_token
     set_reset_password_token
   end
