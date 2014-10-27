@@ -17,14 +17,14 @@
 .header {
   background-color: #f8f8f8
 }
-.user_name {
+.user-name {
   float: right;
   margin: 20px 40px;
 }
-.search_header {
+.search-header {
   height: 50px;
 }
-.search_input {
+.search-input {
   margin-left: 80px;
   margin-top: 8px;
 }

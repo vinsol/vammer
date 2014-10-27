@@ -1,6 +1,5 @@
-<!-- #FIX: Spacing issue -->
 <div class='navbar navbar-default'>
-  <div class='navbar-header search_input'>
+  <div class='navbar-header search-input'>
 
     <%= form_tag html: {class: 'form-inline'} do %>
 
@@ -33,8 +32,7 @@
           </li>
 
           <% if admin_logged_in %>
-            <!-- #FIX: Indentation -->
-            <!-- #FIX: Symbol names should not start with capital letters -->
+
             <li>
 
               <%= link_to :Settings, new_setting_path %>
@@ -44,7 +42,6 @@
           <% end %>
 
           <li>
-            <!-- #FIX: Indentation issue. Please take care. -->
 
             <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
 

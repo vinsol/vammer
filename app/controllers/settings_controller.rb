@@ -1,6 +1,5 @@
 class SettingsController < ApplicationController
 
-  # fix- Rename. Use some meaningful name. -DONE
   before_action :authenticate_admin
 
   # fix- This may not be required. Lets discuss. -DONE

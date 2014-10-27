@@ -1,0 +1,62 @@
+<div class='col-md-6 col-md-offset-3'>
+
+  <h2>Members</h2>
+
+  <table class='table table-striped table-hover table-bordered center-align'>
+    <thead>
+
+      <tr>
+        <th id='name'>
+
+          <%= link_to_by_order 'Name', params,  'name' %>
+
+        </th>
+        <th >
+
+          <%= link_to_by_order 'Email', params,  'email' %>
+
+        </th>
+        <th>Joining Date</th>
+        <th>Action</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <div id='change'>
+
+        <% @users.each do |user| %>
+
+      </div>
+      <tr>
+        <td>
+
+          <%= user.name %>
+
+        </td>
+        <td>
+
+          <%= user.email %>
+
+        </td>
+        <td>
+
+          <%= user.joining_date.to_date %>
+
+        </td>
+        <td>
+
+          <%= link_to 'show' %>
+          <% if admin_logged_in %>
+             | <%= link_to 'edit' %>
+          <% end %>
+
+        </td>
+      </tr>
+
+      <% end %>
+
+    </tbody>
+  </table> 
+
+  <%= paginate @users %>
+</div>
