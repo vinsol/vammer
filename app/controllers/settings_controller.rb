@@ -18,7 +18,7 @@ class SettingsController < ApplicationController
       @setting = Setting.find(setting.first)
       @setting.update(setting.second)
     end
-    redirect_to :root
+    redirect_to '/settings/edit'
     # Move following line of code to before_action. Redirect to root page if no setting object exists.
     # fix- Below code wont work if there are more than one keys need to be updated.
     #       Discuss with me if unclear. -DONE
