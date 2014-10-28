@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
     self.password ? true : self.password = SecureRandom.hex
   end
 
+  USER_DETAILS = [:name, :about_me, :job_title, :email, :date_of_birth, :mobile, :joining_date]
+
   # fix- Rename to #email_matches_company_domain -DONE
   def email_matches_company_domain
     company_data = YAML.load_file('config/config.yml')

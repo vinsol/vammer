@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  before_action :find_selected_user
   before_action :authenticate_user_admin, only: [:update, :edit]
 
   ALLOWED_PARAMS = [:name, :date_of_birth, :mobile, :about_me, :job_title,
@@ -24,8 +25,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    #FIX: Use already loaded resource in before_action
-    #FIX: Add flash messages
     if @user.update(permitted_params)
       flash[:notice] = 'user updated successfully'
       redirect_to :users
@@ -33,10 +32,6 @@ class UsersController < ApplicationController
       flash[:notice] = 'user not updated'
       render :edit
     end
-  end
-
-  def show
-    @user = User.find(params[:id])
   end
 
   private
@@ -59,6 +54,10 @@ class UsersController < ApplicationController
         flash[:notice] = 'you do not have the permission to edit a user'
         redirect_to :users
       end
+    end
+
+    def find_selected_user
+      @user = User.where(id: params[:id]).first
     end
 
 end
