@@ -6,10 +6,10 @@ class SettingsController < ApplicationController
 
   def update
     params[:value].each do |setting|
-      @setting = Setting.where(id: setting.first).first
-      @setting.update(value: setting.second)
+      setting = Setting.where(id: setting.first).first
+      setting.update(value: setting.second) if setting
     end
-    flash[:notice] = 'user is successfully updated'
+    flash[:notice] = 'Setting is successfully updated'
     redirect_to settings_edit_path
     # Move following line of code to before_action. Redirect to root page if no setting object exists.
     # fix- Below code wont work if there are more than one keys need to be updated.
@@ -23,7 +23,7 @@ class SettingsController < ApplicationController
     def authenticate_admin
       #FIX: Set a flash message
       unless current_user.admin
-        flash[:error] = 'no access as you are not admin'
+        flash[:error] = 'Access Denied'
         redirect_to :root
       end
     end
