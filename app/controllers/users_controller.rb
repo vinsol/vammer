@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
 
-  before_action :fetch_user ,:authenticate_user_admin, only: [:update, :edit]
+  before_action :fetch_user, except: [:index]
 
-  ALLOWED_PARAMS = %i(name, date_of_birth, mobile, about_me, job_title
-                      admin, joining_date, enabled) +
-                      [ attachment_attributes: %i(id, attachment) ]
+  before_action :authenticate_user_admin, only: [:update, :edit]
+
+  ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
+                      admin joining_date enabled) +
+                      [ attachment_attributes: %i(id attachment) ]
 
   def index
     @users = current_user.admin ? User.all : User.where(enabled: true)
@@ -62,5 +64,5 @@ class UsersController < ApplicationController
 
     def sorting_valid?
       (['desc', 'asc'].include? params[:direction] and ['name', 'email'].include?(params[:order]))
-
+    end
 end
