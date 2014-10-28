@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  SORT_BY_OPTIONS = [:name, :email]
+
   def get_company_name
     YAML.load_file('config/config.yml')['company']['name']
   end
@@ -12,22 +14,23 @@ module ApplicationHelper
     current_user.admin
   end
 
-  #NOTE: Use a better name. e.g. #sort_direction_link
-  def generate_image_tag(order, direction)
+  def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
     link_to image, users_path(order: order, direction: direction)
   end
 
   def link_to_by_order(link)
     sort_order = params[:direction] == 'asc' ? :desc : :asc
-    if link.downcase == params[:order]
-      generate_image_tag params[:order], sort_order
+    if link == params[:order].to_sym
+      sort_direction_link params[:order], sort_order
     #FIX: Will not work for more than 2 sortable columns
     else
-      order = params[:order] == 'name' ? 'email' : 'name'
-      sort_by_ascending_image = generate_image_tag order, :asc
-      sort_by_descending_image = generate_image_tag order, :desc
-      [sort_by_ascending_image, sort_by_descending_image].join().html_safe
+      order_options = SORT_BY_OPTIONS.reject { |option| option == params[:order].to_sym }
+      order_options.map do |order|
+        sort_by_ascending_image = sort_direction_link order, :asc
+        sort_by_descending_image = sort_direction_link order, :desc
+        [sort_by_ascending_image, sort_by_descending_image]
+      end.join().html_safe
     end
   end
 
