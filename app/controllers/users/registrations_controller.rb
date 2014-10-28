@@ -5,14 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
-      if resource.active_for_authentication?
-        resource.send_reset_password_instructions
-        redirect_to :root
-      else
-        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
-      end
+      resource.send_reset_password_instructions
+      redirect_to :root
     else
       clean_up_passwords resource
       @validatable = devise_mapping.validatable?

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :find_selected_user
+  before_action :find_selected_user, except: [:index]
   before_action :authenticate_user_admin, only: [:update, :edit]
 
   ALLOWED_PARAMS = [:name, :date_of_birth, :mobile, :about_me, :job_title,
@@ -44,11 +44,6 @@ class UsersController < ApplicationController
 
     #FIX: Use #where to fetch resources instead of #find
     def authenticate_user_admin
-      @user = User.where(id: params[:id]).first
-      unless @user
-        flash[:notice] = 'record not found'
-        redirect_to :users
-      end
       #FIX: Display a flash message in case of redirect below
       unless current_user.admin or @user == current_user
         flash[:notice] = 'you do not have the permission to edit a user'
@@ -57,7 +52,13 @@ class UsersController < ApplicationController
     end
 
     def find_selected_user
+
       @user = User.where(id: params[:id]).first
+      unless @user
+        flash[:notice] = 'record not found'
+        redirect_to :users
+      end
+
     end
 
 end

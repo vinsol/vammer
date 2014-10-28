@@ -14,7 +14,7 @@
       <% end %>
 
       <td> attachment </td>
-      <td> <%= image_tag(@user.attachment.attachment.url) %> </td>
+      <td> <%= @user.attachment ? image_tag(@user.attachment.attachment.url) : 'no image' %> </td>
 
     </table>
   </div>
