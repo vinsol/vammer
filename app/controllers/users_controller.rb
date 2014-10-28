@@ -46,6 +46,10 @@ class UsersController < ApplicationController
     #FIX: Use #where to fetch resources instead of #find
     def authenticate_user_admin
       @user = User.where(id: params[:id]).first
+      unless @user
+        flash[:notice] = 'record not found'
+        redirect_to :users
+      end
       #FIX: Display a flash message in case of redirect below
       unless current_user.admin or @user == current_user
         flash[:notice] = 'you do not have the permission to edit a user'

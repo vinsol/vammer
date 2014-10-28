@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   validate :email_domain
 
-  validates :job_title, :name, format: { with: /\A[a-z]+\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
+  validates :job_title, :name, format: { with: /\A[a-z]+(\s[a-z])*\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
 
   #FIX: Use format instead of numericality
   validates :mobile, format: { with: /\A\d+\z/ }, length: {is: 10}, on: :update, allow_blank: true
