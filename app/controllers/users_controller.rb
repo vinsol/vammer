@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :find_user ,:authenticate_user_admin, only: [:update, :edit]
+  before_action :fetch_user ,:authenticate_user_admin, only: [:update, :edit]
 
   ALLOWED_PARAMS = %i(name, date_of_birth, mobile, about_me, job_title
                       admin, joining_date, enabled) +
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
     #FIX: Use #where to fetch resources instead of #find
 
-    def find_user
+    def fetch_user
       @user = User.where(id: params[:id]).first
       unless @user
         flash[:notice] = 'record not found'
