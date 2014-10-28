@@ -18,14 +18,14 @@ module ApplicationHelper
     link_to image, users_path(order: order, direction: direction)
   end
 
-  def link_to_by_order(link)
+  def link_to_by_order(link, order_by)
     sort_order = params[:direction] == "asc" ? :desc : :asc
     if link.downcase == params[:order]
       generate_image_tag params[:order], sort_order
     else
-      order = params[:order] == 'name' ? 'email' : 'name'
-      sort_by_ascending_image = generate_image_tag order, :asc
-      sort_by_descending_image = generate_image_tag order, :desc
+      # order = params[:order] == 'name' ? 'email' : 'name'
+      sort_by_ascending_image = generate_image_tag order_by, :asc
+      sort_by_descending_image = generate_image_tag order_by, :desc
       [sort_by_ascending_image, sort_by_descending_image].join().html_safe
     end
   end
