@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   before_validation :set_initial_password
 
   def set_initial_password
-    self.password ? true : self.password = SecureRandom.hex
+    self.password = SecureRandom.hex if self.encrypted_password.empty?
   end
 
   # fix- Rename to #email_matches_company_domain -DONE
