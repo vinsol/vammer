@@ -12,19 +12,17 @@ module ApplicationHelper
     current_user.admin
   end
 
-  #FIX: When user visits the index page for first time, each field should have links to sort in asc/desc order.
-  #FIX: When the list is sorted on a field, that field should have the link to order in opposite direction and other fields should have both links.
-  #FIX: Use something else instead of variable names 'link' and 'order'. Something more clear.
-
+  #NOTE: Use a better name. e.g. #sort_direction_link
   def generate_image_tag(order, direction)
     image = image_tag("#{direction}.png")
     link_to image, users_path(order: order, direction: direction)
   end
 
   def link_to_by_order(link)
-    sort_order = params[:direction] == "asc" ? :desc : :asc
+    sort_order = params[:direction] == 'asc' ? :desc : :asc
     if link.downcase == params[:order]
       generate_image_tag params[:order], sort_order
+    #FIX: Will not work for more than 2 sortable columns
     else
       order = params[:order] == 'name' ? 'email' : 'name'
       sort_by_ascending_image = generate_image_tag order, :asc
