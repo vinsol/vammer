@@ -5,9 +5,9 @@ class SettingsController < ApplicationController
   # fix- This may not be required. Lets discuss. -DONE
 
   def update
-    params[:value].each do |setting|
-      setting = Setting.where(id: setting.first).first
-      setting.update(value: setting.second) if setting
+    params[:value].each do |current_setting|
+      setting = Setting.where(id: current_setting.first).first
+      setting.update(value: current_setting.second) if setting
     end
     flash[:notice] = 'Setting is successfully updated'
     redirect_to settings_edit_path
