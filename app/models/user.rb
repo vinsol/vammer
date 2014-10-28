@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
 
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
+  #FIX: Use %i for this.
 
   def email_in_company_domain
     company_data = YAML.load_file('config/config.yml')

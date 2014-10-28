@@ -36,8 +36,10 @@ class UsersController < ApplicationController
       redirect_to :users unless current_user.admin or user == current_user
     end
 
+    #FIX: Rename to #fetch_user
     def find_selected_user
       @user = User.where(id: params[:id]).first
+      #FIX: Handle case if user not found
     end
 
 end
