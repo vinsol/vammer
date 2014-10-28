@@ -9,19 +9,20 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachment
 
+  before_validation :set_initial_password
+
   validates :name, presence: true, on: :update
 
   validate :email_matches_company_domain
 
   START_YEAR = 1970
 
-  before_validation :set_initial_password
+  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
   def set_initial_password
     self.password = SecureRandom.hex if self.encrypted_password.empty?
   end
 
-  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
   def email_matches_company_domain
     company_data = YAML.load_file('config/config.yml')

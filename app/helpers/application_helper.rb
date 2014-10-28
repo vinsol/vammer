@@ -4,7 +4,7 @@ module ApplicationHelper
     YAML.load_file('config/config.yml')['company']
   end
 
-  def admin_logged_in
+  def admin_logged_in?
     current_user.admin
   end
 
@@ -24,11 +24,11 @@ module ApplicationHelper
     end
   end
 
-  def admin_or_self_user(user)
-    admin_logged_in or !not_self_user
+  def admin_or_self_user?(user)
+    admin_logged_in? or !not_self_user?(user)
   end
 
-  def not_self_user(user)
+  def not_self_user?(user)
     current_user != user
   end
 
