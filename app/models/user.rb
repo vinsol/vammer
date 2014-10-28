@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
     self.password = SecureRandom.hex if self.encrypted_password.empty?
   end
 
-  USER_DETAILS = [:name, :about_me, :job_title, :email, :date_of_birth, :mobile, :joining_date]
+  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
+  #FIX: Use %i for this.
 
   # fix- Rename to #email_matches_company_domain -DONE
   def email_matches_company_domain

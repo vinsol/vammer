@@ -9,12 +9,15 @@
       <% User::USER_DETAILS.each do |field| %>
         <tr>
           <td> <%= field %> </td>
-          <td> <%= @user["#{field}"] %> </td>
+          <td> <%= @user.public_send(field) %> </td>
+          <!-- #FIX: Please use #send to get value of a field on an object -->
         </tr>
       <% end %>
 
+      <!-- #FIX: Will this work if there is no attachment. -->
       <td> attachment </td>
-      <td> <%= @user.attachment ? image_tag(@user.attachment.attachment.url) : 'no image' %> </td>
+
+      <td> <%= @user.attachment ? image_tag(@user.attachment.attachment.url) : 'No image uploaded' %> </td>
 
     </table>
   </div>
