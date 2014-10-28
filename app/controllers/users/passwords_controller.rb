@@ -1,8 +1,12 @@
 class Users::PasswordsController < Devise::PasswordsController
 
+  #FIX: Is this overriding of #update necessary? Can we do some configuration instead?
+  # If not, please add a one line comment above method definition to specify why did we override this.
+
+  # this method is overridden because we have to save user's name when we set the password
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
-    self.resource.name = params[:user][:name]
+    self.resource.name = resource_params[:name]
     self.resource.enabled = true
     self.resource.save
     yield resource if block_given?
