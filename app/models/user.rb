@@ -13,10 +13,6 @@ class User < ActiveRecord::Base
 
   validate :email_matches_company_domain
 
-  validates :job_title, :name, format: { with: /\A[a-z]+(\s[a-z])*\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
-
-  validates :mobile, format: { with: /\A\d+\z/ }, length: {is: 10}, on: :update, allow_blank: true
-
   START_YEAR = 1970
 
   before_validation :set_initial_password
