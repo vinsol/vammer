@@ -9,9 +9,12 @@ class UsersController < ApplicationController
 
   def index
     @users = current_user.admin ? User.all : User.where(enabled: true)
-
     if params[:direction]
-      @users = @users.order( params[:order] => params[:direction].to_sym).page params[:page]
+      if sorting_valid?
+        @users = @users.order( params[:order] => params[:direction].to_sym).page params[:page]
+      else
+        redirect_to users_path
+      end
     else
       @users = @users.order(name: :asc).page params[:page]
     end
@@ -49,6 +52,10 @@ class UsersController < ApplicationController
         flash[:notice] = 'you do not have the permission to edit a user'
         redirect_to :users
       end
+    end
+
+    def sorting_valid?
+      (['desc', 'asc'].include? params[:direction] and ['name', 'email'].include?(params[:order]))
     end
 
     def find_selected_user

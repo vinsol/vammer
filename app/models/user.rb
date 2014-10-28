@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachment
 
+  validates :name, presence: true, on: :update
+
   validate :email_matches_company_domain
 
   validates :job_title, :name, format: { with: /\A[a-z]+(\s[a-z])*\z/i, message: 'only letters are allowed' }, on: :update, allow_blank: true
