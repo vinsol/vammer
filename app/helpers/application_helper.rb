@@ -30,7 +30,7 @@ module ApplicationHelper
     end
   end
 
-  def admin_or_self_user
+  def admin_or_self_user(user)
     admin_logged_in or user == current_user
   end
 end
