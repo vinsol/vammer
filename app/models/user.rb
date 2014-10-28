@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
     self.password = SecureRandom.hex if self.encrypted_password.empty?
   end
 
-
   def email_matches_company_domain
     company_data = YAML.load_file('config/config.yml')
     if company_data['company']['domain'] != email.split('@').last
