@@ -9,10 +9,12 @@
       <% User::USER_DETAILS.each do |field| %>
         <tr>
           <td> <%= field %> </td>
+          <!-- #FIX: Please use #send to get value of a field on an object -->
           <td> <%= @user["#{field}"] %> </td>
         </tr>
       <% end %>
 
+      <!-- #FIX: Will this work if there is no attachment. -->
       <td> attachment </td>
       <td> <%= image_tag(@user.attachment.attachment.url) %> </td>
 

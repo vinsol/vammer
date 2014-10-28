@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   validates :mobile, numericality: { only_integer: true }, length: {is: 10}, on: :update, allow_blank: true
 
+  #FIX: Use %i for this.
   USER_DETAILS = [:name, :about_me, :job_title, :email, :date_of_birth, :mobile, :joining_date]
 
   def email_in_company_domain
