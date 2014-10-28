@@ -25,7 +25,11 @@ module ApplicationHelper
   end
 
   def admin_or_self_user(user)
-    admin_logged_in or user == current_user
+    admin_logged_in or !not_self_user
+  end
+
+  def not_self_user(user)
+    current_user != user
   end
 
 end

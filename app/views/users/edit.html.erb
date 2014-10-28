@@ -60,7 +60,7 @@
 
       </div><br/>
 
-      <% if admin_logged_in %>
+      <% if admin_logged_in && not_self_user(@user) %>
 
         <div class='control-group'>
 

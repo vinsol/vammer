@@ -18,8 +18,6 @@
       </div>
       <br>
 
-      <!-- # fix- Try adding one more record to settings table for testing purpose. Logo is there, you can add location as another record -DONE -->
-      <!-- # fix- Modify the form to be used with multiple records -DONE -->
       <% Setting.all.each do |setting| %>
         <div class='control-group'>
           <%= label_tag :value, setting.key, { class: 'col-lg-4 control-label' } %>

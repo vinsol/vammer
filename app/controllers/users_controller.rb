@@ -9,6 +9,7 @@ class UsersController < ApplicationController
                       [ attachment_attributes: %i(id attachment) ]
 
   def index
+
     @users = current_user.admin ? User.all : User.where(enabled: true)
     if params[:direction]
       if sorting_valid?
@@ -39,11 +40,9 @@ class UsersController < ApplicationController
   private
 
     def permitted_params
-      #FIX: Make a constant to store all the permitted attributes
       params.require(:user).permit *ALLOWED_PARAMS
     end
 
-    #FIX: Use #where to fetch resources instead of #find
     def fetch_user
       @user = User.where(id: params[:id]).first
       unless @user
@@ -53,9 +52,6 @@ class UsersController < ApplicationController
     end
 
     def authenticate_user_admin
-      #FIX: Display a flash message in case of redirect below
-
-      #FIX: Move it to a separate before_action
       unless current_user.admin or @user == current_user
         flash[:notice] = 'you do not have the permission to edit a user'
         redirect_to :users
@@ -65,4 +61,5 @@ class UsersController < ApplicationController
     def sorting_valid?
       (['desc', 'asc'].include? params[:direction] and ['name', 'email'].include?(params[:order]))
     end
+
 end

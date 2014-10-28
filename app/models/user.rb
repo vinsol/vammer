@@ -22,9 +22,7 @@ class User < ActiveRecord::Base
   end
 
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
-  #FIX: Use %i for this.
 
-  # fix- Rename to #email_matches_company_domain -DONE
   def email_matches_company_domain
     company_data = YAML.load_file('config/config.yml')
     if company_data['company']['domain'] != email.split('@').last
