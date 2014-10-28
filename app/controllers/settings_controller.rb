@@ -6,10 +6,11 @@ class SettingsController < ApplicationController
 
   def update
     params[:value].each do |setting|
-      @setting = Setting.find(setting.first)
+      @setting = Setting.where(id: setting.first).first
       @setting.update(value: setting.second)
     end
-    redirect_to '/settings/edit'
+    flash[:notice] = 'user is successfully updated'
+    redirect_to settings_edit_path
     # Move following line of code to before_action. Redirect to root page if no setting object exists.
     # fix- Below code wont work if there are more than one keys need to be updated.
     #       Discuss with me if unclear. -DONE
