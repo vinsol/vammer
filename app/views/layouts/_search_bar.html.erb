@@ -21,22 +21,31 @@
         </a>
 
         <ul class='dropdown-menu'>
-          <!-- #FIX: In one line -->
-          <li> <a href='#'>Group</a> </li>
-          <!-- #FIX: In one line -->
-          <li> <a href='#'>People</a> </li>
-          <!-- #FIX: In one line -->
-          <li> <a href='#'>Edit Profile</a> </li>
+          <li>
+            <a href='#'>Group</a>
+          </li>
+          <li>
+            <%= link_to :People, users_path %>
+          </li>
+          <li>
+            <%= link_to 'Edit Profile', edit_user_path(current_user) %>
+          </li>
 
-          <% if admin_logged_in %>
-            <!-- #FIX: In one line -->
-            <!-- #FIX: Symbol names should not start with capital letters -->
-            <li> <%= link_to 'Settings', new_setting_path %></li>
+          <% if admin_logged_in? %>
+
+            <li>
+
+              <%= link_to :Settings, settings_edit_path %>
+
+            </li>
 
           <% end %>
 
-          <!-- #FIX: In one line -->
-          <li> <%= link_to('Logout', destroy_user_session_path, method: :delete) %> </li>
+          <li>
+
+            <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+
+          </li>
         </ul>
       </li>
     </ul>

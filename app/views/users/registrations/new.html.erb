@@ -1,28 +1,35 @@
-<div class="container">
+<div class='container'>
 
-  <div class="col-md-6 col-md-offset-3 vertical-center">
+  <div class='col-md-6 col-md-offset-3 vertical-center'>
 
     <h2>Sign up</h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal col-lg-10"}) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal col-lg-10'}) do |f| %>
 
       <% if not devise_error_messages!.empty? %>
-        <div class=" control-group col-md-offset-3">
+        <div class=' control-group col-md-offset-3'>
+
           <%= devise_error_messages! %>
+
         </div>
       <% end %>
 
-      <div class="control-group">
-        <%= f.label :email, class: "col-lg-4 control-label" %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      <div class='control-group'>
+
+        <%= f.label :email, class: 'col-lg-4 control-label' %>
+        <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+
       </div>
       <br>
 
-      <div class = "control-group col-md-offset-4">
-        <%= f.submit "Sign up", class: "btn btn-primary col-lg-4" %>
+      <div class = 'control-group col-md-offset-4'>
+
+        <%= f.submit 'Sign up', class: 'btn btn-primary col-lg-4' %>
+
       </div><br><br>
 
-      <%= render "users/shared/links" %>
+      <%= render 'users/shared/links' %>
+
     <% end %>
 
   </div>

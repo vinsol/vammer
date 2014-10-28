@@ -1,3 +1,6 @@
 .vertical-center {
   margin-top: 10%;
 }
+.center-align td, .center-align th{
+  text-align: center;
+}

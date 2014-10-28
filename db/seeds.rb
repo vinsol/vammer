@@ -13,9 +13,12 @@ password = STDIN.gets.chomp
 puts 'confirm password'
 confirm_password = STDIN.gets.chomp
 
-user = User.new(name: name, email: email_id, password: password, password_confirmation: confirm_password, admin: true)
+user = User.new(name: name, email: email_id, password: password, password_confirmation: confirm_password, admin: true, enabled: true)
 if user.save
   puts "Admin with email id #{user.email} is created"
 else
   puts user.errors.full_messages
 end
+
+Setting.find_or_create_by(key: :logo)
+puts 'setting for logo is saved'

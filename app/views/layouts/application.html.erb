@@ -7,18 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="header">
-    <%= link_to image_tag(Setting.first.value), :root %>
+
+  <div class='header'>
+    <% if setting = Setting.find_by(key: :logo) %>
+      <%= link_to image_tag(setting.value), :root %>
+    <% end %>
     <% if user_signed_in? %>
-      <div class="user_name">
+      <div class='user-name'>
         hi <%= current_user.name %>
       </div>
-      <div class="search_header">
-        <%= render "layouts/search_bar" %>
+      <div class='search-header'>
+        <%= render 'layouts/search_bar' %>
       </div>
     <% end %>
   </div>
-  <div class="container-body">
+  <div class='container-body'>
     <%= yield %>
   </div>
 
