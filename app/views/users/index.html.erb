@@ -53,9 +53,8 @@
           <td>
 
             <%= link_to 'show' %>
-            <!-- #FIX: Move this condition to a helper method -->
             <% if admin_or_self_user %>
-               | <%= link_to 'edit', edit_user_path(user) %>
+              | <%= link_to 'edit', edit_user_path(user) %>
             <% end %>
 
           </td>
