@@ -2,6 +2,12 @@
 
   <h2>Members</h2>
 
+  <% if flash[:notice] %>
+    <div class="col-lg-offset-4">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
   <table class='table table-striped table-hover table-bordered center-align'>
     <thead>
 
@@ -46,8 +52,9 @@
           </td>
           <td>
 
-            <%= link_to 'show', user_path(user) %>
-            <% if admin_logged_in or user == current_user%>
+            <%= link_to 'show' %>
+            <!-- #FIX: Move this condition to a helper method -->
+            <% if admin_or_self_user %>
                | <%= link_to 'edit', edit_user_path(user) %>
             <% end %>
 
