@@ -34,7 +34,6 @@
 
           <%= f.label :attachment, class: 'col-lg-4 control-label' %>
           <%= attach.file_field :attachment %>
-          <!-- #FIX: Remove if not required -DONE -->
 
         <% end %>
 
@@ -50,8 +49,6 @@
       <div class='control-group'>
 
         <%= f.label :date_of_birth, class: 'col-lg-4 control-label' %>
-        <!-- #FIX: Do not restrict end_year -->
-        <!-- #FIX: Make a constant for start_year in model -->
         <%= date_select :user, :date_of_birth, start_year: User::START_YEAR, end_year: Time.now.year, class: 'form-control' %>
 
       </div><br/>
@@ -82,7 +79,6 @@
         <div class='control-group'>
 
           <%= f.label :joining_date, class: 'col-lg-4 control-label' %>
-          <!-- #FIX: start_year should be same as start for dob -->
           <%= date_select :user, :joining_date, start_year: User::START_YEAR, end_year: Time.now.year, class: 'form-control' %>
 
         </div><br/>
