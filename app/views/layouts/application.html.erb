@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Vammer</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
 
-  <div class='header'>
-    <% if setting = Setting.find_by(key: :logo) %>
-      <%= link_to image_tag(setting.value), :root %>
-    <% end %>
-    <% if user_signed_in? %>
-      <div class='user-name'>
-        hi <%= current_user.name %>
-      </div>
-      <div class='search-header'>
-        <%= render 'layouts/search_bar' %>
-      </div>
-    <% end %>
-  </div>
-  <div class='container-body'>
-    <%= yield %>
-  </div>
+  <head>
+    <title>Vammer</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body>
+
+    <div class='header'>
+
+      <% if @setting %>
+        <%= link_to image_tag(@setting.value), :root %>
+      <% end %>
+
+      <% if user_signed_in? %>
+
+        <div class='user-name'>
+          hi <%= current_user.name %>
+        </div>
+
+        <div class='search-header'>
+          <%= render 'layouts/search_bar' %>
+        </div>
+
+      <% end %>
+
+    </div>
+
+    <div class='container-body'>
+      <br>
+      <% if flash[:notice] %>
+        <div class="control-group col-lg-offset-4">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
+    </div>
+  </body>
 </html>
