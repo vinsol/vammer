@@ -1,17 +1,13 @@
-require 'securerandom'
-
 class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :attachment, as: :attachment, dependent: :destroy
 
   accepts_nested_attributes_for :attachment
 
-  before_validation :set_initial_password
-
-  validates :name, presence: true, on: :update
+  before_create :set_enabled
 
   validate :email_matches_company_domain
 
@@ -19,23 +15,27 @@ class User < ActiveRecord::Base
 
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
-  def set_initial_password
-    self.password = SecureRandom.hex if self.encrypted_password.empty?
-  end
-
-  def email_matches_company_domain
-    company_data = YAML.load_file('config/config.yml')
-    if company_data['company']['domain'] != email.split('@').last
-      errors.add(:email, 'domain does not match with companies domain')
-    end
-  end
+  COMPANY_CONFIGURATIONS_PATH = 'config/config.yml'
 
   def active_for_authentication?
-    super && enabled
+    enabled
   end
 
   def inactive_message
-    'Sorry, this account is not enabled.'
+    :inactive
   end
+
+  private
+
+    def email_matches_company_domain
+      company_data = YAML.load_file(COMPANY_CONFIGURATIONS_PATH)
+      if company_data['company']['domain'] != email.split('@').last
+        errors.add(:email, 'domain does not match with companies domain')
+      end
+    end
+
+    def set_enabled
+      self.enabled = true
+    end
 
 end

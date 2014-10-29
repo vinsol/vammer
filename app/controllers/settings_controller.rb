@@ -7,7 +7,7 @@ class SettingsController < ApplicationController
       setting = Setting.where(id: current_setting.first).first
       setting.update(value: current_setting.second) if setting
     end
-    flash[:notice] = 'Setting is successfully updated'
+    flash[:notice] = t('.success', scope: :flash)
     redirect_to settings_edit_path
   end
 
@@ -15,7 +15,7 @@ class SettingsController < ApplicationController
 
     def authenticate_admin
       unless current_user.admin
-        flash[:error] = 'Access Denied'
+        flash[:error] = t('access.failure', scope: :flash)
         redirect_to :root
       end
     end

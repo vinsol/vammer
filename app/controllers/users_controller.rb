@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :fetch_user, except: [:index]
+  before_action :fetch_user, except: :index
 
   before_action :authenticate_user_admin, only: [:update, :edit]
 
@@ -9,7 +9,6 @@ class UsersController < ApplicationController
                       [ attachment_attributes: %i(id attachment) ]
 
   def index
-
     @users = current_user.admin ? User.all : User.where(enabled: true)
     if params[:direction]
       if sorting_valid?
@@ -20,7 +19,6 @@ class UsersController < ApplicationController
     else
       @users = @users.order(name: :asc).page params[:page]
     end
-
   end
 
   def edit
@@ -29,10 +27,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(permitted_params)
-      flash[:notice] = 'user updated successfully'
+      flash[:notice] = t('.success', scope: :flash)
       redirect_to :users
     else
-      flash[:notice] = 'user not updated'
+      flash[:notice] = t('.failure', scope: :flash)
       render :edit
     end
   end
@@ -46,14 +44,14 @@ class UsersController < ApplicationController
     def fetch_user
       @user = User.where(id: params[:id]).first
       unless @user
-        flash[:notice] = 'record not found'
+        flash[:notice] = t('record.failure', scope: :flash)
         redirect_to :users
       end
     end
 
     def authenticate_user_admin
       unless current_user.admin or @user == current_user
-        flash[:notice] = 'you do not have the permission to edit a user'
+        flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end
     end
