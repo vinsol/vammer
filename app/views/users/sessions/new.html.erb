@@ -8,8 +8,10 @@
       Log in
     </h1>
 
-    <div class="control-group col-md-offset-4">
-      <%= flash[:alert] %>
+    <div class='control-group col-md-offset-4 flash-message'>
+      <% if flash[:alert] %>
+        <%= flash[:alert] %>
+      <% end %>
       <br><br>
     </div>
 

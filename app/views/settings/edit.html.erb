@@ -5,7 +5,7 @@
     <%= form_tag( { controller: :settings, action: :update }, { method: :put }) do %>
 
       <% if flash[:notice] %>
-        <div class="control-group col-lg-offset-4">
+        <div class='control-group col-lg-offset-4 flash-message'>
           <%= flash[:notice] %>
         </div>
       <% end %>
