@@ -9,6 +9,7 @@
 <body>
 
   <div class='header'>
+    <% #FIXME_AB: No db query from view plz. -%>
     <% if setting = Setting.find_by(key: :logo) %>
       <%= link_to image_tag(setting.value), :root %>
     <% end %>

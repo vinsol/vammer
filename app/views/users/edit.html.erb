@@ -6,6 +6,7 @@
       <h2>edit user details</h2>
 
       <div class="control-group col-md-offset-4">
+        <% #FIXME_AB: This code to display error messages would be needed at many places. extract it in partial and pass the object to the partial as local -%>
         <% @user.errors.full_messages.each do |message| %>
           <li>
             <%= message %>
@@ -49,6 +50,7 @@
       <div class='control-group'>
 
         <%= f.label :date_of_birth, class: 'col-lg-4 control-label' %>
+        <% #FIXME_AB: instead of Time.now we should use Time.current. Read the diff. -%>
         <%= date_select :user, :date_of_birth, start_year: User::START_YEAR, end_year: Time.now.year, class: 'form-control' %>
 
       </div><br/>

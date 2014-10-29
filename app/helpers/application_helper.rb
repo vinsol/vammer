@@ -1,10 +1,12 @@
 module ApplicationHelper
 
   def company_config
+    #FIXME_AB: config should be loaded once on boot. not again and again
     YAML.load_file('config/config.yml')['company']
   end
 
   def admin_logged_in?
+    #FIXME_AB: current_user.is_admin? or current_user.admin? because this must be returning truthy value
     current_user.admin
   end
 

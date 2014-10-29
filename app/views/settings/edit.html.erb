@@ -3,7 +3,7 @@
   <div class='col-md-7 col-md-offset-2 vertical-center'>
 
     <%= form_tag( { controller: :settings, action: :update }, { method: :put }) do %>
-
+<% #FIXME_AB: we would be displaying flash messages at many places. so we should extract them in layout  -%>
       <% if flash[:notice] %>
         <div class="control-group col-lg-offset-4">
           <%= flash[:notice] %>
@@ -17,7 +17,7 @@
 
       </div>
       <br>
-
+      <% #FIXME_AB: no db query from views -%>
       <% Setting.all.each do |setting| %>
         <div class='control-group'>
           <%= label_tag :value, setting.key, { class: 'col-lg-4 control-label' } %>
