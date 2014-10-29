@@ -2,7 +2,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::RMagick
 
-  process :resize_to_fill => [50, 50]
+  process :resize_to_fill => [100, 100]
 
   storage :file
 

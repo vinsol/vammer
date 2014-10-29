@@ -14,9 +14,7 @@
 
       <% #FIXME_AB: No db query from view plz. -%>
 
-      <% if @setting %>
-        <%= link_to image_tag(@setting.value), :root %>
-      <% end %>
+      <%= link_to image_tag(fetch_logo.value), :root %>
 
       <% if user_signed_in? %>
 
