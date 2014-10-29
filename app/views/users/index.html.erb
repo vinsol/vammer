@@ -2,12 +2,6 @@
 
   <h2>Members</h2>
 
-  <% if flash[:notice] %>
-    <div class="col-lg-offset-4">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-
   <table class='table table-striped table-hover table-bordered center-align'>
     <thead>
 
@@ -35,21 +29,9 @@
       <% @users.each do |user| %>
 
         <tr>
-          <td>
-
-            <%= user.name %>
-
-          </td>
-          <td>
-
-            <%= user.email %>
-
-          </td>
-          <td>
-
-            <%= user.joining_date.to_date %>
-
-          </td>
+          <td> <%= user.name %> </td>
+          <td> <%= user.email %> </td>
+          <td> <%= user.joining_date.to_date %> </td>
           <td>
 
             <%= link_to 'show', user_path(user) %>

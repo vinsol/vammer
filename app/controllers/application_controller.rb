@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def fetch_logo
+    @setting = Setting.where(key: :logo)
+  end
+
 end

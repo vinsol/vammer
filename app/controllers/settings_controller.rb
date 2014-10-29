@@ -2,6 +2,10 @@ class SettingsController < ApplicationController
 
   before_action :authenticate_admin
 
+  def edit
+    @settings = Setting.all
+  end
+
   def update
     params[:value].each do |current_setting|
       setting = Setting.where(id: current_setting.first).first
@@ -15,7 +19,7 @@ class SettingsController < ApplicationController
 
     def authenticate_admin
       unless current_user.admin
-        flash[:error] = 'Access Denied'
+        flash[:notice] = 'Access Denied'
         redirect_to :root
       end
     end
