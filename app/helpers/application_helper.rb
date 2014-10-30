@@ -1,8 +1,10 @@
 module ApplicationHelper
 
+  include Configuration
+
   def company_config
     #FIXME_AB: config should be loaded once on boot. not again and again
-    YAML.load_file('config/config.yml')['company']
+    COMPANY
   end
 
   def admin_logged_in?
