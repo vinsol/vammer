@@ -8,3 +8,14 @@
   float: left;
   margin-left: -50px;
 }
+.table-width {
+   width: 80%;
+   margin: auto;
+}
+.row-height {
+  height: 200px;
+}
+.column-width {
+  display: table-cell;
+  width: 200px;
+}
