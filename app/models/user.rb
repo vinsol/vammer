@@ -18,11 +18,7 @@ class User < ActiveRecord::Base
   COMPANY_CONFIGURATIONS_PATH = 'config/config.yml'
 
   def active_for_authentication?
-    enabled
-  end
-
-  def inactive_message
-    :inactive
+    super && enabled
   end
 
   private

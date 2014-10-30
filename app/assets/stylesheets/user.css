@@ -4,3 +4,16 @@
 .center-align td, .center-align th{
   text-align: center;
 }
+.column-width {
+  display: table-cell;
+  width: 200px;
+}
+
+.table-width {
+   width: 80%;
+   margin: auto;
+}
+
+.row-height {
+  height: 200px;
+}
