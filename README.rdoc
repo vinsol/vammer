@@ -10,8 +10,6 @@
 
 1) You have to create a config.yml file which will contain according to config.yml.example, database.yml from database.yml.example, also You can generate the secret token using command 'rake secret'
 
-2) bundle
+2) run 'bundle'
 
-3) rake db:setup
-
-4) you will also have to run rake db:seed in order to create first admin account.
+3) run 'rake db:setup'
