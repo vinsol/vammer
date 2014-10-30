@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   validate :email_matches_company_domain
 
+  validates :name, presence: :true
+
   START_YEAR = 1970
 
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
