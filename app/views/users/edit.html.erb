@@ -1,11 +1,14 @@
 <div class='container'>
-  <div class='col-md-6 col-md-offset-3 vertical-center'>
+
+  <%= render 'users/registrations/side_bar' %>
+
+  <div class='col-md-6 col-md-offset-2 vertical-center'>
 
     <%= form_for @user, html: { class: 'form-horizontal col-lg-10'} do |f| %>
 
       <h2>edit user details</h2>
 
-      <div class="control-group col-md-offset-4">
+      <div class='control-group col-md-offset-4'>
 
         <%= render partial: 'application/error_message', locals: {user: @user} %>
 
