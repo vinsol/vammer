@@ -1,10 +1,5 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version - 2.1.2
 
 * Rails version - 4.1.6
@@ -13,6 +8,10 @@ Things you may want to cover:
 
 * Configuration
 
-1) You have to create a config.yml file which will contain according to config.yml.example
+1) You have to create a config.yml file which will contain according to config.yml.example, database.yml from database.yml.example, also You can generate the secret token using command 'rake secret'
 
-2) you will also have to run rake db:seed in order to create first admin account.
+2) bundle
+
+3) rake db:setup
+
+4) you will also have to run rake db:seed in order to create first admin account.
