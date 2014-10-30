@@ -11,15 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029054904) do
+ActiveRecord::Schema.define(version: 20141030100054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attachments", force: true do |t|
-    t.string  "attachment_type"
-    t.integer "attachment_id"
-    t.string  "attachment"
+    t.string   "attachment_type"
+    t.integer  "attachment_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   create_table "settings", force: true do |t|
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20141029054904) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-10-29 16:32:34'
+    t.datetime "joining_date",           default: '2014-10-30 09:42:24'
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

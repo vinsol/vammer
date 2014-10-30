@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
-                      [ attachment_attributes: %i(id attachment) ]
+                      [ attachment_attributes: %i(attachment id) ]
 
   def index
     @users = current_user.admin ? User.all : User.where(enabled: true)
