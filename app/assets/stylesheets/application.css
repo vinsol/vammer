@@ -35,25 +35,3 @@
 .flash-message {
   background-color: red;
 }
-
-.lib-panel img {
-    width: 100%;
-    background-color: transparent;
-}
-.set-constant-height {
-  height: 200px;
-}
-
-.column-width {
-  display: table-cell;
-  width: 200px;
-}
-
-.table-width {
-   width: 80%;
-   margin: auto;
-}
-
-.row-height {
-  height: 200px;
-}
