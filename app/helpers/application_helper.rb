@@ -10,7 +10,11 @@ module ApplicationHelper
 
   def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
-    link_to image, users_path(order: order, direction: direction)
+    if params[:controller] == 'users'
+      link_to image, users_path(order: order, direction: direction)
+    else
+      link_to image, controller: :groups, action: params[:action], order: order, direction: direction
+    end
   end
 
   def link_to_by_order(link)
@@ -35,6 +39,19 @@ module ApplicationHelper
   def fetch_logo
     setting = Setting.where(key: :logo).first
     setting ? setting : 'not image'
+  end
+
+  def group_action_link(group)
+
+    case params[:action].to_sym
+    when :index
+      link_to :unjoin, unjoin_group_path(group)
+    when :owned
+      link_to :edit, edit_group_path(group)
+    when :other
+      link_to :join, join_group_path(group)
+    end
+
   end
 
 end
