@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :update, :show]
 
+  resources :groups, only: [:index, :new, :create]
+
 end
