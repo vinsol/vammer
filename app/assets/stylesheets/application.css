@@ -57,3 +57,11 @@
 .row-height {
   height: 200px;
 }
+.dashboard-body{
+  width: 80%;
+  float: right;
+}
+.dashboard-sidebar{
+  float: left;
+  margin-left: 50px;
+}

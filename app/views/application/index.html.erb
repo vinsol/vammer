@@ -1,0 +1,21 @@
+<div class='cointainer'>
+  <div class='dashboard-body'>
+    <div>
+      <%= form_tag 'posts', class: 'form-horizontal' do %>
+        <div class='form-group'>
+          <div class='col-lg-5 col-lg-offset-2'>
+            <%= text_area_tag :desc, '', placeholder: 'what\'s on your mind', class: 'form-control' %>
+          </div>
+          <div class='col-lg-4 col-lg-offset-2'>
+            <br>
+            <%= submit_tag %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class='dashboard-sidebar'>
+    <%= current_user.attachment ? image_tag(current_user.attachment.attachment.url) : 'no image' %>
+    <%= current_user.name %>
+  </div>
+</div>

@@ -32,4 +32,9 @@ module ApplicationHelper
     current_user != user
   end
 
+  def fetch_logo
+    setting = Setting.where(key: :logo).first
+    setting ? setting : 'not image'
+  end
+
 end
