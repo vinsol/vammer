@@ -1,43 +1,48 @@
-<ul class='nav nav-tabs'>
-  <li>
-    <%= link_to 'My groups', :groups %>
-  </li>
-  <li>
-    <%= link_to 'Other groups', :groups_other %>
-  </li>
-  <li>
-    <%= link_to 'Owned groups', :groups_owned %>
-  </li>
-</ul>
-<div class='col-lg-8 col-lg-offset-2'>
-  <table class="table table-striped table-hover ">
-    <tr>
-      <th>Name
-        <%= link_to_by_order :name %>
-      </th>
-      <th>Description</th>
-        <% if not_owned? %>
-          <th>Creator
-              <%= link_to_by_order :creator %>
-          </th>
-        <% end %>
-      <th>Action</th>
-    </tr>
-    <% @groups.each do |group| %>
+<div class='dashboard-body'>
+  <ul class='nav nav-tabs'>
+    <li>
+      <%= link_to 'My groups', :groups %>
+    </li>
+    <li>
+      <%= link_to 'Other groups', :groups_other %>
+    </li>
+    <li>
+      <%= link_to 'Owned groups', :groups_owned %>
+    </li>
+  </ul>
+  <div>
+    <table class="table table-striped table-hover ">
       <tr>
-        <td> <%= group.name %>
-          <%= group.id %>
-         </td>
-        <td> <%= group.description %> </td>
-        <% if not_owned? %>
-          <td> <%= group.creator.name %> </td>
-        <% end %>
-        <td>
-          <%= link_to 'view' %>
-          <%= group_action_link(group) %>
-        </td>
+        <th>Name
+          <%= link_to_by_order :name %>
+        </th>
+        <th>Description</th>
+          <% if not_owned? %>
+            <th>Creator
+                <%= link_to_by_order :creator %>
+            </th>
+          <% end %>
+        <th>Action</th>
       </tr>
-    <% end %>
-  </table>
-  <%= paginate @groups %>
+      <% @groups.each do |group| %>
+        <tr>
+          <td> <%= group.name %>
+            <%= group.id %>
+           </td>
+          <td> <%= group.description %> </td>
+          <% if not_owned? %>
+            <td> <%= group.creator.name %> </td>
+          <% end %>
+          <td>
+            <%= link_to 'view' %>
+            <%= group_action_link(group) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @groups %>
+  </div>
+</div>
+<div class='dashboard-sidebar'>
+  <%= render 'group_list' %>
 </div>
