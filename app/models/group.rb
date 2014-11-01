@@ -7,6 +7,6 @@ class Group < ActiveRecord::Base
 
   belongs_to :creator, class_name: User, foreign_key: :user_id
 
-  # validates :name, :description, presence: true
+  validates :name, :description, presence: true
 
 end
