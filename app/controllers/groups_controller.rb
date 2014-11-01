@@ -9,9 +9,13 @@ class GroupsController < ApplicationController
   end
 
   def create
-    group = current_user.groups.new(permitted_params)
-    group.update(user_id: current_user.id)
-    redirect_to groups_path
+    group = current_user.groups.create(permitted_params)
+    group.user_id = current_user.id
+    if group.save
+      redirect_to groups_path
+    else
+      redirect_to new_group_path
+    end
   end
 
   private
