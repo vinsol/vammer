@@ -50,8 +50,4 @@ class UsersController < ApplicationController
       end
     end
 
-    def sorting_valid?
-      (['desc', 'asc'].include? params[:direction] and ['name', 'email'].include?(params[:order]))
-    end
-
 end

@@ -15,10 +15,12 @@
       <th>Name
         <%= link_to_by_order :name %>
       </th>
-      <th>Descrition</th>
-      <th>Creator
-        <%= link_to_by_order :creator %>
-      </th>
+      <th>Description</th>
+        <% if not_owned? %>
+          <th>Creator
+              <%= link_to_by_order :creator %>
+          </th>
+        <% end %>
       <th>Action</th>
     </tr>
     <% @groups.each do |group| %>
@@ -27,7 +29,9 @@
           <%= group.id %>
          </td>
         <td> <%= group.description %> </td>
-        <td> <%= group.creator.name %> </td>
+        <% if not_owned? %>
+          <td> <%= group.creator.name %> </td>
+        <% end %>
         <td>
           <%= link_to 'view' %>
           <%= group_action_link(group) %>

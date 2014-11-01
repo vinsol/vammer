@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   end
 
   def other
-    @groups = Group.where(id: GroupsUser.where("group_id not in (?)", current_user.groups.pluck(:id)).pluck(:group_id)).page params[:page]
+    @groups = Group.search_other(current_user).page params[:page]
     @groups = collection(@groups)
     render :index
   end
@@ -52,10 +52,6 @@ class GroupsController < ApplicationController
 
     def permitted_params
       params[:group].permit(:name, :description)
-    end
-
-    def sorting_valid?
-      (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
     end
 
 end

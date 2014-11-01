@@ -9,4 +9,9 @@ class Group < ActiveRecord::Base
 
   validates :name, :description, presence: true
 
+  def self.search_other(current_user)
+    groups = current_user.groups.pluck(:id)
+    where("id not in (?)", groups)
+  end
+
 end

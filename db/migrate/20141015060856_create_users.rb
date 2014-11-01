@@ -8,6 +8,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :about_me
       t.boolean :admin
       t.boolean :enabled
+
+      t.timestamps
     end
   end
 end

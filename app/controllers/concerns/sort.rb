@@ -9,9 +9,23 @@ module Sort
         redirect_to :index
       end
     else
-      collection = collection.order(name: :asc).page params[:page]
+      collection = collection.order(created_at: :desc).page params[:page]
     end
 
   end
+
+  private
+
+    def group_sortng?
+      (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
+    end
+
+    def user_sorting?
+      (['desc', 'asc'].include? params[:direction] and ['name', 'email'].include?(params[:order]))
+    end
+
+    def sorting_valid?
+      params[:controller] == 'groups' ? group_sortng? : user_sorting?
+    end
 
 end

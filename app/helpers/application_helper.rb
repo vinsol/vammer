@@ -54,4 +54,8 @@ module ApplicationHelper
 
   end
 
+  def not_owned?
+    params[:action] != 'owned'
+  end
+
 end
