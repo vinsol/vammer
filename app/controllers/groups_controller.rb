@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-  before_action :fetch_group, on: [:join, :unjoin, :update, :edit]
+  before_action :fetch_group, on: [:join, :unjoin, :update, :edit, :show]
 
   include Sort
 
@@ -51,6 +51,9 @@ class GroupsController < ApplicationController
   def update
     @group.update(permitted_params)
     redirect_to groups_path
+  end
+
+  def show
   end
 
   private

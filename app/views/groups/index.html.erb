@@ -4,10 +4,10 @@
       <%= link_to 'My groups', :groups %>
     </li>
     <li>
-      <%= link_to 'Other groups', :groups_other %>
+      <%= link_to 'Other groups', :other_groups %>
     </li>
     <li>
-      <%= link_to 'Owned groups', :groups_owned %>
+      <%= link_to 'Owned groups', :owned_groups %>
     </li>
   </ul>
   <div>
@@ -27,9 +27,8 @@
       <% @groups.each do |group| %>
         <tr>
           <td> <%= group.name %>
-            <%= group.id %>
            </td>
-          <td> <%= group.description %> </td>
+          <td> <%= group.description.truncate(25) %> </td>
           <% if not_owned? %>
             <td> <%= group.creator.name %> </td>
           <% end %>

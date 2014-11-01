@@ -1,9 +1,13 @@
+<%= current_user.attachment ? image_tag(current_user.attachment.attachment.url) : 'no image' %>
+    <%= current_user.name %>
+<br> <br>
 <div class="list-group">
   <a href="#" class="list-group-item active">
     Groups
   </a>
   <% @my_groups.each do |group| %>
-    <%= link_to group.name, :groups, class: 'list-group-item' %>
+    <%= link_to group.name, group, class: 'list-group-item' %>
+    
   <% end %>
   <%= link_to 'new group', :new_group, class: 'list-group-item' %>
 </div>
