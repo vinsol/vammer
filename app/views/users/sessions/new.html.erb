@@ -4,46 +4,42 @@
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-horizontal col-lg-10'}) do |f| %>
 
-    <h1>
-      Log in
-    </h1>
+      <h1> Log in </h1>
+      <% if flash[:alert] %>
 
-    <% if flash[:alert] %>
-      <div class='control-group col-md-offset-4 flash-message'>
-      <%= flash[:alert] %>
+        <div class='control-group col-md-offset-4 flash-message'>
+          <%= flash[:alert] %>
+        </div>
+
+      <% end %>
+
+      <br><br>
+
+      <div class='control-group'>
+        <%= f.label :email, 'Email', class: 'col-lg-4 control-label' %>
+        <%= f.email_field :email, class: 'form-control', autofocus: true %>
+      </div> <br>
+
+      <div class='control-group'>
+        <%= f.label :password, class: 'col-lg-4 control-label' %>
+        <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
       </div>
-    <% end %>
-    <br><br>
 
-    <div class='control-group'>
+      <% if devise_mapping.rememberable? -%>
 
-      <%= f.label :email, 'Email', class: 'col-lg-4 control-label' %>
-      <%= f.email_field :email, class: 'form-control', autofocus: true %>
+        <div>
+          <%= f.check_box :remember_me%>
+          <%= f.label :remember_me, class: 'col-lg-4 control-label' %>
+        </div>
 
-    </div>
-    <br>
+      <% end -%>
 
-    <div class='control-group'>
-
-      <%= f.label :password, class: 'col-lg-4 control-label' %>
-      <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
-
-    </div>
-
-    <% if devise_mapping.rememberable? -%>
       <div>
-        <%= f.check_box :remember_me%> <%= f.label :remember_me, class: 'col-lg-4 control-label' %>
+        <%= f.submit 'Log in', class: 'btn btn-primary' %>
       </div>
 
-    <% end -%>
+      <%= render 'users/shared/links' %>
 
-    <div>
-
-      <%= f.submit 'Log in', class: 'btn btn-primary' %>
-
-    </div>
-
-    <%= render 'users/shared/links' %>
     <% end %>
 
   </div>

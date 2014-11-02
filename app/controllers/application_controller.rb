@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_params, if: :devise_controller?
 
   def fetch_logo
-    @setting = Setting.where(key: :logo)
+    @logo = Setting.where(key: :logo).first
   end
 
   def configure_devise_params

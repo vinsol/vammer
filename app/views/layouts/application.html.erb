@@ -12,8 +12,8 @@
 
     <div class='header'>
 
-      <% if @setting %>
-        <%= link_to image_tag(@setting.value), :root %>
+      <% if @logo %>
+        <%= link_to image_tag(@logo.value), :root %>
       <% end %>
 
       <% if user_signed_in? %>
