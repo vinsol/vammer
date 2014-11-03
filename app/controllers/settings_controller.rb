@@ -19,6 +19,7 @@ class SettingsController < ApplicationController
 
     def authenticate_admin
       unless current_user.admin
+        #FIX: This should be error
         flash[:notice] = 'Access Denied'
         redirect_to :root
       end

@@ -1,13 +1,5 @@
 class Users::PasswordsController < Devise::PasswordsController
 
-  #FIX: Is this overriding of #update necessary? Can we do some configuration instead?
-  # If not, please add a one line comment above method definition to specify why did we override this.
-
-  # this method is overridden because we have to save user's name when we set the password
-  #FIXME_AB: I think with our latest discussion we don't need to overwrite this. right?
-
-  # Yes sir it is now removed
-
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
     self.resource.name = resource_params[:name]

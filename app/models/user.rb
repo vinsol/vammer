@@ -36,8 +36,6 @@ class User < ActiveRecord::Base
     end
 
     def email_matches_company_domain
-      #FIXME_AB: do not load yml again and again. read that data when rails boots. Put this in initializers
-      #FIXME_AB: this conditions should be extracted in a private method.
       if COMPANY['domain'] != email.split('@').last
         errors.add(:email, 'domain does not match with companies domain')
       end

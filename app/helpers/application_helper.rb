@@ -3,12 +3,12 @@ module ApplicationHelper
   include Configuration
 
   def company_config
-    #FIXME_AB: config should be loaded once on boot. not again and again
+    #FIX: Use directly at places.
     COMPANY
   end
 
   def admin_logged_in?
-    #FIXME_AB: current_user.is_admin? or current_user.admin? because this must be returning truthy value
+    #FIX: Use #admin?
     current_user.admin
   end
 
