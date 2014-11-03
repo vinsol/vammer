@@ -12,7 +12,7 @@
   <% @users.each do |user| %>
     <tr class='row-height'>
       <td class='column-width'>
-        <%= user.attachment ? image_tag(user.attachment.attachment.url) : 'no image' %>
+        <%= user.image ? image_tag(user.image.attachment.url) : 'no image' %>
       </td>
       <td class='column-width'> <%= user.name %> </td>
       <td class='column-width'> <%= user.email %> </td>

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
-                      [ attachment_attributes: %i(attachment id) ]
+                      [ image_attributes: %i(attachment id) ]
 
   def index
     @users = current_user.admin ? User.all : User.where(enabled: true)
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user.build_attachment unless @user.attachment
+    @user.build_image unless @user.image
   end
 
   def update

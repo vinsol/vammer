@@ -1,6 +1,6 @@
 <div class='col-lg-offset-1 col-lg-7'>
   <% @posts.each do |post| %>
-    <%= image_tag(post.user.attachment.attachment.url(:thumb)) %>
+    <%= image_tag(post.user.image.attachment.url(:thumb)) %>
     <%= post.user.name %>
     <br><br>
     <%= post.content %>
