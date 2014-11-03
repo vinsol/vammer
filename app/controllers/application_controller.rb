@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_devise_params, if: :devise_controller?
 
-  def fetch_logo
-    @setting = Setting.where(key: :logo)
-  end
-
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |user|
       user.permit(:name, :email, :password, :password_confirmation)
