@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-  before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show]
+  before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
 
   include Sort
 
@@ -10,13 +10,13 @@ class GroupsController < ApplicationController
   end
 
   def other
-    @groups = Group.search_other(current_user).page params[:page]
+    @groups = Group.search_other(current_user)
     @groups = collection(@groups)
     render :index
   end
 
   def owned
-    @groups = current_user.created_groups.page params[:page]
+    @groups = current_user.created_groups
     @groups = collection(@groups)
     render :index
   end
@@ -54,6 +54,10 @@ class GroupsController < ApplicationController
   end
 
   def show
+  end
+
+  def members
+    @members = @group.users.page params[:page]
   end
 
   private
