@@ -76,6 +76,10 @@ class GroupsController < ApplicationController
 
     def fetch_group
       @group = Group.where(id: params[:id]).first
+      unless @group
+        flash[:notice] = t('record.failure', scope: :flash)
+        redirect_to groups_path
+      end
     end
 
 end

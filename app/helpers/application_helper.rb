@@ -40,11 +40,6 @@ module ApplicationHelper
     current_user != user
   end
 
-  def fetch_logo
-    setting = Setting.where(key: :logo).first
-    setting ? setting : 'not image'
-  end
-
   def group_action_link(group)
 
     case params[:action].to_sym
@@ -65,6 +60,15 @@ module ApplicationHelper
 
   def not_owned?
     params[:action] != 'owned'
+  end
+
+  def group_action(group)
+    if current_user.groups.include? group
+      link_to :unjoin, unjoin_group_path(group)
+    else
+      link_to :join, join_group_path(group)
+    end
+
   end
 
 end
