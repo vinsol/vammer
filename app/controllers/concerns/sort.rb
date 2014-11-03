@@ -9,8 +9,6 @@ module Sort
   end
 
   def collection(collection)
-    debugger
-
     if params[:direction]
       if sorting_valid?
         collection = order_collection( params[:order], params[:direction].to_sym, collection)
