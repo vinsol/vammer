@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20141031090954) do
   create_table "attachments", force: true do |t|
     t.string   "attachment_type"
     t.integer  "attachment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -26,14 +28,19 @@ ActiveRecord::Schema.define(version: 20141031090954) do
   end
 
   create_table "groups", force: true do |t|
-    t.string  "name"
-    t.string  "description"
-    t.integer "user_id"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "creator"
   end
 
   create_table "groups_users", force: true do |t|
-    t.integer "group_id"
-    t.integer "user_id"
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settings", force: true do |t|
@@ -58,7 +65,7 @@ ActiveRecord::Schema.define(version: 20141031090954) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-10-30 09:42:24'
+    t.datetime "joining_date",           default: '2014-11-01 07:18:04'
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

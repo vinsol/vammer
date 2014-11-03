@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  include Sort
+
   before_action :fetch_user, except: :index
 
   before_action :authenticate_user_admin, only: [:update, :edit]
@@ -10,15 +12,7 @@ class UsersController < ApplicationController
 
   def index
     @users = current_user.admin ? User.all : User.where(enabled: true)
-    if params[:direction]
-      if sorting_valid?
-        @users = @users.order( params[:order] => params[:direction].to_sym).page params[:page]
-      else
-        redirect_to users_path
-      end
-    else
-      @users = @users.order(name: :asc).page params[:page]
-    end
+    @users = collection(@users)
   end
 
   def edit
@@ -54,10 +48,6 @@ class UsersController < ApplicationController
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end
-    end
-
-    def sorting_valid?
-      (['desc', 'asc'].include? params[:direction] and ['name', 'email'].include?(params[:order]))
     end
 
 end

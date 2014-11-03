@@ -32,3 +32,6 @@ en:
       failure: 'ACCESS DENIED'
     record:
       failure: 'record not found'
+    groups:
+      unjoin:
+        failure: 'can not unjoin group created by you'

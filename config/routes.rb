@@ -9,6 +9,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :update, :show]
 
-  resources :groups, only: [:index, :new, :create]
+  resources :groups, only: [:index, :new, :create, :edit] do
+    member do
+      get 'unjoin'
+      get 'join'
+    end
+  end
+
+  get 'groups/other', controller: :groups, action: :other
+
+  get 'groups/owned', controller: :groups, action: :owned
 
 end
