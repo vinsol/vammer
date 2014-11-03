@@ -1,11 +1,27 @@
-<%= form_tag 'posts', class: 'form-horizontal' do %>
+<%= form_for @post, class: 'form-horizontal' do |f| %>
   <div class='form-group'>
-    <div class='col-lg-5 col-lg-offset-2'>
-      <%= text_area_tag :desc, '', placeholder: 'what\'s on your mind', class: 'form-control' %>
+    <div class='col-lg-7 col-lg-offset-1'>
+      <%= f.text_area :content, placeholder: 'what\'s on your mind', class: 'form-control' %>
     </div>
-    <div class='col-lg-4 col-lg-offset-2'>
+    <br><br><br><br>
+
+    <% if params[:controller] == 'groups' %>
+      <%= f.hidden_field :group_id, value: params[:id] %>
+    <% end %>
+
+    <div class='col-lg-offset-6'>
+
+      <%= f.fields_for :attachment do |attach| %>
+
+        <%= attach.file_field :attachment %>
+
+      <% end %>
+
+    </div>
+
+    <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
       <br>
-      <%= submit_tag %>
+      <%= f.submit %>
     </div>
   </div>
 <% end %>

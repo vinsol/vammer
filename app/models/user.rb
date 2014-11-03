@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :created_groups, class_name: Group, foreign_key: :user_id
 
+  has_many :posts
+
   before_create :set_enabled
 
   validate :email_matches_company_domain

@@ -14,7 +14,13 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_groups
-    @my_groups = current_user.groups
+    @my_groups = current_user.groups if current_user
+  end
+
+  def index
+    @post = Post.new
+    @post.build_attachment
+    @posts = Post.where(user_id: current_user)
   end
 
 end
