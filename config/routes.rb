@@ -13,10 +13,11 @@ Rails.application.routes.draw do
     member do
       get 'unjoin'
       get 'join'
+      get 'members'
     end
     collection do
-      get 'owned' => 'groups#owned'
-      get 'other' => 'groups#other'
+      get 'owned'
+      get 'other'
     end
   end
 
