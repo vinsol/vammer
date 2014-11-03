@@ -33,7 +33,7 @@
             <td> <%= group.creator.name %> </td>
           <% end %>
           <td>
-            <%= link_to 'view' %>
+            <%= link_to 'view', group_path(group) %>
             <%= group_action_link(group) %>
           </td>
         </tr>
