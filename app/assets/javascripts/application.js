@@ -13,4 +13,6 @@
 //= require jquery
 //= require bootstrap
 //= require jquery_ujs
+
+// FIXME_AB: don't use require_tree. read about it and discuss with Jaggi sir
 //= require_tree .

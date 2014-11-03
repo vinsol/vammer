@@ -20,6 +20,7 @@ class SettingsController < ApplicationController
     def authenticate_admin
       unless current_user.admin
         flash[:notice] = t('access.failure', scope: :flash)
+        #FIX: This should be error
         redirect_to :root
       end
     end

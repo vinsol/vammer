@@ -3,16 +3,24 @@
   <tr>
     <th>Image</th>
 
-    <th>Name
-      <%= link_to_by_order :name %>
-    </th>
+  <table class='table table-striped table-hover table-bordered center-align'>
+    <thead>
 
-    <th>Email
-      <%= link_to_by_order :email %>
-    </th>
+      <tr>
+        <th id='name'>
+          NAME
+          <%= link_to_by_order :name %>
 
-    <th>Joining Date</th>
-  </tr>
+        </th>
+        <th >
+          EMAIL
+          <%= link_to_by_order :email %>
+
+        </th>
+
+        <th>Joining Date</th>
+
+      </tr>
 
   <% @users.each do |user| %>
 

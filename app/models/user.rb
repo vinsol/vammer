@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  
+  include Configuration
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
@@ -40,6 +42,18 @@ class User < ActiveRecord::Base
 
     def set_enabled
       self.enabled = true
+    end
+
+  private
+
+    def set_initial_password
+      self.password = SecureRandom.hex if self.encrypted_password.empty?
+    end
+
+    def email_matches_company_domain
+      if COMPANY['domain'] != email.split('@').last
+        errors.add(:email, 'domain does not match with companies domain')
+      end
     end
 
 end

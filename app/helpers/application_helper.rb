@@ -1,10 +1,14 @@
 module ApplicationHelper
 
+  include Configuration
+
   def company_config
-    YAML.load_file('config/config.yml')['company']
+    #FIX: Use directly at places.
+    COMPANY
   end
 
   def admin_logged_in?
+    #FIX: Use #admin?
     current_user.admin
   end
 
