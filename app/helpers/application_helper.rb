@@ -49,7 +49,7 @@ module ApplicationHelper
 
     case params[:action].to_sym
     when :index
-      link_to :unjoin, unjoin_group_path(group)
+      link_to :unjoin, unjoin_group_path(group) unless current_user == group.creator
     when :owned
       link_to :edit, edit_group_path(group)
     when :other

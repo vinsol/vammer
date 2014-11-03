@@ -1,15 +1,22 @@
 module Sort
 
-  def collection(collection)
+  def order_collection(order_by, direction, collection)
+    if order_by == 'creator'
+      collection.joins(:creator).order("users.name #{direction}").page params[:page]
+    else
+      collection.order(order_by => direction).page params[:page]
+    end
+  end
 
+  def collection(collection)
     if params[:direction]
       if sorting_valid?
-        collection = collection.order( params[:order] => params[:direction].to_sym).page params[:page]
+        collection = order_collection( params[:order], params[:direction].to_sym, collection)
       else
-        redirect_to :index
+        redirect_to :root
       end
     else
-      collection = collection.order(created_at: :desc).page params[:page]
+      collection = order_collection(:created_at, :desc, collection)
     end
 
   end
