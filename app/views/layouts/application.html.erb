@@ -12,7 +12,9 @@
 
     <div class='header'>
 
-      <%= link_to image_tag(fetch_logo.value), :root %>
+      <% if @logo %>
+        <%= link_to image_tag(@logo.value), :root %>
+      <% end %>
 
       <% if user_signed_in? %>
 

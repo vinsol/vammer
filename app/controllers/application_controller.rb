@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_devise_params, if: :devise_controller?
-  before_action :authenticate_user!, :fetch_groups
+  before_action :authenticate_user!, :fetch_groups, :fetch_logo
+
+  def fetch_logo
+    @logo = Setting.where(key: :logo).first
+  end
 
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |user|
