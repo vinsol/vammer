@@ -9,15 +9,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :update, :show]
 
-  resources :groups, only: [:index, :new, :create, :edit, :update] do
+  resources :groups, except: [:destroy] do
     member do
       get 'unjoin'
       get 'join'
     end
+    collection do
+      get 'owned' => 'groups#owned'
+      get 'other' => 'groups#other'
+    end
   end
-
-  get 'groups/other', controller: :groups, action: :other
-
-  get 'groups/owned', controller: :groups, action: :owned
 
 end

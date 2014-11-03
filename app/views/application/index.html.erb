@@ -20,6 +20,8 @@
 
       <% end %>
 
+      <%= render 'create_post' %>
+
     </div>
   </div>
 
@@ -28,6 +30,7 @@
     <%= current_user.attachment ? image_tag(current_user.attachment.attachment.url) : 'no image' %>
     <%= current_user.name %>
     <%= render 'group_list' %>
+
   </div>
 
 </div>
