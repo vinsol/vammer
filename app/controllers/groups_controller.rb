@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+  before_action :fetch_group, on: [:join, :unjoin, :update, :edit]
+
   include Sort
 
   def index
@@ -34,9 +36,8 @@ class GroupsController < ApplicationController
   end
 
   def unjoin
-    group = Group.where(id: params[:id]).first
-    if group.creator != current_user
-      group.users.destroy(current_user)
+    if @group.creator != current_user
+      @group.users.destroy(current_user)
     else
       flash[:notice] = t('.failure', scope: :flash)
     end
@@ -44,18 +45,26 @@ class GroupsController < ApplicationController
   end
 
   def join
-    group = Group.where(id: params[:id]).first
-    group.users.push(current_user)
+    @group.users.push(current_user)
     redirect_to groups_path
   end
 
   def edit
   end
 
+  def update
+    @group.update(permitted_params)
+    redirect_to groups_path
+  end
+
   private
 
     def permitted_params
       params[:group].permit(:name, :description)
+    end
+
+    def fetch_group
+      @group = Group.where(id: params[:id]).first
     end
 
 end

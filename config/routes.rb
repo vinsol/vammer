@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :update, :show]
 
-  resources :groups, only: [:index, :new, :create, :edit] do
+  resources :groups, only: [:index, :new, :create, :edit, :update] do
     member do
       get 'unjoin'
       get 'join'
