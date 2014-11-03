@@ -2,7 +2,7 @@ module Sort
 
   def order_collection(order_by, direction, collection)
     if order_by == 'creator'
-      collection.joins(:users).order("users.name #{direction}").page params[:page]
+      collection.joins(:creator).order("users.name #{direction}").page params[:page]
     else
       collection.order(order_by => direction).page params[:page]
     end
