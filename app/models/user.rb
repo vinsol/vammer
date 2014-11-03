@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachment
 
+  has_many :groups_users
+
+  has_many :groups, through: :groups_users
+
+  has_many :created_groups, class_name: Group, foreign_key: :user_id
+
   before_create :set_enabled
 
   validate :email_matches_company_domain
