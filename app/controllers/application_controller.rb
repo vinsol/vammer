@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_logo
-    @setting = Setting.where(key: :logo).first
+    @logo = Setting.where(key: :logo).first
+    @logo ? @logo : 'not image'
   end
 
   def fetch_groups
