@@ -49,12 +49,17 @@ module ApplicationHelper
 
     case params[:action].to_sym
     when :index
-      link_to :unjoin, unjoin_group_path(group) unless current_user == group.creator
+    joiner_link = link_to :unjoin, unjoin_group_path(group)
     when :owned
-      link_to :edit, edit_group_path(group)
+    edit_link = link_to :edit, edit_group_path(group)
     when :other
-      link_to :join, join_group_path(group)
+    joiner_link = link_to :join, join_group_path(group)
     end
+
+    if admin_logged_in?
+      edit_link = link_to :edit, edit_group_path(group)
+    end
+    [edit_link, joiner_link].join(' ').html_safe
 
   end
 

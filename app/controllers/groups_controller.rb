@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
 
-  before_action :fetch_group, on: [:join, :unjoin, :update, :edit, :show]
+  before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show]
+  before_action :authenticate_user_admin, only: [:edit, :update]
 
   include Sort
 
@@ -61,6 +62,13 @@ class GroupsController < ApplicationController
   end
 
   private
+
+    def authenticate_user_admin
+      unless current_user.admin or @user == current_user
+        flash[:notice] = t('access.failure', scope: :flash)
+        redirect_to :users
+      end
+    end
 
     def permitted_params
       params[:group].permit(:name, :description)
