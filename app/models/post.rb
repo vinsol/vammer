@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
 
-  has_one :upload, as: :attachment, dependent: :destroy
+  has_one :document, as: :attachment, dependent: :destroy
 
-  accepts_nested_attributes_for :upload
+  accepts_nested_attributes_for :document
 
   belongs_to :user
 

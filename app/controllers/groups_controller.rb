@@ -91,7 +91,7 @@ class GroupsController < ApplicationController
 
     def initialize_posts
       @post = Post.new
-      @post.build_upload
+      @post.build_document
       @posts = Post.where(user_id: current_user)
     end
 

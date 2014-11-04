@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def index
     @post = Post.new
-    @post.build_upload
+    @post.build_document
     @posts = Post.all
   end
 

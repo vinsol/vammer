@@ -1,4 +1,4 @@
-class Upload < Attachment
+class Document < Attachment
 
   has_attached_file :attachment
 
