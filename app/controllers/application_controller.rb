@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_params, if: :devise_controller?
   before_action :authenticate_user!, :fetch_groups, :fetch_logo
 
+
   def fetch_logo
     @logo = Setting.where(key: :logo).first
   end
@@ -20,9 +21,13 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_groups
-    if not current_user.nil?
-      @my_groups = current_user.groups
-    end
+    @my_groups = current_user.groups if current_user
+  end
+
+  def index
+    @post = Post.new
+    @post.build_document
+    @posts = Post.all
   end
 
 end

@@ -1,14 +1,10 @@
 <div class='dashboard-body'>
-  <%= render 'create_post' %>
-  <h2>
-    <%= @group.name.capitalize %>
-  </h2>
-  <%= group_action(@group) %>
-  <div>
-    <%= @group.description %>
-  </div>
   <%= render 'show_group_details' %>
+  <%= render 'show_post' %>
 </div>
+
 <div class='dashboard-sidebar'>
+
   <%= render 'group_list' %>
+
 </div>

@@ -1,15 +1,8 @@
 module ApplicationHelper
 
-  include Configuration
-
-  def company_config
-    #FIX: Use directly at places.
-    COMPANY
-  end
-
   def admin_logged_in?
     #FIX: Use #admin?
-    current_user.admin
+    current_user.admin?
   end
 
   def sort_direction_link(order, direction)

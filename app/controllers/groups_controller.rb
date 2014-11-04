@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
 
   before_action :authenticate_user_admin, only: [:edit, :update]
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
+  before_action :initialize_posts, only: [:show]
 
   include Sort
 
@@ -59,6 +60,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    group = Group.where(id: params[:id]).first
+    @posts = group.posts
   end
 
   def members
@@ -68,7 +71,7 @@ class GroupsController < ApplicationController
   private
 
     def authenticate_user_admin
-      unless current_user.admin or @user == current_user
+      unless current_user.admin? or @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end
@@ -84,6 +87,12 @@ class GroupsController < ApplicationController
         flash[:notice] = t('record.failure', scope: :flash)
         redirect_to groups_path
       end
+    end
+
+    def initialize_posts
+      @post = Post.new
+      @post.build_document
+      @posts = Post.where(user_id: current_user)
     end
 
 end

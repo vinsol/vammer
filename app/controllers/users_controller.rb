@@ -8,15 +8,15 @@ class UsersController < ApplicationController
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
-                      [ attachment_attributes: %i(attachment id) ]
+                      [ image_attributes: %i(attachment id) ]
 
   def index
-    @users = current_user.admin ? User.all : User.where(enabled: true)
+    @users = current_user.admin? ? User.all : User.where(enabled: true)
     @users = collection(@users)
   end
 
   def edit
-    @user.build_attachment unless @user.attachment
+    @user.build_image unless @user.image
   end
 
   def update
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     end
 
     def authenticate_user_admin
-      unless current_user.admin or @user == current_user
+      unless current_user.admin? or @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end
