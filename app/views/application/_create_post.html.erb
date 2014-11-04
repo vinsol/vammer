@@ -12,7 +12,7 @@
   <div class='control-group col-md-offset-4'>
 
     <!-- #FIX: Why using variable user for a post object? -->
-    <%= render partial: 'application/error_message', locals: {user: @post} %>
+    <%= render partial: 'application/error_message', locals: { errors: @post.errors} %>
 
     <br><br>
   </div>

@@ -6,9 +6,7 @@
 <br> <br>
 <div class="list-group">
 
-  <a href="#" class="list-group-item active">
-    Groups
-  </a>
+  <%= link_to 'Groups', groups_path, class: 'list-group-item active' %>
 
   <% @my_groups.each do |group| %>
 

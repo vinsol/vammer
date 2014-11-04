@@ -37,6 +37,7 @@ class GroupsController < ApplicationController
       #FIX: Use common syntax for path
       redirect_to groups_path
     else
+      flash[:notice] = t('.failure', scope: :flash)
       #FIX: Use common syntax for path
       redirect_to new_group_path
     end

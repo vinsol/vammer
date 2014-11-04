@@ -1,6 +1,8 @@
 <div class='container'>
 
-  <%= render 'users/registrations/side_bar' %>
+  <% if !not_self_user?(@user) %>
+    <%= render 'users/registrations/side_bar' %>
+  <% end %>
 
   <div class='col-md-6 col-md-offset-2 vertical-center'>
 
@@ -10,7 +12,7 @@
 
       <div class='control-group col-md-offset-4'>
 
-        <%= render partial: 'application/error_message', locals: {user: @user} %>
+        <%= render partial: 'application/error_message', locals: {errors: @user.errors} %>
 
         <br><br>
       </div>
