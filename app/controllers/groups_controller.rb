@@ -75,6 +75,7 @@ class GroupsController < ApplicationController
   end
 
   def members
+    initialize_posts
     @members = @group.users.page params[:page]
   end
 
