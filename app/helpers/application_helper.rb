@@ -8,17 +8,13 @@ module ApplicationHelper
   def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
     #FIX: Try to make this independent of controller and action names.
-    if params[:controller] == 'users'
-      link_to image, users_path(order: order, direction: direction)
-    else
-      link_to image, controller: :groups, action: params[:action], order: order, direction: direction
-    end
+    link_to image, controller: params[:controller], action: params[:action], order: order, direction: direction
   end
 
   def link_to_by_order(link)
     #FIX: sort_order is being used only in if part
-    sort_order = params[:direction] == 'asc' ? :desc : :asc
     if link.to_s == params[:order]
+      sort_order = params[:direction] == 'asc' ? :desc : :asc
       sort_direction_link params[:order], sort_order
     else
       sort_by_ascending_image = sort_direction_link link, :asc
@@ -28,12 +24,12 @@ module ApplicationHelper
   end
 
   def admin_or_self_user?(user)
-    admin_logged_in? or !not_self_user?(user)
+    admin_logged_in? or not_self_user?(user)
   end
 
   #FIX: user_logged_in?(user)
-  def not_self_user?(user)
-    current_user != user
+  def user_logged_in?(user)
+    current_user == user
   end
 
   #FIX: Use different view files for each action and extract common code in partials
@@ -60,7 +56,7 @@ module ApplicationHelper
   end
 
   #FIX: Rename to #group_join_link
-  def group_action(group)
+  def group_action_link(group)
     if current_user.groups.include? group
       link_to :unjoin, unjoin_group_path(group)
     else

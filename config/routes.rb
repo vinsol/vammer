@@ -2,10 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { confirmations: 'users/confirmations' }
 
-  root 'application#index'
+  root 'homes#index'
 
-  put 'settings', controller: :settings, action: :update
-  get 'settings/edit', controller: :settings, action: :edit
+  namespace :admin do
+    put 'settings', controller: :settings, action: :update
+    get 'settings/edit', controller: :settings, action: :edit
+  end
 
   resources :users, only: [:index, :edit, :update, :show]
 

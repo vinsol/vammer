@@ -1,0 +1,19 @@
+<div class='col-lg-offset-2'>
+  <% if flash[:error] %>
+    <% flash[:error].each do |flash_error| %>
+      <%= flash_error %>
+      <br>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for @post, class: 'form-horizontal' do |f| %>
+
+    <%= render 'attributes_post_form', locals: {f: f} %>
+
+    <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
+      <br>
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

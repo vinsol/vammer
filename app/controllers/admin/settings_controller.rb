@@ -1,5 +1,5 @@
 #FIX: Move this to namespace 'admin'
-class SettingsController < ApplicationController
+class Admin::SettingsController < Admin
 
   before_action :authenticate_admin
 
@@ -13,7 +13,7 @@ class SettingsController < ApplicationController
       setting.update(value: current_setting.second) if setting
     end
     flash[:notice] = t('.success', scope: :flash)
-    redirect_to settings_edit_path
+    redirect_to admin_settings_edit_path
   end
 
   private

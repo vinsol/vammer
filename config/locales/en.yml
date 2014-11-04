@@ -25,9 +25,10 @@ en:
       update:
         success: 'user updated successfully'
         failure: 'user not updated successfully'
-    settings:
-      update:
-        success: 'Settings successfully updated'
+    admin:
+      settings:
+        update:
+          success: 'Settings successfully updated'
     access:
       failure: 'ACCESS DENIED'
     record:

@@ -1,10 +1,11 @@
 <div class='dashboard-body'>
   <%= render 'show_group_details' %>
-  <%= render 'show_post' %>
+  <%= group_action_link(@group) %>
+  <%= render 'homes/show_post' %>
 </div>
 
 <div class='dashboard-sidebar'>
 
-  <%= render 'group_list' %>
+  <%= render 'homes/group_list' %>
 
 </div>
