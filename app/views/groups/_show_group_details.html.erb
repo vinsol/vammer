@@ -1,9 +1,6 @@
-<h2>
-  <%= @group.name.capitalize %>
-</h2>
+<h2> <%= @group.name.capitalize %> </h2>
   <%= link_to 'members', members_group_path %>
-<div>
-  <%= @group.description %>
-</div>
+<div> <%= @group.description %> </div>
 <br>
+
 <%= render 'create_post' %>

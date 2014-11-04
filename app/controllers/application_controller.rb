@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def index
     @post = Post.new
     @post.build_upload
-    @posts = Post.where(user_id: current_user)
+    @posts = Post.all
   end
 
 end

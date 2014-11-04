@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
 
-  has_one :image, as: :attachment, dependent: :destroy
+  has_one :image, as: :attachment
 
   accepts_nested_attributes_for :image
 

@@ -1,3 +1,12 @@
+<div class='col-lg-offset-2'>
+  <% if flash[:error] %>
+    <% flash[:error].each do |flash_error| %>
+      <%= flash_error %>
+      <br>
+    <% end %>
+  <% end %>
+</div>
+
 <%= form_for @post, class: 'form-horizontal' do |f| %>
 
   <div class='control-group col-md-offset-4'>
