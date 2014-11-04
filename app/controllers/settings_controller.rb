@@ -1,3 +1,4 @@
+#FIX: Move this to namespace 'admin'
 class SettingsController < ApplicationController
 
   before_action :authenticate_admin
@@ -19,8 +20,8 @@ class SettingsController < ApplicationController
 
     def authenticate_admin
       unless current_user.admin?
-        flash[:notice] = t('access.failure', scope: :flash)
         #FIX: This should be error
+        flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :root
       end
     end

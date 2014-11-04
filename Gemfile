@@ -20,6 +20,7 @@ gem 'letter_opener', '1.2.0', group: :development
 
 gem 'kaminari', '0.16.1'
 
+#FIX: Add versions
 gem 'paperclip'
 
 gem 'rmagick'
