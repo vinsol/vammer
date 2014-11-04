@@ -73,7 +73,11 @@ ActiveRecord::Schema.define(version: 20141103103544) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-10-30 05:38:50'
+    t.datetime "joining_date",           default: '2014-11-04 12:26:17'
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

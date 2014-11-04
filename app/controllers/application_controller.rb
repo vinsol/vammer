@@ -22,7 +22,9 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_groups
-    @my_groups = current_user.groups if current_user
+    if current_user
+      @my_groups = current_user.groups
+    end
   end
 
   #FIX: Make a HomeController and move this action there
