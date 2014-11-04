@@ -1,8 +1,8 @@
 class GroupsController < ApplicationController
 
-  before_action :authenticate_user_admin, only: [:edit, :update]
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :initialize_posts, only: [:show]
+  before_action :authenticate_user_admin, only: [:edit, :update]
 
   include Sort
 
@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
   end
 
   def unjoin
-    if @group.creator != current_user
+    if @group.creator != current_user and current_user.groups.include? @group
       @group.users.destroy(current_user)
     #FIX: Move else logic to before action
     else
@@ -56,7 +56,11 @@ class GroupsController < ApplicationController
     #FIX: Add a before_action to return if user is already present in group
     #FIX: Handle success/failure
     #FIX: Add flash
-    @group.users.push(current_user)
+    if @group.users.include? current_user
+      flash[:notice] = t('.failure', scope: :flash)
+    else
+      @group.users.push(current_user)
+    end
     redirect_to groups_path
   end
 
@@ -71,7 +75,7 @@ class GroupsController < ApplicationController
   def show
     group = Group.where(id: params[:id]).first
     #FIX: What is group is not found. Handle it in before_action
-    @posts = group.posts
+    @posts = group.posts.order(created_at: :desc)
   end
 
   def members
@@ -82,9 +86,9 @@ class GroupsController < ApplicationController
   private
 
     def authenticate_user_admin
-      unless current_user.admin? or @user == current_user
+      unless current_user.admin? or @group.creator == current_user
         flash[:notice] = t('access.failure', scope: :flash)
-        redirect_to :users
+        redirect_to :groups
       end
     end
 

@@ -34,4 +34,6 @@ en:
       failure: 'record not found'
     groups:
       unjoin:
-        failure: 'can not unjoin group created by you'
+        failure: 'can not unjoin group'
+      join:
+        failure: 'can not again join a group'
