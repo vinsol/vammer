@@ -29,11 +29,12 @@ class User < ActiveRecord::Base
 
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
+  def active_for_authentication?
+    super && enabled
+  end
+
   private
 
-    def active_for_authentication?
-      super && enabled
-    end
 
     def email_matches_company_domain
       if COMPANY['domain'] != email.split('@').last
