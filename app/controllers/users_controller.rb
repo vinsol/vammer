@@ -11,7 +11,7 @@ class UsersController < ApplicationController
                       [ image_attributes: %i(attachment id) ]
 
   def index
-    @users = current_user.admin ? User.all : User.where(enabled: true)
+    @users = current_user.admin? ? User.all : User.where(enabled: true)
     @users = collection(@users)
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     end
 
     def authenticate_user_admin
-      unless current_user.admin or @user == current_user
+      unless current_user.admin? or @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end

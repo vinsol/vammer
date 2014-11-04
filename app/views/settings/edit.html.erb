@@ -5,7 +5,7 @@
 
       <div class='control-group'>
         <%= label_tag :company_name, 'Company Name', {class: 'col-lg-4 control-label'} %>
-        <%= text_field_tag :company_name, company_config['name'], disabled: true, class: 'form-control col-md-offset-4'%>
+        <%= text_field_tag :company_name, Configuration::COMPANY['name'], disabled: true, class: 'form-control col-md-offset-4'%>
       </div>
 
       <br>

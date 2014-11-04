@@ -27,35 +27,20 @@ class User < ActiveRecord::Base
 
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
-  COMPANY_CONFIGURATIONS_PATH = 'config/config.yml'
-
-  def active_for_authentication?
-    super && enabled
-  end
-
   private
 
-    def email_matches_company_domain
-      company_data = YAML.load_file(COMPANY_CONFIGURATIONS_PATH)
-      if company_data['company']['domain'] != email.split('@').last
-        errors.add(:email, 'domain does not match with companies domain')
-      end
-    end
-
-    def set_enabled
-      self.enabled = true
-    end
-
-  private
-
-    def set_initial_password
-      self.password = SecureRandom.hex if self.encrypted_password.empty?
+    def active_for_authentication?
+      super && enabled
     end
 
     def email_matches_company_domain
       if COMPANY['domain'] != email.split('@').last
         errors.add(:email, 'domain does not match with companies domain')
       end
+    end
+
+    def set_enabled
+      self.enabled = true
     end
 
 end

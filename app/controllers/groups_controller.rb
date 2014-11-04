@@ -71,7 +71,7 @@ class GroupsController < ApplicationController
   private
 
     def authenticate_user_admin
-      unless current_user.admin or @user == current_user
+      unless current_user.admin? or @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end
