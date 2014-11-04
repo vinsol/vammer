@@ -20,9 +20,13 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_groups
-    if not current_user.nil?
-      @my_groups = current_user.groups
-    end
+    @my_groups = current_user.groups if current_user
+  end
+
+  def index
+    @post = Post.new
+    @post.build_upload
+    @posts = Post.all
   end
 
 end

@@ -1,11 +1,44 @@
-<%= form_tag 'posts', class: 'form-horizontal' do %>
-  <div class='form-group'>
-    <div class='col-lg-5 col-lg-offset-2'>
-      <%= text_area_tag :desc, '', placeholder: 'what\'s on your mind', class: 'form-control' %>
-    </div>
-    <div class='col-lg-4 col-lg-offset-2'>
+<div class='col-lg-offset-2'>
+  <% if flash[:error] %>
+    <% flash[:error].each do |flash_error| %>
+      <%= flash_error %>
       <br>
-      <%= submit_tag %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for @post, class: 'form-horizontal' do |f| %>
+
+  <div class='control-group col-md-offset-4'>
+
+    <%= render partial: 'application/error_message', locals: {user: @post} %>
+
+    <br><br>
+  </div>
+
+  <div class='form-group'>
+    <div class='col-lg-7 col-lg-offset-1'>
+      <%= f.text_area :content, placeholder: 'what\'s on your mind', class: 'form-control' %>
+    </div>
+    <br><br><br><br>
+
+    <% if params[:controller] == 'groups' %>
+      <%= f.hidden_field :group_id, value: params[:id] %>
+    <% end %>
+
+    <div class='col-lg-offset-6'>
+
+      <%= f.fields_for :upload do |attach| %>
+
+        <%= attach.file_field :attachment %>
+
+      <% end %>
+
+    </div>
+
+    <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
+      <br>
+      <%= f.submit %>
     </div>
   </div>
 <% end %>
