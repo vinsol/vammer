@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
     @groups = collection(@groups)
   end
 
+  #FIX: Rename to some better name
   def other
     @groups = Group.search_other(current_user)
     @groups = collection(@groups)
@@ -28,11 +29,15 @@ class GroupsController < ApplicationController
   end
 
   def create
+    #FIX: Use #owned_groups association for creation
     group = current_user.groups.create(permitted_params)
     group.user_id = current_user.id
+    #FIX: Flash messages
     if group.save
+      #FIX: Use common syntax for path
       redirect_to groups_path
     else
+      #FIX: Use common syntax for path
       redirect_to new_group_path
     end
   end
@@ -40,6 +45,7 @@ class GroupsController < ApplicationController
   def unjoin
     if @group.creator != current_user
       @group.users.destroy(current_user)
+    #FIX: Move else logic to before action
     else
       flash[:notice] = t('.failure', scope: :flash)
     end
@@ -47,6 +53,9 @@ class GroupsController < ApplicationController
   end
 
   def join
+    #FIX: Add a before_action to return if user is already present in group
+    #FIX: Handle success/failure
+    #FIX: Add flash
     @group.users.push(current_user)
     redirect_to groups_path
   end
@@ -61,6 +70,7 @@ class GroupsController < ApplicationController
 
   def show
     group = Group.where(id: params[:id]).first
+    #FIX: What is group is not found. Handle it in before_action
     @posts = group.posts
   end
 
@@ -89,6 +99,9 @@ class GroupsController < ApplicationController
       end
     end
 
+    #FIX: We are not initializing posts here. only one post.
+    #FIX: Add different methods for initialization and loading existing posts
+    #FIX: Also this should not be a before_action
     def initialize_posts
       @post = Post.new
       @post.build_document

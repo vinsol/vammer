@@ -11,6 +11,7 @@
 
   <div class='control-group col-md-offset-4'>
 
+    <!-- #FIX: Why using variable user for a post object? -->
     <%= render partial: 'application/error_message', locals: {user: @post} %>
 
     <br><br>
@@ -22,6 +23,7 @@
     </div>
     <br><br><br><br>
 
+    <!-- #FIX: Use different views. Do not add conditions based on controller or action names -->
     <% if params[:controller] == 'groups' %>
       <%= f.hidden_field :group_id, value: params[:id] %>
     <% end %>

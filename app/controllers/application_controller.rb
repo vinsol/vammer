@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_devise_params, if: :devise_controller?
+  #FIX: Call :fetch_groups in specific controllers
   before_action :authenticate_user!, :fetch_groups, :fetch_logo
 
 
@@ -24,6 +25,7 @@ class ApplicationController < ActionController::Base
     @my_groups = current_user.groups if current_user
   end
 
+  #FIX: Make a HomeController and move this action there
   def index
     @post = Post.new
     @post.build_document
