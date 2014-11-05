@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   
-  include Configuration
+  START_YEAR = 1970
+
+  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
@@ -9,14 +11,14 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :image
 
-  has_many :groups_users
+  has_many :groups_members, dependent: :destroy
 
-  has_many :groups, through: :groups_users
+  has_many :groups, through: :groups_members
 
-  #FIX: Rename to :owned_groups
-  has_many :created_groups, class_name: Group, foreign_key: :user_id
+  #FIX: Rename to :owned_groups -DONE
+  has_many :owned_groups, class_name: Group, foreign_key: :creator_id
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   before_create :set_enabled
 
@@ -24,10 +26,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: :true
 
-  #FIX: Move constants to top
-  START_YEAR = 1970
-
-  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
+  #FIX: Move constants to top -DONE
 
   def active_for_authentication?
     super && enabled

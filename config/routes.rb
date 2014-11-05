@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   root 'homes#index'
 
-  put 'settings', controller: :settings, action: :update
-  get 'settings/edit', controller: :settings, action: :edit
+  namespace :admin do
+    put 'settings', controller: :settings, action: :update
+    get 'settings/edit', controller: :settings, action: :edit
+  end
 
   resources :users, only: [:index, :edit, :update, :show]
 
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'owned'
-      get 'other'
+      get 'extraneous'
     end
   end
 

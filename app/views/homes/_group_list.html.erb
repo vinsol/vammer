@@ -1,10 +1,10 @@
 <!-- #FIX: Rename to _groups.htm.erb -->
 <%= current_user.image ? image_tag(current_user.image.attachment.url) : 'no image' %>
 <!-- #FIX: Indentation -->
-    <%= current_user.name %>
+<%= current_user.name %>
 
 <br> <br>
-<div class="list-group">
+<div class='list-group'>
 
   <%= link_to 'Groups', groups_path, class: 'list-group-item active' %>
 

@@ -12,7 +12,7 @@
 
       <div class='control-group col-md-offset-4'>
 
-        <%= render partial: 'application/error_message', locals: {errors: @user.errors} %>
+        <%= render partial: 'homes/error_message', locals: {errors: @user.errors} %>
 
         <br><br>
       </div>
@@ -64,7 +64,7 @@
 
       </div><br/>
 
-      <% if admin_logged_in? && not_self_user?(@user) %>
+      <% if admin_logged_in? && !user_logged_in?(@user) %>
 
         <div class='control-group'>
 

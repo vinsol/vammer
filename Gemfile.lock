@@ -132,9 +132,9 @@ DEPENDENCIES
   jquery-rails (= 3.1.2)
   kaminari (= 0.16.1)
   letter_opener (= 1.2.0)
-  paperclip
+  paperclip (= 4.2.0)
   pg (= 0.17.1)
   rails (= 4.1.6)
-  rmagick
+  rmagick (= 2.13.3)
   therubyracer (= 0.12.1)
   uglifier (= 2.5.3)

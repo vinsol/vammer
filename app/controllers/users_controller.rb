@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  include Sort
-
   before_action :fetch_user, except: :index
 
   before_action :authenticate_user_admin, only: [:update, :edit]
@@ -12,7 +10,9 @@ class UsersController < ApplicationController
 
   def index
     @users = current_user.admin? ? User.all : User.where(enabled: true)
-    @users = collection(@users)
+    sort_order
+    sort_column
+    @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
   end
 
   def edit
