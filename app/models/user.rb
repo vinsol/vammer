@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   
+  START_YEAR = 1970
+
+  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
 
@@ -11,8 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :groups, through: :groups_users
 
-  #FIX: Rename to :owned_groups
-  has_many :created_groups, class_name: Group, foreign_key: :user_id
+  #FIX: Rename to :owned_groups -DONE
+  has_many :owned_groups, class_name: Group, foreign_key: :user_id
 
   has_many :posts
 
@@ -22,10 +26,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: :true
 
-  #FIX: Move constants to top
-  START_YEAR = 1970
-
-  USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
+  #FIX: Move constants to top -DONE
 
   def active_for_authentication?
     super && enabled

@@ -33,10 +33,10 @@ module ApplicationHelper
   end
 
   def group_owner_logged_in?(group)
-    current_user.created_groups.include? group
+    current_user.owned_groups.include? group
   end
 
-  #FIX: Use different view files for each action and extract common code in partials
+  #FIX: Use different view files for each action and extract common code in partials -DONE
 
   # FIX: Rename to #group_join_link -DONE
   def group_join_link(group)

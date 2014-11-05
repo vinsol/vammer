@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user_admin, only: [:edit, :update]
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :fetch_groups
-  before_action :creator_logged_in? only: :unjoin
+  before_action :creator_logged_in?, only: :unjoin
 
   def sort(collection)
     sort_order
@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
   end
 
   def owned
-    @groups = current_user.created_groups
+    @groups = current_user.owned_groups
     @groups = sort(@groups)
   end
 
@@ -36,9 +36,9 @@ class GroupsController < ApplicationController
   end
 
   def create
-    #FIX: Use #owned_groups association for creation
-    group = current_user.groups.create(permitted_params)
-    group.user_id = current_user.id
+    #FIX: Use #owned_groups association for creation -DONE
+    group = current_user.owned_groups.create(permitted_params)
+    group.users.push current_user
     #FIX: Flash messages
     if group.save
       #FIX: Use common syntax for path -DONE
@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
 
   def unjoin
     @group.users.destroy(current_user)
-    #FIX: Move else logic to before action
+    #FIX: Move else logic to before action -DONE
   end
 
   def join
