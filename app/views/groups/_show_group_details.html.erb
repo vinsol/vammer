@@ -2,6 +2,6 @@
   <%= link_to 'members', members_group_path %>
 <div> <%= @group.description %> </div>
 <br>
-<% if @group.users.include? current_user %>
+<% if @group.members.include? current_user %>
   <%= render 'create_post' %>
 <% end %>

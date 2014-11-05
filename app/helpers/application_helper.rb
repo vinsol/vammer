@@ -7,8 +7,8 @@ module ApplicationHelper
   #FIX: Fix sorting with pagination -DONE
   def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
-    #FIX: Try to make this independent of controller and action names.
-    link_to image, controller: params[:controller], action: params[:action], order: order, direction: direction, page: params[:page]
+    #FIX: Try to make this independent of controller and action names. -DONE
+    link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
   end
 
   def link_to_by_order(link)

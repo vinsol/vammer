@@ -33,8 +33,14 @@
     <div class='container-body'>
       <br>
       <% if flash[:notice] %>
-        <div class="control-group alert alert-danger col-lg-offset-4 col-lg-4">
+        <div class="control-group alert alert-warning col-lg-offset-4 col-lg-4">
           <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <% if flash[:error] %>
+        <div class="control-group alert alert-danger col-lg-offset-4 col-lg-4">
+          <%= flash[:error] %>
         </div>
       <% end %>
 

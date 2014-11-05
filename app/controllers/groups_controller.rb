@@ -1,9 +1,11 @@
 class GroupsController < ApplicationController
 
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
+  before_action :fetch_groups
   before_action :initialize_posts, only: [:show]
   before_action :authenticate_user_admin, only: [:edit, :update]
-  before_action :creator_logged_in?, only: :unjoin
+  before_action :allow_unjoin, only: :unjoin
+  before_action :allow_join, only: :join
 
   def sort(collection)
     sort_order
@@ -22,7 +24,7 @@ class GroupsController < ApplicationController
 
   #FIX: Rename to some better name
   def extraneous
-    @groups = Group.search_other(current_user)
+    @groups = current_user.search_extraneous
     @groups = sort(@groups)
   end
 
@@ -38,14 +40,12 @@ class GroupsController < ApplicationController
   def create
     #FIX: Use #owned_groups association for creation -DONE
     group = current_user.owned_groups.create(permitted_params)
-    group.members.push current_user
     #FIX: Flash messages
     if group.save
       #FIX: Use common syntax for path -DONE
       redirect_to :groups
     else
-      flash[:notice] = t('.failure', scope: :flash)
-      #FIX: Use common syntax for path
+      flash[:error] = t('.failure', scope: :flash)
       #FIX: Use common syntax for path -DONE
       redirect_to :new_group
     end
@@ -53,18 +53,15 @@ class GroupsController < ApplicationController
 
   def unjoin
     @group.members.destroy(current_user)
+    redirect_to :groups      
     #FIX: Move else logic to before action -DONE
   end
 
   def join
     #FIX: Add a before_action to return if user is already present in group -DONE
-    #FIX: Handle success/failure
-    #FIX: Add flash
-    if @group.members.include? current_user
-      flash[:notice] = t('.failure', scope: :flash)
-    else
-      @group.members.push(current_user)
-    end
+    #FIX: Handle success/failure -DONE
+    #FIX: Add flash -DONE
+    @group.members.push(current_user)
     redirect_to :groups
   end
 
@@ -77,11 +74,10 @@ class GroupsController < ApplicationController
   end
 
   def show
-    #FIX: What is group is not found. Handle it in before_action
     initialize_posts
     fetch_posts
     #FIX: What is group is not found. Handle it in before_action -DONE
-    @posts = group.posts.order(created_at: :desc)
+    @posts = @group.posts.order(created_at: :desc)
   end
 
   def members
@@ -93,7 +89,7 @@ class GroupsController < ApplicationController
 
     def authenticate_user_admin
       unless current_user.admin? or @group.creator == current_user
-        flash[:notice] = t('access.failure', scope: :flash)
+        flash[:error] = t('access.failure', scope: :flash)
         redirect_to :groups
       end
     end
@@ -105,7 +101,7 @@ class GroupsController < ApplicationController
     def fetch_group
       @group = Group.where(id: params[:id]).first
       unless @group
-        flash[:notice] = t('record.failure', scope: :flash)
+        flash[:error] = t('record.failure', scope: :flash)
         redirect_to :groups
       end
     end
@@ -122,10 +118,21 @@ class GroupsController < ApplicationController
       @posts = Post.where(user_id: current_user)
     end
 
-    def creator_logged_in?
-      if @group.creator == current_user
-        flash[:notice] = t('.failure', scope: :flash)
+    def allow_unjoin
+      if @group.creator == current_user or not group_member?
+        flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups      
+      end
+    end
+
+    def group_member?
+      @group.members.include? current_user
+    end
+
+    def allow_join
+      if group_member?
+        flash[:error] = t('.failure', scope: :flash)
+        redirect_to :groups
       end
     end
 

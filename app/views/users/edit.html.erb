@@ -1,6 +1,6 @@
 <div class='container'>
 
-  <% if !not_self_user?(@user) %>
+  <% if user_logged_in?(@user) %>
     <%= render 'users/registrations/side_bar' %>
   <% end %>
 

@@ -1,8 +1,6 @@
 #FIX: Move this to namespace 'admin' -DONE
 class Admin::SettingsController < Admin
 
-  before_action :authenticate_admin
-
   def edit
     @settings = Setting.all
   end
@@ -15,15 +13,5 @@ class Admin::SettingsController < Admin
     flash[:notice] = t('.success', scope: :flash)
     redirect_to admin_settings_edit_path
   end
-
-  private
-
-    def authenticate_admin
-      unless current_user.admin?
-        #FIX: This should be error
-        flash[:notice] = t('access.failure', scope: :flash)
-        redirect_to :root
-      end
-    end
 
 end

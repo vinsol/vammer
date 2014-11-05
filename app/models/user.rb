@@ -32,6 +32,12 @@ class User < ActiveRecord::Base
     super && enabled
   end
 
+  def search_extraneous
+    groups = self.groups.pluck(:id)
+    Group.where.not(id: groups)
+  end
+
+
   private
 
 
