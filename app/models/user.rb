@@ -11,14 +11,14 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :image
 
-  has_many :groups_users
+  has_many :groups_members, dependent: :destroy
 
-  has_many :groups, through: :groups_users
+  has_many :groups, through: :groups_members
 
   #FIX: Rename to :owned_groups -DONE
-  has_many :owned_groups, class_name: Group, foreign_key: :user_id
+  has_many :owned_groups, class_name: Group, foreign_key: :creator_id
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   before_create :set_enabled
 

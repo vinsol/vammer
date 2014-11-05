@@ -38,7 +38,7 @@ class GroupsController < ApplicationController
   def create
     #FIX: Use #owned_groups association for creation -DONE
     group = current_user.owned_groups.create(permitted_params)
-    group.users.push current_user
+    group.members.push current_user
     #FIX: Flash messages
     if group.save
       #FIX: Use common syntax for path -DONE
@@ -50,7 +50,7 @@ class GroupsController < ApplicationController
   end
 
   def unjoin
-    @group.users.destroy(current_user)
+    @group.members.destroy(current_user)
     #FIX: Move else logic to before action -DONE
   end
 
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
     #FIX: Add a before_action to return if user is already present in group -DONE
     #FIX: Handle success/failure
     #FIX: Add flash
-    @group.users.push(current_user)
+    @group.members.push(current_user)
     redirect_to :groups
   end
 
@@ -79,7 +79,7 @@ class GroupsController < ApplicationController
 
   def members
     initialize_posts
-    @members = @group.users.page params[:page]
+    @members = @group.members.page params[:page]
   end
 
   private
