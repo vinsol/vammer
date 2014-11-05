@@ -8,11 +8,7 @@ module ApplicationHelper
   def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
     #FIX: Try to make this independent of controller and action names.
-    if params[:controller] == 'users'
-      link_to image, users_path(order: order, direction: direction)
-    else
-      link_to image, controller: :groups, action: params[:action], order: order, direction: direction
-    end
+    link_to image, controller: params[:controller], action: params[:action], order: order, direction: direction, page: params[:page]
   end
 
   def link_to_by_order(link)
