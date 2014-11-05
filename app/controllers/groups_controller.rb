@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user_admin, only: [:edit, :update]
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :fetch_groups
+  before_action :creator_logged_in? only: :unjoin
 
   def sort(collection)
     sort_order
@@ -23,13 +24,11 @@ class GroupsController < ApplicationController
   def extraneous
     @groups = Group.search_other(current_user)
     @groups = sort(@groups)
-    render :index
   end
 
   def owned
     @groups = current_user.created_groups
     @groups = sort(@groups)
-    render :index
   end
 
   def new
@@ -51,13 +50,8 @@ class GroupsController < ApplicationController
   end
 
   def unjoin
-    if @group.creator != current_user
-      @group.users.destroy(current_user)
+    @group.users.destroy(current_user)
     #FIX: Move else logic to before action
-    else
-      flash[:notice] = t('.failure', scope: :flash)
-    end
-    redirect_to :groups
   end
 
   def join
@@ -119,6 +113,13 @@ class GroupsController < ApplicationController
 
     def fetch_posts
       @posts = Post.where(user_id: current_user)
+    end
+
+    def creator_logged_in?
+      if @group.creator == current_user
+        flash[:notice] = t('.failure', scope: :flash)
+        redirect_to :groups      
+      end
     end
 
 end

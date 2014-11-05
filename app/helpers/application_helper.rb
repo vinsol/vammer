@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def admin_or_self_user?(user)
-    admin_logged_in? or not_self_user?(user)
+    admin_logged_in? or user_logged_in?(user)
   end
 
   #FIX: user_logged_in?(user) -DONE
@@ -32,33 +32,18 @@ module ApplicationHelper
     current_user == user
   end
 
+  def group_owner_logged_in?(group)
+    current_user.created_groups.include? group
+  end
+
   #FIX: Use different view files for each action and extract common code in partials
-  def group_action_link(group)
-
-    case params[:action].to_sym
-    when :index
-    joiner_link = link_to :unjoin, unjoin_group_path(group)
-    when :owned
-    edit_link = link_to :edit, edit_group_path(group)
-    when :other
-    joiner_link = link_to :join, join_group_path(group)
-    end
-
-    if admin_logged_in?
-      edit_link = link_to :edit, edit_group_path(group)
-    end
-    [edit_link, joiner_link].join(' ').html_safe
-
-  end
-
-  def not_owned?
-    params[:action] != 'owned'
-  end
 
   # FIX: Rename to #group_join_link -DONE
   def group_join_link(group)
     if current_user.groups.include? group
-      link_to :unjoin, unjoin_group_path(group)
+      if  group.creator != current_user
+        link_to :unjoin, unjoin_group_path(group)
+      end
     else
       link_to :join, join_group_path(group)
     end
