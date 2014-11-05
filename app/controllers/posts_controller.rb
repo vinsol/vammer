@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     end
   end
 
-  #FIX: This should be private method
+  #FIX: This should be private method -DONE
   private
 
     def permitted_params

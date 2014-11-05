@@ -20,7 +20,7 @@ class GroupsController < ApplicationController
   end
 
   #FIX: Rename to some better name
-  def other
+  def extraneous
     @groups = Group.search_other(current_user)
     @groups = sort(@groups)
     render :index
@@ -61,7 +61,7 @@ class GroupsController < ApplicationController
   end
 
   def join
-    #FIX: Add a before_action to return if user is already present in group
+    #FIX: Add a before_action to return if user is already present in group -DONE
     #FIX: Handle success/failure
     #FIX: Add flash
     @group.users.push(current_user)
@@ -79,9 +79,8 @@ class GroupsController < ApplicationController
   def show
     initialize_posts
     fetch_posts
-    group = Group.where(id: params[:id]).first
-    #FIX: What is group is not found. Handle it in before_action
-    @posts = group.posts
+    #FIX: What is group is not found. Handle it in before_action -DONE
+    @posts = @group.posts
   end
 
   def members

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'owned'
-      get 'other'
+      get 'extraneous'
     end
   end
 

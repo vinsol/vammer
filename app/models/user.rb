@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   
-  include Configuration
-
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
 

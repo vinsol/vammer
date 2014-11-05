@@ -1,4 +1,4 @@
-#FIX: Move this to namespace 'admin'
+#FIX: Move this to namespace 'admin' -DONE
 class Admin::SettingsController < Admin
 
   before_action :authenticate_admin
