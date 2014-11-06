@@ -2,13 +2,10 @@ class Group < ActiveRecord::Base
 
   #FIX: Rename to :groups_members -DONE
   has_many :groups_members, dependent: :destroy
-
   #FIX: Rename association to :members -DONE
   has_many :members, through: :groups_members, source: :user
-
   #FIX: Add dependent destroy -DONE
   has_many :posts, dependent: :destroy
-
   #FIX: Use creator_id as foreign_key -DONE
   belongs_to :creator, class_name: User, foreign_key: :creator_id
 

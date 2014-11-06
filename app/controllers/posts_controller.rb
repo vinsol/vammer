@@ -4,11 +4,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(permitted_params)
     #FIX: Dont use redirect back, Redirect on the basis of group_id in post -DONE
     #FIX: Render with post details filled in case of failed to create
-    if @post.save
-      redirect_to redirect_path
-    else
-      render 'homes/index'
-    end
+    redirect_to redirect_path
   end
 
   #FIX: This should be private method -DONE
