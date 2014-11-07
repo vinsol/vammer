@@ -10,8 +10,7 @@
 <%= form_for @post, class: 'form-horizontal' do |f| %>
   
     <%= render 'homes/attributes_post_form', locals: {f: f} %>
-
-    <%= f.hidden_field :group_id, value: params[:id] %>
+    <%= f.hidden_field :group_id, value: @group.id %>
 
     <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
       <br>

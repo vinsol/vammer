@@ -20,5 +20,6 @@ else
   puts user.errors.full_messages
 end
 
-Setting.find_or_create_by(key: :logo)
+setting = Setting.create
+setting.build_image
 puts 'setting for logo is saved'

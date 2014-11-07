@@ -29,6 +29,7 @@ en:
       settings:
         update:
           success: 'Settings successfully updated'
+          failure: 'Settings not updated'
     access:
       failure: 'ACCESS DENIED'
     record:

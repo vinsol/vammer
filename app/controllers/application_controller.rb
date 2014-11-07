@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
 
   def fetch_logo
-    @logo = Setting.where(key: :logo).first
+    @logo = Setting.first
   end
 
   def configure_devise_params

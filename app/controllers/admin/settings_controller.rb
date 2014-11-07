@@ -2,16 +2,24 @@
 class Admin::SettingsController < Admin
 
   def edit
-    @settings = Setting.all
+    @setting = Setting.first
+    @setting.build_image unless @setting.image
   end
 
   def update
-    params[:value].each do |current_setting|
-      setting = Setting.where(id: current_setting.first).first
-      setting.update(value: current_setting.second) if setting
+    setting = Setting.first
+    if setting.update(permitted_params)
+      flash[:notice] = t('.success', scope: :flash)
+    else
+      flash[:error] = t('.failure', scope: :flash)
     end
-    flash[:notice] = t('.success', scope: :flash)
     redirect_to admin_settings_edit_path
   end
+
+  private
+    
+    def permitted_params
+      params.require(:setting).permit(image_attributes: [:attachment])
+    end
 
 end

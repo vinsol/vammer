@@ -14,7 +14,6 @@ class PostsController < ApplicationController
   #FIX: This should be private method -DONE
   private
 
-    # working
     def render_path
       initialize_render_path
       if params[:post][:group_id]

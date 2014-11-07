@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'homes#index'
 
   namespace :admin do
-    put 'settings', controller: :settings, action: :update
+    resources :settings, only: [:update]
     get 'settings/edit', controller: :settings, action: :edit
   end
 
