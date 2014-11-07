@@ -1,51 +1,48 @@
-<table class='table-width'>
-
-
-  <table class='center-align'>
-    <thead>
-
-      <tr>
-        <th>Image</th>
-
-        <th id='name'>
-          NAME
-          <%= link_to_by_order :name %>
-
-        </th>
-        <th >
-          EMAIL
-          <%= link_to_by_order :email %>
-
-        </th>
-
-        <th>Joining Date</th>
-
-      </tr>
+<div class='container'>
 
   <% @users.each do |user| %>
 
-    <tr class='row-height'>
+    <div class='row row-margin-bottom'>
 
-      <td class='column-width'>
-        <%= user.image ? image_tag(user.image.attachment.url) : 'no image' %>
-      </td>
+      <div class='col-md-5 no-padding lib-item' data-category='view'>
 
-      <td class='column-width'> <%= user.name %> </td>
+        <div class='lib-panel'>
+          <div class='row box-shadow'>
+            <div class='col-md-6'>
 
-      <td class='column-width'> <%= user.email %> </td>
+              <%= user.image ? image_tag(user.image.attachment.url(:large), class: 'lib-img') : 'no image' %>
 
-      <td class='column-width'> <%= user.joining_date %> </td>
+            </div>
 
-      <td class='column-width'>
-        <%= link_to 'show', user_path(user) %>
-          <% if admin_or_self_user?(user) %>
-          | <%= link_to 'edit', edit_user_path(user) %>
-        <% end %>
-      </td>
+            <div class='col-md-6'>
+              <div class='lib-row lib-header'>
 
-    </tr>
+                <%= user.name %>
+
+                <div class='lib-header-seperator'></div>
+              </div>
+
+              <div class='lib-row lib-desc'>
+
+                <%= user.email %><br>
+                <%= user.joining_date %><br>
+                <%= link_to 'show', user_path(user) %><br><br>
+
+                <% if admin_or_self_user?(user) %>
+                  <%= link_to 'edit', edit_user_path(user), class: 'col-md-offset-4' %>
+                <% end %>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-1'></div>
+
+    </div>
 
   <% end %>
 
-</table>
-<%= paginate @users %>
+</div>
