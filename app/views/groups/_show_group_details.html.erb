@@ -1,7 +1,7 @@
 <h2> <%= @group.name.capitalize %> </h2>
-  <%= link_to 'members', members_group_path %>
+  <%= link_to 'members', members_group_path(@group) %>
 <div> <%= @group.description %> </div>
 <br>
 <% if @group.members.include? current_user %>
-  <%= render 'create_post' %>
+  <%= render 'groups/create_post' %>
 <% end %>

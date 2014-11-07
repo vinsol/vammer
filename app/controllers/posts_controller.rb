@@ -4,11 +4,31 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(permitted_params)
     #FIX: Dont use redirect back, Redirect on the basis of group_id in post -DONE
     #FIX: Render with post details filled in case of failed to create
-    redirect_to redirect_path
+    if @post.save
+      redirect_to redirect_path
+    else
+      render render_path
+    end
   end
 
   #FIX: This should be private method -DONE
   private
+
+    def render_path
+      initialize_render_path
+      if params[:post][:group_id]
+        @group = Group.where(id: params[:post][:group_id]).first
+        'groups/show'
+      else
+        'homes/index'
+      end
+    end
+
+    def initialize_render_path
+      @posts = Post.order(created_at: :desc)
+      fetch_groups
+      @post.build_document
+    end
 
     def redirect_path
       if params[:post][:group_id]
