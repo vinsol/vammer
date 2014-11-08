@@ -13,9 +13,11 @@ class Group < ActiveRecord::Base
 
   after_create :add_creator_to_member
 
-  def add_creator_to_member
-    members.push creator
-  end
+  private
+
+    def add_creator_to_member
+      members.push creator
+    end
 
   #FIX: Add a callback to add creator to members of group -DONE
 
