@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   #FIX: Rename to :owned_groups -DONE
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validate :email_matches_company_domain
   validates :name, presence: :true

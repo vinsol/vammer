@@ -1,11 +1,9 @@
-class Post < ActiveRecord::Base
+class Comment < ActiveRecord::Base
 
   has_one :document, as: :attachment, dependent: :destroy
   accepts_nested_attributes_for :document
   belongs_to :user
-  belongs_to :group
-  has_many :comments, dependent: :destroy
-  accepts_nested_attributes_for :comments
+  belongs_to :post
 
   validates :content, presence: true
 

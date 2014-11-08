@@ -2,21 +2,26 @@
 <div class='col-lg-offset-1 col-lg-7'>
 
   <% @posts.each do |post| %>
-    <% if post.user.image %>
-      <%= image_tag(post.user.image.attachment.url(:thumb)) %>
-    <% end %>
+    <div class='post-division fill'>
+      <% if post.user.image %>
+        <%= image_tag(post.user.image.attachment.url(:thumb)) %>
+      <% end %>
 
-    <%= post.user.name %>
+      <%= post.user.name %>
 
-    <br><br>
+      <br><br>
 
-    <%= post.content %>
+      <%= post.content %>
 
-    <% if post.document %>
-      <%= link_to 'attachment', post.document.attachment.url %>
-    <% end %>
-
-    <br> <br> <br> <br>
+      <% if post.document %>
+        <%= link_to 'attachment', post.document.attachment.url %>
+      <% end %>
+      <%= render 'homes/show_comments', post: post %>
+      <% if(@group ? @group.members.include?(current_user) : false) %>
+        <%= render 'homes/create_comments', post: post %>
+      <% end %>
+      <br> <br> <br> <br>
+    </div>
   <% end %>
 
   <br>

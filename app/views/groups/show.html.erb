@@ -1,6 +1,8 @@
 <div class='dashboard-body'>
   <%= render 'groups/show_group_details' %>
-  <%= group_join_link(@group) %>
+  <div class='join-link'>
+    <%= group_join_link(@group) %>
+  </div>
   <%= render 'homes/show_post' %>
 </div>
 

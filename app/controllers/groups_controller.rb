@@ -75,6 +75,7 @@ class GroupsController < ApplicationController
 
   def show
     initialize_posts
+    initialize_comments
     fetch_posts
     #FIX: What is group is not found. Handle it in before_action -DONE
     @posts = @group.posts.order(created_at: :desc)
@@ -109,10 +110,6 @@ class GroupsController < ApplicationController
     #FIX: We are not initializing posts here. only one post. -DONE
     #FIX: Add different methods for initialization and loading existing posts -DONE
     #FIX: Also this should not be a before_action -DONE
-    def initialize_posts
-      @post = Post.new
-      @post.build_document
-    end
 
     def fetch_posts
       @posts = Post.where(user_id: current_user)

@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :fetch_logo
 
 
-  def fetch_logo
-    @logo = Setting.first
-  end
-
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |user|
       user.permit(:name, :email, :password, :password_confirmation)
@@ -21,20 +17,36 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
-  def fetch_groups
-    if current_user
-      @my_groups = current_user.groups
+  private
+
+    def fetch_logo
+      @logo = Setting.first
     end
-  end
 
-  #FIX: Make a HomeController and move this action there -DONE
+    def fetch_groups
+      if current_user
+        @my_groups = current_user.groups
+      end
+    end
 
-  def sort_order
-    params[:direction] = 'asc' unless params[:direction] == 'desc'
-  end
+    #FIX: Make a HomeController and move this action there -DONE
 
-  def sort_column
-    params[:column] = 'created_at' if params[:column].blank?
-  end
+    def sort_order
+      params[:direction] = 'asc' unless params[:direction] == 'desc'
+    end
+
+    def sort_column
+      params[:column] = 'created_at' if params[:column].blank?
+    end
+
+    def initialize_comments
+      @comment = Comment.new
+      @comment.build_document
+    end
+
+    def initialize_posts
+      @post = Post.new
+      @post.build_document
+    end
 
 end

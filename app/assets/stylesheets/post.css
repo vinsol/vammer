@@ -1,3 +1,19 @@
 .post-submit-button {
   margin-top: -45px;
 }
+.shadow {
+  -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
+}
+.post-division {
+  background-color: #ececec;
+  border-bottom: 10px solid #FFF;
+  display: table;
+  width: 600px;
+}
+.comment-box {
+  background-color: #FAFAFA;
+}
+.join-link {
+  margin: -60px 0px 0px 80px;
+ }
