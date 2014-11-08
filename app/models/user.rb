@@ -31,9 +31,7 @@ class User < ActiveRecord::Base
     Group.where.not(id: groups)
   end
 
-
   private
-
 
     def email_matches_company_domain
       if COMPANY['domain'] != email.split('@').last

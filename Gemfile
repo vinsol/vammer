@@ -10,6 +10,9 @@ gem 'devise', '3.4.0'
 
 group :test, :development do
   gem 'byebug', '3.5.1'
+  gem 'rspec-rails', '3.1.0'
+  gem 'shoulda-matchers', '2.7.0'
+  gem 'factory_girl_rails', '4.5.0'
 end
 
 gem 'jquery-rails', '3.1.2'
