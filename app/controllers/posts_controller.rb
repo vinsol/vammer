@@ -19,7 +19,7 @@ class PostsController < ApplicationController
         @group = @post.group
         'groups/show'
       else
-        'homes/index'
+        'home/index'
       end
     end
 
