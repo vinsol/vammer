@@ -13,7 +13,7 @@
       <%= comment.content %>
       <br><br><br>
 
-      <% comment.documents.each do |document| %>
+      <% comment.document_files.each do |document| %>
         <%= link_to('attachment', document.attachment.url) %>
       <% end %>
 

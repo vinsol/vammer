@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   before_action :fetch_comment, :authenticate_user_admin, only: [:destroy]
 
   def create
-    debugger
     post = Post.find(params[:post_id])
     @comment = post.comments.new(permitted_params)
     @comment.user_id = current_user.id
@@ -27,7 +26,7 @@ class CommentsController < ApplicationController
     end
 
     def permitted_params
-      params.require(:comment).permit(:content, documents_attributes: [:attachment, :id, :_destroy] )
+      params.require(:comment).permit(:content, document_files_attributes: [:attachment, :id, :_destroy] )
     end
 
     def fetch_comment
