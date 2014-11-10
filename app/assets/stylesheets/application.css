@@ -14,5 +14,6 @@
  *= require post
  *= require user
  *= require home
+ *= require comment
  *= require bootstrap
  */
