@@ -5,13 +5,14 @@
       <%= f.hidden_field :group_id, value: @group.try(:id) %>
     </div>
     <br>
-
-    <div class='control-group'>
-      <%= f.fields_for :documents, @comment do |doc| %>
-        <%= doc.file_field :attachment %>
-      <% end %>
+    <div class='col-lg-3'>
+      <div class='control-group'>
+        <%= f.fields_for :documents, @comment do |doc| %>
+          <%= doc.file_field :attachment %>
+        <% end %>
+      </div>
+      <%= f.link_to_add 'Add', :documents %>
     </div>
-    <%= f.link_to_add 'Add attachment', :documents %>
 
     <div class='control-group col-lg-offset-10'>
       <%= f.submit 'Post', class: 'btn btn-primary' %>
