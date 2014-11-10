@@ -1,9 +1,12 @@
 <div class='col-lg-10'>
+
   <%= form_for [post, @comment], html: { class: 'form-horizontal col-lg-12'} do |f| %>
+
     <div class='control-group'>
       <%= f.text_area :content, class: 'form-control' %>
       <%= f.hidden_field :group_id, value: @group.try(:id) %>
     </div>
+
     <br>
 
     <div class='control-group'>
@@ -14,7 +17,9 @@
 
     <div class='control-group col-lg-offset-10'>
       <%= f.submit 'Post', class: 'btn btn-primary' %>
-    <% end %>
+    </div>
+
     <br> <br>
-  </div>
+  <% end %>
+
 </div>

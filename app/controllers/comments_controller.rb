@@ -18,10 +18,10 @@ class CommentsController < ApplicationController
   private
 
     def redirect_path
-      if params[:comment][:group_id].empty?
+      if @comment.group_id.empty?
         :root
       else
-        group_path(params[:comment][:group_id])
+        group_path(@comment.group_id)
       end
     end
 
