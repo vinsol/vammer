@@ -1,5 +1,5 @@
 <div class='col-lg-10'>
-  <%= form_for [post, @comment], html: { class: 'form-horizontal col-lg-12'} do |f| %>
+  <%= nested_form_for [post, @comment], html: { class: 'form-horizontal col-lg-12'} do |f| %>
     <div class='control-group'>
       <%= f.text_area :content, class: 'form-control' %>
       <%= f.hidden_field :group_id, value: @group.try(:id) %>
@@ -7,14 +7,15 @@
     <br>
 
     <div class='control-group'>
-      <%= f.fields_for :document do |doc| %>
+      <%= f.fields_for :document_files do |doc| %>
         <%= doc.file_field :attachment %>
       <% end %>
     </div>
+    <%= f.link_to_add 'Add attachment', :document_files %>
 
     <div class='control-group col-lg-offset-10'>
       <%= f.submit 'Post', class: 'btn btn-primary' %>
-    <% end %>
-    <br> <br>
-  </div>
+    </div>
+  <% end %>
+  <br> <br>
 </div>

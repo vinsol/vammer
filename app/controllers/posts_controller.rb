@@ -39,7 +39,7 @@ class PostsController < ApplicationController
     end
 
     def permitted_params
-      params.require(:post).permit(:content, :group_id, document_attributes: [:attachment, :id])
+      params.require(:post).permit(:content, :group_id, documents_attributes: [:attachment, :id, :_destroy])
     end
 
 end

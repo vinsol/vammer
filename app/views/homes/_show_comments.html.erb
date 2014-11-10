@@ -13,8 +13,8 @@
       <%= comment.content %>
       <br><br><br>
 
-      <% if comment.document %>
-        <%= link_to('attachment', comment.document.attachment.url) %>
+      <% comment.document_files.each do |document| %>
+        <%= link_to('attachment', document.attachment.url) %>
       <% end %>
 
       <% if admin_or_self_user?(comment.user) %>

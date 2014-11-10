@@ -13,9 +13,10 @@
 
       <%= post.content %>
 
-      <% if post.document %>
-        <%= link_to 'attachment', post.document.attachment.url %>
+      <% post.documents.each do |document| %>
+        <%= link_to 'attachment', document.attachment.url %>
       <% end %>
+
       <%= render 'homes/show_comments', post: post %>
       <% if(@group ? @group.members.include?(current_user) : true) %>
         <%= render 'homes/create_comments', post: post %>

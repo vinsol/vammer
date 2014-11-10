@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     end
 
     def permitted_params
-      params.require(:comment).permit(:content, document_attributes: [:attachment] )
+      params.require(:comment).permit(:content, document_files_attributes: [:attachment, :id, :_destroy] )
     end
 
     def fetch_comment

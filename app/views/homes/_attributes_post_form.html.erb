@@ -16,10 +16,11 @@
 
 <div class='col-lg-offset-6'>
 
-  <%= locals[:f].fields_for :document do |attach| %>
+  <%= locals[:f].fields_for :documents do |attach| %>
 
     <%= attach.file_field :attachment %>
 
   <% end %>
+  <%= locals[:f].link_to_add 'Add attachment', :documents %>
 
 </div>
