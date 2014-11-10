@@ -1,53 +1,51 @@
-<div class='navbar navbar-default'>
-  <div class='navbar-header search-input'>
+<div class='navbar navbar-default navbar-center'>
 
-    <%= form_tag html: {class: 'form-inline'} do %>
+  <%= form_tag html: {class: 'form-inline'} do %>
 
-      <div class='col-md-offset-9'>
+    <div class='col-md-offset-8'>
 
-        <%= text_field_tag :search_input, '', placeholder: 'Search'  %>
-        <%= submit_tag 'search', class: 'btn btn-primary' %>
+      <%= text_field_tag :search_input, '', placeholder: 'Search'  %>
+      <%= submit_tag 'search', class: 'btn btn-primary' %>
 
-      </div>
+    </div>
 
-    <% end %>
+  <% end %>
 
-    <ul class='nav navbar-right navbar-position '>
+  <ul class='nav col-md-offset-11 col-md-1 navbar-position'>
 
-      <li class='dropdown'>
+    <li class='dropdown'>
 
-        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>More
-          <b class='caret'></b>
-        </a>
+      <a href='#' class='dropdown-toggle' data-toggle='dropdown'>More
+        <b class='caret'></b>
+      </a>
 
-        <ul class='dropdown-menu'>
-          <li>
-            <%= link_to :Group, groups_path %>
-          </li>
-          <li>
-            <%= link_to :People, users_path %>
-          </li>
-          <li>
-            <%= link_to 'Edit Profile', edit_user_path(current_user) %>
-          </li>
+      <ul class='dropdown-menu'>
+        <li>
+          <%= link_to :Group, groups_path %>
+        </li>
+        <li>
+          <%= link_to :People, users_path %>
+        </li>
+        <li>
+          <%= link_to 'Edit Profile', edit_user_path(current_user) %>
+        </li>
 
-          <% if admin_logged_in? %>
-
-            <li>
-
-              <%= link_to :Settings, admin_settings_edit_path %>
-
-            </li>
-
-          <% end %>
+        <% if admin_logged_in? %>
 
           <li>
 
-            <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+            <%= link_to :Settings, admin_settings_edit_path %>
 
           </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+
+        <% end %>
+
+        <li>
+
+          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>

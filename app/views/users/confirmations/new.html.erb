@@ -1,21 +1,21 @@
 <div class='container'>
 
-  <div class='col-md-7 col-md-offset-2 vertical-center'>
+  <div class='col-md-8 col-md-offset-2 vertical-center'>
 
     <h2>Resend confirmation instructions</h2>
 
-    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'form-horizontal col-lg-10' }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'form-horizontal col-lg-8' }) do |f| %>
 
       <%= devise_error_messages! %>
 
       <div class='control-group'>
 
-        <%= f.label :email, class: 'col-lg-4 control-label' %>
+        <%= f.label :email, class: 'control-label' %>
         <%= f.email_field :email, autofocus: true, class: 'form-control' %>
 
       </div><br>
 
-      <div class='control-group col-md-offset-4'>
+      <div class='control-group'>
 
         <%= f.submit 'Resend confirmation instructions', class: 'btn btn-primary' %>
 
