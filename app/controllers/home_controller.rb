@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 
   def index
     @post = Post.new
-    @post.build_document
+    @post.documents.build
     fetch_posts  
   end
 

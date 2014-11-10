@@ -1,0 +1,28 @@
+<br> <br> <br>
+<div class='col-lg-12'>
+
+  <% post.comments.each do |comment| %>
+
+    <div class='shadow comment-box'>
+
+      <% if post.user.image %>
+        <%= image_tag(post.user.image.attachment.url(:thumb)) %>
+      <% end %>
+
+      <%= comment.user.name %><br>
+      <%= comment.content %>
+      <br><br><br>
+
+      <% comment.document_files.each do |document| %>
+        <%= link_to('attachment', document.attachment.url) %>
+      <% end %>
+
+      <% if admin_or_self_user?(comment.user) %>
+        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete %>
+      <% end %>
+
+    </div>
+    <br>
+  <% end %>
+
+</div>
