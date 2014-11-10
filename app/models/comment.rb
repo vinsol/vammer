@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
 
-  has_one :document, as: :attachment, dependent: :destroy
-  accepts_nested_attributes_for :document
+  has_many :documents, as: :attachment, dependent: :destroy
+  accepts_nested_attributes_for :documents
   belongs_to :user
   belongs_to :post
 

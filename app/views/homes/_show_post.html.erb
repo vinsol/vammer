@@ -18,7 +18,7 @@
       <% end %>
 
       <%= render 'homes/show_comments', post: post %>
-      <% if(@group ? @group.members.include?(current_user) : false) %>
+      <% if(@group ? @group.members.include?(current_user) : true) %>
         <%= render 'homes/create_comments', post: post %>
       <% end %>
       <br> <br> <br> <br>
