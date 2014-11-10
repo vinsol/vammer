@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { confirmations: 'users/confirmations' }
 
-  root 'homes#index'
+  root 'home#index'
 
   namespace :admin do
     resources :settings, only: [:update]

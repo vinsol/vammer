@@ -1,1 +1,6 @@
-<%= render 'create_group' %>
+<%= form_for @group, html: { class: 'form-horizontal col-lg-10'} do |f| %>
+
+  <h2>Update</h2>
+
+  <%= render 'form', {f: f} %>
+<% end %>

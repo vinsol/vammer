@@ -1,5 +1,4 @@
-#FIX: Move this to Admin::BaseController
-class Admin < ApplicationController
+class Admin::BaseController < ApplicationController
 
   before_action :authenticate_admin
 

@@ -37,7 +37,13 @@ en:
     groups:
       unjoin:
         failure: 'can not unjoin group'
+        success: 'group unjoined'
       join:
         failure: 'can not again join a group'
+        success: 'group joined'
       create:
         failure: 'Group not saved'
+        success: 'Group created'
+      update:
+        success: 'group updated'
+        failure: 'group not updated'
