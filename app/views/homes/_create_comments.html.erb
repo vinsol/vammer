@@ -7,7 +7,7 @@
     <br>
 
     <div class='control-group'>
-      <%= f.fields_for :documents do |doc| %>
+      <%= f.fields_for :documents, @comment do |doc| %>
         <%= doc.file_field :attachment %>
       <% end %>
     </div>
@@ -15,7 +15,7 @@
 
     <div class='control-group col-lg-offset-10'>
       <%= f.submit 'Post', class: 'btn btn-primary' %>
-    <% end %>
-    <br> <br>
-  </div>
+    </div>
+  <% end %>
+  <br> <br>
 </div>
