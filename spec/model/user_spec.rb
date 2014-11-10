@@ -13,13 +13,26 @@ describe User do
 
   end
 
-  # describe '#search_extraneous' do
-  #   let(:user) { create(:user, :current) }
-  #   let(:admin) { create(:user, :admin) }
-  #   let(:my_group) { user.owned_groups.create(name: 'my', description: 'my group') }
-  #   let(:other_group) { admin.owned_groups.create(name: 'other', description: 'my group') }
-  #   it { expect(user.search_extraneous).to eql (Group.where(id: other_group.id).pluck(:id)) }
-  # end
+  describe '#search_extraneous' do
+    let(:user) { create(:user, :current) }
+    let(:admin) { create(:user, :admin) }
+
+    context 'when user has groups' do
+      it do
+        my_group = user.owned_groups.create(name: 'my', description: 'my group')
+        other_group = admin.owned_groups.create(name: 'other', description: 'other group')
+        expect(user.search_extraneous.pluck(:id)).to eql (Group.where(id: other_group.id).pluck(:id))
+      end
+    end
+
+    context 'when user has no groups' do
+      it do
+        other_group = admin.owned_groups.create(name: 'other', description: 'other group')
+        expect(user.search_extraneous.pluck(:id)).to eql (Group.where(id: other_group.id).pluck(:id))
+      end
+    end
+
+  end
 
   describe '#active_for_authentication?' do
     let(:user) { create(:user, :current) }
