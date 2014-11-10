@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :fetch_post, :authenticate_user_admin, only: [:destroy]
+
   def create
     @post = current_user.posts.new(permitted_params)
     #FIX: Dont use redirect back, Redirect on the basis of group_id in post -DONE
@@ -9,6 +11,11 @@ class PostsController < ApplicationController
     else
       render render_path
     end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to :root
   end
 
   #FIX: This should be private method -DONE
@@ -40,6 +47,17 @@ class PostsController < ApplicationController
 
     def permitted_params
       params.require(:post).permit(:content, :group_id, documents_attributes: [:attachment, :id, :_destroy])
+    end
+
+    def fetch_post
+      @post = Post.where(id: params[:id]).first
+    end
+
+    def authenticate_user_admin
+      unless current_user.admin? or @post.user == current_user
+        flash[:notice] = t('access.failure', scope: :flash)
+        redirect_to :root
+      end
     end
 
 end

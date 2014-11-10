@@ -16,6 +16,9 @@
       <% post.documents.each do |document| %>
         <%= link_to 'attachment', document.attachment.url %>
       <% end %>
+      <% if admin_or_self_user?(post.user) %>
+        <%= link_to 'delete post', post_path(post.id), method: :delete %>
+      <% end %>
 
       <%= render 'homes/show_comments', post: post %>
       <% if(@group ? @group.members.include?(current_user) : true) %>
