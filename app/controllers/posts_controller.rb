@@ -13,28 +13,28 @@ class PostsController < ApplicationController
   private
 
     def render_path
-      initialize_render_path
+      fetch_form_associations
       #FIX: Use @post.group_id
-      if params[:post][:group_id]
-        @group = Group.where(id: params[:post][:group_id]).first
+      if @post.group_id
+        @group = @post.group
         'groups/show'
       else
-        'homes/index'
+        'home/index'
       end
     end
 
     #FIX: Rename to #fetch_form_associations and this should be called from the inside the action
-    def initialize_render_path
+    def fetch_form_associations
       #FIX: Define a method #fetch_posts and call from here
-      @posts = Post.order(created_at: :desc)
-      fetch_groups
+      fetch_posts
+      fetch_user_groups
       @post.build_document
     end
 
     def redirect_path
-      #FIX: Use @post.group_id
-      if params[:post][:group_id]
-        group_path(params[:post][:group_id])
+      #FIX: Use @post.group_id -DONE
+      if @post.group_id
+        group_path(@post.group_id)
       else
         :root
       end

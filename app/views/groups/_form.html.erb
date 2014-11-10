@@ -1,0 +1,28 @@
+<!-- #FIX: _form.html.erb DONE-->
+<div class='container'>
+  <div class='col-md-6 col-md-offset-2 vertical-center'>
+
+    <!-- #FIX: Extract common code in partial -DONE -->
+    <div class='control-group'>
+
+      <%= f.label :name, class: 'col-lg-4 control-label' %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+    </div><br>
+
+    <div class='control-group'>
+
+      <%= f.label :description, class: 'col-lg-4 control-label' %>
+      <%= f.text_area :description, class: 'form-control' %>
+
+    </div><br>
+
+    <div class='control-group col-lg-offset-4'>
+
+      <%= f.submit class: 'btn btn-primary' %>
+
+    </div>
+
+
+  </div>
+</div>

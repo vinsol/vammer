@@ -21,11 +21,9 @@ class ApplicationController < ActionController::Base
   end
 
   #FIX: Rename to #fetch_user_groups
-  def fetch_groups
-    #FIX: if condition not required
-    if current_user
-      @my_groups = current_user.groups
-    end
+  def fetch_user_groups
+    #FIX: if condition not required -DONE
+    @my_groups = current_user.groups
   end
 
   def sort_order
@@ -34,6 +32,10 @@ class ApplicationController < ActionController::Base
 
   def sort_column
     params[:column] = 'created_at' if params[:column].blank?
+  end
+
+  def fetch_posts
+    @posts = Post.order(created_at: :desc)
   end
 
 end

@@ -7,14 +7,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
 
-  accepts_nested_attributes_for :image
-
   has_one :image, as: :attachment, dependent: :destroy
-
   has_many :groups_members, dependent: :destroy
   has_many :groups, through: :groups_members
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id
   has_many :posts, dependent: :destroy
+
+  accepts_nested_attributes_for :image
 
   validates :name, presence: :true
   validate :email_matches_company_domain
