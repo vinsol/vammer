@@ -1,15 +1,6 @@
-<div class='col-lg-offset-2'>
-  <% if flash[:error] %>
-    <% flash[:error].each do |flash_error| %>
-      <%= flash_error %>
-      <br>
-    <% end %>
-  <% end %>
-</div>
-
-<%= nested_form_for @post, class: 'form-horizontal' do |f| %>
+<%= form_for @post, class: 'form-horizontal' do |f| %>
   
-    <%= render 'homes/attributes_post_form', locals: {f: f} %>
+    <%= render 'home/posts_form_fields', locals: {f: f} %>
     <%= f.hidden_field :group_id, value: @group.id %>
 
     <div class='col-lg-4 col-lg-offset-1 post-submit-button'>

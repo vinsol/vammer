@@ -1,5 +1,4 @@
-#FIX: Move this to namespace 'admin' -DONE
-class Admin::SettingsController < Admin
+class Admin::SettingsController < Admin::BaseController
 
   def edit
     @setting = Setting.first

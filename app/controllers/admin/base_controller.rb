@@ -1,4 +1,4 @@
-class Admin < ApplicationController
+class Admin::BaseController < ApplicationController
 
   before_action :authenticate_admin
 
@@ -6,7 +6,6 @@ class Admin < ApplicationController
 
     def authenticate_admin
       unless current_user.admin?
-        #FIX: This should be error -DONE
         flash[:error] = t('access.failure', scope: :flash)
         redirect_to :root
       end

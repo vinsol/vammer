@@ -1,7 +1,7 @@
+<!-- #FIX: Rename to _posts_form_fields.html.erb -->
 <div class='control-group col-md-offset-4'>
 
-<!-- #FIX: Why using variable user for a post object? -->
-<%= render partial: 'homes/error_message', locals: {errors: @post.errors} %>
+<!-- #FIX: Move error messages to form -->
 
 <br><br>
 </div>
@@ -11,8 +11,6 @@
   <%= locals[:f].text_area :content, placeholder: 'what\'s on your mind', class: 'form-control' %>
 </div>
 <br><br><br><br>
-
-<!-- #FIX: Use different views. Do not add conditions based on controller or action names -DONE -->
 
 <div class='add-more-attachment col-lg-2'>
 

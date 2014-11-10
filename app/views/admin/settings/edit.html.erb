@@ -8,6 +8,7 @@
       </div>
 
       <br>
+      <div class='control-group'>
       <%= f.fields_for :image do |attach| %>
 
         <%= attach.label :attachment, class: 'col-lg-4 control-label' %>
@@ -16,9 +17,9 @@
 
       <% end %>
 
-      </div><br />
+      </div><br>
 
-      <div class='control-group col-md-offset-4'>
+      <div class='control-group col-lg-offset-4'>
         <%= f.submit %>
       </div>
 

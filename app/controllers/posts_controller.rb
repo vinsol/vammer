@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(permitted_params)
-    #FIX: Dont use redirect back, Redirect on the basis of group_id in post -DONE
     #FIX: Render with post details filled in case of failed to create
     if @post.save
       redirect_to redirect_path
@@ -22,24 +21,28 @@ class PostsController < ApplicationController
   private
 
     def render_path
-      initialize_render_path
-      if params[:post][:group_id]
-        @group = Group.where(id: params[:post][:group_id]).first
+      fetch_form_associations
+      #FIX: Use @post.group_id
+      if @post.group_id
+        @group = @post.group
         'groups/show'
       else
-        'homes/index'
+        'home/index'
       end
     end
 
-    def initialize_render_path
-      @posts = Post.order(created_at: :desc)
-      fetch_groups
+    #FIX: Rename to #fetch_form_associations and this should be called from the inside the action
+    def fetch_form_associations
+      #FIX: Define a method #fetch_posts and call from here
+      fetch_posts
+      fetch_user_groups
       @post.build_document
     end
 
     def redirect_path
-      if params[:post][:group_id]
-        group_path(params[:post][:group_id])
+      #FIX: Use @post.group_id -DONE
+      if @post.group_id
+        group_path(@post.group_id)
       else
         :root
       end
