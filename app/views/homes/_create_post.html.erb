@@ -7,7 +7,7 @@
   <% end %>
 </div>
 
-<%= form_for @post, class: 'form-horizontal' do |f| %>
+<%= nested_form_for @post, class: 'form-horizontal' do |f| %>
 
     <%= render 'homes/attributes_post_form', locals: {f: f} %>
 

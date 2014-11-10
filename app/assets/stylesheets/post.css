@@ -1,5 +1,5 @@
 .post-submit-button {
-  margin-top: -45px;
+  margin-top: -15px;
 }
 .shadow {
   -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,.10);
@@ -16,4 +16,11 @@
 }
 .join-link {
   margin: -60px 0px 0px 80px;
- }
+}
+.delete-post {
+  float: right;
+}
+.add-more-attachment {
+  float: right !important;
+  margin-right: 350px;
+}

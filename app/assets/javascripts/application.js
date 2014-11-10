@@ -13,5 +13,6 @@
 //= require jquery
 //= require bootstrap
 //= require jquery_ujs
+//= require jquery_nested_form
 
 // FIXME_AB: don't use require_tree. read about it and discuss with Jaggi sir
