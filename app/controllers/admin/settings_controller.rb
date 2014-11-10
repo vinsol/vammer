@@ -1,4 +1,3 @@
-#FIX: Move this to namespace 'admin' -DONE
 class Admin::SettingsController < Admin
 
   def edit

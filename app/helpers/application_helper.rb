@@ -4,15 +4,12 @@ module ApplicationHelper
     current_user.admin?
   end
 
-  #FIX: Fix sorting with pagination -DONE
   def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
-    #FIX: Try to make this independent of controller and action names. -DONE
     link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
   end
 
   def link_to_by_order(link)
-    #FIX: sort_order is being used only in if part -DONE
     if link.to_s == params[:order]
       sort_order = params[:direction] == 'asc' ? :desc : :asc
       sort_direction_link params[:order], sort_order
@@ -27,7 +24,6 @@ module ApplicationHelper
     admin_logged_in? or user_logged_in?(user)
   end
 
-  #FIX: user_logged_in?(user) -DONE
   def user_logged_in?(user)
     current_user == user
   end
@@ -36,9 +32,6 @@ module ApplicationHelper
     current_user.owned_groups.include? group
   end
 
-  #FIX: Use different view files for each action and extract common code in partials -DONE
-
-  # FIX: Rename to #group_join_link -DONE
   def group_join_link(group)
     if current_user.groups.include? group
       if  group.creator != current_user

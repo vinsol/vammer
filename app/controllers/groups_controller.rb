@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
 
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :fetch_groups
+  #FIX: Remove this. Already called in action
   before_action :initialize_posts, only: [:show]
   before_action :authenticate_user_admin, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
@@ -22,7 +23,6 @@ class GroupsController < ApplicationController
     @groups = sort(@groups)
   end
 
-  #FIX: Rename to some better name
   def extraneous
     @groups = current_user.search_extraneous
     @groups = sort(@groups)
@@ -38,15 +38,12 @@ class GroupsController < ApplicationController
   end
 
   def create
-    #FIX: Use #owned_groups association for creation -DONE
     group = current_user.owned_groups.create(permitted_params)
-    #FIX: Flash messages
     if group.save
-      #FIX: Use common syntax for path -DONE
+      #FIX: Flash message for success
       redirect_to :groups
     else
       flash[:error] = t('.failure', scope: :flash)
-      #FIX: Use common syntax for path -DONE
       redirect_to :new_group
     end
   end
@@ -54,13 +51,10 @@ class GroupsController < ApplicationController
   def unjoin
     @group.members.destroy(current_user)
     redirect_to :groups      
-    #FIX: Move else logic to before action -DONE
   end
 
   def join
-    #FIX: Add a before_action to return if user is already present in group -DONE
-    #FIX: Handle success/failure -DONE
-    #FIX: Add flash -DONE
+    #FIX: Add flash
     @group.members.push(current_user)
     redirect_to :groups
   end
@@ -76,7 +70,6 @@ class GroupsController < ApplicationController
   def show
     initialize_posts
     fetch_posts
-    #FIX: What is group is not found. Handle it in before_action -DONE
     @posts = @group.posts.order(created_at: :desc)
   end
 
@@ -87,7 +80,9 @@ class GroupsController < ApplicationController
 
   private
 
+    #FIX: Rename to #allow_modify
     def authenticate_user_admin
+      #FIX: Use '||' instead of 'or'
       unless current_user.admin? or @group.creator == current_user
         flash[:error] = t('access.failure', scope: :flash)
         redirect_to :groups
@@ -106,9 +101,7 @@ class GroupsController < ApplicationController
       end
     end
 
-    #FIX: We are not initializing posts here. only one post. -DONE
-    #FIX: Add different methods for initialization and loading existing posts -DONE
-    #FIX: Also this should not be a before_action -DONE
+    #FIX: Rename to #initialize_post
     def initialize_posts
       @post = Post.new
       @post.build_document
@@ -119,12 +112,14 @@ class GroupsController < ApplicationController
     end
 
     def allow_unjoin
+      #FIX: Use '||'
       if @group.creator == current_user or not group_member?
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups      
       end
     end
 
+    #FIX: We do need a method for this.
     def group_member?
       @group.members.include? current_user
     end

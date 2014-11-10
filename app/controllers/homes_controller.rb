@@ -1,3 +1,4 @@
+#FIX: Rename to HomeController
 class HomesController < ApplicationController
 
   before_action :fetch_groups

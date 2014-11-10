@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_devise_params, if: :devise_controller?
-  #FIX: Call :fetch_groups in specific controllers -DONE
   before_action :authenticate_user!, :fetch_logo
 
 
@@ -21,13 +20,13 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  #FIX: Rename to #fetch_user_groups
   def fetch_groups
+    #FIX: if condition not required
     if current_user
       @my_groups = current_user.groups
     end
   end
-
-  #FIX: Make a HomeController and move this action there -DONE
 
   def sort_order
     params[:direction] = 'asc' unless params[:direction] == 'desc'
