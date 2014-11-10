@@ -1,5 +1,10 @@
-# FactoryGirl.define :group do |g|
+FactoryGirl.define do
 
-#     g.creator { creator creator.association }
+  factory :group do
 
-# end
+    name 'ruby'
+    description 'nice language'
+
+  end
+
+end
