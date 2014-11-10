@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'homes#index'
 
   namespace :admin do
+    #FIXME_AB: can we make it a singular resource: http://guides.rubyonrails.org/routing.html#singular-resources
     resources :settings, only: [:update]
     get 'settings/edit', controller: :settings, action: :edit
   end
