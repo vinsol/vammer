@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
 
     def initialize_posts
       @post = Post.new
-      @post.build_document
+      @post.documents.build
     end
 
 end

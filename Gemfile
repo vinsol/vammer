@@ -24,3 +24,5 @@ gem 'kaminari', '0.16.1'
 gem 'paperclip', '4.2.0'
 
 gem 'rmagick', '2.13.3'
+
+gem 'nested_form'
