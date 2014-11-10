@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20141107092937) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-11-07 19:39:23'
+    t.datetime "joining_date",           default: '2014-11-10 08:52:24'
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

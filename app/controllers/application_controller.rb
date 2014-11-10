@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
     def initialize_comments
       @comment = Comment.new
-      @comment.build_document
+      @comment.documents.build
     end
 
     def initialize_posts

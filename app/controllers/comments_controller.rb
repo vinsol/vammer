@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :fetch_comment, :authenticate_user_admin, only: [:destroy]
 
   def create
+    debugger
     post = Post.find(params[:post_id])
     @comment = post.comments.new(permitted_params)
     @comment.user_id = current_user.id
