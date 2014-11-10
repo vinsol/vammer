@@ -2,7 +2,6 @@ class GroupsController < ApplicationController
 
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :fetch_groups
-  before_action :initialize_posts, only: [:show]
   before_action :authenticate_user_admin, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
   before_action :allow_join, only: :join
@@ -76,7 +75,6 @@ class GroupsController < ApplicationController
   def show
     initialize_posts
     initialize_comments
-    fetch_posts
     #FIX: What is group is not found. Handle it in before_action -DONE
     @posts = @group.posts.order(created_at: :desc)
   end
