@@ -36,7 +36,7 @@ class PostsController < ApplicationController
       #FIX: Define a method #fetch_posts and call from here
       fetch_posts
       fetch_user_groups
-      @post.build_document
+      @post.documents.build
     end
 
     def redirect_path
