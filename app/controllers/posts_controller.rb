@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   private
 
     def render_path
+      initialize_comments
       initialize_render_path
       if params[:post][:group_id]
         @group = Group.where(id: params[:post][:group_id]).first
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
     def initialize_render_path
       @posts = Post.order(created_at: :desc)
       fetch_groups
-      @post.build_document
+      @post.documents.build
     end
 
     def redirect_path

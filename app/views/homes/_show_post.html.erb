@@ -15,6 +15,9 @@
 
       <% post.documents.each do |document| %>
         <%= link_to 'attachment', document.attachment.url %>
+        <% if admin_or_self_user?(post.user) %>
+          <%= link_to 'destroy attachment', post_attachment_path(post, document), method: :delete %>
+        <% end %>
       <% end %>
 
       <%= render 'homes/show_comments', post: post %>
