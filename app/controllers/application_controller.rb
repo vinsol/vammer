@@ -27,10 +27,12 @@ class ApplicationController < ActionController::Base
   end
 
   def sort_order
+    #FIXME_AB: Do we have a better way?
     params[:direction] = 'asc' unless params[:direction] == 'desc'
   end
 
   def sort_column
+    #FIXME_AB: Can you identify potential issue?
     params[:column] = 'created_at' if params[:column].blank?
   end
 
