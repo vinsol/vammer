@@ -7,14 +7,20 @@ class CommentsController < ApplicationController
     @comment = post.comments.new(permitted_params)
     @comment.user_id = current_user.id
     if @comment.save
+      flash[:notice] = t('.success', scope: :flash)
       redirect_to redirect_path
     else
+      flash[:error] = t('.failure', scope: :flash)
       render render_path
     end
   end
 
   def destroy
-    @comment.destroy
+    if @comment.destroy
+      flash[:notice] = t('.success', scope: :flash)
+    else
+      flash[:error] = t('.failure', scope: :flash)
+    end
     redirect_to redirect_path
   end
 
@@ -23,7 +29,6 @@ class CommentsController < ApplicationController
     def render_path
       fetch_user_groups
       initialize_render_path
-      initialize_posts
       if @comment.post.group_id
         @group = @comment.post.group
         'groups/show'
@@ -34,7 +39,7 @@ class CommentsController < ApplicationController
 
     def initialize_render_path
       @posts = Post.order(created_at: :desc)
-      initialize_posts
+      initialize_post
     end
 
     def redirect_path

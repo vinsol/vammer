@@ -30,6 +30,20 @@ en:
         update:
           success: 'Settings successfully updated'
           failure: 'Settings not updated'
+    comments:
+      create:
+        success: 'comment successfully added'
+        failure: 'could not add comment'
+      destroy:
+        success: 'comment successfully destroyed'
+        failure: 'could not destroy'
+    posts:
+      create:
+        success: 'post successfully created'
+        failure: 'could not add post'
+      destroy:
+        success: 'post successfully destroyed'
+        failure: 'could not destroy'
     access:
       failure: 'ACCESS DENIED'
     record:

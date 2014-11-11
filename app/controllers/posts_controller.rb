@@ -6,14 +6,20 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(permitted_params)
     #FIX: Render with post details filled in case of failed to create
     if @post.save
+      flash[:notice] = t('.success', scope: :flash)
       redirect_to redirect_path
     else
+      flash[:error] = t('.failure', scope: :flash)
       render render_path
     end
   end
 
   def destroy
-    @post.destroy
+    if @post.destroy
+      flash[:notice] = t('.success', scope: :flash)
+    else
+      flash[:error] = t('.failure', scope: :flash)
+    end
     redirect_to :root
   end
 
@@ -22,7 +28,7 @@ class PostsController < ApplicationController
 
     def render_path
       initialize_comments
-      initialize_posts
+      initialize_post
       fetch_form_associations
       #FIX: Use @post.group_id
       if @post.group_id

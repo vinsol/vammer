@@ -1,12 +1,3 @@
-<div class='col-lg-offset-2'>
-  <% if flash[:error] %>
-    <% flash[:error].each do |flash_error| %>
-      <%= flash_error %>
-      <br>
-    <% end %>
-  <% end %>
-</div>
-
 <%= nested_form_for @post, class: 'form-horizontal' do |f| %>
 
   <%= render partial: 'home/error_message', locals: {errors: @post.errors} %>

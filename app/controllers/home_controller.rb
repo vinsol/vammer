@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 
   def index
     initialize_comments
-    initialize_posts
+    initialize_post
     fetch_posts  
   end
 

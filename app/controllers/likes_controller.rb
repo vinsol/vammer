@@ -4,7 +4,7 @@ class LikesController < ApplicationController
 
   def create
     like = current_user.likes.create
-    @likeable.likes << like
+    @likeable.likes.push like
     redirect_to redirect_path
   end
 

@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   #FIX: Rename to #fetch_user_groups
     def fetch_user_groups
       #FIX: if condition not required -DONE
-      @my_groups = current_user.groups
+      @user_groups = current_user.groups
     end
 
     def sort_order
@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
       @comment.document_files.build
     end
 
-    def initialize_posts
+    def initialize_post
       @post = Post.new
       @post.documents.build
     end
