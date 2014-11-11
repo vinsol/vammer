@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :image, as: :attachment, dependent: :destroy
+  has_many :likes
   has_many :groups_members, dependent: :destroy
   has_many :groups, through: :groups_members
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id
