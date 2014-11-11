@@ -9,9 +9,11 @@ class UsersController < ApplicationController
                       [ image_attributes: %i(attachment id) ]
 
   def index
+    #FIXME_AB: Why not enabled is a scope
     @users = current_user.admin? ? User.all : User.where(enabled: true)
     sort_order
     sort_column
+    #FIXME_AB: any column from params can be used for sorting.
     @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
   end
 
@@ -43,7 +45,9 @@ class UsersController < ApplicationController
       end
     end
 
+    #FIXME_AB: Can we name it better?
     def authenticate_user_admin
+      #FIXME_AB: or vs ||
       unless current_user.admin? or @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
