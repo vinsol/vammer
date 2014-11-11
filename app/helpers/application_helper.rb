@@ -43,4 +43,13 @@ module ApplicationHelper
 
   end
 
+  def link_to_like_unlike(likeable_id)
+    like = Like.where(user_id: current_user, likeable_id: likeable_id).first
+    if like.nil?
+      link_to 'like', post_likes_path(likeable_id), method: :post
+    else
+      link_to 'unlike', post_like_path(likeable_id, like), method: :delete
+    end
+  end
+
 end

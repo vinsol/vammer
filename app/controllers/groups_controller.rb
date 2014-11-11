@@ -83,6 +83,7 @@ class GroupsController < ApplicationController
   def show
     #FIX: What is group is not found. Handle it in before_action -DONE
     initialize_post
+    initialize_comments
     fetch_posts
     @posts = @group.posts.order(created_at: :desc)
   end
@@ -118,7 +119,7 @@ class GroupsController < ApplicationController
     #FIX: Rename to #initialize_post -DONE
     def initialize_post
       @post = Post.new
-      @post.build_document
+      @post.documents.build
     end
 
     def fetch_posts
