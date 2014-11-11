@@ -6,8 +6,11 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     @comment = post.comments.new(permitted_params)
     @comment.user_id = current_user.id
-    @comment.save
-    redirect_to redirect_path
+    if @comment.save
+      redirect_to redirect_path
+    else
+      render render_path
+    end
   end
 
   def destroy
@@ -17,11 +20,28 @@ class CommentsController < ApplicationController
 
   private
 
+    def render_path
+      initialize_render_path
+      if @comment.post.group_id
+        @group = @comment.post.group
+        'groups/show'
+      else
+        'homes/index'
+      end
+    end
+
+    def initialize_render_path
+      @posts = Post.order(created_at: :desc)
+      initialize_posts
+      fetch_groups
+      @comment.build_document
+    end
+
     def redirect_path
-      if @comment.group_id.empty?
+      if @comment.post.group
         :root
       else
-        group_path(@comment.group_id)
+        group_path(@comment.post.group_id)
       end
     end
 
