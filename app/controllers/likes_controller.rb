@@ -1,11 +1,11 @@
 #FIX: Rename to HomeController
 class LikesController < ApplicationController
 
-  before_action :fetch_post
+  before_action :fetch_likeable
 
   def create
     like = current_user.likes.create
-    @post.likes << like
+    @likeable.likes << like
     redirect_to redirect_path
   end
 
@@ -17,13 +17,18 @@ class LikesController < ApplicationController
 
   private
 
-    def fetch_post
-      @post = Post.where(id: params[:post_id]).first
+    def fetch_likeable
+      if params[:comment_id]
+        @likeable = Comment.where(id: params[:comment_id]).first
+      else
+        @likeable = Post.where(id: params[:post_id]).first
+      end
     end
 
     def redirect_path
-      if @post.group_id
-        group_path(@post.group_id)
+      path = @likeable.try(:group) || @likeable.post
+      if path
+        group_path(path.group_id)
       else
         :root
       end

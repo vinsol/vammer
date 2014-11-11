@@ -13,6 +13,9 @@
       <%= comment.content %>
       <br><br><br>
 
+      <%= link_to_like_unlike comment, :comment %>
+      <%= comment.likes.count %>
+
       <% comment.document_files.each do |document| %>
         <%= link_to('attachment', document.attachment.url) %>
 

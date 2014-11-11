@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :likes, only: [:create, :destroy]
       resources :attachments, only: [:destroy]
       resources :comments, only: [:create, :destroy] do
+        resources :likes, only: [:create, :destroy], shallow: true
         resources :attachments, only: [:destroy], shallow: true
       end
     end
