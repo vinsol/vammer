@@ -21,6 +21,8 @@ class PostsController < ApplicationController
   private
 
     def render_path
+      initialize_comments
+      initialize_posts
       fetch_form_associations
       #FIX: Use @post.group_id
       if @post.group_id
@@ -36,7 +38,6 @@ class PostsController < ApplicationController
       #FIX: Define a method #fetch_posts and call from here
       fetch_posts
       fetch_user_groups
-      @post.documents.build
     end
 
     def redirect_path

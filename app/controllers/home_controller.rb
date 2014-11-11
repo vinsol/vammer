@@ -4,8 +4,8 @@ class HomeController < ApplicationController
   before_action :fetch_user_groups
 
   def index
-    @post = Post.new
-    @post.documents.build
+    initialize_comments
+    initialize_posts
     fetch_posts  
   end
 
