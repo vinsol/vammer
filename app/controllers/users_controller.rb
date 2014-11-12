@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     #FIXME_AB: Can we name it better?
     def authenticate_user_admin
       #FIXME_AB: or vs ||
-      unless current_user.admin? or @user == current_user
+      unless current_user.admin? || @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end

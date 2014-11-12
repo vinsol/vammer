@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :group
 
   validates :content, presence: true
-  #FIXME_AB: Should we also add validation on user, because there should be no post with out user.
+  validates :user_id, presence: true
+  #FIXME_AB: Should we also add validation on user, because there should be no post with out user. -DONE
 
 end
