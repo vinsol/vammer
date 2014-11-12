@@ -43,28 +43,29 @@ module ApplicationHelper
 
   end
 
-  def post_like_unlike(like, likeable_id)
+  def post_like_unlike(like, likeable)
     if like.nil?
-      link_to 'like', post_likes_path(likeable_id, group_id: params[:id]), method: :post
+      link_to 'like', post_likes_path(likeable, group_id: params[:id]), method: :post
     else
-      link_to 'unlike', post_like_path(likeable_id, like, group_id: params[:id]), method: :delete
+      link_to 'unlike', post_like_path(likeable, like, group_id: params[:id]), method: :delete
     end
   end
 
-  def comment_like_unlike(like, likeable_id)
+  def comment_like_unlike(like, likeable)
     if like.nil?
-      link_to 'like', post_comment_likes_path(likeable_id.post, likeable_id, group_id: params[:id]), method: :post
+      link_to 'like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post
     else
       link_to 'unlike', like_path(like, group_id: params[:id]), method: :delete
     end
   end
 
-  def link_to_like_unlike(likeable_id, method)
-    like = Like.where(user_id: current_user, likeable_id: likeable_id).first
+  def link_to_like_unlike(likeable, method)
     if method == :post
-      post_like_unlike(like, likeable_id)
+      like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Post').first
+      post_like_unlike(like, likeable)
     else
-      comment_like_unlike(like, likeable_id)
+      like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Comment').first
+      comment_like_unlike(like, likeable)
     end
   end
 
