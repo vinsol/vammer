@@ -5,11 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_params, if: :devise_controller?
   before_action :authenticate_user!, :fetch_logo
 
-
-  def fetch_logo
-    @logo = Setting.first
-  end
-
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |user|
       user.permit(:name, :email, :password, :password_confirmation)
@@ -39,5 +34,11 @@ class ApplicationController < ActionController::Base
   def fetch_posts
     @posts = Post.order(created_at: :desc)
   end
+
+  private
+
+    def fetch_logo
+      @logo = Setting.first
+    end
 
 end

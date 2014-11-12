@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   
   validate :email_matches_company_domain
 
+  scope :enabled, -> { where(enabled: true) }
+
   def active_for_authentication?
     super && enabled
   end

@@ -9,7 +9,7 @@ module ApplicationHelper
     link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
   end
 
-  def link_to_by_order(link)
+  def link_to_order(link)
     if link.to_s == params[:order]
       sort_order = params[:direction] == 'asc' ? :desc : :asc
       sort_direction_link params[:order], sort_order
@@ -23,11 +23,11 @@ module ApplicationHelper
   #FIXME_AB: I think this can be named better
   def can_edit_user?(user)
     #FIXME_AB: why using or. Prefer using ||
-    admin_logged_in? || user_logged_in?(user)
+    admin_logged_in? || creator_logged_in?(user)
   end
 
-  #FIXME_AB: Can be named better
-  def user_logged_in?(user)
+  #FIXME_AB: Can be named better -DONE
+  def creator_logged_in?(user)
     current_user == user
   end
 

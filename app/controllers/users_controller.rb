@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :fetch_user, except: :index
 
-  before_action :authenticate_user_admin, only: [:update, :edit]
+  before_action :authenticate_admin_or_owner, only: [:update, :edit]
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def index
     #FIXME_AB: Why not enabled is a scope
-    @users = current_user.admin? ? User.all : User.where(enabled: true)
+    @users = current_user.admin? ? User.all : User.enabled
     sort_order
     sort_column
     #FIXME_AB: any column from params can be used for sorting.
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     end
 
     #FIXME_AB: Can we name it better?
-    def authenticate_user_admin
+    def authenticate_admin_or_owner
       #FIXME_AB: or vs ||
       unless current_user.admin? || @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
