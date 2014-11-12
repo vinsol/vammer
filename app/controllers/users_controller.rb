@@ -19,7 +19,10 @@ class UsersController < ApplicationController
         @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
       end
       format.json do
-        render json: User.where('name like ? ', '%' + params[:term] + '%') + Group.where('name like ? ', '%' + params[:term] + '%')
+        data = { users: User.where('name like ? ', '%' + params[:term] + '%'),
+                groups: Group.where('name like ? ', '%' + params[:term] + '%')
+               }
+        render json: data
       end
     end
   end
