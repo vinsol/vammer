@@ -13,5 +13,7 @@
 //= require jquery
 //= require bootstrap
 //= require jquery_ujs
+//= require select2
+//= require search
 
 // FIXME_AB: don't use require_tree. read about it and discuss with Jaggi sir

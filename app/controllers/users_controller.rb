@@ -10,11 +10,18 @@ class UsersController < ApplicationController
 
   def index
     #FIXME_AB: Why not enabled is a scope
-    @users = current_user.admin? ? User.all : User.where(enabled: true)
-    sort_order
-    sort_column
-    #FIXME_AB: any column from params can be used for sorting.
-    @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+    respond_to do |format|
+      format.html do
+        @users = current_user.admin? ? User.all : User.where(enabled: true)
+        sort_order
+        sort_column
+        #FIXME_AB: any column from params can be used for sorting.
+        @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+      end
+      format.json do
+        render json: User.where('name like ? ', '%' + params[:term] + '%') + Group.where('name like ? ', '%' + params[:term] + '%')
+      end
+    end
   end
 
   def edit
