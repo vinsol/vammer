@@ -13,6 +13,14 @@ class Group < ActiveRecord::Base
 
   after_create :add_creator_to_member
 
+  def self.sort_by_creator(collection, direction)
+    collection.joins(:creator).order("users.name #{ direction }")
+  end
+
+  def self.sort(collection, column, direction)
+    collection.order( column => direction)
+  end
+
   private
 
     def add_creator_to_member

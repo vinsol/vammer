@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :fetch_user, except: :index
 
-  before_action :authenticate_admin_or_owner, only: [:update, :edit]
+  before_action :allow_modify, only: [:update, :edit]
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     sort_order
     sort_column
     #FIXME_AB: any column from params can be used for sorting.
-    @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+    @users = User.sort(@users, params[:column], params[:direction].to_sym).page params[:page]
   end
 
   def edit
@@ -45,8 +45,8 @@ class UsersController < ApplicationController
       end
     end
 
-    #FIXME_AB: Can we name it better?
-    def authenticate_admin_or_owner
+    #FIXME_AB: Can we name it better? -DONE
+    def allow_modify
       #FIXME_AB: or vs ||
       unless current_user.admin? || @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)

@@ -11,9 +11,9 @@ class GroupsController < ApplicationController
     sort_order
     sort_column
     if params[:column] == 'creator'
-      collection.joins(:creator).order("users.name #{params[:direction]}").page params[:page]
+      Group.sort_by_creator(collection, params[:direction]).page params[:page]
     else
-      collection.order( params[:column] => params[:direction].to_sym).page params[:page]
+      Group.sort(collection, params[:column], params[:direction].to_sym).page params[:page]
     end
   end
 
@@ -82,7 +82,6 @@ class GroupsController < ApplicationController
 
   def show
     initialize_post
-    fetch_posts
     @posts = @group.posts.order(created_at: :desc)
   end
 
@@ -103,7 +102,7 @@ class GroupsController < ApplicationController
     end
 
     def permitted_params
-      params[:group].permit(:name, :description)
+      params.require(:group).permit(:name, :description)
     end
 
     def fetch_group
@@ -128,7 +127,7 @@ class GroupsController < ApplicationController
       #FIX: Use '||'
       if @group.creator == current_user || !(@group.members.include? current_user)
         flash[:error] = t('.failure', scope: :flash)
-        redirect_to :groups      
+        redirect_to :groups
       end
     end
 

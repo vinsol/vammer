@@ -4,11 +4,6 @@ module ApplicationHelper
     current_user.admin?
   end
 
-  def sort_direction_link(order, direction)
-    image = image_tag("#{direction}.png")
-    link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
-  end
-
   def link_to_order(link)
     if link.to_s == params[:order]
       sort_order = params[:direction] == 'asc' ? :desc : :asc
@@ -45,7 +40,13 @@ module ApplicationHelper
     else
       link_to :join, join_group_path(group)
     end
-
   end
+
+  private
+
+    def sort_direction_link(order, direction)
+      image = image_tag("#{direction}.png")
+      link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
+    end
 
 end
