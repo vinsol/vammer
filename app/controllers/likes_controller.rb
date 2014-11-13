@@ -5,8 +5,9 @@ class LikesController < ApplicationController
   def create
     like = current_user.likes.create
     @likeable.likes.push like
+    like_path = params[:comment_id] ? like_path(like.id) : post_like_path(@likeable.id, like.id)
     respond_to do |format|
-      result = {count: @likeable.likes.count, like_path: post_like_path(@likeable.id, like.id)}
+      result = {count: @likeable.likes.count, like_path: like_path}
       format.json { render json: result}
     end
   end
@@ -15,8 +16,9 @@ class LikesController < ApplicationController
     like = Like.where(id: params[:id]).first
     @likeable = like.likeable
     like.destroy
+    like_path = like.likeable_type == 'Comment' ? post_comment_likes_path(like.likeable.post, like.likeable) : post_likes_path(like.likeable)
     respond_to do |format|
-      result = {count: @likeable.likes.count, like_path: post_likes_path}
+      result = {count: @likeable.likes.count, like_path: like_path}
       format.json { render json: result}
     end
   end
