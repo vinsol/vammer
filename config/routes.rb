@@ -23,8 +23,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [:create, :destroy] do
-    resources :comments, only: [:create, :destroy]
+  scope shallow_path: 'comment' do
+    resources :posts, only: [:create, :destroy] do
+      resources :attachments, only: [:destroy]
+      resources :comments, only: [:create, :destroy] do
+        resources :attachments, only: [:destroy], shallow: true
+      end
+    end
   end
 
 end
