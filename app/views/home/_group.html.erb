@@ -1,4 +1,4 @@
-<%= current_user.image ? image_tag(current_user.image.attachment.url) : 'no image' %>
+<%= current_user.image ? image_tag(current_user.image.attachment.url) : image_tag('missing.jpg') %>
 <%= current_user.name %>
 
 <br> <br>

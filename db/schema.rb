@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107073516) do
+ActiveRecord::Schema.define(version: 20141113172925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20141107073516) do
     t.datetime "attachment_updated_at"
   end
 
+  create_table "comments", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "groups", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -36,9 +44,19 @@ ActiveRecord::Schema.define(version: 20141107073516) do
     t.integer  "creator"
   end
 
+  add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
+
   create_table "groups_members", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "likeable_type"
+    t.integer  "likeable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,7 +69,25 @@ ActiveRecord::Schema.define(version: 20141107073516) do
     t.datetime "updated_at"
   end
 
+  add_index "posts", ["group_id"], name: "index_posts_on_group_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
   create_table "settings", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "simple_hashtag_hashtaggings", force: true do |t|
+    t.integer "hashtag_id"
+    t.integer "hashtaggable_id"
+    t.string  "hashtaggable_type"
+  end
+
+  add_index "simple_hashtag_hashtaggings", ["hashtag_id"], name: "index_simple_hashtag_hashtaggings_on_hashtag_id", using: :btree
+  add_index "simple_hashtag_hashtaggings", ["hashtaggable_id", "hashtaggable_type"], name: "index_hashtaggings_hashtaggable_id_hashtaggable_type", using: :btree
+
+  create_table "simple_hashtag_hashtags", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,7 +107,7 @@ ActiveRecord::Schema.define(version: 20141107073516) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-11-10 08:52:24'
+    t.datetime "joining_date",           default: '2014-11-12 11:03:56'
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

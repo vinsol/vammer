@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     #FIXME_AB: can we make it a singular resource: http://guides.rubyonrails.org/routing.html#singular-resources
-    resources :settings, only: [:update]
+    resource :settings, only: [:update]
     get 'settings/edit', to: 'settings#edit'
   end
 

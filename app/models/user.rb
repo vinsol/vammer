@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     collection.order(column => direction)
   end
 
+  def large_thumbnail_url
+    image.attachment.url(:large)
+  end
+
   private
 
     def email_matches_company_domain
