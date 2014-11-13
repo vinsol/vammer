@@ -2,11 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { confirmations: 'users/confirmations' }
 
-  root 'homes#index'
+  root 'home#index'
 
   namespace :admin do
+    #FIXME_AB: can we make it a singular resource: http://guides.rubyonrails.org/routing.html#singular-resources
     resources :settings, only: [:update]
-    get 'settings/edit', controller: :settings, action: :edit
+    get 'settings/edit', to: 'settings#edit'
   end
 
   resources :users, only: [:index, :edit, :update, :show]
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:create, :destroy] do
       resources :attachments, only: [:destroy]
       resources :comments, only: [:create, :destroy] do
+        resources :likes, only: [:create, :destroy], shallow: true
         resources :attachments, only: [:destroy], shallow: true
       end
     end

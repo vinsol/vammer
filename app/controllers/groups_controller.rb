@@ -1,8 +1,9 @@
 class GroupsController < ApplicationController
 
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
-  before_action :fetch_groups
-  before_action :authenticate_user_admin, only: [:edit, :update]
+  before_action :fetch_user_groups
+  #FIX: Remove this. Already called in action -DONE
+  before_action :allow_modify, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
   before_action :allow_join, only: :join
 
@@ -21,7 +22,6 @@ class GroupsController < ApplicationController
     @groups = sort(@groups)
   end
 
-  #FIX: Rename to some better name
   def extraneous
     @groups = current_user.search_extraneous
     @groups = sort(@groups)
@@ -37,30 +37,33 @@ class GroupsController < ApplicationController
   end
 
   def create
-    #FIX: Use #owned_groups association for creation -DONE
     group = current_user.owned_groups.create(permitted_params)
-    #FIX: Flash messages
     if group.save
-      #FIX: Use common syntax for path -DONE
+      #FIX: Flash message for success -DONE
+      flash[:notice] = t('.success', scope: :flash)
       redirect_to :groups
     else
       flash[:error] = t('.failure', scope: :flash)
-      #FIX: Use common syntax for path -DONE
       redirect_to :new_group
     end
   end
 
   def unjoin
-    @group.members.destroy(current_user)
-    redirect_to :groups      
-    #FIX: Move else logic to before action -DONE
+    if @group.members.destroy(current_user)
+      flash[:notice] = t('.success', scope: :flash)
+    else
+      flash[:error] = t('.failure', scope: :flash)
+    end
+    redirect_to :groups
   end
 
   def join
-    #FIX: Add a before_action to return if user is already present in group -DONE
-    #FIX: Handle success/failure -DONE
     #FIX: Add flash -DONE
-    @group.members.push(current_user)
+    if @group.members.push(current_user)
+      flash[:notice] = t('.success', scope: :flash)
+    else
+      flash[:error] = t('.failure', scope: :flash)
+    end
     redirect_to :groups
   end
 
@@ -68,26 +71,34 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @group.update(permitted_params)
-    redirect_to :groups
+    if @group.update(permitted_params)
+      flash[:notice] = t('.success', scope: :flash)
+      redirect_to :groups
+    else
+      flash[:error] = t('.failure', scope: :flash)
+      render :edit
+    end
   end
 
   def show
-    initialize_posts
-    initialize_comments
     #FIX: What is group is not found. Handle it in before_action -DONE
+    initialize_post
+    initialize_comments
+    fetch_posts
     @posts = @group.posts.order(created_at: :desc)
   end
 
   def members
-    initialize_posts
+    initialize_post
     @members = @group.members.page params[:page]
   end
 
   private
 
-    def authenticate_user_admin
-      unless current_user.admin? or @group.creator == current_user
+    #FIX: Rename to #allow_modify -DONE
+    def allow_modify
+      #FIX: Use '||' instead of 'or' -DONE
+      unless current_user.admin? || @group.creator == current_user
         flash[:error] = t('access.failure', scope: :flash)
         redirect_to :groups
       end
@@ -105,27 +116,27 @@ class GroupsController < ApplicationController
       end
     end
 
-    #FIX: We are not initializing posts here. only one post. -DONE
-    #FIX: Add different methods for initialization and loading existing posts -DONE
-    #FIX: Also this should not be a before_action -DONE
+    #FIX: Rename to #initialize_post -DONE
+    def initialize_post
+      @post = Post.new
+      @post.documents.build
+    end
 
     def fetch_posts
       @posts = Post.where(user_id: current_user)
     end
 
     def allow_unjoin
-      if @group.creator == current_user or not group_member?
+      #FIX: Use '||'
+      if @group.creator == current_user || !(@group.members.include? current_user)
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups      
       end
     end
 
-    def group_member?
-      @group.members.include? current_user
-    end
-
+    #FIX: We do need a method for this. -DONE
     def allow_join
-      if group_member?
+      if @group.members.include? current_user
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups
       end

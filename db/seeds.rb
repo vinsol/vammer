@@ -4,7 +4,9 @@
 puts 'enter name'
 name = STDIN.gets.chomp
 
-puts 'enter email_id'
+#FIXME_AB: You should tell that this email id should be the company id. Read domain from config.yml
+#FIXME_AB: Also make sure that your rails application doesn't boot if it doesn't have config.yml file with company name and domain.
+puts "enter email_id with domain name as #{COMPANY['domain']}"
 email_id = STDIN.gets.chomp
 
 puts 'enter pasword'
@@ -23,3 +25,4 @@ end
 setting = Setting.create
 setting.build_image
 puts 'setting for logo is saved'
+#FIXME_AB: Where is logo saved, where did we assigned? You just created setting and build image

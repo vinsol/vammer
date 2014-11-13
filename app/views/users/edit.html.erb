@@ -1,32 +1,32 @@
-<div class='container'>
+<div>
 
   <% if user_logged_in?(@user) %>
     <%= render 'users/registrations/side_bar' %>
   <% end %>
 
-  <div class='col-md-6 col-md-offset-2 vertical-center'>
+  <div class='col-md-8 col-md-offset-2 vertical-center'>
 
-    <%= form_for @user, html: { class: 'form-horizontal col-lg-10'} do |f| %>
+    <%= form_for @user, html: { class: 'form-horizontal col-lg-8'} do |f| %>
 
       <h2>edit user details</h2>
 
       <div class='control-group col-md-offset-4'>
 
-        <%= render partial: 'homes/error_message', locals: {errors: @user.errors} %>
+        <%= render partial: 'home/error_message', locals: {errors: @user.errors} %>
 
         <br><br>
       </div>
 
       <div class='control-group'>
 
-        <%= f.label :name, class: 'col-lg-4 control-label' %>
+        <%= f.label :name, class: 'control-label' %>
         <%= f.text_field :name, class: 'form-control' %>
 
       </div><br/>
 
       <div class='control-group'>
 
-        <%= f.label :about_me, class: 'col-lg-4 control-label' %>
+        <%= f.label :about_me, class: 'control-label' %>
         <%= f.text_area :about_me, class: 'form-control' %>
 
       </div><br/>
@@ -35,7 +35,7 @@
 
         <%= f.fields_for :image do |attach| %>
 
-          <%= f.label :attachment, class: 'col-lg-4 control-label' %>
+          <%= f.label :attachment, class: 'control-label' %>
           <%= attach.file_field :attachment %>
 
         <% end %>
@@ -44,14 +44,14 @@
 
       <div class='control-group'>
 
-        <%= f.label :job_title, class: 'col-lg-4 control-label' %>
+        <%= f.label :job_title, class: 'control-label' %>
         <%= f.text_field :job_title, class: 'form-control' %>
 
       </div><br/>
 
       <div class='control-group'>
 
-        <%= f.label :date_of_birth, class: 'col-lg-4 control-label' %>
+        <%= f.label :date_of_birth, class: 'control-label' %>
 
         <%= date_select :user, :date_of_birth, start_year: User::START_YEAR, end_year: Time.current.year, class: 'form-control' %>
 
@@ -59,7 +59,7 @@
 
       <div class='control-group'>
 
-        <%= f.label :mobile, class: 'col-lg-4 control-label' %>
+        <%= f.label :mobile, class: 'control-label' %>
         <%= f.text_field :mobile, class: 'form-control' %>
 
       </div><br/>
@@ -68,28 +68,28 @@
 
         <div class='control-group'>
 
-          <%= f.label :admin, class: 'col-lg-4 control-label' %>
+          <%= f.label :admin, class: 'control-label' %>
           <%= f.check_box :admin %>
 
         </div><br/>
 
         <div class='control-group'>
 
-          <%= f.label :enabled, class: 'col-lg-4 control-label' %>
+          <%= f.label :enabled, class: 'control-label' %>
           <%= f.check_box :enabled %>
 
         </div><br/>
 
         <div class='control-group'>
 
-          <%= f.label :joining_date, class: 'col-lg-4 control-label' %>
+          <%= f.label :joining_date, class: 'control-label' %>
           <%= date_select :user, :joining_date, start_year: User::START_YEAR, end_year: Time.current.year, class: 'form-control' %>
 
         </div><br/>
 
       <% end %>
 
-      <div class='control-group col-lg-offset-4'>
+      <div class='control-group'>
 
         <%= f.submit 'Update user', class: 'btn btn-primary' %>
 

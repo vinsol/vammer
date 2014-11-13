@@ -7,6 +7,7 @@
     </div>
 
     <br>
+
     <div class='control-group'>
       <%= f.fields_for :document_files do |doc| %>
         <%= doc.file_field :attachment %>
@@ -18,7 +19,7 @@
     <div class='control-group col-lg-offset-10'>
       <%= f.submit 'Post', class: 'btn btn-primary' %>
     </div>
-    <br> <br>
-  <% end %>
 
+  <% end %>
+  <br> <br>
 </div>

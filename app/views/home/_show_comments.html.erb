@@ -13,6 +13,12 @@
       <%= comment.content %>
       <br><br><br>
 
+      <%= link_to_like_unlike comment, :comment %>
+
+      <div class='count'>
+        <%= comment.likes.count %>
+      </div>
+
       <% comment.document_files.each do |document| %>
         <%= link_to('attachment', document.attachment.url) %>
 
@@ -23,7 +29,7 @@
       <% end %>
 
       <% if admin_or_self_user?(comment.user) %>
-        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, class: 'delete-comment' %>
+        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete %>
       <% end %>
 
     </div>

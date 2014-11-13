@@ -30,6 +30,20 @@ en:
         update:
           success: 'Settings successfully updated'
           failure: 'Settings not updated'
+    comments:
+      create:
+        success: 'comment successfully added'
+        failure: 'could not add comment'
+      destroy:
+        success: 'comment successfully destroyed'
+        failure: 'could not destroy'
+    posts:
+      create:
+        success: 'post successfully created'
+        failure: 'could not add post'
+      destroy:
+        success: 'post successfully destroyed'
+        failure: 'could not destroy'
     access:
       failure: 'ACCESS DENIED'
     record:
@@ -37,7 +51,13 @@ en:
     groups:
       unjoin:
         failure: 'can not unjoin group'
+        success: 'group unjoined'
       join:
         failure: 'can not again join a group'
+        success: 'group joined'
       create:
         failure: 'Group not saved'
+        success: 'Group created'
+      update:
+        success: 'group updated'
+        failure: 'group not updated'

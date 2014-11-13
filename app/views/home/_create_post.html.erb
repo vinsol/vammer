@@ -1,7 +1,8 @@
 <%= nested_form_for @post, class: 'form-horizontal' do |f| %>
-  
+
+  <%= render partial: 'home/error_message', locals: {errors: @post.errors} %>
+
     <%= render 'home/posts_form_fields', locals: {f: f} %>
-    <%= f.hidden_field :group_id, value: @group.id %>
 
     <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
       <br>

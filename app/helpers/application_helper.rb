@@ -4,15 +4,12 @@ module ApplicationHelper
     current_user.admin?
   end
 
-  #FIX: Fix sorting with pagination -DONE
   def sort_direction_link(order, direction)
     image = image_tag("#{direction}.png")
-    #FIX: Try to make this independent of controller and action names. -DONE
     link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
   end
 
   def link_to_by_order(link)
-    #FIX: sort_order is being used only in if part -DONE
     if link.to_s == params[:order]
       sort_order = params[:direction] == 'asc' ? :desc : :asc
       sort_direction_link params[:order], sort_order
@@ -27,7 +24,6 @@ module ApplicationHelper
     admin_logged_in? or user_logged_in?(user)
   end
 
-  #FIX: user_logged_in?(user) -DONE
   def user_logged_in?(user)
     current_user == user
   end
@@ -36,9 +32,6 @@ module ApplicationHelper
     current_user.owned_groups.include? group
   end
 
-  #FIX: Use different view files for each action and extract common code in partials -DONE
-
-  # FIX: Rename to #group_join_link -DONE
   def group_join_link(group)
     if current_user.groups.include? group
       if  group.creator != current_user
@@ -48,6 +41,32 @@ module ApplicationHelper
       link_to :join, join_group_path(group)
     end
 
+  end
+
+  def post_like_unlike(like, likeable)
+    if like.nil?
+      link_to 'like', post_likes_path(likeable, group_id: params[:id]), method: :post, class: :like
+    else
+      link_to 'unlike', post_like_path(likeable, like, group_id: params[:id]), method: :delete, class: :unlike
+    end
+  end
+
+  def comment_like_unlike(like, likeable)
+    if like.nil?
+      link_to 'like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post, class: :like
+    else
+      link_to 'unlike', like_path(like, group_id: params[:id]), method: :delete, class: :unlike
+    end
+  end
+
+  def link_to_like_unlike(likeable, method)
+    if method == :post
+      like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Post').first
+      post_like_unlike(like, likeable)
+    else
+      like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Comment').first
+      comment_like_unlike(like, likeable)
+    end
   end
 
 end

@@ -10,42 +10,45 @@
 
   <body>
 
-    <div class='header'>
+    <div class='container'>
 
-      <% if @logo %>
-        <%= link_to(@logo.image ? image_tag(@logo.image.attachment.url) : 'no image', :root) %>
-      <% end %>
+      <div class='header'>
 
-      <% if user_signed_in? %>
+        <% if @logo.image %>
+          <%= link_to image_tag(@logo.image.attachment.url), :root %>
+        <% end %>
 
-        <div class='user-name'>
-          hi <%= current_user.name %>
-        </div>
+        <% if user_signed_in? %>
 
-        <div class='search-header'>
-          <%= render 'layouts/search_bar' %>
-        </div>
+          <div class='user-name'>
+            hi <%= current_user.name %>
+          </div>
 
-      <% end %>
+          <div class='search-header'>
+            <%= render 'layouts/search_bar' %>
+          </div>
 
-    </div>
+        <% end %>
 
-    <div class='container-body'>
-      <br>
-      <% if flash[:notice] %>
-        <div class="control-group alert alert-warning col-lg-offset-4 col-lg-4">
-          <%= flash[:notice] %>
-        </div>
-      <% end %>
+      </div>
 
-      <% if flash[:error] %>
-        <div class="control-group alert alert-danger col-lg-offset-4 col-lg-4">
-          <%= flash[:error] %>
-        </div>
-      <% end %>
+      <div class='container-body'>
+        <br>
+        <% if flash[:notice] %>
+          <div class="control-group alert alert-warning col-lg-offset-4 col-lg-4">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
 
-      <%= yield %>
+        <% if flash[:error] %>
+          <div class="control-group alert alert-danger col-lg-offset-4 col-lg-4">
+            <%= flash[:error] %>
+          </div>
+        <% end %>
 
+        <%= yield %>
+
+      </div>
     </div>
   </body>
 </html>
