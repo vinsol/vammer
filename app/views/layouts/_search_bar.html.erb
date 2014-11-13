@@ -1,17 +1,10 @@
 <div class='navbar navbar-default navbar-center'>
 
-  <%= form_tag html: {class: 'form-inline'} do %>
+  <div class='col-md-offset-10'>
+    <input type ="hidden" id="user_user_id"></input>
+  </div>
 
-    <div class='col-md-offset-8'>
-
-      <%= text_field_tag :search_input, '', placeholder: 'Search'  %>
-      <%= submit_tag 'search', class: 'btn btn-primary' %>
-
-    </div>
-
-  <% end %>
-
-  <ul class='nav col-md-offset-11 col-md-1 navbar-position'>
+    <ul class='nav navbar-right navbar-position '>
 
     <li class='dropdown'>
 

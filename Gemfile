@@ -4,6 +4,8 @@ gem 'rails', '4.1.6'
 
 gem 'pg', '0.17.1'
 
+gem 'sass-rails' ,'4.0.4'
+
 gem 'therubyracer', '0.12.1', platforms: :ruby
 
 gem 'devise', '3.4.0'
@@ -28,3 +30,5 @@ gem 'paperclip', '4.2.0'
 gem 'rmagick', '2.13.3'
 
 gem 'nested_form', '0.3.2'
+
+gem 'select2-rails', '3.5.9.1'

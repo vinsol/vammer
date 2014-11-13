@@ -9,10 +9,22 @@ class UsersController < ApplicationController
                       [ image_attributes: %i(attachment id) ]
 
   def index
-    @users = current_user.admin? ? User.all : User.where(enabled: true)
-    sort_order
-    sort_column
-    @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+    #FIXME_AB: Why not enabled is a scope
+    respond_to do |format|
+      format.html do
+        @users = current_user.admin? ? User.all : User.where(enabled: true)
+        sort_order
+        sort_column
+        #FIXME_AB: any column from params can be used for sorting.
+        @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+      end
+      format.json do
+        data = { users: User.where('name like ? ', '%' + params[:term] + '%'),
+                groups: Group.where('name like ? ', '%' + params[:term] + '%')
+               }
+        render json: data
+      end
+    end
   end
 
   def edit
@@ -43,8 +55,10 @@ class UsersController < ApplicationController
       end
     end
 
+    #FIXME_AB: Can we name it better?
     def authenticate_user_admin
-      unless current_user.admin? or @user == current_user
+      #FIXME_AB: or vs ||
+      unless current_user.admin? || @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
       end
