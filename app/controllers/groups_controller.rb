@@ -119,10 +119,6 @@ class GroupsController < ApplicationController
       @post.build_document
     end
 
-    def fetch_posts
-      @posts = Post.where(user_id: current_user)
-    end
-
     def allow_unjoin
       #FIX: Use '||'
       if @group.creator == current_user || !(@group.members.include? current_user)

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_params, if: :devise_controller?
   before_action :authenticate_user!, :fetch_logo
 
-  protected
+  private
 
     def configure_devise_params
       devise_parameter_sanitizer.for(:sign_up) do |user|
@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
       root_path
     end
 
-    #FIX: Rename to #fetch_user_groups
     def fetch_user_groups
       #FIX: if condition not required -DONE
       @my_groups = current_user.groups
@@ -36,8 +35,6 @@ class ApplicationController < ActionController::Base
     def fetch_posts
       @posts = Post.order(created_at: :desc)
     end
-
-  private
 
     def fetch_logo
       @logo = Setting.first

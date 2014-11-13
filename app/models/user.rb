@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     Group.where.not(id: groups)
   end
 
+  def self.sort(collection, column, direction)
+    collection.order(column => direction)
+  end
+
   private
 
     def email_matches_company_domain

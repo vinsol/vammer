@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
   end
 
   def self.sort(collection, column, direction)
-    collection.order( column => direction)
+    collection.order(column => direction)
   end
 
   private
