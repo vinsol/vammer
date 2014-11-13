@@ -53,9 +53,9 @@ module ApplicationHelper
 
   def comment_like_unlike(like, likeable)
     if like.nil?
-      link_to 'like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post
+      link_to 'like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post, class: :like
     else
-      link_to 'unlike', like_path(like, group_id: params[:id]), method: :delete
+      link_to 'unlike', like_path(like, group_id: params[:id]), method: :delete, class: :unlike
     end
   end
 

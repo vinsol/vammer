@@ -5,13 +5,20 @@ class LikesController < ApplicationController
   def create
     like = current_user.likes.create
     @likeable.likes.push like
-    redirect_to redirect_path
+    respond_to do |format|
+      result = {count: @likeable.likes.count, like_path: post_like_path(@likeable.id, like.id)}
+      format.json { render json: result}
+    end
   end
 
   def destroy
     like = Like.where(id: params[:id]).first
+    @likeable = like.likeable
     like.destroy
-    redirect_to redirect_path
+    respond_to do |format|
+      result = {count: @likeable.likes.count, like_path: post_likes_path}
+      format.json { render json: result}
+    end
   end
 
   private
