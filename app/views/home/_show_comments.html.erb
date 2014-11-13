@@ -10,7 +10,7 @@
       <% end %>
 
       <%= comment.user.name %><br>
-      <%= comment.content %>
+      <%= linkify_hashtags(comment.content) %>
       <br><br><br>
 
       <%= link_to_like_unlike comment, :comment %>

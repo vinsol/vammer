@@ -1,7 +1,6 @@
-<!-- #FIX: Rename file to _posts.html.erb -->
 <div class='col-lg-offset-1 col-lg-7'>
 
-  <% @posts.each do |post| %>
+  <% @hashtagged.each do |post| %>
     <div class='post-division fill'>
 
       <% if post.user.image %>
@@ -26,10 +25,7 @@
 
       <%= link_to_like_unlike post, :post %>
 
-      <div class='count'>
-        <%= post.likes.count %>
-      </div>
-
+      <%= post.likes.count %>
 
       <% if admin_or_self_user?(post.user) %>
 
@@ -37,12 +33,9 @@
 
       <% end %>
 
-
       <%= render 'home/show_comments', post: post %>
 
       <% if(@group ? @group.members.include?(current_user) : true) %>
-
-        <%= render 'home/create_comments', post: post %>
 
       <% end %>
 
