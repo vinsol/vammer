@@ -35,7 +35,8 @@ class PostsController < ApplicationController
     def initialize_render_path
       @posts = Post.order(created_at: :desc)
       fetch_groups
-      @post.documents.build
+      initialize_posts
+      initialize_comments
     end
 
     def redirect_path

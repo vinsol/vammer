@@ -20,7 +20,7 @@
         <% end %>
       <% end %>
       <% if admin_or_self_user?(post.user) %>
-        <%= link_to 'delete post', post_path(post.id), method: :delete %>
+        <%= link_to 'delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
       <% end %>
 
       <%= render 'homes/show_comments', post: post %>
