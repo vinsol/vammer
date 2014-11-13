@@ -47,9 +47,46 @@ describe User do
     end
   end
 
+  describe 'validate_format' do
+    let(:user) { build(:user, :current) }
+    context '' do
+      REGEX = /\A([a-z]|\s)+\z/i
+      it do
+        user.name = 'sawan'
+        expect(user.name).to match REGEX
+      end
+      it do
+        user.name = 'saw an'
+        expect(user.name).to match REGEX
+      end
+      it do
+        user.name = 'sawa_n'
+        expect(user.name).not_to match REGEX
+      end
+      it do
+        user.name = '   '
+        expect(user.name).to match REGEX
+      end
+      it do
+        user.name = ''
+        expect(user.name).not_to match REGEX
+      end
+      it do
+        user.name = '  y  '
+        expect(user.name).to match REGEX
+      end
+      it do
+        user.name = '67'
+        expect(user.name).not_to match REGEX
+      end
+    end
+  end
+
   it { should validate_presence_of(:name) }
+  it { should ensure_length_of(:name).is_at_most(255) }
   it { should have_one(:image).dependent(:destroy) }
   it { should have_many(:groups_members).dependent(:destroy) }
+  it { should have_many(:likes) }
   it { should have_many(:groups).through(:groups_members) }
   it { should have_many(:owned_groups) }
   it { should have_many(:posts).dependent(:destroy) }

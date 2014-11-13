@@ -22,13 +22,13 @@
       <% comment.document_files.each do |document| %>
         <%= link_to('attachment', document.attachment.url) %>
 
-        <% if admin_or_self_user?(comment.user) %>
+        <% if can_edit_user?(comment.user) %>
           <%= link_to 'destroy', attachment_path(document, group_id: post.group.try(:id)), method: :delete %>
         <% end %>
 
       <% end %>
 
-      <% if admin_or_self_user?(comment.user) %>
+      <% if can_edit_user?(comment.user) %>
         <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete %>
       <% end %>
 

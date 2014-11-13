@@ -18,7 +18,7 @@
 
         <%= link_to 'attachment', document.attachment.url %>
 
-        <% if admin_or_self_user?(post.user) %>
+        <% if can_edit_user?(post.user) %>
           <%= link_to 'destroy attachment', post_attachment_path(post, document), method: :delete %>
         <% end %>
 
@@ -31,7 +31,7 @@
       </div>
 
 
-      <% if admin_or_self_user?(post.user) %>
+      <% if can_edit_user?(post.user) %>
 
         <%= link_to 'delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
 
