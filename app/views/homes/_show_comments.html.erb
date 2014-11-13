@@ -18,7 +18,7 @@
       <% end %>
 
       <% if admin_or_self_user?(comment.user) %>
-        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete %>
+        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, class: 'delete-comment' %>
       <% end %>
 
     </div>
