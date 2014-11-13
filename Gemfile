@@ -25,3 +25,5 @@ gem 'paperclip', '4.2.0'
 gem 'rmagick', '2.13.3'
 
 gem 'nested_form', '0.3.2'
+
+gem 'simple_hashtag'
