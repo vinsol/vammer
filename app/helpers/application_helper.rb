@@ -45,9 +45,9 @@ module ApplicationHelper
 
   def post_like_unlike(like, likeable)
     if like.nil?
-      link_to 'like', post_likes_path(likeable, group_id: params[:id]), method: :post
+      link_to 'like', post_likes_path(likeable, group_id: params[:id]), method: :post, class: :like
     else
-      link_to 'unlike', post_like_path(likeable, like, group_id: params[:id]), method: :delete
+      link_to 'unlike', post_like_path(likeable, like, group_id: params[:id]), method: :delete, class: :unlike
     end
   end
 
