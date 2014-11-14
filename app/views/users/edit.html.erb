@@ -11,8 +11,8 @@
       <h2>edit user details</h2>
 
       <div class='control-group col-md-offset-4'>
-        <% #FIXME_AB: Should we not keep shared partials in shared directory. Which are shared across controllers -%>
-        <%= render partial: 'home/error_message', locals: {errors: @user.errors} %>
+
+        <%= render partial: 'shared/error_message', locals: {errors: @user.errors} %>
 
         <br><br>
       </div>

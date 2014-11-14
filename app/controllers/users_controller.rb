@@ -13,10 +13,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         @users = current_user.admin? ? User.all : User.where(enabled: true)
-        sort_order
-        sort_column
+        #TODO will be used in next sprint
+        # sort_order
+        # sort_column
         #FIXME_AB: any column from params can be used for sorting.
-        @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+        # @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
       end
       format.json do
         data = { users: User.where('name like ? ', '%' + params[:term] + '%'),
@@ -25,10 +26,15 @@ class UsersController < ApplicationController
         render json: data
       end
     end
+    @users = current_user.admin? ? User.all : User.where(enabled: true)
   end
 
   def edit
     @user.build_image unless @user.image
+  end
+
+  def show
+    @posts = current_user.posts
   end
 
   def update

@@ -18,17 +18,17 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @groups = current_user.groups
+    @groups = @groups = current_user.groups.includes(:creator)
     @groups = sort(@groups)
   end
 
   def extraneous
-    @groups = current_user.search_extraneous
+    @groups = current_user.search_extraneous.includes(:creator)
     @groups = sort(@groups)
   end
 
   def owned
-    @groups = current_user.owned_groups
+    @groups = current_user.owned_groups.includes(:creator)
     @groups = sort(@groups)
   end
 
@@ -85,7 +85,7 @@ class GroupsController < ApplicationController
     initialize_post
     initialize_comments
     fetch_posts
-    @posts = @group.posts.order(created_at: :desc)
+    @posts = @group.posts.order(created_at: :desc).includes(:user).includes(:documents).includes(:comments)
   end
 
   def members

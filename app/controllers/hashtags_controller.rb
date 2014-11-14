@@ -10,6 +10,7 @@ class HashtagsController < ApplicationController
     @hashtagged = @hashtagged.map do |hashtag|
       hashtag.try(:post) ? hashtag.post : hashtag
     end
+    @hashtagged.uniq!
     render 'posts/_post'
   end
 
