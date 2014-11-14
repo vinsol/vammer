@@ -34,3 +34,5 @@ gem 'nested_form', '0.3.2'
 gem 'select2-rails', '3.5.9.1'
 
 gem 'simple_hashtag', '0.1.9'
+
+gem 'remotipart'

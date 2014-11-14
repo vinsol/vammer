@@ -103,6 +103,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
     ref (1.0.5)
+    remotipart (1.2.1)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rmagick (2.13.3)
@@ -172,6 +173,7 @@ DEPENDENCIES
   paperclip (= 4.2.0)
   pg (= 0.17.1)
   rails (= 4.1.6)
+  remotipart
   rmagick (= 2.13.3)
   rspec-rails (= 3.1.0)
   sass-rails (= 4.0.4)

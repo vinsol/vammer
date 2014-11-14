@@ -6,7 +6,17 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     @comment = post.comments.new(permitted_params)
     @comment.user_id = current_user.id
-    redirect_or_render
+    @comment.save
+    respond_to do |format|
+      result = {
+        comment: @comment,
+        like_path: post_comment_likes_path(@comment.post, @comment),
+        user: @comment.user,
+        post_id: @comment.post.id,
+      }
+      format.json { render json: result }
+    end
+    # redirect_or_render
   end
 
   def destroy
