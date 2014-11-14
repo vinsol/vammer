@@ -2,7 +2,6 @@ class GroupsController < ApplicationController
 
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :fetch_user_groups
-  #FIX: Remove this. Already called in action -DONE
   before_action :allow_modify, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
   before_action :allow_join, only: :join
@@ -39,7 +38,6 @@ class GroupsController < ApplicationController
   def create
     group = current_user.owned_groups.create(permitted_params)
     if group.save
-      #FIX: Flash message for success -DONE
       flash[:notice] = t('.success', scope: :flash)
       redirect_to :groups
     else
@@ -58,7 +56,6 @@ class GroupsController < ApplicationController
   end
 
   def join
-    #FIX: Add flash -DONE
     if @group.members.push(current_user)
       flash[:notice] = t('.success', scope: :flash)
     else
@@ -92,9 +89,7 @@ class GroupsController < ApplicationController
 
   private
 
-    #FIX: Rename to #allow_modify -DONE
     def allow_modify
-      #FIX: Use '||' instead of 'or' -DONE
       unless current_user.admin? || @group.creator == current_user
         flash[:error] = t('access.failure', scope: :flash)
         redirect_to :groups
@@ -113,21 +108,18 @@ class GroupsController < ApplicationController
       end
     end
 
-    #FIX: Rename to #initialize_post -DONE
     def initialize_post
       @post = Post.new
       @post.build_document
     end
 
     def allow_unjoin
-      #FIX: Use '||'
-      if @group.creator == current_user || !(@group.members.include? current_user)
+      if @group.creator == current_user || @group.members.exclude?(current_user)
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups
       end
     end
 
-    #FIX: We do need a method for this. -DONE
     def allow_join
       if @group.members.include? current_user
         flash[:error] = t('.failure', scope: :flash)

@@ -18,12 +18,12 @@ class ApplicationController < ActionController::Base
     end
 
     def fetch_user_groups
-      #FIX: if condition not required -DONE
       @my_groups = current_user.groups
     end
 
     def sort_order
       #FIXME_AB: Do we have a better way?
+      #FIX: Do not change params. You may use instance variable or directly return string from the method
       params[:direction] = 'asc' unless params[:direction] == 'desc'
     end
 

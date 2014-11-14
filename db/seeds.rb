@@ -22,6 +22,7 @@ else
   puts user.errors.full_messages
 end
 
+#FIX: Show missing image if image not present. Do not build empty image. Remove message.
 setting = Setting.create
 setting.build_image
 puts 'setting for logo is saved'

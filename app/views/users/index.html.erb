@@ -10,9 +10,8 @@
           <div class='lib-panel'>
             <div class='row box-shadow'>
               <div class='col-md-4'>
-                <% #FIXME_AB: I would prefer to move user.image.attachment.url(:large) to user model as a method: large_thumbnail_url -%>
+                <!-- #FIX: missing image tag can be returned from helper and used at all places -->
                 <%= user.image ? image_tag(user.large_thumbnail_url, class: 'lib-img') : image_tag('missing.jpg') %>
-                <% #FIXME_AB: above if user don't have image, no image should not come as text, should be a missing image thumbnail -%>
               </div>
 
               <div class='col-md-6'>
@@ -26,10 +25,8 @@
                 <div class='lib-row lib-desc'>
 
                   <%= user.email %><br>
-                  <% #FIXME_AB: What is the format of date you are displaying? 2014-11-10 08:52:24 UTC -%>
                   <%= user.joining_date.to_s(:long) %><br>
                   <%= link_to 'show', user_path(user) %><br><br>
-                  <% #FIXME_AB: can be named as can_edit_user?(user) -%>
                   <% if can_edit_user?(user) %>
                     <%= link_to 'edit', edit_user_path(user), class: 'col-md-offset-4' %>
                   <% end %>

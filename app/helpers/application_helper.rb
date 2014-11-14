@@ -15,25 +15,25 @@ module ApplicationHelper
     end
   end
 
-  #FIXME_AB: I think this can be named better
   def can_edit_user?(user)
-    #FIXME_AB: why using or. Prefer using ||
     admin_logged_in? || creator_logged_in?(user)
   end
 
-  #FIXME_AB: Can be named better -DONE
   def creator_logged_in?(user)
     current_user == user
   end
 
   #FIXME_AB: should be used as group.owner?(current_user). Or use some other permission engine like can can
+  #FIX: Move to model
   def group_owner_logged_in?(group)
     group.creator == current_user
   end
 
   def group_join_link(group)
     #FIXME_AB: logic can be improved.
+    #FIX: This method should not return nil in any case
     if current_user.groups.include? group
+      #FIX: This condition can be moved to view
       if group.creator != current_user
         link_to :unjoin, unjoin_group_path(group)
       end

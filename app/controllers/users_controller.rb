@@ -9,7 +9,6 @@ class UsersController < ApplicationController
                       [ image_attributes: %i(attachment id) ]
 
   def index
-    #FIXME_AB: Why not enabled is a scope
     @users = current_user.admin? ? User.all : User.enabled
     sort_order
     sort_column
@@ -45,9 +44,7 @@ class UsersController < ApplicationController
       end
     end
 
-    #FIXME_AB: Can we name it better? -DONE
     def allow_modify
-      #FIXME_AB: or vs ||
       unless current_user.admin? || @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users
