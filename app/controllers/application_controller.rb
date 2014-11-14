@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
     end
 
   def fetch_posts
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.includes(:user).includes(:documents).includes(:comments).order(created_at: :desc)
   end
 
 end

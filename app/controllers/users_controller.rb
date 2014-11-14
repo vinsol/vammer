@@ -10,13 +10,18 @@ class UsersController < ApplicationController
 
   def index
     @users = current_user.admin? ? User.all : User.where(enabled: true)
-    sort_order
-    sort_column
-    @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
+    #TODO will be used in next sprint
+    # sort_order
+    # sort_column
+    # @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
   end
 
   def edit
     @user.build_image unless @user.image
+  end
+
+  def show
+    @posts = current_user.posts
   end
 
   def update

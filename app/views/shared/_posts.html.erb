@@ -39,7 +39,7 @@
 
       <% if(@group ? @group.members.include?(current_user) : true) %>
 
-        <%= render 'home/create_comments', post: post %>
+        <%= render 'shared/create_comments', post: post %>
 
       <% end %>
 
