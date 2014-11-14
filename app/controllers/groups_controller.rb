@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @groups = @groups = current_user.groups.includes(:creator)
+    @groups = current_user.groups.includes(:creator)
     @groups = sort(@groups)
   end
 
@@ -83,8 +83,7 @@ class GroupsController < ApplicationController
   def show
     #FIX: What is group is not found. Handle it in before_action -DONE
     initialize_post
-    initialize_comments
-    fetch_posts
+    initialize_comment
     @posts = @group.posts.order(created_at: :desc).includes(:user).includes(:documents).includes(:comments)
   end
 
@@ -114,16 +113,6 @@ class GroupsController < ApplicationController
         flash[:error] = t('record.failure', scope: :flash)
         redirect_to :groups
       end
-    end
-
-    #FIX: Rename to #initialize_post -DONE
-    def initialize_post
-      @post = Post.new
-      @post.documents.build
-    end
-
-    def fetch_posts
-      @posts = Post.where(user_id: current_user)
     end
 
     def allow_unjoin

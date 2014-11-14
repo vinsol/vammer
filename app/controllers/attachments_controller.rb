@@ -1,6 +1,6 @@
 class AttachmentsController < ApplicationController
 
-  before_action :fetch_attachment, :authenticate_user_admin
+  before_action :fetch_attachment, :allow_edit
 
   def destroy
     @attachment.destroy
@@ -22,7 +22,7 @@ class AttachmentsController < ApplicationController
       @attachment = Attachment.where(id: params[:id]).first
     end
 
-    def authenticate_user_admin
+    def allow_edit
       unless current_user.admin? or @attachment.attachment.user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to redirect_path

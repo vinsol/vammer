@@ -4,9 +4,9 @@ class HomeController < ApplicationController
   before_action :fetch_user_groups
 
   def index
-    initialize_comments
+    initialize_comment
     initialize_post
-    fetch_posts  
+    fetch_posts
   end
 
 end

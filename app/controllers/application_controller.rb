@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       params[:column] = 'created_at' if params[:column].blank?
     end
 
-    def initialize_comments
+    def initialize_comment
       @comment = Comment.new
       @comment.document_files.build
     end
@@ -47,8 +47,8 @@ class ApplicationController < ActionController::Base
       @post.documents.build
     end
 
-  def fetch_posts
-    @posts = Post.includes(:user).includes(:documents).includes(:comments).order(created_at: :desc)
-  end
+    def fetch_posts
+      @posts = Post.includes(:user).includes(:documents).includes(:comments).order(created_at: :desc)
+    end
 
 end

@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   private
 
     def render_path
-      initialize_comments
+      initialize_comment
       initialize_post
       fetch_form_associations
       #FIX: Use @post.group_id
@@ -49,11 +49,19 @@ class PostsController < ApplicationController
     def redirect_path
       #FIX: Use @post.group_id -DONE
       if @post.group_id
+        group_path(@post.group_id)
+      else
+        :root
+      end
+    end
+
+    def permitted_params
       params.require(:post).permit(:content, :group_id, documents_attributes: [:attachment, :id, :_destroy])
     end
 
     def fetch_post
       @post = Post.where(id: params[:id]).first
+    end
 
     def authenticate_user_admin
       unless current_user.admin? or @post.user == current_user
