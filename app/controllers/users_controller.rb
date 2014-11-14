@@ -21,6 +21,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    initialize_comments
+    initialize_post
     @posts = current_user.posts
   end
 
