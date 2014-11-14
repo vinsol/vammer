@@ -20,16 +20,18 @@
       </div>
 
       <% comment.document_files.each do |document| %>
+      <div class='attachment'>
         <%= link_to('attachment', document.attachment.url) %>
 
         <% if can_edit_user?(comment.user) %>
-          <%= link_to 'destroy', attachment_path(document, group_id: post.group.try(:id)), method: :delete %>
+          <%= link_to 'destroy', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
         <% end %>
+      </div>
 
       <% end %>
 
       <% if can_edit_user?(comment.user) %>
-        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete %>
+        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
       <% end %>
 
     </div>

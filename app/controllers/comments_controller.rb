@@ -7,28 +7,52 @@ class CommentsController < ApplicationController
     @comment = post.comments.new(permitted_params)
     @comment.user_id = current_user.id
     @comment.save
+    attachments = fetch_attachments
+    result = build_result(attachments)
     respond_to do |format|
-      result = {
-        comment: @comment,
-        like_path: post_comment_likes_path(@comment.post, @comment),
-        user: @comment.user,
-        post_id: @comment.post.id,
-      }
-      format.json { render json: result }
+      format.json { render json: result.as_json }
     end
-    # redirect_or_render
   end
 
   def destroy
+    # debugger
     if @comment.destroy
       flash[:notice] = t('.success', scope: :flash)
     else
       flash[:error] = t('.failure', scope: :flash)
     end
-    redirect_to redirect_path
+    respond_to do |format|
+      format.json { render json: {} }
+    end
+    # redirect_to redirect_path
   end
 
   private
+
+    def build_result(attachments)
+      result = {
+        comment: @comment,
+        like_path: post_comment_likes_path(@comment.post, @comment),
+        user: @comment.user,
+        attachment: attachments.map(&:url),
+        post_id: @comment.post.id,
+        comment_destroy_path: post_comment_path(@comment.post, @comment),
+        attachment_destroy_paths: destroy_attachment_path
+      }
+    end
+
+    def destroy_attachment_path
+      attachment_ids = @comment.document_file_ids
+      attachment_destroy_paths = attachment_ids.map do |attachment_id|
+        attachment_path(attachment_id)
+      end
+    end
+
+    def fetch_attachments
+      @comment.document_files.map do |attach|
+        attach.attachment
+      end
+    end
 
     def redirect_or_render
       if @comment.save

@@ -4,7 +4,10 @@ class AttachmentsController < ApplicationController
 
   def destroy
     @attachment.destroy
-    redirect_to redirect_path
+    respond_to do |format|
+      format.json { render json: {} }
+    end
+    # redirect_to redirect_path
   end
 
   private
