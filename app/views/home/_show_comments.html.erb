@@ -4,23 +4,27 @@
   <% post.comments.each do |comment| %>
 
     <div class='shadow comment-box'>
+      <div class='comment-margin'>
+        <% if post.user.image %>
+          <%= image_tag(post.user.image.attachment.url(:thumb)) %>
+        <% end %>
 
-      <% if post.user.image %>
-        <%= image_tag(post.user.image.attachment.url(:thumb)) %>
-      <% end %>
+        <%= comment.user.name %>
+      </div>
 
-      <%= comment.user.name %><br>
-      <%= linkify_hashtags(comment.content) %>
-      <br><br><br>
+      <div class='comment-margin'>
+        <%= linkify_hashtags(comment.content) %>
+      </div>
+      <div class='comment-margin'>
+        <%= link_to_like_unlike comment, :comment %>
+      </div>
 
-      <%= link_to_like_unlike comment, :comment %>
-
-      <div class='count'>
+      <div class='count comment-margin'>
         <%= comment.likes.count %>
       </div>
 
       <% comment.document_files.each do |document| %>
-      <div class='attachment'>
+      <div class='attachment comment-margin'>
         <%= link_to('attachment', document.attachment.url) %>
 
         <% if can_edit_user?(comment.user) %>
@@ -30,12 +34,13 @@
 
       <% end %>
 
-      <% if can_edit_user?(comment.user) %>
-        <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
-      <% end %>
+      <div class='comment-margin'>
+        <% if can_edit_user?(comment.user) %>
+          <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
+        <% end %>
+      </div>
 
     </div>
-    <br>
   <% end %>
   <div class= <%= post.id %> ></div>
 

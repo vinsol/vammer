@@ -1,5 +1,8 @@
-.header {
-  background-color: #f8f8f8
+.blue-color {
+  background-color: #3B5998
+}
+.more-position {
+  margin-top: -7px;
 }
 .user-name {
   float: right;
@@ -7,6 +10,7 @@
 }
 .search-header {
   height: 50px;
+  border-top: 1px solid rgba(79, 170, 219, 1)
 }
 .search-input {
   margin-left: 80px;
@@ -29,4 +33,7 @@
 }
 .navbar-center {
   padding-top: 8px;
+}
+body{
+  background-color: #e9eaed;
 }

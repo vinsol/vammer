@@ -1,16 +1,29 @@
 var Comment = function() {
 }
 
-Comment.prototype.CreateDom = function(element, data) {
-  response = JSON.parse(data.responseText);
-  var $container = $('.' + response.post_id);
-      $box = $('<div>').attr({ 'class': 'shadow comment-box' });
-      $like = $('<a>').attr({ 'href': response.like_path, 'data-method': 'post', 'data-remote': 'true', 'class': 'like'}).text('like');
-      $content = $('<div>').text(response.comment.content);
-      $attachment_container = $('<div>').attr({ 'class': 'attachment' })
+Comment.prototype.marginDiv = function() {
+  return $('<div>').attr({'class': 'comment-margin'})
+}
+
+Comment.prototype.userDetails = function(response) {
+  var $contaier_div = this.marginDiv(),
       $name = $('<div>').text(response.user.name);
+  return $contaier_div.append($name);
+}
+
+Comment.prototype.likeDetails = function(response) {
+  var $contaier_div = this.marginDiv(),
+      $like = $('<a>').attr({ 'href': response.like_path, 'data-method': 'post', 'data-remote': 'true', 'class': 'like'}).text('like');
+  return $contaier_div.append($like);
+}
+Comment.prototype.numberOfLikesDetails = function(response) {
+  var $contaier_div = this.marginDiv(),
       $numberOfLikes = $('<div>').attr( {'class': 'count'} ).text(0);
-      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('delete')
+  return $contaier_div.append($numberOfLikes);
+}
+
+Comment.prototype.attachmentDetails = function(response) {
+  var $contaier_div = this.marginDiv(),
       $attachments = []
   $.each(response.attachment, function(index, element) {
     var attachment = $('<a>').attr({'href': element}).text('attachment '),
@@ -19,6 +32,25 @@ Comment.prototype.CreateDom = function(element, data) {
     $attachment_container.append(attachment, destroy_attachmnet)
     $attachments.push($attachment_container)
   })
+  return $contaier_div.append($attachments);
+}
+
+Comment.prototype.contentDetails = function(response) {
+  var $contaier_div = this.marginDiv(),
+  $content = $('<div>').text(response.comment.content);
+  return $contaier_div.append($content)
+}
+
+Comment.prototype.CreateDom = function(element, data) {
+  var response = JSON.parse(data.responseText),
+      $name = this.userDetails(response),
+      $like = this.likeDetails(response),
+      $attachments = this.attachmentDetails(response),
+      $numberOfLikes = this.numberOfLikesDetails(response),
+      $content = this.contentDetails(response),
+      $container = $('.' + response.post_id),
+      $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
+      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('delete');
   $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment)
   $container.append($box)
 }
