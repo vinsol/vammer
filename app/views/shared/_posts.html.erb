@@ -17,11 +17,15 @@
 
         <% post.documents.each do |document| %>
 
-          <%= link_to 'attachment', document.attachment.url %>
+          <div class='attachment comment-margin'>
 
-          <% if can_edit_user?(post.user) %>
-            <%= link_to 'destroy attachment', post_attachment_path(post, document), method: :delete %>
-          <% end %>
+            <%= link_to 'attachment', document.attachment.url %>
+
+            <% if can_edit_user?(post.user) %>
+              <%= link_to 'destroy attachment', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+            <% end %>
+
+          </div>
 
         <% end %>
 

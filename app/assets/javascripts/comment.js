@@ -1,3 +1,4 @@
+REGEX = { linkify: /#(\w+)/g }
 var Comment = function() {
 }
 
@@ -37,8 +38,9 @@ Comment.prototype.attachmentDetails = function(response) {
 
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-  $content = $('<div>').text(response.comment.content);
-  return $contaier_div.append($content)
+      str = response.comment.content.toLowerCase();
+  str = str.replace(REGEX.linkify, '<a href="hashtags/$1">$1</a>')
+  return $contaier_div.append(str)
 }
 
 Comment.prototype.CreateDom = function(element, data) {
