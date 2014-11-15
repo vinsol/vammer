@@ -24,12 +24,12 @@ class ApplicationController < ActionController::Base
     def sort_order
       #FIXME_AB: Do we have a better way?
       #FIX: Do not change params. You may use instance variable or directly return string from the method
-      params[:direction] = 'asc' unless params[:direction] == 'desc'
+      params[:direction] == 'asc' ? 'asc' : 'desc'
     end
 
     def sort_column
       #FIXME_AB: Can you identify potential issue?
-      params[:column] = 'created_at' if params[:column].blank?
+      params[:column].blank? ? 'created_at' : params[:column]
     end
 
     def fetch_posts

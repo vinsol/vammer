@@ -1,7 +1,7 @@
 class Group < ActiveRecord::Base
 
-  has_many :groups_members, dependent: :destroy
-  has_many :members, through: :groups_members, source: :user
+  has_many :memberships, dependent: :destroy
+  has_many :members, through: :memberships, source: :user
   has_many :posts, dependent: :destroy
   belongs_to :creator, class_name: User
 
@@ -16,6 +16,10 @@ class Group < ActiveRecord::Base
 
   def self.sort(collection, column, direction)
     collection.order(column => direction)
+  end
+
+  def owner?(current_user)
+    creator == current_user
   end
 
   private

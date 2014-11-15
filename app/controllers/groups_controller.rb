@@ -5,16 +5,7 @@ class GroupsController < ApplicationController
   before_action :allow_modify, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
   before_action :allow_join, only: :join
-
-  def sort(collection)
-    sort_order
-    sort_column
-    if params[:column] == 'creator'
-      Group.sort_by_creator(collection, params[:direction]).page params[:page]
-    else
-      Group.sort(collection, params[:column], params[:direction].to_sym).page params[:page]
-    end
-  end
+  before_action :sorting_valid?, only: [:join, :extraneous, :owned]
 
   def index
     @groups = current_user.groups
@@ -124,6 +115,20 @@ class GroupsController < ApplicationController
       if @group.members.include? current_user
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups
+      end
+    end
+
+    def sorting_valid?
+      (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
+    end
+
+    def sort(collection)
+      order = sort_order
+      column = sort_column
+      if params[:column] == 'creator'
+        Group.sort_by_creator(collection, order).page params[:page]
+      else
+        Group.sort(collection, column, order.to_sym).page params[:page]
       end
     end
 

@@ -10,10 +10,10 @@ class UsersController < ApplicationController
 
   def index
     @users = current_user.admin? ? User.all : User.enabled
-    sort_order
-    sort_column
-    #FIXME_AB: any column from params can be used for sorting.
-    @users = User.sort(@users, params[:column], params[:direction].to_sym).page params[:page]
+    # order = sort_order
+    # column = sort_column
+    # #FIXME_AB: any column from params can be used for sorting.
+    # @users = User.sort(@users, column, order.to_sym).page params[:page]
   end
 
   def edit

@@ -11,7 +11,7 @@
             <div class='row box-shadow'>
               <div class='col-md-4'>
                 <!-- #FIX: missing image tag can be returned from helper and used at all places -->
-                <%= user.image ? image_tag(user.large_thumbnail_url, class: 'lib-img') : image_tag('missing.jpg') %>
+                <%= user.image ? image_tag(user.large_thumbnail_url, class: 'lib-img') : missing_image_tag %>
               </div>
 
               <div class='col-md-6'>
@@ -43,6 +43,8 @@
       </div>
 
     <% end %>
+    <% else %>
+      No Users
   <% end %>
 
 </div>

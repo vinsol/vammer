@@ -13,7 +13,7 @@
     <div class='header'>
 
       <% if @logo %>
-        <%= link_to(@logo.image ? image_tag(@logo.image.attachment.url) : image_tag('missing.jpg'), :root) %>
+        <%= link_to(@logo.image ? image_tag(@logo.image.attachment.url) : missing_image_tag, :root) %>
       <% end %>
 
       <% if user_signed_in? %>

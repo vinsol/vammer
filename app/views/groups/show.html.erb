@@ -1,6 +1,8 @@
 <div class='dashboard-body'>
   <%= render 'groups/show_group_details' %>
-  <%= group_join_link(@group) %>
+  <% if group.creator != current_user %>
+    <%= group_join_link(@group) %>
+  <% end %>
   <%= render 'home/posts' %>
 </div>
 

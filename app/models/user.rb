@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :image, as: :attachment, dependent: :destroy
-  #FIXME_AB: instead of groups_members, i think we should name it as memberships
-  has_many :groups_members, dependent: :destroy
-  has_many :groups, through: :groups_members
+  #FIXME_AB: instead of membership, i think we should name it as memberships
+  has_many :memberships, dependent: :destroy
+  has_many :groups, through: :memberships
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id
   #FIXME_AB: Are you sure we want to destroy all related records when we destroy user?. AFAIR we agreed to delete user if there is no record associated with him, else disable him. Please consult with your PM
   has_many :posts, dependent: :destroy
