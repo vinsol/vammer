@@ -15,11 +15,9 @@
       <div class='comment-margin'>
         <%= linkify_hashtags(comment.content) %>
       </div>
-      <div class='comment-margin'>
-        <%= link_to_like_unlike comment, :comment %>
-      </div>
+      <%= link_to_like_unlike comment, :comment %>
 
-      <div class='count comment-margin'>
+      <div class='count'>
         <%= comment.likes.count %>
       </div>
 

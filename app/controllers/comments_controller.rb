@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # debugger
     if @comment.destroy
       flash[:notice] = t('.success', scope: :flash)
     else
@@ -24,14 +23,15 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.json { render json: {} }
     end
-    # redirect_to redirect_path
   end
 
   private
 
     def build_result(attachments)
+      image = @comment.user.image ? @comment.user.image.attachment.url(:thumb) : 'no_image'
       result = {
         comment: @comment,
+        image: image,
         like_path: post_comment_likes_path(@comment.post, @comment),
         user: @comment.user,
         attachment: attachments.map(&:url),
@@ -54,34 +54,7 @@ class CommentsController < ApplicationController
       end
     end
 
-    def redirect_or_render
-      if @comment.save
-        flash[:notice] = t('.success', scope: :flash)
-        redirect_to redirect_path
-      else
-        flash[:error] = t('.failure', scope: :flash)
-        render render_path
-      end
-    end
-
-    def render_path
-      fetch_user_groups
-      initialize_render_path
-      if @comment.post.group_id
-        @group = @comment.post.group
-        'groups/show'
-      else
-        'home/index'
-      end
-    end
-
-    def initialize_render_path
-      @posts = Post.order(created_at: :desc)
-      initialize_post
-    end
-
     def redirect_path
-      debugger
       if @comment.post.group
         group_path(@comment.post.group_id)
       else

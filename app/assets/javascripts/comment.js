@@ -8,19 +8,18 @@ Comment.prototype.marginDiv = function() {
 
 Comment.prototype.userDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-      $name = $('<div>').text(response.user.name);
-  return $contaier_div.append($name);
+      $image = $('<img>').attr( { 'src': response.image } );
+      name = response.user.name;
+  return $contaier_div.append($image).append(name);
 }
 
 Comment.prototype.likeDetails = function(response) {
-  var $contaier_div = this.marginDiv(),
-      $like = $('<a>').attr({ 'href': response.like_path, 'data-method': 'post', 'data-remote': 'true', 'class': 'like'}).text('like');
-  return $contaier_div.append($like);
+  var $like = $('<a>').attr({ 'href': response.like_path, 'data-method': 'post', 'data-remote': 'true', 'class': 'like'}).text('like');
+  return $like;
 }
 Comment.prototype.numberOfLikesDetails = function(response) {
-  var $contaier_div = this.marginDiv(),
-      $numberOfLikes = $('<div>').attr( {'class': 'count'} ).text(0);
-  return $contaier_div.append($numberOfLikes);
+  var $numberOfLikes = $('<div>').attr( {'class': 'count'} ).text(0);
+  return $numberOfLikes;
 }
 
 Comment.prototype.attachmentDetails = function(response) {
@@ -43,6 +42,10 @@ Comment.prototype.contentDetails = function(response) {
   return $contaier_div.append(str)
 }
 
+Comment.prototype.resetForm = function(element) {
+  $(element).closest('form')[0].reset();
+}
+
 Comment.prototype.CreateDom = function(element, data) {
   var response = JSON.parse(data.responseText),
       $name = this.userDetails(response),
@@ -54,13 +57,14 @@ Comment.prototype.CreateDom = function(element, data) {
       $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
       $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('delete');
   $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment)
-  $container.append($box)
+  $container.append($box);
+  this.resetForm(element);
 }
 
 Comment.prototype.bindEvents = function() {
   var _this = this;
   $('#create-comment').bind("ajax:complete", function(e, data){
-    _this.CreateDom(e, data)
+    _this.CreateDom(this, data)
   });
   $('.post-division').on('ajax:complete', '.delete-comment', function(e, data){
     $(this).parent().html('')
