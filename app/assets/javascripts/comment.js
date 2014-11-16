@@ -3,12 +3,12 @@ var Comment = function() {
 }
 
 Comment.prototype.marginDiv = function() {
-  return $('<div>').attr({'class': 'comment-margin'})
+  return $('<div>').attr({'class': 'comment-margin'});
 }
 
 Comment.prototype.userDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-      $image = $('<img>').attr( { 'src': response.image } );
+      $image = $('<img>').attr( { 'src': response.image } ),
       name = response.user.name;
   return $contaier_div.append($image).append(name);
 }
@@ -24,13 +24,13 @@ Comment.prototype.numberOfLikesDetails = function(response) {
 
 Comment.prototype.attachmentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-      $attachments = []
+      $attachments = [];
   $.each(response.attachment, function(index, element) {
     var attachment = $('<a>').attr({'href': element}).text('attachment '),
-        destroy_attachmnet = $('<a>').attr({'href': response.attachment_destroy_paths[index], 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-attachment'}).text('destroy ');
-        $attachment_container = $('<div>').attr({ 'class': 'attachment' })
-    $attachment_container.append(attachment, destroy_attachmnet)
-    $attachments.push($attachment_container)
+        destroy_attachmnet = $('<a>').attr({'href': response.attachment_destroy_paths[index], 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-attachment'}).text('destroy '),
+        $attachment_container = $('<div>').attr({ 'class': 'attachment' });
+    $attachment_container.append(attachment, destroy_attachmnet);
+    $attachments.push($attachment_container);
   })
   return $contaier_div.append($attachments);
 }
@@ -38,8 +38,8 @@ Comment.prototype.attachmentDetails = function(response) {
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       str = response.comment.content.toLowerCase();
-  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">$1</a>')
-  return $contaier_div.append(str)
+  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">$1</a>');
+  return $contaier_div.append(str);
 }
 
 Comment.prototype.resetForm = function(element) {
@@ -56,7 +56,7 @@ Comment.prototype.CreateDom = function(element, data) {
       $container = $('.' + response.post_id),
       $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
       $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('delete');
-  $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment)
+  $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
   $container.append($box);
   this.resetForm(element);
 }
@@ -64,14 +64,14 @@ Comment.prototype.CreateDom = function(element, data) {
 Comment.prototype.bindEvents = function() {
   var _this = this;
   $('#create-comment').bind("ajax:complete", function(e, data){
-    _this.CreateDom(this, data)
+    _this.CreateDom(this, data);
   });
   $('.post-division').on('ajax:complete', '.delete-comment', function(e, data){
-    $(this).parent().html('')
+    $(this).parent().html('');
   })
 }
 
 $(function(){
-  var comment = new Comment
-  comment.bindEvents()
+  var comment = new Comment;
+  comment.bindEvents();
 });

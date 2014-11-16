@@ -8,7 +8,7 @@ Results.prototype.addResults = function(results, index, item, is_user) {
     'object': item,
     'is_user': is_user
   })
-  return results
+  return results;
 };
 
 Results.prototype.generateDropDown = function(results, heading, users, groups){
@@ -53,10 +53,10 @@ $(function() {
     dropdownCssClass: "bigdrop"
   }).on("select2-selecting", function(e) {
     if (e.choice.is_user) {
-      controller = '/users/'
+      controller = '/users/';
     } else {
-      controller = '/groups/'
-    } 
-    window.location.href = controller + e.choice.object.id
+      controller = '/groups/';
+    }
+    window.location.href = controller + e.choice.object.id;
   })
 });

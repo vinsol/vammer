@@ -9,11 +9,11 @@ Like.prototype.generateLink = function(element, data, like_or_unlike, http_metho
 }
 
 Like.prototype.like = function(element, data) {
-  this.generateLink(element, data, 'unlike', 'delete')
+  this.generateLink(element, data, 'unlike', 'delete');
 }
 
 Like.prototype.unlike = function(element, data) {
-  this.generateLink(element, data, 'like', 'post')
+  this.generateLink(element, data, 'like', 'post');
 }
 
 Like.prototype.bindEvents = function() {
