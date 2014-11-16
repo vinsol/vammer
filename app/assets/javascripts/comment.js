@@ -38,7 +38,7 @@ Comment.prototype.attachmentDetails = function(response) {
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       str = response.comment.content.toLowerCase();
-  str = str.replace(REGEX.linkify, '<a href="hashtags/$1">$1</a>')
+  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">$1</a>')
   return $contaier_div.append(str)
 }
 

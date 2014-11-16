@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def show
     initialize_comment
     initialize_post
-    @posts = current_user.posts
+    @posts = @user.posts
   end
 
   def update

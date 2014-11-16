@@ -45,7 +45,7 @@
 
         <%= render 'home/show_comments', post: post %>
 
-        <% if(@group ? @group.members.include?(current_user) : true) %>
+        <% if( !post.group || current_user.groups.include?(post.group) ) %>
 
           <%= render 'shared/create_comments', post: post %>
 
