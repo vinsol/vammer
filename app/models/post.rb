@@ -6,7 +6,6 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  #FIX: Can be written in one line
   validates :content, :user_id, presence: true
 
 end

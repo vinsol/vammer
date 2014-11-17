@@ -3,6 +3,7 @@
   <% if @users %>
     <% @users.each do |user| %>
 
+      <!-- #FIX: Make a partial for rendering card and use it inside loop -->
       <div class='row row-margin-bottom'>
 
         <div class='col-md-5 no-padding lib-item' data-category='view'>
@@ -10,10 +11,10 @@
           <div class='lib-panel'>
             <div class='row box-shadow'>
               <div class='col-md-4'>
-                <!-- #FIX: missing image tag can be returned from helper and used at all places -->
                 <%= user.image ? image_tag(user.large_thumbnail_url, class: 'lib-img') : missing_image_tag %>
               </div>
 
+              <!-- #FIX: Make a partial for user details. Keep image in card partial only. -->
               <div class='col-md-6'>
                 <div class='lib-row lib-header'>
 

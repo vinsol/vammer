@@ -1,17 +1,20 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+#FIX: Fix case
 puts 'enter name'
 name = STDIN.gets.chomp
 
 #FIXME_AB: You should tell that this email id should be the company id. Read domain from config.yml
-#FIXME_AB: Also make sure that your rails application doesn't boot if it doesn't have config.yml file with company name and domain.
-puts "enter email_id with domain name as #{COMPANY['domain']}"
+#FIX: Fix case
+puts "enter email with domain name as #{COMPANY['domain']}"
 email_id = STDIN.gets.chomp
 
+#FIX: Fix case
 puts 'enter pasword'
 password = STDIN.gets.chomp
 
+#FIX: Fix case
 puts 'confirm password'
 confirm_password = STDIN.gets.chomp
 
@@ -22,6 +25,4 @@ else
   puts user.errors.full_messages
 end
 
-#FIX: Show missing image if image not present. Do not build empty image. Remove message.
 setting = Setting.create
-#FIXME_AB: Where is logo saved, where did we assigned? You just created setting and build image

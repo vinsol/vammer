@@ -1,4 +1,3 @@
-#FIXME_AB: Indexes missing on almost all tables
 class User < ActiveRecord::Base
 
   START_YEAR = 1970
@@ -8,7 +7,6 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :image, as: :attachment, dependent: :destroy
-  #FIXME_AB: instead of membership, i think we should name it as memberships
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id
