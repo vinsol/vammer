@@ -1,5 +1,4 @@
-Like = function() {
-}
+Like = function(){}
 
 Like.prototype.generateLink = function(element, data, like_or_unlike, http_method){
   var response = JSON.parse(data.responseText);

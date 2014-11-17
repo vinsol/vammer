@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
   before_action :configure_devise_params, if: :devise_controller?
   before_action :authenticate_user!, :fetch_logo
-
 
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |user|
@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
       params[:column] = 'created_at' if params[:column].blank?
     end
 
+    #FIX: This comment is not associated to any post. Add a post_id field in the form where it is being used.
     def initialize_comment
       @comment = Comment.new
       @comment.document_files.build
@@ -48,6 +49,7 @@ class ApplicationController < ActionController::Base
     end
 
     def fetch_posts
+      #FIX: All inludes can be written as a collection e.g. includes(:user, :documents, :comments)
       @posts = Post.includes(:user).includes(:documents).includes(:comments).order(created_at: :desc)
     end
 

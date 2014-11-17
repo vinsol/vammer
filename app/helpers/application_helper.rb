@@ -45,9 +45,9 @@ module ApplicationHelper
     else
       link_to :join, join_group_path(group)
     end
-
   end
 
+  #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def post_like_unlike(like, likeable)
     if like.nil?
       link_to 'like', post_likes_path(likeable, group_id: params[:id]), method: :post, class: :like, remote: :true
@@ -56,6 +56,7 @@ module ApplicationHelper
     end
   end
 
+  #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def comment_like_unlike(like, likeable)
     if like.nil?
       link_to 'like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post, class: :like, remote: :true
@@ -64,6 +65,7 @@ module ApplicationHelper
     end
   end
 
+  #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def link_to_like_unlike(likeable, method)
     if method == :post
       like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Post').first

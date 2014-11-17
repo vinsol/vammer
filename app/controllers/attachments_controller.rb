@@ -3,11 +3,12 @@ class AttachmentsController < ApplicationController
   before_action :fetch_attachment, :allow_edit
 
   def destroy
+    #FIX: What if #destroy fails
     @attachment.destroy
     respond_to do |format|
+      #FIX: Render with some status code
       format.json { render json: {} }
     end
-    # redirect_to redirect_path
   end
 
   private
@@ -26,7 +27,10 @@ class AttachmentsController < ApplicationController
     end
 
     def allow_edit
+      #FIX: use #if
+      #FIX: Make a method like #can_edit_attachment?(user)
       unless current_user.admin? or @attachment.attachment.user == current_user
+        #FIX: As it is an ajax request, respond with json.
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to redirect_path
       end

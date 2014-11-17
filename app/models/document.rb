@@ -1,3 +1,4 @@
+#FIX: Create new classes PostDocument, CommentDocument and inherit them from Document.
 class Document < Attachment
 
   has_attached_file :attachment

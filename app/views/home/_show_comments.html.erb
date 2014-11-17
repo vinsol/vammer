@@ -22,6 +22,7 @@
       </div>
 
       <% comment.document_files.each do |document| %>
+      <!-- #FIX: Indentation -->
       <div class='attachment comment-margin'>
         <%= link_to('attachment', document.attachment.url) %>
 
@@ -33,6 +34,7 @@
       <% end %>
 
       <div class='comment-margin'>
+        <!-- #FIX: Move if condition outer div -->
         <% if can_edit_user?(comment.user) %>
           <%= link_to 'delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
         <% end %>
@@ -40,6 +42,7 @@
 
     </div>
   <% end %>
+  <!-- #FIX: Use id and a longer name to uniquely identify comment div -->
   <div class= <%= post.id %> ></div>
 
 </div>

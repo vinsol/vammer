@@ -1,3 +1,4 @@
+// #FIX: Will see later
 REGEX = { linkify: /#(\w+)/g }
 var Comment = function() {
 }
