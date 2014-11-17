@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     attachments = fetch_attachments
     result = build_result(attachments)
     respond_to do |format|
-      format.json { render json: result.as_json }
+      format.json { render json: result }
     end
   end
 

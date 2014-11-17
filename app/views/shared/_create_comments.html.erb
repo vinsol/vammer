@@ -1,12 +1,12 @@
 <div class='col-lg-10'>
-  <%= nested_form_for [post, @comment], html: { class: 'form-horizontal col-lg-12' ,remote: true, id: 'create-comment'} do |f| %>
+  <%= nested_form_for [post, @comment], html: { class: 'form-horizontal col-lg-12' ,remote: true, class: 'create-comment'} do |f| %>
 
     <div class='control-group'>
       <%= f.text_area :content, class: 'form-control' %>
     </div>
 
     <br>
-    <div class=' comment-post'>
+    <div class='comment-post'>
       <div class='control-group'>
         <%= f.fields_for :document_files do |doc| %>
           <%= doc.file_field :attachment %>
