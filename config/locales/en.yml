@@ -23,8 +23,8 @@ en:
   flash:
     users:
       update:
-        success: 'user updated successfully'
-        failure: 'user not updated successfully'
+        success: 'User updated successfully'
+        failure: 'User not updated successfully'
     admin:
       settings:
         update:
@@ -32,32 +32,32 @@ en:
           failure: 'Settings not updated'
     comments:
       create:
-        success: 'comment successfully added'
-        failure: 'could not add comment'
+        success: 'Comment successfully added'
+        failure: 'Could not add comment'
       destroy:
-        success: 'comment successfully destroyed'
-        failure: 'could not destroy'
+        success: 'Comment successfully deleted'
+        failure: 'Could not delete'
     posts:
       create:
-        success: 'post successfully created'
-        failure: 'could not add post'
+        success: 'Post successfully created'
+        failure: 'Could not add post'
       destroy:
-        success: 'post successfully destroyed'
-        failure: 'could not destroy'
+        success: 'Post successfully deleted'
+        failure: 'Could not delete'
     access:
-      failure: 'ACCESS DENIED'
+      failure: 'Access denied'
     record:
-      failure: 'record not found'
+      failure: 'Record not found'
     groups:
       unjoin:
-        failure: 'can not unjoin group'
-        success: 'group unjoined'
+        failure: 'Can not unjoin group'
+        success: 'Group unjoined'
       join:
-        failure: 'can not again join a group'
-        success: 'group joined'
+        failure: 'Can not again join a group'
+        success: 'Group joined'
       create:
         failure: 'Group not saved'
         success: 'Group created'
       update:
-        success: 'group updated'
-        failure: 'group not updated'
+        success: 'Group updated'
+        failure: 'Group not updated'

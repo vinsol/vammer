@@ -9,7 +9,7 @@ Comment.prototype.marginDiv = function() {
 Comment.prototype.userDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       $image = $('<img>').attr( { 'src': response.image } ),
-      name = response.user.name;
+      name = response.user.name.capitalize;
   return $contaier_div.append($image).append(name);
 }
 

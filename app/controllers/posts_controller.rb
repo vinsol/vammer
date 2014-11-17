@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     def fetch_form_associations
       fetch_posts
       fetch_user_groups
-      @post.build_document
+      @post.documents.build
       @group = @post.group if @post.group_id
     end
 

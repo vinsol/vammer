@@ -8,8 +8,10 @@
         <% if post.user.image %>
           <%= image_tag(post.user.image.attachment.url(:thumb)) %>
         <% end %>
+      <span class='name-bold'>
+        <%= comment.user.name.capitalize %>
+      </span>
 
-        <%= comment.user.name %>
       </div>
 
       <div class='comment-margin'>

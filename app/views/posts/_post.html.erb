@@ -7,7 +7,9 @@
         <%= image_tag(post.user.image.attachment.url(:thumb)) %>
       <% end %>
 
-      <%= post.user.name %>
+      <span class='name-bold'>
+        <%= post.user.name.capitalize %>
+      </span>
 
       <br><br>
 

@@ -21,7 +21,7 @@
         <% if user_signed_in? %>
 
           <div class='user-name'>
-            hi <%= current_user.name %>
+            Hi <%= current_user.name.capitalize %>
           </div>
 
           <div class='search-header'>
@@ -35,7 +35,7 @@
       <div class='container-body'>
         <br>
         <% if flash[:notice] %>
-          <div class="control-group alert alert-warning col-lg-offset-4 col-lg-4">
+          <div class="control-group alert alert-success col-lg-offset-4 col-lg-4">
             <%= flash[:notice] %>
           </div>
         <% end %>
