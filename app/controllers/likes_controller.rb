@@ -39,13 +39,4 @@ class LikesController < ApplicationController
       end
     end
 
-    #FIX: Remove this
-    def redirect_path
-      if params[:group_id]
-        group_path(params[:group_id])
-      else
-        :root
-      end
-    end
-
 end
