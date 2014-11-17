@@ -32,7 +32,7 @@ module ApplicationHelper
   def group_join_link(group)
     #FIXME_AB: logic can be improved.
     #FIX: This method should not return nil in any case
-    current_user.groups.include? group ? link_to :unjoin, unjoin_group_path(group) : link_to :join, join_group_path(group)
+    current_user.groups.include?(group) ? link_to(:unjoin, unjoin_group_path(group)) : link_to(:join, join_group_path(group))
       #FIX: This condition can be moved to view
   end
 
