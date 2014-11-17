@@ -4,7 +4,7 @@ Like = function() {
 Like.prototype.generateLink = function(element, data, like_or_unlike, http_method){
   var response = JSON.parse(data.responseText);
   $(element).html(like_or_unlike);
-  $(element).attr( {'class': like_or_unlike, 'href': response.like_path, 'data-remote': 'true' } ).data('method', http_method);
+  $(element).attr( {'class': like_or_unlike, 'href': response.like_path } ).data('method', http_method).data('remote', 'true');
   $(element).next('.count').html(response.count);
 }
 
