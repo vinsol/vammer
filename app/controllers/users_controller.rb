@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def show
     initialize_comment
     initialize_post
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def update

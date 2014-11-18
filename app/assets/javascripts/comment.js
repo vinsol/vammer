@@ -9,8 +9,10 @@ Comment.prototype.marginDiv = function() {
 Comment.prototype.userDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       $image = $('<img>').attr( { 'src': response.image } ),
-      name = response.user.name.capitalize;
-  return $contaier_div.append($image).append(name);
+      name = response.user.name.substr(0, 1).toUpperCase() + response.user.name.substr(1);;
+      $bold_comment = $('<span>').attr( { 'class': 'name-bold' } )
+      $bold_comment.append(name)
+  return $contaier_div.append($image).append($bold_comment);
 }
 
 Comment.prototype.likeDetails = function(response) {
@@ -38,7 +40,7 @@ Comment.prototype.attachmentDetails = function(response) {
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       str = response.comment.content.toLowerCase();
-  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">$1</a>');
+  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">#$1</a>');
   return $contaier_div.append(str);
 }
 
@@ -68,7 +70,7 @@ Comment.prototype.bindEvents = function() {
     _this.CreateDom(this, data);
   });
   $('.post-division').on('ajax:complete', '.delete-comment', function(e, data){
-    $(this).parent().html('');
+    $(this).closest('.comment-box').remove();
   })
 }
 

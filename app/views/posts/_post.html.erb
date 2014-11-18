@@ -2,46 +2,50 @@
 
   <% @hashtagged.each do |post| %>
     <div class='post-division fill'>
+      <div class='add-margin'>
 
-      <% if post.user.image %>
-        <%= image_tag(post.user.image.attachment.url(:thumb)) %>
-      <% end %>
+        <% if post.user.image %>
+          <%= image_tag(post.user.image.attachment.url(:thumb)) %>
+        <% end %>
 
       <span class='name-bold'>
         <%= post.user.name.capitalize %>
       </span>
 
-      <br><br>
+        <br><br>
 
-      <%= linkify_hashtags(post.content) %>
+        <%= linkify_hashtags(post.content) %>
 
-      <% post.documents.each do |document| %>
+        <% post.documents.each do |document| %>
 
-        <%= link_to 'attachment', document.attachment.url %>
+          <div class='attachment comment-margin'>
 
-        <% if can_edit_user?(post.user) %>
-          <%= link_to 'destroy attachment', attachment_path(post, document), method: :delete %>
+            <%= link_to 'attachment', document.attachment.url %>
+
+            <% if can_edit_user?(post.user) %>
+              <%= link_to 'destroy attachment', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+            <% end %>
+
+          </div>
+
         <% end %>
 
-      <% end %>
+        <%= link_to_like_unlike post, :post %>
 
-      <%= link_to_like_unlike post, :post %>
+        <div class='count'>
+          <%= post.likes.count %>
+        </div>
 
-      <%= post.likes.count %>
 
-      <% if can_edit_user?(post.user) %>
+        <% if can_edit_user?(post.user) %>
 
-        <%= link_to 'delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
+          <%= link_to 'delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
 
-      <% end %>
+        <% end %>
 
-      <%= render 'home/show_comments', post: post %>
+        <%= render 'home/show_comments', post: post %>
 
-      <% if(@group ? @group.members.include?(current_user) : true) %>
-
-      <% end %>
-
-      <br> <br> <br> <br>
+      </div>
     </div>
   <% end %>
 
