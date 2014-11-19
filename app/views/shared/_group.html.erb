@@ -1,5 +1,5 @@
-<%= current_user.image ? image_tag(current_user.image.attachment.url) : 'no image' %>
-<%= current_user.name %>
+<%= current_user.image ? image_tag(current_user.image.attachment.url) : missing_image_tag %>
+<%= current_user.name.capitalize %>
 
 <br> <br>
 <div class='list-group'>
@@ -8,9 +8,9 @@
 
   <% @user_groups.each do |group| %>
 
-    <%= link_to group.name, group, class: 'list-group-item' %>
+    <%= link_to group.name.truncate(10), group, class: 'list-group-item' %>
     
   <% end %>
 
-  <%= link_to 'new group', :new_group, class: 'list-group-item' %>
+  <%= link_to 'New group', :new_group, class: 'list-group-item' %>
 </div>

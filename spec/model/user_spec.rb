@@ -52,32 +52,32 @@ describe User do
     context '' do
       REGEX = /\A([a-z]|\s)+\z/i
       it do
-        user.name = 'sawan'
-        expect(user.name).to match REGEX
+        user.name.capitalize = 'sawan'
+        expect(user.name.capitalize).to match REGEX
       end
       it do
-        user.name = 'saw an'
-        expect(user.name).to match REGEX
+        user.name.capitalize = 'saw an'
+        expect(user.name.capitalize).to match REGEX
       end
       it do
-        user.name = 'sawa_n'
-        expect(user.name).not_to match REGEX
+        user.name.capitalize = 'sawa_n'
+        expect(user.name.capitalize).not_to match REGEX
       end
       it do
-        user.name = '   '
-        expect(user.name).to match REGEX
+        user.name.capitalize = '   '
+        expect(user.name.capitalize).to match REGEX
       end
       it do
-        user.name = ''
-        expect(user.name).not_to match REGEX
+        user.name.capitalize = ''
+        expect(user.name.capitalize).not_to match REGEX
       end
       it do
-        user.name = '  y  '
-        expect(user.name).to match REGEX
+        user.name.capitalize = '  y  '
+        expect(user.name.capitalize).to match REGEX
       end
       it do
-        user.name = '67'
-        expect(user.name).not_to match REGEX
+        user.name.capitalize = '67'
+        expect(user.name.capitalize).not_to match REGEX
       end
     end
   end

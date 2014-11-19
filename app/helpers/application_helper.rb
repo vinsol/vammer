@@ -50,18 +50,18 @@ module ApplicationHelper
   #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def post_like_unlike(like, likeable)
     if like.nil?
-      link_to 'like', post_likes_path(likeable, group_id: params[:id]), method: :post, class: :like, remote: :true
+      link_to 'Like', post_likes_path(likeable, group_id: params[:id]), method: :post, class: 'like' , remote: :true
     else
-      link_to 'unlike', post_like_path(likeable, like, group_id: params[:id]), method: :delete, class: :unlike, remote: :true
+      link_to 'Unlike', post_like_path(likeable, like, group_id: params[:id]), method: :delete, class: 'unlike', remote: :true
     end
   end
 
   #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def comment_like_unlike(like, likeable)
     if like.nil?
-      link_to 'like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post, class: :like, remote: :true
+      link_to 'Like', post_comment_likes_path(likeable.post, likeable, group_id: params[:id]), method: :post, class: 'like comment-margin', remote: :true
     else
-      link_to 'unlike', like_path(like, group_id: params[:id]), method: :delete, class: :unlike, remote: :true
+      link_to 'Unlike', like_path(like, group_id: params[:id]), method: :delete, class: 'unlike comment-margin', remote: :true
     end
   end
 
@@ -74,6 +74,10 @@ module ApplicationHelper
       like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Comment').first
       comment_like_unlike(like, likeable)
     end
+  end
+
+  def missing_image_tag
+    image_tag('/assets/missing.jpg')
   end
 
 end

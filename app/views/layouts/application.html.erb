@@ -10,19 +10,11 @@
 
   <body>
 
-    <div class='body-container'>
+    <div class='blue-color'>
 
-      <div class='blue-color'>
-
-        <% if @logo.image %>
-          <%= link_to image_tag(@logo.image.attachment.url), :root %>
-        <% end %>
+      <div class='container'>
 
         <% if user_signed_in? %>
-
-          <div class='user-name'>
-            hi <%= current_user.name %>
-          </div>
 
           <div class='search-header'>
             <%= render 'layouts/search_bar' %>
@@ -36,7 +28,7 @@
         <br>
         <!-- #FIX: Fade out flash messages after some time -->
         <% if flash[:notice] %>
-          <div class="control-group alert alert-warning col-lg-offset-4 col-lg-4">
+          <div class="control-group alert alert-success col-lg-offset-4 col-lg-4">
             <%= flash[:notice] %>
           </div>
         <% end %>

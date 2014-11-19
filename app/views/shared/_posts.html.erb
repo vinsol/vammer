@@ -9,39 +9,45 @@
           <%= image_tag(post.user.image.attachment.url(:thumb)) %>
         <% end %>
 
-        <%= post.user.name %>
+      <span class='name-bold'>
+        <%= post.user.name.capitalize %>
+      </span>
 
         <br><br>
 
-        <%= linkify_hashtags(post.content) %>
+        <div class='post-margin'>
 
-        <% post.documents.each do |document| %>
+          <%= linkify_hashtags(post.content) %>
 
-          <div class='attachment comment-margin'>
+          <% post.documents.each do |document| %>
 
-            <%= link_to 'attachment', document.attachment.url %>
+            <div class='attachment comment-margin'>
 
-            <% if can_edit_user?(post.user) %>
-              <%= link_to 'destroy attachment', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
-            <% end %>
+              <%= link_to document.attachment_file_name, document.attachment.url %>
 
+              <% if can_edit_user?(post.user) %>
+                <%= link_to 'Delete', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+              <% end %>
+
+            </div>
+
+          <% end %>
+          <br>
+
+          <%= link_to_like_unlike post, :post %>
+
+          <div class='count'>
+            <%= post.likes.count %>
           </div>
 
-        <% end %>
 
-        <%= link_to_like_unlike post, :post %>
+          <% if can_edit_user?(post.user) %>
 
-        <div class='count'>
-          <%= post.likes.count %>
+            <%= link_to 'Delete', post_path(post.id), method: :delete, class: 'delete-post' %>
+
+          <% end %>
+
         </div>
-
-
-        <% if can_edit_user?(post.user) %>
-
-          <%= link_to 'delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
-
-        <% end %>
-
 
         <%= render 'home/show_comments', post: post %>
 
