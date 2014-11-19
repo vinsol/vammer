@@ -1,12 +1,27 @@
+.search-user {
+  margin-top: -50px;
+}
+
+.more-link-color {
+  color: #ececec;
+}
+
 .name-bold {
   font-size: 16px;
   font-style: bold;
 }
+
+.logo-position {
+  margin-left: 15px;
+}
+
 .blue-color {
-  background-color: #3B5998
+  background: linear-gradient(#8DB1EF, #3b5998);
+  height: 54px;
 }
 .more-position {
-  margin-top: -7px;
+  float: right;
+  margin-right: 15px;
 }
 .user-name {
   float: right;

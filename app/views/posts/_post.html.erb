@@ -20,18 +20,18 @@
 
           <div class='attachment comment-margin'>
 
-            <%= link_to 'attachment', document.attachment.url %>
+            <%= link_to 'Attachment', document.attachment.url %>
 
             <% if can_edit_user?(post.user) %>
-              <%= link_to 'destroy attachment', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+              <%= link_to 'Destroy attachment', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
             <% end %>
 
           </div>
 
         <% end %>
 
+        <br>
         <%= link_to_like_unlike post, :post %>
-
         <div class='count'>
           <%= post.likes.count %>
         </div>
@@ -39,7 +39,7 @@
 
         <% if can_edit_user?(post.user) %>
 
-          <%= link_to 'delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
+          <%= link_to 'Delete post', post_path(post.id), method: :delete, class: 'delete-post' %>
 
         <% end %>
 

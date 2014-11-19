@@ -8,7 +8,7 @@
 
   <% @user_groups.each do |group| %>
 
-    <%= link_to group.name, group, class: 'list-group-item' %>
+    <%= link_to group.name.truncate(10), group, class: 'list-group-item' %>
     
   <% end %>
 

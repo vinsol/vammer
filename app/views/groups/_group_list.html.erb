@@ -35,7 +35,7 @@
           <% end %>
 
           <td>
-            <%= link_to 'view', group_path(group) %>
+            <%= link_to 'View', group_path(group) %>
             <%= group_join_link(group) %>
             <% if admin_logged_in? || group_owner_logged_in?(group) %>
               <%= link_to :edit, edit_group_path(group) %>

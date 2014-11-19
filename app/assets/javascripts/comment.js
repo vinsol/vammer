@@ -16,11 +16,11 @@ Comment.prototype.userDetails = function(response) {
 }
 
 Comment.prototype.likeDetails = function(response) {
-  var $like = $('<a>').attr({ 'href': response.like_path, 'data-method': 'post', 'data-remote': 'true', 'class': 'like'}).text('like');
+  var $like = $('<a>').attr({ 'href': response.like_path, 'data-method': 'post', 'data-remote': 'true', 'class': 'like comment-margin'}).text('like');
   return $like;
 }
 Comment.prototype.numberOfLikesDetails = function(response) {
-  var $numberOfLikes = $('<div>').attr( {'class': 'count'} ).text(0);
+  var $numberOfLikes = $('<div>').attr( {'class': 'count comment-margin'} ).text(0);
   return $numberOfLikes;
 }
 
@@ -57,7 +57,7 @@ Comment.prototype.CreateDom = function(element, data) {
       $content = this.contentDetails(response),
       $container = $('.' + response.post_id),
       $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
-      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('delete');
+      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('Delete comment');
       console.log(345678)
   $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
   $container.append($box);

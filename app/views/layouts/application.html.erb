@@ -10,19 +10,11 @@
 
   <body>
 
-    <div class='body-container'>
+    <div class='blue-color'>
 
-      <div class='blue-color'>
-
-        <% if @logo.image %>
-          <%= link_to image_tag(@logo.image.attachment.url), :root %>
-        <% end %>
+      <div class='container'>
 
         <% if user_signed_in? %>
-
-          <div class='user-name'>
-            Hi <%= current_user.name.capitalize %>
-          </div>
 
           <div class='search-header'>
             <%= render 'layouts/search_bar' %>
