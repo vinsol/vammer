@@ -11,7 +11,7 @@
             <div class='row box-shadow'>
               <div class='col-md-4'>
                 <% #FIXME_AB: I would prefer to move user.image.attachment.url(:large) to user model as a method: large_thumbnail_url -%>
-                <%= user.image ? image_tag(user.image.attachment.url, class: 'lib-img') : 'no image' %>
+                <%= user.image ? image_tag(user.image.attachment.url, class: 'lib-img') : missing_image_tag %>
                 <% #FIXME_AB: above if user don't have image, no image should not come as text, should be a missing image thumbnail -%>
               </div>
 

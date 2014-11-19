@@ -74,4 +74,8 @@ module ApplicationHelper
     end
   end
 
+  def missing_image_tag
+    image_tag('/assets/missing.jpg')
+  end
+
 end

@@ -13,7 +13,7 @@
 
       <td> Attachment </td>
 
-      <td> <%= @user.image ? image_tag(@user.image.attachment.url) : 'No image uploaded' %> </td>
+      <td> <%= @user.image ? image_tag(@user.image.attachment.url) : missing_image_tag %> </td>
 
     </table>
   </div>
