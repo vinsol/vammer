@@ -57,7 +57,7 @@ Comment.prototype.CreateDom = function(element, data) {
       $content = this.contentDetails(response),
       $container = $('.' + response.post_id),
       $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
-      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('Delete comment');
+      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('Delete');
       console.log(345678)
   $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
   $container.append($box);

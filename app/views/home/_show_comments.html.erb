@@ -24,7 +24,7 @@
 
       <% comment.document_files.each do |document| %>
       <div class='attachment comment-margin'>
-        <%= link_to('Attachment', document.attachment.url) %>
+        <%= link_to(document.attachment_file_name, document.attachment.url) %>
 
         <% if can_edit_user?(comment.user) %>
           <%= link_to 'Destroy', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
@@ -35,7 +35,7 @@
 
       <div class='comment-margin'>
         <% if can_edit_user?(comment.user) %>
-          <%= link_to 'Delete comment', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
+          <%= link_to 'Delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
         <% end %>
       </div>
 
