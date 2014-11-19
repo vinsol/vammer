@@ -9,8 +9,8 @@ Comment.prototype.marginDiv = function() {
 
 Comment.prototype.userDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-      $image = $('<img>').attr( { 'src': response.image } ),
-      name = response.user.name;
+      $image = $('<img>').attr( { 'src': response.image_url } ),
+      name = response.user_name;
   return $contaier_div.append($image).append(name);
 }
 
@@ -26,7 +26,7 @@ Comment.prototype.numberOfLikesDetails = function(response) {
 Comment.prototype.attachmentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       $attachments = [];
-  $.each(response.attachment, function(index, element) {
+  $.each(response.attachment_url, function(index, element) {
     var attachment = $('<a>').attr({'href': element}).text('attachment '),
         destroy_attachmnet = $('<a>').attr({'href': response.attachment_destroy_paths[index], 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-attachment'}).text('destroy '),
         $attachment_container = $('<div>').attr({ 'class': 'attachment' });
@@ -38,7 +38,7 @@ Comment.prototype.attachmentDetails = function(response) {
 
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-      str = response.comment.content.toLowerCase();
+      str = response.comment_description.toLowerCase();
   str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">$1</a>');
   return $contaier_div.append(str);
 }
@@ -48,7 +48,8 @@ Comment.prototype.resetForm = function(element) {
 }
 
 Comment.prototype.CreateDom = function(element, data) {
-  var response = JSON.parse(data.responseText),
+  debugger
+  var response = JSON.parse(data.responseText).comment,
       $name = this.userDetails(response),
       $like = this.likeDetails(response),
       $attachments = this.attachmentDetails(response),
@@ -63,13 +64,23 @@ Comment.prototype.CreateDom = function(element, data) {
   this.resetForm(element);
 }
 
+Comment.prototype.destroy = function(element, data) {
+  error = data.responseJSON.error
+  if(error == undefined) {
+    $(element).closest('.comment-box').remove();
+  } else {
+    alert(error)
+  }
+
+}
+
 Comment.prototype.bindEvents = function() {
   var _this = this;
   $('.create-comment').bind("ajax:complete", function(e, data){
     _this.CreateDom(this, data);
   });
   $('.post-division').on('ajax:complete', '.delete-comment', function(e, data){
-    $(this).parent().html('');
+    _this.destroy(this, data)
   })
 }
 

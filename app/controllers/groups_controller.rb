@@ -84,8 +84,8 @@ class GroupsController < ApplicationController
     #FIX: What is group is not found. Handle it in before_action -DONE
     initialize_post
     initialize_comment
-    #FIX: Refactor #includes
-    @posts = @group.posts.order(created_at: :desc).includes(:user).includes(:documents).includes(:comments)
+    #FIX: Refactor #includes -DONE
+    @posts = @group.posts.order(created_at: :desc).includes(:user, :documents, :comments)
   end
 
   def members
@@ -101,7 +101,7 @@ class GroupsController < ApplicationController
       #FIX: Use '||' instead of 'or' -DONE
       unless current_user.admin? || @group.creator == current_user
         flash[:error] = t('access.failure', scope: :flash)
-        redirect_to :groups
+       redirect_to :groups
       end
     end
 

@@ -36,3 +36,5 @@ gem 'select2-rails', '3.5.9.1'
 gem 'simple_hashtag', '0.1.9'
 
 gem 'remotipart', '1.2.1'
+
+gem 'active_model_serializers', '0.9.0'
