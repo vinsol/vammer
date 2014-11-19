@@ -5,7 +5,7 @@
     <div class='shadow comment-box'>
       <div class='comment-margin'>
         <% if post.user.image %>
-          <%= image_tag(post.user.image.attachment.url(:thumb)) %>
+          <%= image_tag(comment.user.image.attachment.url(:thumb)) %>
         <% end %>
       <span class='name-bold'>
         <%= comment.user.name.capitalize %>
