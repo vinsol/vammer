@@ -18,7 +18,7 @@ Results.prototype.generateDropDown = function(results, heading, users, groups){
     _this.addResults(results, index, item, true);
   })
   $.each(groups, function (index, item){
-    if (results['GROUP']===undefined) {
+    if (results['GROUP'] == undefined) {
       results['GROUP']={text:'GROUP'};
       results.push(results['GROUP']);
     }

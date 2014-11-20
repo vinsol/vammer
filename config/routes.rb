@@ -30,11 +30,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:create, :destroy] do
       post 'like', to: 'posts#like'
       delete 'unlike/:id', to: 'posts#unlike', as: :unlike
-      # resources :likes, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy] do
         post 'like', to: 'comments#like'
         delete 'unlike/:id', to: 'comments#unlike', as: :unlike
-        # resources :likes, only: [:create, :destroy], shallow: true
       end
     end
   end

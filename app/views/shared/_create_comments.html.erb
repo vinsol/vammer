@@ -6,6 +6,8 @@
       <%= f.text_area :content, class: 'form-control' %>
     </div>
 
+      <%= f.hidden_field :post_id, value: post.id %>
+
     <br>
     <div class='comment-post'>
       <div class='control-group'>

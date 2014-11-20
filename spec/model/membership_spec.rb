@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe GroupsMember do
+describe Membership do
 
   it { should belong_to :user }
   it { should belong_to :group }
