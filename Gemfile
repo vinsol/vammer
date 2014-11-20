@@ -17,6 +17,8 @@ group :test, :development do
   gem 'factory_girl_rails', '4.5.0'
 end
 
+gem 'simplecov', require: false, group: :test
+
 gem 'jquery-rails', '3.1.2'
 
 gem 'uglifier', '2.5.3'

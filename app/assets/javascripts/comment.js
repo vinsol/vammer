@@ -10,9 +10,9 @@ Comment.prototype.marginDiv = function() {
 Comment.prototype.userDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       $image = $('<img>').attr( { 'src': response.image_url } ),
-      name = response.user.name.substr(0, 1).toUpperCase() + response.user.name.substr(1);;
-      $bold_comment = $('<span>').attr( { 'class': 'name-bold' } )
-      $bold_comment.append(name)
+      name = response.user_name.substr(0, 1).toUpperCase() + response.user_name.substr(1),
+      $bold_comment = $('<span>').attr( { 'class': 'name-bold' } );
+  $bold_comment.append(name);
   return $contaier_div.append($image).append($bold_comment);
 }
 
@@ -28,9 +28,9 @@ Comment.prototype.numberOfLikesDetails = function(response) {
 Comment.prototype.attachmentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       $attachments = [];
-  $.each(response.attachment_url, function(index, element) {
-    var attachment = $('<a>').attr({'href': element}).text('attachment '),
-        destroy_attachmnet = $('<a>').attr({'href': response.attachment_destroy_paths[index], 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-attachment'}).text('destroy '),
+  $.each(response.document_files, function(index, element) {
+    var attachment = $('<a>').attr({'href': element.attachments_url}).text('attachment '),
+        destroy_attachmnet = $('<a>').attr({'href': element.attachment_destroy_paths, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-attachment'}).text('destroy '),
         $attachment_container = $('<div>').attr({ 'class': 'attachment' });
     $attachment_container.append(attachment, destroy_attachmnet);
     $attachments.push($attachment_container);
@@ -40,7 +40,7 @@ Comment.prototype.attachmentDetails = function(response) {
 
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
-      str = response.comment.content.toLowerCase();
+      str = response.comment_description.toLowerCase();
   str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">#$1</a>');
   return $contaier_div.append(str);
 }
@@ -50,29 +50,36 @@ Comment.prototype.resetForm = function(element) {
 }
 
 Comment.prototype.CreateDom = function(element, data) {
-  var response = JSON.parse(data.responseText).comment,
-      $name = this.userDetails(response),
-      $like = this.likeDetails(response),
-      $attachments = this.attachmentDetails(response),
-      $numberOfLikes = this.numberOfLikesDetails(response),
-      $content = this.contentDetails(response),
-      $container = $('.' + response.post_id),
-      $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
-      $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('Delete');
-      console.log(345678)
-  $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
-  $container.append($box);
-  this.resetForm(element);
+  if(this.checkError(data)){
+    var response = JSON.parse(data.responseText).comment,
+        $name = this.userDetails(response),
+        $like = this.likeDetails(response),
+        $attachments = this.attachmentDetails(response),
+        $numberOfLikes = this.numberOfLikesDetails(response),
+        $content = this.contentDetails(response),
+        $container = $('.' + response.post_id),
+        $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
+        $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('Delete');
+        console.log(345678)
+    $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
+    $container.append($box);
+    this.resetForm(element);
+  }
+}
+
+Comment.prototype.checkError = function(data) {
+  error = JSON.parse(data.responseText).error
+  if(error != undefined) {
+    alert(error)
+  }
+  return error == undefined
 }
 
 Comment.prototype.destroy = function(element, data) {
-  error = data.responseJSON.error
-  if(error == undefined) {
+  if(this.checkError(data)){
     $(element).closest('.comment-box').remove();
-  } else {
-    alert(error)
+    alert(JSON.parse(data.responseText).message)
   }
-
 }
 
 Comment.prototype.bindEvents = function() {
