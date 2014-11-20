@@ -2,20 +2,10 @@ class GroupsController < ApplicationController
 
   before_action :fetch_group, only: [:join, :unjoin, :update, :edit, :show, :members]
   before_action :fetch_user_groups
-  #FIX: Remove this. Already called in action -DONE
   before_action :allow_modify, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
   before_action :allow_join, only: :join
-
-  def sort(collection)
-    sort_order
-    sort_column
-    if params[:column] == 'creator'
-      collection.joins(:creator).order("users.name #{params[:direction]}").page params[:page]
-    else
-      collection.order( params[:column] => params[:direction].to_sym).page params[:page]
-    end
-  end
+  before_action :sorting_valid?, only: [:join, :extraneous, :owned]
 
   def index
     @groups = current_user.groups.includes(:creator)
@@ -39,7 +29,6 @@ class GroupsController < ApplicationController
   def create
     group = current_user.owned_groups.create(permitted_params)
     if group.save
-      #FIX: Flash message for success -DONE
       flash[:notice] = t('.success', scope: :flash)
       redirect_to :groups
     else
@@ -58,7 +47,6 @@ class GroupsController < ApplicationController
   end
 
   def join
-    #FIX: Add flash -DONE
     if @group.members.push(current_user)
       flash[:notice] = t('.success', scope: :flash)
     else
@@ -96,9 +84,7 @@ class GroupsController < ApplicationController
 
   private
 
-    #FIX: Rename to #allow_modify -DONE
     def allow_modify
-      #FIX: Use '||' instead of 'or' -DONE
       unless current_user.admin? || @group.creator == current_user
         flash[:error] = t('access.failure', scope: :flash)
        redirect_to :groups
@@ -106,7 +92,7 @@ class GroupsController < ApplicationController
     end
 
     def permitted_params
-      params[:group].permit(:name, :description)
+      params.require(:group).permit(:name, :description)
     end
 
     def fetch_group
@@ -118,18 +104,30 @@ class GroupsController < ApplicationController
     end
 
     def allow_unjoin
-      #FIX: Use '||'
-      if @group.creator == current_user || !(@group.members.include? current_user)
+      if @group.creator == current_user || @group.members.exclude?(current_user)
         flash[:error] = t('.failure', scope: :flash)
-        redirect_to :groups      
+        redirect_to :groups
       end
     end
 
-    #FIX: We do need a method for this. -DONE
     def allow_join
       if @group.members.include? current_user
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups
+      end
+    end
+
+    def sorting_valid?
+      (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
+    end
+
+    def sort(collection)
+      order = sort_order
+      column = sort_column
+      if params[:column] == 'creator'
+        Group.sort_by_creator(collection, order).page params[:page]
+      else
+        Group.sort(collection, column, order.to_sym).page params[:page]
       end
     end
 

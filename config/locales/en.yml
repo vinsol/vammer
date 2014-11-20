@@ -66,6 +66,10 @@ en:
         failure: 'Hahstag not found'
   message:
     comments:
+      like:
+        failure: 'Can not like this comment'
+      unlike:
+        failure: 'Can not unlike this comment'
       create:
         failure: 'Can not create comment'
         success: 'Comment added'

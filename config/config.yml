@@ -1,3 +1,14 @@
-company:
-  name: Vinsol
-  domain: vinsol.com
+development:
+  company:
+    name: Vinsol
+    domain: vinsol.com
+
+test:
+  company:
+    name: Vinsol
+    domain: vinsol.com
+
+production:
+  company:
+    name: Vinsol
+    domain: vinsol.com

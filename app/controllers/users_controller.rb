@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_action :fetch_user, except: :index
 
-  before_action :authenticate_user_admin, only: [:update, :edit]
+  before_action :allow_modify, only: [:update, :edit]
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
         render json: data
       end
     end
-    @users = current_user.admin? ? User.all : User.where(enabled: true)
+
   end
 
   def edit
@@ -63,9 +63,7 @@ class UsersController < ApplicationController
       end
     end
 
-    #FIXME_AB: Can we name it better?
-    def authenticate_user_admin
-      #FIXME_AB: or vs ||
+    def allow_modify
       unless current_user.admin? || @user == current_user
         flash[:notice] = t('access.failure', scope: :flash)
         redirect_to :users

@@ -1,6 +1,6 @@
 <div>
 
-  <% if user_logged_in?(@user) %>
+  <% if creator_logged_in?(@user) %>
     <%= render 'users/registrations/side_bar' %>
   <% end %>
 
@@ -67,7 +67,7 @@
 
       </div><br/>
       <% #FIXME_AB: ??? -%>
-      <% if admin_logged_in? && !user_logged_in?(@user) %>
+      <% if admin_logged_in? && !creator_logged_in?(@user) %>
 
         <div class='control-group'>
 

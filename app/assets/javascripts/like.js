@@ -1,5 +1,13 @@
 Like = function(){}
 
+Like.prototype.checkError = function(data) {
+  error = JSON.parse(data.responseText).error
+  if(error != undefined) {
+    alert(error)
+  }
+  return error == undefined
+}
+
 Like.prototype.generateLink = function(element, data, like_or_unlike, http_method){
   var response = JSON.parse(data.responseText);
   $(element).html(like_or_unlike);
@@ -8,11 +16,15 @@ Like.prototype.generateLink = function(element, data, like_or_unlike, http_metho
 }
 
 Like.prototype.like = function(element, data) {
-  this.generateLink(element, data, 'unlike', 'delete');
+  if(this.checkError(data)){ 
+    this.generateLink(element, data, 'unlike', 'delete');
+  }
 }
 
 Like.prototype.unlike = function(element, data) {
-  this.generateLink(element, data, 'like', 'post');
+  if(this.checkError(data)){ 
+    this.generateLink(element, data, 'like', 'post');
+  }
 }
 
 Like.prototype.bindEvents = function() {

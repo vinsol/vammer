@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :fetch_post, only: :destroy
+  before_action :fetch_post, only: [:destroy]
 
   def create
     @post = current_user.posts.new(permitted_params)
@@ -23,6 +23,32 @@ class PostsController < ApplicationController
     redirect_to :root
   end
 
+  def like
+    #FIX: First initialize like object and then assign to user, then save. Handle success/failure
+    @post = Post.where(id: params[:post_id]).first
+    like = current_user.likes.build
+    @post.likes.push like
+    like.save
+    like_path = post_unlike_path(@post.id, like.id)
+    respond_to do |format|
+      #FIX: Use #unlike_path key
+      result = {count: @post.likes.count, like_path: like_path}
+      format.json { render json: result}
+    end
+  end
+
+  def unlike
+    #FIX: Fetch in before_action
+    like = Like.where(id: params[:id]).first
+    @likeable = like.likeable
+    #FIX: Handle success/failure
+    like.destroy
+    like_path = post_like_path(@likeable)
+    respond_to do |format|
+      result = {count: @likeable.likes.count, like_path: like_path}
+      format.json { render json: result}
+    end
+  end
 
   private
 
@@ -43,11 +69,10 @@ class PostsController < ApplicationController
       fetch_user_groups
       @post.documents.build
       initialize_comment
-      @group = @post.group if @post.group_id
     end
 
     def redirect_path
-      if @post.try(:group_id)
+      if @post.group_id
         group_path(@post.group_id)
       else
         :root

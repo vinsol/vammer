@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20141118062730) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "groups", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -45,12 +48,7 @@ ActiveRecord::Schema.define(version: 20141118062730) do
     t.integer  "creator"
   end
 
-  create_table "groups_members", force: true do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
 
   create_table "likes", force: true do |t|
     t.integer  "user_id"
@@ -60,6 +58,18 @@ ActiveRecord::Schema.define(version: 20141118062730) do
     t.datetime "updated_at"
   end
 
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "memberships", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+
   create_table "posts", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
@@ -67,6 +77,9 @@ ActiveRecord::Schema.define(version: 20141118062730) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "posts", ["group_id"], name: "index_posts_on_group_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "settings", force: true do |t|
     t.datetime "created_at"
@@ -103,7 +116,7 @@ ActiveRecord::Schema.define(version: 20141118062730) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-11-15 20:08:02'
+    t.datetime "joining_date",           default: '2014-11-20 10:20:01'
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

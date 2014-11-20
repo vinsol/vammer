@@ -13,7 +13,7 @@ class CommentSerializer < BaseSerializer
   end
 
   def like_path
-    post_comment_likes_path(object.post, object)
+    post_comment_like_path(object.post, object)
   end
 
   def user_name

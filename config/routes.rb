@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :admin do
-    #FIXME_AB: can we make it a singular resource: http://guides.rubyonrails.org/routing.html#singular-resources
-    resources :settings, only: [:update]
+    resource :settings, only: [:update]
     get 'settings/edit', to: 'settings#edit'
   end
 
@@ -29,9 +28,13 @@ Rails.application.routes.draw do
 
   scope shallow_path: 'comment' do
     resources :posts, only: [:create, :destroy] do
-      resources :likes, only: [:create, :destroy]
+      post 'like', to: 'posts#like'
+      delete 'unlike/:id', to: 'posts#unlike', as: :unlike
+      # resources :likes, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy] do
-        resources :likes, only: [:create, :destroy], shallow: true
+        post 'like', to: 'comments#like'
+        delete 'unlike/:id', to: 'comments#unlike', as: :unlike
+        # resources :likes, only: [:create, :destroy], shallow: true
       end
     end
   end

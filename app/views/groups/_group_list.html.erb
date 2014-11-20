@@ -11,18 +11,19 @@
 
       <tr>
         <th>Name
-          <%= link_to_by_order :name %>
+          <%= link_to_order :name %>
         </th>
         <th>Description</th>
 
           <% if action != :owned %>
             <th>Creator
-                <%= link_to_by_order :creator %>
+                <%= link_to_order :creator %>
             </th>
           <% end %>
 
         <th>Action</th>
       </tr>
+
 
       <% @groups.each do |group| %>
 
