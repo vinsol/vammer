@@ -65,6 +65,9 @@ en:
       show:
         failure: 'Hahstag not found'
   message:
+    posts:
+      like:
+        failure: 'Record not found'
     comments:
       like:
         failure: 'Can not like this comment'

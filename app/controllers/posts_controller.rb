@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
 
   before_action :fetch_post, only: [:destroy]
+  before_action :fetch_post_for_like, only: [:like, :unlike]
+  before_action :fetch_like, only: [:unlike]
 
   def create
     @post = current_user.posts.new(permitted_params)
@@ -25,32 +27,89 @@ class PostsController < ApplicationController
 
   def like
     #FIX: First initialize like object and then assign to user, then save. Handle success/failure
-    @post = Post.where(id: params[:post_id]).first
     like = current_user.likes.build
     @post.likes.push like
-    like.save
-    like_path = post_unlike_path(@post.id, like.id)
-    respond_to do |format|
-      #FIX: Use #unlike_path key
-      result = {count: @post.likes.count, like_path: like_path}
-      format.json { render json: result}
+    if like.save
+      like_successful(like)
+    else
+      like_unsuccessful
     end
   end
 
   def unlike
     #FIX: Fetch in before_action
-    like = Like.where(id: params[:id]).first
-    @likeable = like.likeable
+    @post = @like.likeable
     #FIX: Handle success/failure
-    like.destroy
-    like_path = post_like_path(@likeable)
-    respond_to do |format|
-      result = {count: @likeable.likes.count, like_path: like_path}
-      format.json { render json: result}
+    if @like.destroy
+      unlike_successful
+    else
+      unlike_unsuccessful
     end
   end
 
   private
+
+    def unlike_successful
+      like_path = post_like_path(@post)
+      render_like_unlike_successful(like_path)
+    end
+
+    def like_successful(like)
+      like_path = post_unlike_path(@post.id, like.id)
+      render_like_unlike_successful(like_path)
+    end
+
+    def render_like_unlike_successful(like_path)
+      respond_to do |format|
+        #FIX: Use #unlike_path key
+        result = {count: @post.likes.count, like_path: like_path}
+        format.json { render json: result}
+      end
+    end
+
+    def unlike_unsuccessful
+      like = { error: t('comments.unlike.failure', scope: :message) }
+      render_error_response_for_like_unlike(like)      
+    end
+
+    def like_unsuccessful
+      like = { error: t('comments.like.failure', scope: :message) }
+      render_error_response_for_like_unlike(like)
+    end
+
+    def render_error_response_for_like_unlike(like)
+      respond_to do |format|
+        format.json { render json: like }
+      end
+    end
+
+    def fetch_post_for_like
+      @post = Post.where(id: params[:post_id]).first
+      unless @post
+        handle_response
+      end
+    end
+
+    def handle_response
+      like = { error: t('posts.like.failure', scope: :message) }
+      respond_to do |format|
+        format.json { render json: like }
+      end
+    end
+
+    def fetch_like
+      @like = Like.where(id: params[:id]).first
+      unless @like
+        handle_response_like
+      end
+    end
+
+    def handle_response_like
+      like = { error: t('comments.unlike.failure', scope: :message) }
+      respond_to do |format|
+        format.json { render json: like }
+      end
+    end
 
     def fetch_post
       @post = Post.where(id: params[:id]).first
