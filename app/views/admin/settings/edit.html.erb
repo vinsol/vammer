@@ -15,6 +15,11 @@
 
         <%= attach.file_field :attachment %>
 
+        <div class='pull-right upload-logo'>
+          <%= image_tag @logo.image.attachment.url(:thumb) %>
+        </div>
+
+
       <% end %>
 
       </div><br>
@@ -22,6 +27,7 @@
       <div class='control-group'>
         <%= f.submit %>
       </div>
+
 
     <% end %>
 
