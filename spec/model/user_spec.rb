@@ -31,17 +31,17 @@ describe User do
   end
 
   describe '#search_extraneous' do
-    let(:user) { create(:user) }
-    let(:admin) { create(:user, :admin) }
+    let(:first_user) { create(:user, :with_group) }
+    let(:second_user) { create(:user) }
 
     context 'when user has groups' do
       it do
         #FIX: Use let and factories to build groups
-        my_group = user.owned_groups.create(name: 'my', description: 'my group')
-        other_group = admin.owned_groups.create(name: 'other', description: 'other group')
+        # my_group = user.owned_groups.create(name: 'my', description: 'my group')
+        # other_group = admin.owned_groups.create(name: 'other', description: 'other group')
         #FIX: No need to pluck id here. Just check count of returned arel and other group is included in arel
         # expect(user.search_extraneous.pluck(:id)).to eql (Group.where(id: other_group.id).pluck(:id))
-        expect(user.search_extraneous).to include (other_group)
+        expect(first_user.search_extraneous).to include (second_user.groups)
       end
     end
 

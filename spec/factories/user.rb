@@ -11,6 +11,8 @@ FactoryGirl.define do
     password_confirmation 'vammertest'
     confirmed_at Time.now
 
+    group
+
     #FIX: You are not creating a trait here. This is just a normal user. We can move user creation to /support/user_helper.rb if you need them in multiple files
     #FIX: Use sequence to set unique name and email.
     #FIX: Remove name and email from here. Keep admin here
@@ -21,6 +23,9 @@ FactoryGirl.define do
 
     trait :disabled do
       enabled false
+    end
+
+    trait :with_group do
     end
 
   end
