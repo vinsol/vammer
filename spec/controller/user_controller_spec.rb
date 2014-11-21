@@ -5,7 +5,7 @@ describe UsersController, type: :controller do
     let(:user) { create(:user) }
     subject do
       sign_in(user, @user)
-      get 'edit', id: user.id
+      get 'edit', id: user
     end
 
     it 'renders :edit view' do
