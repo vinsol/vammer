@@ -11,7 +11,6 @@ Attachment.prototype.checkError = function(data) {
 Attachment.prototype.destroy = function(element, data) {
   if(this.checkError(data)){
     $(element).closest('.attachment').remove();
-    alert(JSON.parse(data.responseText).error)
   }
 }
 
