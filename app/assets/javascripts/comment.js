@@ -1,5 +1,7 @@
 // #FIX: Will see later
-REGEX = { linkify: /#(\w+)/g }
+REGEX = { linkify: /#(\w+)/g,
+  linkify_comment: /@(\w+)/g,
+ }
 var Comment = function() {
 }
 
@@ -41,7 +43,8 @@ Comment.prototype.attachmentDetails = function(response) {
 Comment.prototype.contentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       str = response.comment_description.toLowerCase();
-  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">#$1</a>');
+  str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">#$1</a>')
+    .replace(REGEX.linkify_comment, '<a href="/users/mentioned_users/@$1">@$1</a>');
   return $contaier_div.append(str);
 }
 

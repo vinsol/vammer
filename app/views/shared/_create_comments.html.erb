@@ -3,7 +3,7 @@
   <%= nested_form_for [post, @comment], html: { class: 'form-horizontal col-lg-12' ,remote: true, class: 'create-comment'} do |f| %>
 
     <div class='control-group'>
-      <%= f.text_area :content, class: 'form-control' %>
+      <%= f.text_area :content, class: 'form-control inputbox' %>
     </div>
 
       <%= f.hidden_field :post_id, value: post.id %>
