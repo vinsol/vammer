@@ -13,15 +13,16 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         @users = current_user.admin? ? User.all : User.where(enabled: true)
-        #TODO will be used in next sprint
+        @users = filtered_users
+        # Eliminated
         # sort_order
         # sort_column
-        #FIXME_AB: any column from params can be used for sorting.
+        # FIXME_AB: any column from params can be used for sorting.
         # @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
       end
       format.json do
-        data = { users: User.where('name like ? ', '%' + params[:term] + '%'),
-                groups: Group.where('name like ? ', '%' + params[:term] + '%')
+        data = { users: User.where('name ilike ? ', '%' + params[:term] + '%'),
+                groups: Group.where('name ilike ? ', '%' + params[:term] + '%')
                }
         render json: data
       end
@@ -60,6 +61,14 @@ class UsersController < ApplicationController
       unless @user
         flash[:notice] = t('record.failure', scope: :flash)
         redirect_to :users
+      end
+    end
+
+    def filtered_users
+      if /[a-z]/i.match params[:letter]
+        @users.where('name ilike ?', params[:letter][0] + '%').order(name: :asc)
+      else
+        @users
       end
     end
 

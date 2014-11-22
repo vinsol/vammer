@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  ALPHABETS = 'A'..'Z'
+
   def admin_logged_in?
     current_user.admin?
   end
