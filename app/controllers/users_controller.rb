@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
 
-  before_action :fetch_user, except: :index
+  before_action :fetch_user, except: [:index, :mentioned, :mentioned_users]
 
   before_action :allow_modify, only: [:update, :edit]
+
+  before_action :fetch_mentioned_user, only: :mentioned_users
 
   ALLOWED_PARAMS = %i(name date_of_birth mobile about_me job_title
                       admin joining_date enabled) +
@@ -28,6 +30,22 @@ class UsersController < ApplicationController
       end
     end
 
+  end
+
+  def mentioned_users
+    initialize_comment
+    initialize_post
+    @posts = @user.posts.order(created_at: :desc)
+    render 'show'
+  end
+
+  def mentioned
+    respond_to do |format|
+      format.json do
+        data = { users: User.where('name ilike ? ', '%' + params[:term] + '%').pluck(:name) }
+        render json: data
+      end
+    end
   end
 
   def edit
@@ -58,6 +76,14 @@ class UsersController < ApplicationController
 
     def fetch_user
       @user = User.where(id: params[:id]).first
+      unless @user
+        flash[:notice] = t('record.failure', scope: :flash)
+        redirect_to :users
+      end
+    end
+
+    def fetch_mentioned_user
+      @user = User.where(name: params[:name].split('@').last).first
       unless @user
         flash[:notice] = t('record.failure', scope: :flash)
         redirect_to :users

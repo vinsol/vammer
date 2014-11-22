@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :image
 
-  validates :name, presence: :true, format: { with: /\A([a-z]|\s)+\z/i, message: 'only letters' }, length: { maximum: 255 }
+  validates :name, presence: :true, uniqueness: :true, format: { with: /\A([a-z]|\s)+\z/i, message: 'only letters' }, length: { maximum: 255 }
   
   validate :email_matches_company_domain
 

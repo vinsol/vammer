@@ -12,7 +12,12 @@ Rails.application.routes.draw do
     get 'settings/edit', to: 'settings#edit'
   end
 
-  resources :users, only: [:index, :edit, :update, :show]
+  resources :users, only: [:index, :edit, :update, :show] do
+    collection do
+      get 'mentioned'
+    end
+  end
+  get 'users/mentioned_users/:name', to: 'users#mentioned_users', as: :mentioned
 
   resources :groups, except: [:destroy] do
     member do

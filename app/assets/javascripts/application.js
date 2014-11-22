@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require bootstrap
 //= require jquery_ujs
 //= require jquery_nested_form
@@ -20,5 +21,6 @@
 //= require jquery.remotipart
 //= require comment
 //= require attachment
-
+//= require jquery-ui.triggeredAutocomplete
+//= require mention
 // FIXME_AB: don't use require_tree. read about it and discuss with Jaggi sir
