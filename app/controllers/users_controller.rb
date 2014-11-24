@@ -32,6 +32,16 @@ class UsersController < ApplicationController
 
   end
 
+  def follower
+    @users = @user.followers
+    render 'index'
+  end
+
+  def following
+    @users = @user.followed_users
+    render 'index'
+  end
+
   def mentioned_users
     initialize_comment
     initialize_post
@@ -69,12 +79,10 @@ class UsersController < ApplicationController
   end
 
   def follow
-    followed = current_user.followers << @user
-    debugger
-    if followed.errors
-      data = { followed: false }
-    else
+    if @user.followers << current_user
       data = { followed: true, unfollow_path: unfollow_user_path(@user) }
+    else
+      data = { followed: false }
     end
     respond_to do |format|
       format.json do
@@ -84,7 +92,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    if current_user.followers.delete @user
+    if @user.followers.delete current_user
       data = { followed: true, follow_path: follow_user_path(@user) }
     else
       data = { followed: false }

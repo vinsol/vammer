@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     member do
       post 'follow', to: 'users#follow'
       delete 'unfollow', to: 'users#unfollow'
+      get 'follower', to: 'users#follower'
+      get 'following', to: 'users#following'
     end
   end
   get 'users/mentioned_users/:name', to: 'users#mentioned_users', as: :mentioned
