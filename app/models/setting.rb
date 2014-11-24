@@ -1,6 +1,6 @@
 class Setting < ActiveRecord::Base
 
-  has_one :image, as: :attachment, dependent: :destroy
+  has_one :image, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :image
 
   before_destroy :prevent_to_empty

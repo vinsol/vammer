@@ -126,7 +126,7 @@ class PostsController < ApplicationController
     def fetch_form_associations
       fetch_posts
       fetch_user_groups
-      @post.documents.build
+      @post.post_documents.build
       initialize_comment
     end
 
@@ -139,7 +139,7 @@ class PostsController < ApplicationController
     end
 
     def permitted_params
-      params.require(:post).permit(:content, :group_id, documents_attributes: [:attachment, :id])
+      params.require(:post).permit(:content, :group_id, post_documents_attributes: [:attachment, :id])
     end
 
 end

@@ -5,13 +5,13 @@ class Post < ActiveRecord::Base
   hashtaggable_attribute :content
 
   #FIX: Group similar logic together
-  has_many :documents, as: :attachment, dependent: :destroy
+  has_many :post_documents, as: :attachable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :user
   belongs_to :group
 
-  accepts_nested_attributes_for :documents, allow_destroy: true
+  accepts_nested_attributes_for :post_documents, allow_destroy: true
   accepts_nested_attributes_for :comments
   #FIXME_AB: Please confirm with PM about deleting posts and related content
 

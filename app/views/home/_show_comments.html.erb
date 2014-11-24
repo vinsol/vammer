@@ -22,15 +22,15 @@
         <%= comment.likes.count %>
       </div>
 
-      <% comment.document_files.each do |document| %>
+      <% comment.comment_documents.each do |document| %>
       <!-- #FIX: Indentation -->
-      <div class='attachment comment-margin'>
-        <%= link_to(document.attachment_file_name, document.attachment.url) %>
+        <div class='attachment comment-margin'>
+          <%= link_to(document.attachment_file_name, document.attachment.url) %>
 
-        <% if can_edit_user?(comment.user) %>
-          <%= link_to 'Destroy', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
-        <% end %>
-      </div>
+          <% if can_edit_user?(comment.user) %>
+            <%= link_to 'Destroy', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+          <% end %>
+        </div>
 
       <% end %>
 
@@ -44,6 +44,6 @@
     </div>
   <% end %>
   <!-- #FIX: Use id and a longer name to uniquely identify comment div -->
-  <div class= <%= post.id %> ></div>
+  <div class= <%= "new-comment-#{post.id}" %> ></div>
 
 </div>

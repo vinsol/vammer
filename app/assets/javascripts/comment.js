@@ -28,7 +28,7 @@ Comment.prototype.numberOfLikesDetails = function(response) {
 Comment.prototype.attachmentDetails = function(response) {
   var $contaier_div = this.marginDiv(),
       $attachments = [];
-  $.each(response.document_files, function(index, element) {
+  $.each(response.comment_documents, function(index, element) {
     var attachment = $('<a>').attr({'href': element.attachments_url}).text('attachment '),
         destroy_attachmnet = $('<a>').attr({'href': element.attachment_destroy_paths, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-attachment'}).text('destroy '),
         $attachment_container = $('<div>').attr({ 'class': 'attachment' });
@@ -57,10 +57,9 @@ Comment.prototype.CreateDom = function(element, data) {
         $attachments = this.attachmentDetails(response),
         $numberOfLikes = this.numberOfLikesDetails(response),
         $content = this.contentDetails(response),
-        $container = $('.' + response.post_id),
+        $container = $('.new-comment-' + response.post_id),
         $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
         $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path, 'data-method': 'delete', 'data-remote': 'true', 'class': 'delete-comment'}).text('Delete');
-        console.log(345678)
     $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
     $container.append($box);
     this.resetForm(element);

@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
 
 
   def like
-    #FIX: First initialize like object and then assign to user, then save. Handle success/failure
+    #FIX: First initialize like object and then assign to user, then save. Handle success/failure DONE
     like = current_user.likes.build
     @comment.likes.push like
     if like.save
@@ -41,9 +41,9 @@ class CommentsController < ApplicationController
   end
 
   def unlike
-    #FIX: Fetch in before_action
+    #FIX: Fetch in before_action DONE
     @comment = @like.likeable
-    #FIX: Handle success/failure
+    #FIX: Handle success/failure DONE
     if @like.destroy
       unlike_successful
     else
@@ -88,13 +88,13 @@ class CommentsController < ApplicationController
     end
 
     def fetch_attachments
-      @comment.document_files.map do |attach|
+      @comment.comment_documents.map do |attach|
         attach.attachment
       end
     end
 
     def permitted_params
-      params.require(:comment).permit(:content, document_files_attributes: [:attachment, :id, :_destroy])
+      params.require(:comment).permit(:content, comment_documents_attributes: [:attachment, :id, :_destroy])
     end
 
     def fetch_comment

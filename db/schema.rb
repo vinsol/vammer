@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118062730) do
+ActiveRecord::Schema.define(version: 20141124055329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attachments", force: true do |t|
-    t.string   "attachment_type"
-    t.integer  "attachment_id"
+    t.string   "attachable_type"
+    t.integer  "attachable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 20141118062730) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "follows", force: true do |t|
+    t.integer "follower_id"
+    t.integer "followed_user_id"
+  end
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -116,7 +121,7 @@ ActiveRecord::Schema.define(version: 20141118062730) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "joining_date",           default: '2014-11-20 10:20:01'
+    t.datetime "joining_date",           default: '2014-11-22 19:33:02'
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

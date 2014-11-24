@@ -11,11 +11,11 @@
 
 <div class='add-more-attachment col-lg-2'>
 
-  <%= locals[:f].fields_for :documents do |attach| %>
+  <%= locals[:f].fields_for :post_documents do |attach| %>
 
     <%= attach.file_field :attachment %>
 
   <% end %>
-  <%= locals[:f].link_to_add 'Add attachment', :documents %>
+  <%= locals[:f].link_to_add 'Add attachment', :post_documents %>
 
 </div>

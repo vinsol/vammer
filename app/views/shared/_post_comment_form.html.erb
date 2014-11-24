@@ -11,11 +11,11 @@
     <br>
     <div class='comment-post'>
       <div class='control-group'>
-        <%= f.fields_for :document_files do |doc| %>
+        <%= f.fields_for :comment_documents do |doc| %>
           <%= doc.file_field :attachment %>
         <% end %>
       </div>
-      <%= f.link_to_add 'Add attachment', :document_files %>
+      <%= f.link_to_add 'Add attachment', :comment_documents %>
     </div>
 
     <div class='control-group col-lg-offset-10'>

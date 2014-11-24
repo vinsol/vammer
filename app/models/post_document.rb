@@ -1,0 +1,2 @@
+class PostDocument < Document
+end

@@ -1,0 +1,2 @@
+class CommentDocument < Document
+end

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
 
-  has_one :image, as: :attachment, dependent: :destroy
+  has_one :image, as: :attachable, dependent: :destroy
   has_many :likes
   #FIXME_AB: instead of groups_members, i think we should name it as group_memberships
   has_many :memberships, dependent: :destroy
