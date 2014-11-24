@@ -20,7 +20,7 @@
 
       <tr>
         <td> number of followers </td>
-        <td> <%= link_to @user.number_of_followers, follower_user_path(current_user), remote: true, method: :get%> </td>
+        <td> <%= link_to @user.number_of_followers, follower_user_path(@user) %> </td>
       </tr>
 
     </table>
