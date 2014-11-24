@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   scope shallow_path: 'comment' do
-    resources :posts, only: [:create, :destroy] do
+    resources :posts, only: [:create, :destroy, :show] do
       post 'like', to: 'posts#like'
       delete 'unlike/:id', to: 'posts#unlike', as: :unlike
       resources :comments, only: [:create, :destroy] do

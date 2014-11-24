@@ -2,7 +2,7 @@
     <ul class='nav'>
 
       <div class='pull-left logo-position'>
-          <%= link_to(image_tag(@logo.image.attachment.url), :root) %>
+          <%= link_to(image_tag(@logo.image.attachment.url(:thumb)), :root) %>
         <div class='user-name'>
           Hi <%= current_user.name.capitalize %>
         </div>

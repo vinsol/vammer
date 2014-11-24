@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :fetch_post, only: [:destroy]
+  before_action :fetch_post, only: [:destroy, :show]
   before_action :fetch_post_for_like, only: [:like, :unlike]
   before_action :fetch_like, only: [:unlike]
 
@@ -45,6 +45,10 @@ class PostsController < ApplicationController
     else
       unlike_unsuccessful
     end
+  end
+
+  def show
+    initialize_comment
   end
 
   private
