@@ -68,6 +68,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    followed = current_user.followers << @user
+    debugger
+    if followed.errors
+      data = { followed: false }
+    else
+      data = { followed: true, unfollow_path: unfollow_user_path(@user) }
+    end
+    respond_to do |format|
+      format.json do
+        render json: data
+      end
+    end
+  end
+
+  def unfollow
+    if current_user.followers.delete @user
+      data = { followed: true, follow_path: follow_user_path(@user) }
+    else
+      data = { followed: false }
+    end
+    respond_to do |format|
+      format.json do
+        render json: data
+      end
+    end
+  end
+
   private
 
     def permitted_params

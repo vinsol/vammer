@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     image.attachment.url(:large)
   end
 
+  def follow?(user)
+    followers.include? user
+  end
+
   private
 
     def email_matches_company_domain

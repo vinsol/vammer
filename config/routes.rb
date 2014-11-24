@@ -16,18 +16,22 @@ Rails.application.routes.draw do
     collection do
       get 'mentioned'
     end
+    member do
+      post 'follow', to: 'users#follow'
+      delete 'unfollow', to: 'users#unfollow'
+    end
   end
   get 'users/mentioned_users/:name', to: 'users#mentioned_users', as: :mentioned
 
   resources :groups, except: [:destroy] do
     member do
-      get 'unjoin'
-      get 'join'
-      get 'members'
+      get 'unjoin', to: 'groups#unjoin'
+      get 'join', to: 'groups#join'
+      get 'members', to: 'groups#members'
     end
     collection do
-      get 'owned'
-      get 'extraneous'
+      get 'owned', to: 'groups#owned'
+      get 'extraneous', to: 'groups#extraneous'
     end
   end
 
