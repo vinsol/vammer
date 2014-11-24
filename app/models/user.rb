@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     followed_users.include? user
   end
 
+  def number_of_followers
+    followers.count
+  end
+
   private
 
     def email_matches_company_domain

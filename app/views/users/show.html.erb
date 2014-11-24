@@ -1,3 +1,4 @@
+<%= render 'follow_unfollow', user: @user %>
 <div class='container'>
   <div class='col-md-6 col-md-offset-3 vertical-center'>
     <table class='table table-striped table-hover table-bordered center-align'>
@@ -10,10 +11,17 @@
           <td> <%= @user.public_send(field) %> </td>
         </tr>
       <% end %>
+      <tr>
+        <td> Attachment </td>
 
-      <td> Attachment </td>
+        <td> <%= @user.image ? image_tag(@user.image.attachment.url) : missing_image_tag %>
+        </td>
+      </tr>
 
-      <td> <%= @user.image ? image_tag(@user.image.attachment.url) : missing_image_tag %> </td>
+      <tr>
+        <td> number of followers </td>
+        <td> <%= link_to @user.number_of_followers, follower_user_path(current_user), remote: true, method: :get%> </td>
+      </tr>
 
     </table>
   </div>
