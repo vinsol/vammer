@@ -25,7 +25,14 @@
       <% comment.document_files.each do |document| %>
       <!-- #FIX: Indentation -->
       <div class='attachment comment-margin'>
-        <%= link_to(document.attachment_file_name, document.attachment.url) %>
+        <span>
+          <% if document.attachment_content_type.split('/').first == 'image' %>
+            <%= render 'shared/show_attachment', image: document %>
+          <% else %>
+            <%= document.attachment_file_name %>
+            <%= link_to attachment_type(document), document.attachment.url %>
+          <% end %>
+        </span>
 
         <% if can_edit_user?(comment.user) %>
           <%= link_to 'Destroy', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>

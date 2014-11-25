@@ -2,6 +2,10 @@
   margin-right: 410px;
 }
 
+.post-image {
+  margin: 0px 184px;
+}
+
 .search-user {
   margin-top: -50px;
 }
@@ -57,6 +61,7 @@
 .navbar-center {
   padding-top: 8px;
 }
+
 body{
   background-color: #e9eaed;
 }

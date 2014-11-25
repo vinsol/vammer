@@ -38,7 +38,8 @@ class AttachmentsController < ApplicationController
     def allow_edit
       #FIX: use #if DONE
       #FIX: Make a method like #can_edit_attachment?(user) DONE
-      if !can_edit_attachment?(@attachment.attachment.user)
+      user = Object.const_get(@attachment.attachment_type).where(id: @attachment.attachment_id).first.user
+      if !can_edit_attachment?(user)
         #FIX: As it is an ajax request, respond with json. DONE
         handle_response
       end
