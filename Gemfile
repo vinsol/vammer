@@ -17,7 +17,7 @@ group :test, :development do
   gem 'factory_girl_rails', '4.5.0'
 end
 
-gem 'simplecov', require: false, group: :test
+# gem 'simplecov', require: false, group: :test
 
 gem 'jquery-rails', '3.1.2'
 
@@ -42,3 +42,8 @@ gem 'remotipart', '1.2.1'
 gem 'active_model_serializers', '0.9.0'
 
 gem 'jquery-ui-rails'
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'rspec-activemodel-mocks'
+end

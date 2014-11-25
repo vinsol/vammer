@@ -43,16 +43,14 @@ class UsersController < ApplicationController
   end
 
   def mentioned_users
-    initialize_comment
-    initialize_post
-    @posts = @user.posts.order(created_at: :desc)
+    initialize_posts_comments
     render 'show'
   end
 
   def mentioned
     respond_to do |format|
       format.json do
-        data = { users: User.where('name ilike ? ', '%' + params[:term] + '%').pluck(:name) }
+        data = { users: User.where('name ilike ? ', '%' + params.require(:term) + '%').pluck(:name) }
         render json: data
       end
     end
@@ -63,9 +61,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    initialize_comment
-    initialize_post
-    @posts = @user.posts.order(created_at: :desc)
+    initialize_posts_comments
   end
 
   def update
@@ -105,6 +101,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def initialize_posts_comments
+      initialize_comment
+      initialize_post
+      @posts = @user.posts.order(created_at: :desc)
+    end
 
     def permitted_params
       params.require(:user).permit *ALLOWED_PARAMS

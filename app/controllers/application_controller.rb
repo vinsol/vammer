@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     end
 
     def fetch_logo
-      @logo = Setting.first
+      @logo = Setting.first || Setting.create
       @logo.build_image unless @logo.image
     end
 
