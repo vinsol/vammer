@@ -101,7 +101,7 @@ Comment.prototype.contentDetails = function(response) {
   var str = response.comment_description.toLowerCase();
   str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">#$1</a>')
     .replace(REGEX.linkify_comment, '<a href="/users/mentioned_users/@$1">@$1</a>');
-  return $contaier_div.append(str);
+  return this.marginDiv().append(str);
 }
 
 Comment.prototype.resetForm = function(element) {
