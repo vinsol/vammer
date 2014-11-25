@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   #FIXME_AB: Are you sure we want to destroy all related records when we destroy user?. AFAIR we agreed to delete user if there is no record associated with him, else disable him. Please consult with your PM
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+
   has_many :follows, class_name: Follow, foreign_key: :follower_id
   has_many :followings, class_name: Follow, foreign_key: :followed_user_id
   has_many :followers, through: :follows, source: :followed_user
@@ -45,8 +46,8 @@ class User < ActiveRecord::Base
     image.attachment.url(:large)
   end
 
-  def follow?(user)
-    followers.include? user
+  def following?(user)
+    followed_users.include? user
   end
 
   private
