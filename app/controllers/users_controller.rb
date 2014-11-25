@@ -23,8 +23,8 @@ class UsersController < ApplicationController
         # @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
       end
       format.json do
-        data = { users: User.where('name ilike ? ', '%' + params[:term] + '%'),
-                groups: Group.where('name ilike ? ', '%' + params[:term] + '%')
+        data = { users: User.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] },
+                groups: Group.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] }
                }
         render json: data
       end

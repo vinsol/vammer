@@ -2,11 +2,20 @@
 var Results = function() {
 };
 
+Results.prototype.format = function(state) {
+  if(state.is_user) {
+    return state.text + '<img src=' + state.image + '>' + ' U';
+  } else {
+    return state.text + '<img src=' + state.image + '>' + ' G';
+  }
+}
+
 Results.prototype.addResults = function(results, index, item, is_user) {
   results.push({
     'id': index,
-    'text': item['name'],
-    'object': item,
+    'text': item[0]['name'],
+    'image': item[1],
+    'object': item[0],
     'is_user': is_user
   })
   return results;
@@ -27,7 +36,7 @@ Results.prototype.generateDropDown = function(results, heading, users, groups){
 }
 
 $(function() {
-
+  var image_result = new Results()
   $("#user_user_id").select2({
     placeholder: "User/Group search",
     minimumInputLength: 1,
@@ -51,6 +60,7 @@ $(function() {
         };
       }
     },
+    formatResult: image_result.format,
     dropdownCssClass: "bigdrop"
   }).on("select2-selecting", function(e) {
     if (e.choice.is_user) {
