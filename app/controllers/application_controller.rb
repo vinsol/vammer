@@ -5,8 +5,18 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_params, if: :devise_controller?
   before_action :authenticate_user!, :fetch_logo
+  prepend_before_action :user_active?, unless: :devise_controller?
 
   private
+
+    def user_active?
+      unless user_signed_in?
+        respond_to do |format|
+          format.html {  }
+          format.js { render :js => "window.location = '/users/sign_in'" }
+        end
+      end
+    end
 
     #FIX: Make a HomeController and move this action there -DONE
     #FIX: Rename to #fetch_user_groups DONE
