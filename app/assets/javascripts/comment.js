@@ -116,7 +116,7 @@ Comment.prototype.CreateDom = function(element, data) {
         $attachments = this.attachmentDetails(response),
         $numberOfLikes = this.numberOfLikesDetails(response),
         $content = this.contentDetails(response),
-        $container = $('.' + response.post_id),
+        $container = $('.new-comment-' + response.post_id),
         $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
         $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path,
           'data-method': 'delete',

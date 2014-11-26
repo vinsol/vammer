@@ -15,7 +15,7 @@
 
           <%= linkify_mentions(linkify_hashtags(post.content)) %>
 
-          <% post.documents.each do |document| %>
+          <% post.post_documents.each do |document| %>
 
             <div class='attachment comment-margin'>
               <span>
@@ -55,7 +55,7 @@
 
         <% if( !post.group || current_user.groups.include?(post.group) ) %>
 
-          <%= render 'shared/create_comments', post: post %>
+          <%= render 'shared/post_comment_form', post: post %>
 
         <% end %>
 

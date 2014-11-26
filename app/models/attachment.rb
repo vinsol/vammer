@@ -2,6 +2,6 @@
 class Attachment < ActiveRecord::Base
 
   #FIX: Rename association to :attachable
-  belongs_to :attachment, polymorphic: true
+  belongs_to :attachable, polymorphic: true
 
 end

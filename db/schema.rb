@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20141124055329) do
   enable_extension "plpgsql"
 
   create_table "attachments", force: true do |t|
-    t.string   "attachment_type"
-    t.integer  "attachment_id"
+    t.string   "attachable_type"
+    t.integer  "attachable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"

@@ -28,17 +28,17 @@ class ApplicationController < ActionController::Base
     #FIX: This comment is not associated to any post. Add a post_id field in the form where it is being used.
     def initialize_comment
       @comment = Comment.new
-      @comment.document_files.build
+      @comment.comment_documents.build
     end
 
     def initialize_post
       @post = Post.new
-      @post.documents.build
+      @post.post_documents.build
     end
 
     def fetch_posts
       #FIX: All inludes can be written as a collection e.g. includes(:user, :documents, :comments)
-      @posts = Post.includes(:user, :documents, :comments).order(created_at: :desc)
+      @posts = Post.includes(:user, :post_documents, :comments).order(created_at: :desc)
     end
 
     def configure_devise_params

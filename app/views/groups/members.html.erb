@@ -1,6 +1,13 @@
 <div class='dashboard-body'>
 
-  <%= render 'show_group_details' %>
+  <h2> <%= @group.name.capitalize %> </h2>
+    <%= link_to 'Members', members_group_path(@group) %>
+  <div> <%= @group.description %> </div>
+  <br>
+  <div class='join-link'>
+    <%= group_join_link(@group) %>
+  </div>
+  <br>
 
   <div>
     <br>
