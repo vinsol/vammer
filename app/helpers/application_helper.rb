@@ -25,17 +25,6 @@ module ApplicationHelper
     current_user == user
   end
 
-  def group_join_link(group)
-    #FIXME_AB: logic can be improved.
-    if current_user.groups.include? group
-      if group.creator != current_user
-        link_to :unjoin, unjoin_group_path(group)
-      end
-    else
-      link_to :join, join_group_path(group)
-    end
-  end
-
   #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def post_like_unlike(like, likeable)
     if like.nil?

@@ -47,11 +47,13 @@ class ApplicationController < ActionController::Base
     end
 
     def sort_order
+      #FIXME_AB: Do we have a better way?
       params[:direction] == 'asc' ? 'asc' : 'desc'
     end
 
     def sort_column
       #FIXME_AB: Can you identify potential issue?
+      #FIX: Override in specific controllers. Check for valid sortable columns. If params[:column] is blank or invalid, use :created_at
       params[:column].blank? ? 'created_at' : params[:column]
     end
 

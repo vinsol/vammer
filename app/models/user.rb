@@ -1,4 +1,3 @@
-#FIXME_AB: Indexes missing on almost all tables
 class User < ActiveRecord::Base
 
   START_YEAR = 1970

@@ -12,9 +12,14 @@ class UsersController < ApplicationController
 
   def index
     #FIXME_AB: Why not enabled is a scope
+    #FIX: Remove commented code
+    # order = sort_order
+    # column = sort_column
+    # #FIXME_AB: any column from params can be used for sorting.
+    # @users = User.sort(@users, column, order.to_sym).page params[:page]
     respond_to do |format|
       format.html do
-        @users = current_user.admin? ? User.all : User.where(enabled: true)
+        @users = current_user.admin? ? User.all : User.enabled
         @users = filtered_users
       end
       format.json do
