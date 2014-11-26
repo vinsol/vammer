@@ -1,4 +1,3 @@
-// #FIX: Will see later
 REGEX = { linkify: /#(\w+)/g,
   linkify_comment: /@(\w+)/g,
  }

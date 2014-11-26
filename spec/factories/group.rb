@@ -1,4 +1,3 @@
-#FIX: filename should be singular
 FactoryGirl.define do
 
   factory :group do

@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 
   has_one :image, as: :attachable, dependent: :destroy
   has_many :likes
-  #FIXME_AB: instead of groups_members, i think we should name it as group_memberships
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id

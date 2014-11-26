@@ -12,7 +12,6 @@
 </ul>
 
 <div class='container'>
-<% #FIXME_AB: What if there were no users -%>
   <% if @users %>
     <% @users.each do |user| %>
 
@@ -26,8 +25,6 @@
               <div class='col-md-4'>
                 <% #FIXME_AB: I would prefer to move user.image.attachment.url(:large) to user model as a method: large_thumbnail_url -%>
                 <%= user.image ? image_tag(user.image.attachment.url, class: 'lib-img') : missing_image_tag %>
-                <% #FIXME_AB: above if user don't have image, no image should not come as text, should be a missing image thumbnail -%>
-                <!-- #FIX: missing image tag can be returned from helper and used at all places -->
               </div>
 
               <div class='col-md-8'>
@@ -43,10 +40,8 @@
                 <div class='lib-row lib-desc'>
 
                   <%= user.email %><br>
-                  <% #FIXME_AB: What is the format of date you are displaying? 2014-11-10 08:52:24 UTC -%>
                   <%= user.joining_date.to_s(:long) %><br>
                   <%= link_to 'Show', user_path(user) %><br><br>
-                  <% #FIXME_AB: can be named as can_edit_user?(user) -%>
                   <% if can_edit_user?(user) %>
                     <%= link_to 'Edit', edit_user_path(user), class: 'col-md-offset-2' %>
                   <% end %>

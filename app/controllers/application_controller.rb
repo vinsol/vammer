@@ -47,7 +47,6 @@ class ApplicationController < ActionController::Base
     end
 
     def sort_order
-      #FIXME_AB: Do we have a better way?
       params[:direction] == 'asc' ? 'asc' : 'desc'
     end
 

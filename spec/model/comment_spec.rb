@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe Comment do
 
-  #FIX: Group similar rspecs together e.g. associations, validations, instance methods, private methods, class methods, scopes, etc.
   describe 'associations' do
     it { should have_many(:comment_documents).dependent(:destroy) }
     it { should have_many(:likes).dependent(:destroy) }

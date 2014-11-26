@@ -25,7 +25,6 @@ module ApplicationHelper
     current_user == user
   end
 
-  #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def post_like_unlike(like, likeable)
     if like.nil?
       link_to 'Like', post_like_path(likeable), method: :post, class: 'like' , remote: :true
@@ -34,7 +33,6 @@ module ApplicationHelper
     end
   end
 
-  #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def comment_like_unlike(like, likeable)
     if like.nil?
       link_to 'Like', post_comment_like_path(likeable.post, likeable), method: :post, class: 'like comment-margin', remote: :true
@@ -43,7 +41,6 @@ module ApplicationHelper
     end
   end
 
-  #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def link_to_like_unlike(likeable, method)
     if method == :post
       like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Post').first
@@ -57,8 +54,6 @@ module ApplicationHelper
   def link_to_join_unjoin
     current_user.groups.include?(group) ? link_to(:unjoin, unjoin_group_path(group)) : link_to(:join, join_group_path(group))
   end
-    #FIX: This method should not return nil in any case
-    #FIX: This condition can be moved to view
 
   def missing_image_tag
     image_tag('missing.jpg')

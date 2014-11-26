@@ -5,7 +5,6 @@
 puts 'enter name'
 name = STDIN.gets.chomp
 
-#FIXME_AB: You should tell that this email id should be the company id. Read domain from config.yml
 #FIX: Fix case
 puts "enter email with domain name as #{COMPANY['domain']}"
 email_id = STDIN.gets.chomp

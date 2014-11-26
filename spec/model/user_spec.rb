@@ -3,15 +3,10 @@ require 'rails_helper'
 describe User do
 
   #FIX: Add rspces for constants too
-  #FIX: Check rspecs for devise method being used in user model
 
   describe '#email_matches_company_domain' do
 
-    #FIX: No need to store in a variable
     let(:user) { build(:user) }
-    #FIX: Do not repeat model logic here.
-    #   Build 2 different users, one with correct domain email, other with invalid domain.
-    #   Then check errors[:email] after calling #valid? on each
 
     context 'when matches' do
       it do
@@ -50,8 +45,6 @@ describe User do
   describe '#active_for_authentication?' do
     let(:user) { build(:user) }
     let(:disabled_user) { build(:user, :disabled) }
-    #FIX: Do not check for confirmed/unconfirmed user here. Devise does it for you.
-    #   Just check users, who are confirmed && enabled, OR confirmed && disabled
     context 'when confirmed' do
       it do
         expect(user.active_for_authentication?).to equal true
@@ -65,12 +58,9 @@ describe User do
   describe 'validate_format' do
     let(:user) { build(:user) }
     context '' do
-      #FIX: Remove this
       it do
-        #FIX: Why assigning capitalize=
         user.name = 'sawan'
         user.valid?
-        #FIX: Do not match Regex here. Instead assign a name to a user and call valid?
         expect(user.errors[:name]).not_to include 'only letters'
       end
       it do
@@ -208,7 +198,5 @@ describe User do
     it { should validate_presence_of(:name) }
     it { should ensure_length_of(:name).is_at_most(255) }
   end
-
-  #FIX: Check class name and foreign key
 
 end

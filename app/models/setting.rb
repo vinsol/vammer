@@ -9,6 +9,4 @@ class Setting < ActiveRecord::Base
       Setting.count != 1
     end
 
-  #FIX: Add a callback to prevent destruction of last record in settings table
-
 end
