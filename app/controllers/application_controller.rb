@@ -18,14 +18,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    #FIX: Make a HomeController and move this action there -DONE
-    #FIX: Rename to #fetch_user_groups DONE
     def fetch_user_groups
-      #FIX: if condition not required -DONE
       @user_groups = current_user.groups
     end
 
-    #FIX: This comment is not associated to any post. Add a post_id field in the form where it is being used.
     def initialize_comment
       @comment = Comment.new
       @comment.comment_documents.build
@@ -37,7 +33,6 @@ class ApplicationController < ActionController::Base
     end
 
     def fetch_posts
-      #FIX: All inludes can be written as a collection e.g. includes(:user, :documents, :comments)
       @posts = Post.includes(:user, :post_documents, :comments).order(created_at: :desc)
     end
 
@@ -52,8 +47,6 @@ class ApplicationController < ActionController::Base
     end
 
     def sort_order
-      #FIXME_AB: Do we have a better way?
-      #FIX: Do not change params. You may use instance variable or directly return string from the method
       params[:direction] == 'asc' ? 'asc' : 'desc'
     end
 

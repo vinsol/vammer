@@ -5,8 +5,6 @@ class CommentsController < ApplicationController
   before_action :fetch_like, only: :unlike
 
   def create
-    #FIX: fetching post should be in a before_action DONE
-    #FIX: Move to a method #initialize_comment DONE
     initialize_comment
     if @comment.save
       CommentMailer.notify_on_create(current_user, @comment.user, @comment.post.id).deliver
@@ -17,7 +15,6 @@ class CommentsController < ApplicationController
       comment = { error: t('comments.create.failure', scope: :message) }
       render_on_error(comment)
     end
-    #FIX: Use gem ActiveModelSerializer for preparing comment json DONE
   end
 
   def destroy
@@ -31,7 +28,6 @@ class CommentsController < ApplicationController
 
 
   def like
-    #FIX: First initialize like object and then assign to user, then save. Handle success/failure DONE
     like = current_user.likes.build
     @comment.likes.push like
     if like.save
@@ -43,9 +39,7 @@ class CommentsController < ApplicationController
   end
 
   def unlike
-    #FIX: Fetch in before_action DONE
     @comment = @like.likeable
-    #FIX: Handle success/failure DONE
     if @like.destroy
       CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
       unlike_successful
@@ -101,8 +95,6 @@ class CommentsController < ApplicationController
     end
 
     def fetch_comment
-      #FIX: Use #where DONE
-      #FIX: What if comment is not found. Render json. DONE
       @comment = Comment.where(id: params[:id] || params[:comment_id]).first
       unless @comment
         handle_response

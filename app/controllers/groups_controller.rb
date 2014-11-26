@@ -69,15 +69,12 @@ class GroupsController < ApplicationController
   end
 
   def show
-    #FIX: What is group is not found. Handle it in before_action -DONE
     initialize_post
     initialize_comment
-    #FIX: Refactor #includes -DONE
     @posts = @group.posts.order(created_at: :desc).includes(:user, :documents, :comments)
   end
 
   def members
-    #FIX: We should not have post form on group members page. Please confirm with PM
     initialize_post
     @members = @group.members.page params[:page]
   end

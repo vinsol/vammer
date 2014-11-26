@@ -8,9 +8,8 @@ class AttachmentsController < ApplicationController
     else
       comment = { error: t('attachments.destroy.failure', scope: :message) }
     end
-    render_on_error(comment)
-    #FIX: What if #destroy fails DONE
     #FIX: Render with some status code
+    render_on_error(comment)
   end
 
   private
@@ -36,11 +35,8 @@ class AttachmentsController < ApplicationController
     end
 
     def allow_edit
-      #FIX: use #if DONE
-      #FIX: Make a method like #can_edit_attachment?(user) DONE
       user = Object.const_get(@attachment.attachment_type).where(id: @attachment.attachment_id).first.user
       if !can_edit_attachment?(user)
-        #FIX: As it is an ajax request, respond with json. DONE
         handle_response
       end
     end

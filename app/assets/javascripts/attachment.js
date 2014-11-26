@@ -17,7 +17,6 @@ Attachment.prototype.destroy = function(element, data) {
 Attachment.prototype.bindEvents = function() {
   var _this = this;
   $('body').on('ajax:complete', '.delete-attachment', function(e, data){
-    // #FIX: Remove attachment div.
     _this.destroy(this, data)
   })
 }

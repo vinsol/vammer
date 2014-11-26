@@ -26,7 +26,6 @@ class PostsController < ApplicationController
   end
 
   def like
-    #FIX: First initialize like object and then assign to user, then save. Handle success/failure
     like = current_user.likes.build
     @post.likes.push like
     if like.save
@@ -38,9 +37,7 @@ class PostsController < ApplicationController
   end
 
   def unlike
-    #FIX: Fetch in before_action
     @post = @like.likeable
-    #FIX: Handle success/failure
     if @like.destroy
       PostMailer.notify_on_like_unlike(current_user, @post.user, @post.id).deliver
       unlike_successful

@@ -16,11 +16,6 @@ class UsersController < ApplicationController
       format.html do
         @users = current_user.admin? ? User.all : User.where(enabled: true)
         @users = filtered_users
-        # Eliminated
-        # sort_order
-        # sort_column
-        # FIXME_AB: any column from params can be used for sorting.
-        # @users = @users.order( params[:column] => params[:direction].to_sym).page params[:page]
       end
       format.json do
         data = { users: User.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] },

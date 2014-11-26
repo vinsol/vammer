@@ -25,12 +25,6 @@ module ApplicationHelper
     current_user == user
   end
 
-  #FIXME_AB: should be used as group.owner?(current_user). Or use some other permission engine like can can
-  #FIX: Move to model
-  # def group_owner_logged_in?(group)
-  #   group.creator == current_user
-  # end
-
   def group_join_link(group)
     #FIXME_AB: logic can be improved.
     if current_user.groups.include? group
