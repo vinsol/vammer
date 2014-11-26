@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  #FIX: Move constants to helpers
   START_YEAR = 1970
   USER_DETAILS = %i(name about_me job_title email date_of_birth mobile joining_date)
 
@@ -36,6 +37,7 @@ class User < ActiveRecord::Base
     Group.where.not(id: self.group_ids)
   end
 
+  #FIX: We don't need this
   def self.sort(collection, column, direction)
     collection.order(column => direction)
   end
@@ -48,6 +50,7 @@ class User < ActiveRecord::Base
     followed_users.include? user
   end
 
+  #FIX: Not required
   def number_of_followers
     followers.count
   end
