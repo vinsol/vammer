@@ -2,12 +2,8 @@
 <div class='col-lg-offset-1 col-lg-7'>
 
   <% @posts.each do |post| %>
-    <div class='post-division fill'>
-      <div class='add-margin'>
 
-        <% if post.user.image %>
-          <%= image_tag(post.user.image.attachment.url(:thumb)) %>
-        <% end %>
+    <%= render 'shared/show_post', post: post %>
 
       <span class='name-bold'>
         <%= post.user.name.capitalize %>

@@ -4,13 +4,35 @@
     <table class='table table-striped table-hover table-bordered center-align'>
 
       <h2> User details </h2>
-
-      <% User::USER_DETAILS.each do |field| %>
         <tr>
-          <td> <%= field.capitalize %> </td>
-          <td> <%= @user.public_send(field) %> </td>
+          <td> Name </td>
+          <td> <%= @user.name %> </td>
         </tr>
-      <% end %>
+        <tr>
+          <td> About me </td>
+          <td> <%= @user.about_me %> </td>
+        </tr>
+        <tr>
+          <td> Job title </td>
+          <td> <%= @user.job_title %> </td>
+        </tr>
+        <tr>
+          <td> Email </td>
+          <td> <%= @user.email %> </td>
+        </tr>
+        <tr>
+          <td> Date Of Birth </td>
+          <td> <%= @user.date_of_birth %> </td>
+        </tr>
+        <tr>
+          <td> Mobile </td>
+          <td> <%= @user.mobile %> </td>
+        </tr>
+        <tr>
+          <td> Joining date </td>
+          <td> <%= @user.joining_date.to_s(:long) %> </td>
+        </tr>
+
       <tr>
         <td> Attachment </td>
 
