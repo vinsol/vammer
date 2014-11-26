@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     #FIX: Move to a method #initialize_comment DONE
     initialize_comment
     if @comment.save
+      CommentMailer.notify_on_create(current_user, @comment.user, @comment.post.id).deliver
       respond_to do |format|
         format.json { render json: @comment, serializer: CommentSerializer }
       end
@@ -34,6 +35,7 @@ class CommentsController < ApplicationController
     like = current_user.likes.build
     @comment.likes.push like
     if like.save
+      CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
       like_successful(like)
     else
       like_unsuccessful
@@ -45,6 +47,7 @@ class CommentsController < ApplicationController
     @comment = @like.likeable
     #FIX: Handle success/failure
     if @like.destroy
+      CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
       unlike_successful
     else
       unlike_unsuccessful
