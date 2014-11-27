@@ -1,15 +1,16 @@
 class CommentsController < ApplicationController
 
-  before_action :fetch_comment, :authenticate_user_admin, only: [:destroy, :like]
+  before_action :fetch_comment, :authenticate_user_admin, only: [:destroy]
   before_action :fetch_post
   before_action :fetch_like, only: :unlike
+  before_action :fetch_comment, only: [:like]
 
   def create
     #FIX: fetching post should be in a before_action DONE
     #FIX: Move to a method #initialize_comment DONE
     initialize_comment
     if @comment.save
-      CommentMailer.notify_on_create(current_user, @comment.user, @comment.post.id).deliver
+      CommentMailer.notify_on_create(current_user, @comment.post.user, @comment.post.id).deliver
       respond_to do |format|
         format.json { render json: @comment, serializer: CommentSerializer }
       end

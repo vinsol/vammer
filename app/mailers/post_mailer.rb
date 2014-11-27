@@ -5,7 +5,7 @@ class PostMailer < ActionMailer::Base
     @current_user = current_user
     @user = user
     @post_id = post_id
-    mail(to: @user.email)
+    mail(to: @user.email, subject: 'Notification')
   end
 
 end
