@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     #FIXME_AB: Why not enabled is a scope
     respond_to do |format|
       format.html do
+        @user = current_user
         @users = current_user.admin? ? User.all : User.where(enabled: true)
         @users = filtered_users
         # Eliminated

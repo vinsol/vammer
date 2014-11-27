@@ -50,7 +50,7 @@ Comment.prototype.buildAttachment = function(response) {
         'href': response.attachments_url,
       } );
   $anchor.append($image);
-  return $('<div>').append(response.attachment_name).append($anchor)
+  return $('<div>').append($anchor).append(response.attachment_name)
 }
 
 Comment.prototype.isImage = function(response) {
@@ -124,7 +124,7 @@ Comment.prototype.CreateDom = function(element, data) {
           'class': 'delete-comment'
         }).text('Delete');
         console.log(345678)
-    $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
+    $box.append($name).append($content).append($attachments).append($like).append($numberOfLikes).append($destroy_comment);
     $container.append($box);
     this.resetForm(element);
   }

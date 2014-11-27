@@ -16,11 +16,6 @@
       <div class='comment-margin'>
         <%= linkify_mentions(linkify_hashtags(comment.content)) %>
       </div>
-      <%= link_to_like_unlike comment, :comment %>
-
-      <div class='count comment-margin'>
-        <%= comment.likes.count %>
-      </div>
 
       <% comment.document_files.each do |document| %>
       <!-- #FIX: Indentation -->
@@ -29,8 +24,8 @@
           <% if document.attachment_content_type.split('/').first == 'image' %>
             <%= render 'shared/show_attachment', image: document %>
           <% else %>
-            <%= document.attachment_file_name %>
             <%= link_to attachment_type(document), document.attachment.url %>
+            <%= document.attachment_file_name %>
           <% end %>
         </span>
 
@@ -40,6 +35,12 @@
       </div>
 
       <% end %>
+
+      <%= link_to_like_unlike comment, :comment %>
+
+      <div class='count comment-margin'>
+        <%= comment.likes.count %>
+      </div>
 
       <div class='comment-margin'>
         <!-- #FIX: Move if condition outer div -->
