@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
     like = current_user.likes.build
     @comment.likes.push like
     if like.save
-      CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
+      CommentMailer.notify_on_like(current_user, @comment.user, @comment.post.id).deliver
       like_successful(like)
     else
       like_unsuccessful
@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
     @comment = @like.likeable
     #FIX: Handle success/failure
     if @like.destroy
-      CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
+      # CommentMailer.notify_on_like(current_user, @comment.user, @comment.post.id).deliver
       unlike_successful
     else
       unlike_unsuccessful

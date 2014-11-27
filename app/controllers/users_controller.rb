@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   def mentioned
     respond_to do |format|
       format.json do
-        data = { users: User.where('name ilike ? ', '%' + params.require(:term) + '%').pluck(:name) }
+        data = { users: User.where('name ilike ? ',params[:term] + '%').pluck(:name) }
         render json: data
       end
     end

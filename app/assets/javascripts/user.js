@@ -6,6 +6,10 @@ User.prototype.replaceFollowWithUnfollow = function(element, data) {
       .data('method', 'delete')
        .data('remote', 'true')
         .text('unfollow');
+  if($('.follower-numbers').length){
+    var val = parseInt($('.follower-numbers').text());
+    $('.follower-numbers').text(val + 1)
+  }
 }
 
 User.prototype.replaceUnfollowWithFollow = function(element, data) {
@@ -14,6 +18,10 @@ User.prototype.replaceUnfollowWithFollow = function(element, data) {
       .data('method', 'post')
        .data('remote', 'true')
         .text('follow');
+  if($('.follower-numbers').length){
+    var val = parseInt($('.follower-numbers').text());
+    $('.follower-numbers').text(val - 1)
+  }
 }
 
 User.prototype.follow = function(element, data) {

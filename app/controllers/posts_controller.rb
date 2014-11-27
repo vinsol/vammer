@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     like = current_user.likes.build
     @post.likes.push like
     if like.save
-      PostMailer.notify_on_like_unlike(current_user, @post.user, @post.id).deliver
+      PostMailer.notify_on_like(current_user, @post.user, @post.id).deliver
       like_successful(like)
     else
       like_unsuccessful
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     @post = @like.likeable
     #FIX: Handle success/failure
     if @like.destroy
-      PostMailer.notify_on_like_unlike(current_user, @post.user, @post.id).deliver
+      # PostMailer.notify_on_like(current_user, @post.user, @post.id).deliver
       unlike_successful
     else
       unlike_unsuccessful
