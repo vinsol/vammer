@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_action :fetch_comment, :authenticate_user_admin, only: [:destroy]
+  before_action :authenticate_user_admin, :fetch_comment, only: [:destroy]
   before_action :fetch_post
   before_action :fetch_like, only: :unlike
   before_action :fetch_comment, only: [:like]
@@ -145,6 +145,7 @@ class CommentsController < ApplicationController
     end
 
     def authenticate_user_admin
+      fetch_comment
       unless current_user.admin? or @comment.user == current_user
         handle_response
       end

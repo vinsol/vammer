@@ -137,6 +137,10 @@ class PostsController < ApplicationController
       initialize_comment
     end
 
+    def fetch_posts
+      @posts = Post.where(group_id: @post.group_id)
+    end
+
     def redirect_path
       if @post.group_id
         group_path(@post.group_id)

@@ -14,7 +14,7 @@
 
         <br><br>
 
-        <%= linkify_hashtags(post.content) %>
+        <%= linkify_mentions(linkify_hashtags(post.content)) %>
 
         <% post.documents.each do |document| %>
 
