@@ -3,7 +3,9 @@
 <div> <%= @group.description %> </div>
 <br>
 <div class='join-link'>
-  <%= group_join_link(@group) %>
+  <% if @group.creator != current_user %>
+    <%= group_join_link(@group) %>
+  <% end %>
 </div>
 <% if @group.members.include? current_user %>
   <%= render 'groups/create_post' %>
