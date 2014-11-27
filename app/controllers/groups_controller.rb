@@ -84,7 +84,7 @@ class GroupsController < ApplicationController
     def allow_modify
       unless current_user.admin? || @group.creator == current_user
         flash[:error] = t('access.failure', scope: :flash)
-       redirect_to :groups
+        redirect_to :groups
       end
     end
 
@@ -114,11 +114,13 @@ class GroupsController < ApplicationController
       end
     end
 
+    #FIX: This should not be a before_action. We can sort by default columns in each controller if params contain some invalid column name
     def sorting_valid?
       (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
     end
 
     def sort(collection)
+      #FIX: Rename #sort_order to #sort_direction
       order = sort_order
       column = sort_column
       if params[:column] == 'creator'

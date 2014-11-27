@@ -13,6 +13,7 @@ class HashtagsController < ApplicationController
 
   private
 
+    #FIX: Rename #fetch_posts
     def collect_post_form_hashtags
       @hashtagged = @hashtagged.map do |hashtag|
         hashtag.respond_to?(:post) ? hashtag.post : hashtag
@@ -22,6 +23,7 @@ class HashtagsController < ApplicationController
     def fetch_hashtags
       @hashtag = SimpleHashtag::Hashtag.find_by_name(params[:hashtag])
       if @hashtag
+        #FIX: Move this to a method and call from #show. #fetch_hashtaggables
         @hashtagged = @hashtag.hashtaggables
       else
         flash[:error] = t('.failure', scope: :flash)

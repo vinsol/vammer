@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
       unless user_signed_in?
         respond_to do |format|
           format.html {  }
+          #FIX: Move this to a js.erb file
           format.js { render :js => "window.location = '/users/sign_in'" }
         end
       end

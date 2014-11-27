@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   def create
     initialize_comment
     if @comment.save
+      #FIX: Move to model
       CommentMailer.notify_on_create(current_user, @comment.user, @comment.post.id).deliver
       respond_to do |format|
         format.json { render json: @comment, serializer: CommentSerializer }
@@ -19,21 +20,27 @@ class CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
+      #FIX: Use a separate method for rendering success, #render_success
       comment = { message: t('comments.destroy.success', scope: :message) }
     else
       comment = { error: t('comments.destroy.failure', scope: :message) }
     end
+    #FIX: Indentation
       render_on_error(comment)
   end
 
 
   def like
     like = current_user.likes.build
+    #FIX: Check if #push saves the record too?
     @comment.likes.push like
     if like.save
+      #FIX: Move to callback in Like
       CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
+      #FIX: Use single method for success of like, unlike. e.g. #render_like_success(like)
       like_successful(like)
     else
+      #FIX: Use single method for failure of like, unlike. e.g. #render_like_failure(is_like)
       like_unsuccessful
     end
   end
@@ -41,6 +48,7 @@ class CommentsController < ApplicationController
   def unlike
     @comment = @like.likeable
     if @like.destroy
+      #FIX: Remove this. We should not send mail on unlike.
       CommentMailer.notify_on_like_unlike(current_user, @comment.user, @comment.post.id).deliver
       unlike_successful
     else
@@ -84,6 +92,7 @@ class CommentsController < ApplicationController
       end
     end
 
+    #FIX: Remove if not being used
     def fetch_attachments
       @comment.comment_documents.map do |attach|
         attach.attachment
@@ -95,7 +104,7 @@ class CommentsController < ApplicationController
     end
 
     def fetch_comment
-      @comment = Comment.where(id: params[:id] || params[:comment_id]).first
+      @comment = Comment.where(id: params[:comment_id] || params[:id]).first
       unless @comment
         handle_response
       end
@@ -129,12 +138,15 @@ class CommentsController < ApplicationController
       render_on_error(comment)
     end
 
+    #FIX: Rename #render_failure
     def render_on_error(comment)
       respond_to do |format|
+        #FIX: Add status code. Please fix this everywhere.
         format.json { render json: comment }
       end
     end
 
+    #FIX: Rename. Use something specific
     def authenticate_user_admin
       unless current_user.admin? or @comment.user == current_user
         handle_response

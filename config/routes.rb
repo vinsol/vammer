@@ -5,10 +5,12 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { confirmations: 'users/confirmations' }
 
+  #FIX: Move to bottom
   root 'home#index'
 
   namespace :admin do
     resources :settings, only: [:update]
+    #FIX: Move to resources block
     get 'settings/edit', to: 'settings#edit'
   end
 
@@ -19,15 +21,20 @@ Rails.application.routes.draw do
     member do
       post 'follow', to: 'users#follow'
       delete 'unfollow', to: 'users#unfollow'
+      #FIX: Use :followers
       get 'follower', to: 'users#follower'
+      #FIX: Use :followees
       get 'following', to: 'users#following'
     end
   end
+  #FIX: This may be removed if we are able to use #show for this
   get 'users/mentioned_users/:name', to: 'users#mentioned_users', as: :mentioned
 
   resources :groups, except: [:destroy] do
     member do
+      #FIX: Make it delete instead of get
       get 'unjoin', to: 'groups#unjoin'
+      #FIX: Make it post instead of get
       get 'join', to: 'groups#join'
       get 'members', to: 'groups#members'
     end
@@ -41,12 +48,14 @@ Rails.application.routes.draw do
     resources :posts, only: [:create, :destroy, :show] do
       post 'like', to: 'posts#like'
       delete 'unlike/:id', to: 'posts#unlike', as: :unlike
+
       resources :comments, only: [:create, :destroy] do
         post 'like', to: 'comments#like'
         delete 'unlike/:id', to: 'comments#unlike', as: :unlike
       end
     end
   end
+
   resources :attachments, only: [:destroy, :create]
 
 end

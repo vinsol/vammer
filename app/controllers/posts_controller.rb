@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     redirect_to :root
   end
 
+  #FIX: Same as comments controller
   def like
     like = current_user.likes.build
     @post.likes.push like
@@ -36,6 +37,7 @@ class PostsController < ApplicationController
     end
   end
 
+  #FIX: Same as comments controller
   def unlike
     @post = @like.likeable
     if @like.destroy
