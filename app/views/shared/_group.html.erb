@@ -2,13 +2,13 @@
 <%= current_user.name.capitalize %>
 
 <br> <br>
-<div class='list-group'>
+<div class='list-group sidebar-width'>
 
   <%= link_to 'Groups', groups_path, class: 'list-group-item active' %>
 
   <% @user_groups.each do |group| %>
 
-    <%= link_to group.name.truncate(10), group, class: 'list-group-item' %>
+    <%= link_to group.name, group, class: 'list-group-item' %>
     
   <% end %>
 

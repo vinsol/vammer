@@ -1,3 +1,11 @@
+.sidebar-width {
+  width: 150px;
+}
+
+.group-width {
+  width: 300px;
+}
+
 .upload-logo {
   margin-right: 410px;
 }

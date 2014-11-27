@@ -10,7 +10,7 @@
     <table class="table table-striped table-hover ">
 
       <tr>
-        <th>Name
+        <th class='group-width'>Name
           <%= link_to_order :name %>
         </th>
         <th>Description</th>
@@ -28,7 +28,7 @@
       <% @groups.each do |group| %>
 
         <tr>
-          <td> <%= group.name %> </td>
+          <td class='group-width'> <%= group.name %> </td>
           <td> <%= group.description.truncate(25) %> </td>
 
           <% if action != :owned %>
@@ -38,7 +38,7 @@
           <td>
             <%= link_to 'View', group_path(group) %>
             <%= group_join_link(group) %>
-            <% if admin_logged_in? || group_owner_logged_in?(group) %>
+            <% if admin_logged_in? || group.owner?(current_user) %>
               <%= link_to :edit, edit_group_path(group) %>
             <% end %>
           </td>

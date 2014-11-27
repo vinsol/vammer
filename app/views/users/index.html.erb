@@ -1,26 +1,29 @@
-<ul class='nav nav-tabs'>
-  <li> <%= link_to 'All users', users_path %> </li>
-  <li> <%= link_to 'Followers', follower_user_path(@user) %> </li>
-  <li> <%= link_to 'Following', following_user_path(@user) %> </li>
-</ul>
-<ul class='list-inline col-md-offset-3'>
-  <% ApplicationHelper::ALPHABETS.each do |alphabet| %>
-    <li>
-      <%= link_to alphabet, users_path(letter: alphabet) %>
-    </li>|
-  <% end %>
-</ul>
-
-<div class='container'>
-<% #FIXME_AB: What if there were no users -%>
-  <% if @users %>
-    <% @users.each do |user| %>
-
-      <%= render 'show_user_card', user: user %>
-
+<br><br><br><br>
+<div class='col-md-offset-3'>
+  <ul class='nav nav-tabs'>
+    <li> <%= link_to 'All users', users_path %> </li>
+    <li> <%= link_to 'Followers', follower_user_path(@user) %> </li>
+    <li> <%= link_to 'Following', following_user_path(@user) %> </li>
+  </ul>
+  <ul class='list-inline'>
+    <% ApplicationHelper::ALPHABETS.each do |alphabet| %>
+      <li>
+        <%= link_to alphabet, users_path(letter: alphabet) %>
+      </li>|
     <% end %>
-    <% else %>
-      No Users
-  <% end %>
+  </ul>
 
+  <div class='container'>
+  <% #FIXME_AB: What if there were no users -%>
+    <% if @users %>
+      <% @users.each do |user| %>
+
+        <%= render 'show_user_card', user: user %>
+
+      <% end %>
+      <% else %>
+        No Users
+    <% end %>
+
+  </div>
 </div>
