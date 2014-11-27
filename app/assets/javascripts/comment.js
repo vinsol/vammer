@@ -123,7 +123,6 @@ Comment.prototype.CreateDom = function(element, data) {
           'data-remote': 'true',
           'class': 'delete-comment'
         }).text('Delete');
-        console.log(345678)
     $box.append($name).append($content).append($attachments).append($like).append($numberOfLikes).append($destroy_comment);
     $container.append($box);
     this.resetForm(element);
