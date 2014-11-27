@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       end
       format.json do
         data = { users: User.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] },
-                groups: Group.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] }
+                groups: Group.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, false] }
                }
         render json: data
       end
