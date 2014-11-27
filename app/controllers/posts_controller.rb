@@ -132,6 +132,7 @@ class PostsController < ApplicationController
     def fetch_form_associations
       fetch_posts
       fetch_user_groups
+      @group = Group.where(id: @post.group_id).first
       @post.documents.build
       initialize_comment
     end

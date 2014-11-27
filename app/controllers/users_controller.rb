@@ -70,7 +70,7 @@ class UsersController < ApplicationController
       flash[:notice] = t('.success', scope: :flash)
       redirect_to :users
     else
-      flash[:notice] = t('.failure', scope: :flash)
+      flash[:error] = t('.failure', scope: :flash)
       render :edit
     end
   end
@@ -116,7 +116,7 @@ class UsersController < ApplicationController
     def fetch_user
       @user = User.where(id: params[:id]).first
       unless @user
-        flash[:notice] = t('record.failure', scope: :flash)
+        flash[:error] = t('record.failure', scope: :flash)
         redirect_to :users
       end
     end
@@ -124,7 +124,7 @@ class UsersController < ApplicationController
     def fetch_mentioned_user
       @user = User.where(name: params[:name].split('@').last).first
       unless @user
-        flash[:notice] = t('record.failure', scope: :flash)
+        flash[:error] = t('record.failure', scope: :flash)
         redirect_to :users
       end
     end
@@ -139,7 +139,7 @@ class UsersController < ApplicationController
 
     def allow_modify
       unless current_user.admin? || @user == current_user
-        flash[:notice] = t('access.failure', scope: :flash)
+        flash[:error] = t('access.failure', scope: :flash)
         redirect_to :users
       end
     end
