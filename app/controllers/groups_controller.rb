@@ -28,6 +28,7 @@ class GroupsController < ApplicationController
 
   def create
     group = current_user.owned_groups.create(permitted_params)
+    #FIXME_AB: show me error messages when group is not created. just displaying "group not saved" doesn't solve the purpose
     if group.save
       flash[:notice] = t('.success', scope: :flash)
       redirect_to :groups
@@ -108,6 +109,7 @@ class GroupsController < ApplicationController
     end
 
     def allow_join
+      #FIXME_AB: Should't this code to check whether user can join or unjoin be in group model?
       if @group.members.include? current_user
         flash[:error] = t('.failure', scope: :flash)
         redirect_to :groups

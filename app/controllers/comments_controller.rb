@@ -19,6 +19,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    #FIXME_AB: Ensure destroy? to check whether comment is destroyed or not?
     if @comment.destroy
       #FIX: Use a separate method for rendering success, #render_success
       comment = { message: t('comments.destroy.success', scope: :message) }
@@ -46,6 +47,7 @@ class CommentsController < ApplicationController
   end
 
   def unlike
+    #FIXME_AB: Can any user unlike any other users likes
     @comment = @like.likeable
     if @like.destroy
       #FIX: Remove this. We should not send mail on unlike.
@@ -111,6 +113,7 @@ class CommentsController < ApplicationController
     end
 
     def fetch_like
+      #FIXME_AB: use associations current_user.likes.where
       @like = Like.where(id: params[:id]).first
       unless @like
         handle_response_like
@@ -148,6 +151,7 @@ class CommentsController < ApplicationController
 
     #FIX: Rename. Use something specific
     def authenticate_user_admin
+      #FIXME_AB: I think this is a generic method and may need in other controllers, so can we move it to application controller 
       unless current_user.admin? or @comment.user == current_user
         handle_response
       end
@@ -155,6 +159,7 @@ class CommentsController < ApplicationController
 
     def initialize_comment
       @comment = @post.comments.new(permitted_params)
+      #FIXME_AB: You should make proper use of association comment.user = current_user so that it take care of foreign keys itself
       @comment.user_id = current_user.id
     end
 

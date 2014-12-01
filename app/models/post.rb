@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :post_documents, allow_destroy: true
   accepts_nested_attributes_for :comments
 
+  #FIXME_AB: You should validate user not user_id. Error would come on user_id not on user
   validates :content, :user_id, presence: true
 
 end

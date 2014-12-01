@@ -1,3 +1,4 @@
+#FIXME_AB: indexes missing
 class Follow < ActiveRecord::Base
 
   #FIX: Rename :followed_users to :followee

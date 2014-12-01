@@ -1,3 +1,4 @@
+#FIXME_AB: I think we also need index on name field as we are searching by name
 class Group < ActiveRecord::Base
 
   has_many :memberships, dependent: :destroy
@@ -5,6 +6,7 @@ class Group < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   belongs_to :creator, class_name: User
 
+  
   validates :name, uniqueness: true, format: { with: /\A([a-z]|\s)+\z/i, message: 'only letters' }, length: { maximum: 255 }
   validates :name, :description, presence: true
 

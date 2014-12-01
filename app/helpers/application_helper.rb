@@ -18,9 +18,11 @@ module ApplicationHelper
   end
 
   def can_edit_user?(user)
+    #FIXME_AB: can we use cancan or pundit for such authorization?
     admin_logged_in? || creator_logged_in?(user)
   end
 
+  #FIXME_AB: Is the method name is appropriate? this method has nothing to do with creator
   def creator_logged_in?(user)
     current_user == user
   end
@@ -42,6 +44,7 @@ module ApplicationHelper
   end
 
   def link_to_like_unlike(likeable, method)
+    #FIXME_AB: You have associations available so use current_user.likes.where 
     if method == :post
       like = Like.where(user_id: current_user, likeable_id: likeable, likeable_type: 'Post').first
       post_like_unlike(like, likeable)

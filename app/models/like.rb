@@ -1,3 +1,4 @@
+#FIXME_AB: Proper DB indexes missing
 class Like < ActiveRecord::Base
 
   belongs_to :user

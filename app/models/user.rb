@@ -1,3 +1,4 @@
+#FIXME_AB: By default admin field should be false, through migration
 class User < ActiveRecord::Base
 
   #FIX: Move constants to helpers
@@ -18,11 +19,13 @@ class User < ActiveRecord::Base
 
   has_many :follows, class_name: Follow, foreign_key: :follower_id
   has_many :followings, class_name: Follow, foreign_key: :followed_user_id
+  #FIXME_AB: I guess there is some confusion with followers and followings. Ideally 'followers' are users who is following me and 'followings' are people who I follow.
   has_many :followers, through: :follows, source: :followed_user
   has_many :followed_users, through: :followings, source: :follower
 
   accepts_nested_attributes_for :image
 
+  #FIXME_AB: such type of regexp in validations should be extracted out as a constant hash of regexp so that they can be resuxed
   validates :name, presence: :true, uniqueness: :true, format: { with: /\A([a-z]|\s)+\z/i, message: 'only letters' }, length: { maximum: 255 }
   
   validate :email_matches_company_domain
