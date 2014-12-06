@@ -43,6 +43,11 @@ gem 'active_model_serializers', '0.9.0'
 
 gem 'jquery-ui-rails'
 
+gem 'capistrano'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'unicorn'
+
 group :test do
   gem 'simplecov', require: false
   gem 'rspec-activemodel-mocks'

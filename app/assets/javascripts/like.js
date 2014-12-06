@@ -16,13 +16,13 @@ Like.prototype.generateLink = function(element, data, like_or_unlike, http_metho
 }
 
 Like.prototype.like = function(element, data) {
-  if(this.checkError(data)){ 
+  if(this.checkError(data)){
     this.generateLink(element, data, 'unlike', 'delete');
   }
 }
 
 Like.prototype.unlike = function(element, data) {
-  if(this.checkError(data)){ 
+  if(this.checkError(data)){
     this.generateLink(element, data, 'like', 'post');
   }
 }

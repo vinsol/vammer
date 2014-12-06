@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   before_action :allow_modify, only: [:edit, :update]
   before_action :allow_unjoin, only: :unjoin
   before_action :allow_join, only: :join
-  before_action :sorting_valid?, only: [:join, :extraneous, :owned]
+  # before_action :sorting_valid?, only: [:index, :extraneous, :owned]
 
   def index
     @groups = current_user.groups.includes(:creator)
@@ -119,6 +119,7 @@ class GroupsController < ApplicationController
 
     def sorting_valid?
       (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
+      #FIX: This should not be a before_action. We can sort by default columns in each controller if params contain some invalid column name
     end
 
     def sort(collection)

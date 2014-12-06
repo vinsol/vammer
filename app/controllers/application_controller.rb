@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def user_active?
-      unless user_signed_in?
+    def session_valid?
+      unless verified_request?
         respond_to do |format|
           format.html {  }
           format.js { render :js => "window.location = '/users/sign_in'" }

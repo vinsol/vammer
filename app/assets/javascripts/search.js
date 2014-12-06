@@ -32,7 +32,7 @@ Results.prototype.generateDropDown = function(results, heading, users, groups){
       results.push(results['GROUP']);
     }
     _this.addResults(results, index, item, false);
-  })  
+  })
 }
 
 $(function() {
