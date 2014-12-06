@@ -38,34 +38,18 @@ class GroupsController < ApplicationController
   end
 
   def unjoin
-    if @group.members.destroy(current_user)
-      flash[:notice] = t('.success', scope: :flash)
-    else
-      flash[:error] = t('.failure', scope: :flash)
-    end
-    redirect_to :groups
+    @group.members.destroy(current_user)
   end
 
   def join
-    if @group.members.push(current_user)
-      flash[:notice] = t('.success', scope: :flash)
-    else
-      flash[:error] = t('.failure', scope: :flash)
-    end
-    redirect_to :groups
+    @group.members.push(current_user)
   end
 
   def edit
   end
 
   def update
-    if @group.update(permitted_params)
-      flash[:notice] = t('.success', scope: :flash)
-      redirect_to :groups
-    else
-      flash[:error] = t('.failure', scope: :flash)
-      render :edit
-    end
+    update_model(@group, permitted_params, groups_path)
   end
 
   def show
@@ -117,6 +101,7 @@ class GroupsController < ApplicationController
       end
     end
 
+    #FIX: This should not be a before_action. We can sort by default columns in each controller if params contain some invalid column name
     def sort_column
       # params[:order] == 'creator' ? 'creator' : 'name'
       if ['name', 'creator'].include?(params[:order])

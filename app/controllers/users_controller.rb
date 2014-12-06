@@ -71,13 +71,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(permitted_params)
-      flash[:notice] = t('.success', scope: :flash)
-      redirect_to :users
-    else
-      flash[:error] = t('.failure', scope: :flash)
-      render :edit
-    end
+    update_model(@user, permitted_params, users_path)
   end
 
   def follow
@@ -87,6 +81,10 @@ class UsersController < ApplicationController
     else
       data = { followed: false }
     end
+    render_follow_unfollow(data)
+  end
+
+  def render_follow_unfollow
     respond_to do |format|
       format.json do
         render json: data
@@ -101,11 +99,7 @@ class UsersController < ApplicationController
     else
       data = { followed: false }
     end
-    respond_to do |format|
-      format.json do
-        render json: data
-      end
-    end
+    render_follow_unfollow(data)
   end
 
   private

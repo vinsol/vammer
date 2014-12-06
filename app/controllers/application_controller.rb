@@ -67,4 +67,22 @@ class ApplicationController < ActionController::Base
       @logo.build_image unless @logo.image
     end
 
+    def render_like_unlike_successful(like_path, likeable)
+      respond_to do |format|
+        #FIX: Use #unlike_path key
+        result = {count: likeable.likes.count, like_path: like_path}
+        format.json { render json: result}
+      end
+    end
+
+    def update_model(saveable, permitted_params, path)
+      if saveable.update(permitted_params)
+        flash[:notice] = t('.success', scope: :flash)
+        redirect_to path
+      else
+        flash[:error] = t('.failure', scope: :flash)
+        render :edit
+      end
+    end
+
 end

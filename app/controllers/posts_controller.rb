@@ -57,25 +57,17 @@ class PostsController < ApplicationController
 
     def unlike_successful
       like_path = post_like_path(@post)
-      render_like_unlike_successful(like_path)
+      render_like_unlike_successful(like_path, @post)
     end
 
     def like_successful(like)
       like_path = post_unlike_path(@post.id, like.id)
-      render_like_unlike_successful(like_path)
-    end
-
-    def render_like_unlike_successful(like_path)
-      respond_to do |format|
-        #FIX: Use #unlike_path key
-        result = {count: @post.likes.count, like_path: like_path}
-        format.json { render json: result}
-      end
+      render_like_unlike_successful(like_path, @post)
     end
 
     def unlike_unsuccessful
       like = { error: t('comments.unlike.failure', scope: :message) }
-      render_error_response_for_like_unlike(like)      
+      render_error_response_for_like_unlike(like)
     end
 
     def like_unsuccessful

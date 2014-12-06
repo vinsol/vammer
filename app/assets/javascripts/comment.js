@@ -1,13 +1,13 @@
 // #FIX: Will see later
-REGEX = { linkify: /#(\w+)/g,
+var REGEX = { linkify: /#(\w+)/g,
   linkify_comment: /@(\w+)/g,
- }
+ };
 var Comment = function() {
-}
+};
 
 Comment.prototype.marginDiv = function() {
   return $('<div>').attr({'class': 'comment-margin'});
-}
+};
 
 Comment.prototype.userDetails = function(response) {
   // var $contaier_div = this.marginDiv(),
@@ -16,31 +16,31 @@ Comment.prototype.userDetails = function(response) {
       $bold_comment = $('<span>').attr( { 'class': 'name-bold' } );
   $bold_comment.append(name);
   return this.marginDiv().append($image).append($bold_comment);
-}
+};
 
 Comment.prototype.likeDetails = function(response) {
-  return $('<a>').attr({ 
+  return $('<a>').attr({
     'href': response.like_path,
     'data-method': 'post',
     'data-remote': 'true',
     'class': 'like comment-margin'
   }).text('like');
-}
+};
 Comment.prototype.numberOfLikesDetails = function(response) {
   return $('<div>').attr( {'class': 'count comment-margin'} ).text(0);
-}
+};
 
 Comment.prototype.buildImage = function(response) {
-  var $modal = this.buildModal(response);
+  var $modal = this.buildModal(response),
       $image =  $('<img>').attr({
     'src': response.attachments_url,
     'width': '35',
     'height': '35',
     'data-toggle': 'modal',
-    'data-target': '#' + response.attachment_id 
+    'data-target': '#' + response.attachment_id
   });
   return $('<div>').append($image).append($modal);
-}
+};
 
 Comment.prototype.buildAttachment = function(response) {
   var $image = $('<img>').attr( {
@@ -50,16 +50,16 @@ Comment.prototype.buildAttachment = function(response) {
         'href': response.attachments_url,
       } );
   $anchor.append($image);
-  return $('<div>').append($anchor).append(response.attachment_name)
-}
+  return $('<div>').append($anchor).append(response.attachment_name);
+};
 
 Comment.prototype.isImage = function(response) {
   if(response.is_image){
-    return this.buildImage(response)
+    return this.buildImage(response);
   } else {
-    return this.buildAttachment(response)
+    return this.buildAttachment(response);
   }
-}
+};
 
 Comment.prototype.buildModal = function(element) {
   var $modal_container = $('<div>').attr( { 'class': 'modal fade',
@@ -77,10 +77,10 @@ Comment.prototype.buildModal = function(element) {
   $modal_content.append($modal_body);
   $modal_dialog.append($modal_content);
   return $modal_container.append($modal_dialog);
-}
+};
 
 Comment.prototype.attachmentDetails = function(response) {
-      _this = this,
+  var _this = this,
       $attachments = [];
   $.each(response.document_files, function(index, element) {
     var attachment = _this.isImage(element),
@@ -93,20 +93,20 @@ Comment.prototype.attachmentDetails = function(response) {
         $attachment_container = $('<div>').attr({ 'class': 'attachment' });
     $attachment_container.append(attachment, destroy_attachment);
     $attachments.push($attachment_container);
-  })
+  });
   return this.marginDiv().append($attachments);
-}
+};
 
 Comment.prototype.contentDetails = function(response) {
   var str = response.comment_description.toLowerCase();
   str = str.replace(REGEX.linkify, '<a href="/hashtags/$1">#$1</a>')
     .replace(REGEX.linkify_comment, '<a href="/users/mentioned_users/@$1">@$1</a>');
   return this.marginDiv().append(str);
-}
+};
 
 Comment.prototype.resetForm = function(element) {
   $(element).closest('form')[0].reset();
-}
+};
 
 Comment.prototype.CreateDom = function(element, data) {
   if(this.checkError(data)){
@@ -127,22 +127,22 @@ Comment.prototype.CreateDom = function(element, data) {
     $container.append($box);
     this.resetForm(element);
   }
-}
+};
 
 Comment.prototype.checkError = function(data) {
-  error = JSON.parse(data.responseText).error
-  if(error != undefined) {
-    alert(error)
+  var error = JSON.parse(data.responseText).error;
+  if(error !== undefined) {
+    alert(error);
   }
-  return error == undefined
-}
+  return error === undefined;
+};
 
 Comment.prototype.destroy = function(element, data) {
   if(this.checkError(data)){
     $(element).closest('.comment-box').remove();
-    alert(JSON.parse(data.responseText).message)
+    alert(JSON.parse(data.responseText).message);
   }
-}
+};
 
 Comment.prototype.bindEvents = function() {
   var _this = this;
@@ -150,11 +150,11 @@ Comment.prototype.bindEvents = function() {
     _this.CreateDom(this, data);
   });
   $('.post-division').on('ajax:complete', '.delete-comment', function(e, data){
-    _this.destroy(this, data)
-  })
-}
+    _this.destroy(this, data);
+  });
+};
 
 $(function(){
-  var comment = new Comment;
+  var comment = new Comment();
   comment.bindEvents();
 });
