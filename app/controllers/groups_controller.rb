@@ -117,9 +117,13 @@ class GroupsController < ApplicationController
       end
     end
 
-    def sorting_valid?
-      (['desc', 'asc'].include? params[:direction] and ['name', 'creator'].include?(params[:order]))
-      #FIX: This should not be a before_action. We can sort by default columns in each controller if params contain some invalid column name
+    def sort_column
+      # params[:order] == 'creator' ? 'creator' : 'name'
+      if ['name', 'creator'].include?(params[:order])
+        params[:order]
+      else
+        'created_at'
+      end
     end
 
     def sort(collection)
