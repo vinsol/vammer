@@ -1,0 +1,54 @@
+<div class='col-lg-offset-1 col-lg-7'>
+
+  <% @hashtagged.each do |post| %>
+    <div class='post-division fill'>
+      <div class='add-margin'>
+
+        <% if post.user.image %>
+          <%= image_tag(post.user.image.attachment.url(:thumb)) %>
+        <% end %>
+
+      <span class='name-bold'>
+        <%= post.user.name.capitalize %>
+      </span>
+
+        <br><br>
+
+        <%= linkify_mentions(linkify_hashtags(post.content)) %>
+
+        <% post.documents.each do |document| %>
+
+          <div class='attachment comment-margin'>
+
+            <%= link_to document.attachment_file_name, document.attachment.url %>
+
+            <% if can_edit_user?(post.user) %>
+              <%= link_to 'Delete', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+            <% end %>
+
+          </div>
+
+        <% end %>
+
+        <br>
+        <%= link_to_like_unlike post, :post %>
+        <div class='count'>
+          <%= post.likes.count %>
+        </div>
+
+
+        <% if can_edit_user?(post.user) %>
+
+          <%= link_to 'Delete', post_path(post.id), method: :delete, class: 'delete-post' %>
+
+        <% end %>
+
+        <%= render 'home/show_comments', post: post %>
+
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+</div>

@@ -1,0 +1,21 @@
+<div class='control-group col-md-offset-4'>
+
+<br><br>
+</div>
+
+<div class='form-group'>
+<div class='col-lg-7 col-lg-offset-1'>
+  <%= locals[:f].text_area :content, placeholder: 'What\'s on your mind?', class: 'form-control inputbox' %>
+</div>
+<br><br><br><br>
+
+<div class='add-more-attachment col-lg-2'>
+
+  <%= locals[:f].fields_for :documents do |attach| %>
+
+    <%= attach.file_field :attachment %>
+
+  <% end %>
+  <%= locals[:f].link_to_add 'Add attachment', :documents %>
+
+</div>

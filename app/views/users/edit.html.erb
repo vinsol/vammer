@@ -1,0 +1,104 @@
+<div>
+
+  <% if creator_logged_in?(@user) %>
+    <%= render 'users/registrations/side_bar' %>
+  <% end %>
+
+  <div class='col-md-8 col-md-offset-2 vertical-center'>
+
+    <%= form_for @user, html: { class: 'form-horizontal col-lg-8'} do |f| %>
+
+      <h2>edit user details</h2>
+
+      <div class='control-group col-md-offset-4'>
+
+        <%= render partial: 'shared/error_message', locals: {errors: @user.errors} %>
+
+        <br><br>
+      </div>
+
+      <div class='control-group'>
+
+        <%= f.label :name, class: 'control-label' %>
+        <font color='red'>
+          *
+        </font>
+        <%= f.text_field :name, class: 'form-control' %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.label :about_me, class: 'control-label' %>
+        <%= f.text_area :about_me, class: 'form-control' %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.fields_for :image do |attach| %>
+
+          <%= f.label :attachment, class: 'control-label' %>
+          <%= attach.file_field :attachment %>
+
+        <% end %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.label :job_title, class: 'control-label' %>
+        <%= f.text_field :job_title, class: 'form-control' %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.label :date_of_birth, class: 'control-label' %>
+
+        <%= date_select :user, :date_of_birth, start_year: User::START_YEAR, end_year: Time.current.year, class: 'form-control' %>
+
+      </div><br/>
+
+      <div class='control-group'>
+
+        <%= f.label :mobile, class: 'control-label' %>
+        <%= f.text_field :mobile, class: 'form-control' %>
+
+      </div><br/>
+      <% #FIXME_AB: ??? -%>
+      <% if admin_logged_in? && !creator_logged_in?(@user) %>
+
+        <div class='control-group'>
+
+          <%= f.label :admin, class: 'control-label' %>
+          <%= f.check_box :admin %>
+
+        </div><br/>
+
+        <div class='control-group'>
+
+          <%= f.label :enabled, class: 'control-label' %>
+          <%= f.check_box :enabled %>
+
+        </div><br/>
+
+        <div class='control-group'>
+
+          <%= f.label :joining_date, class: 'control-label' %>
+          <%= date_select :user, :joining_date, start_year: User::START_YEAR, end_year: Time.current.year, class: 'form-control' %>
+
+        </div><br/>
+
+      <% end %>
+
+      <div class='control-group'>
+
+        <%= f.submit 'Update user', class: 'btn btn-primary' %>
+
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

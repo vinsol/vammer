@@ -1,0 +1,12 @@
+<%= nested_form_for @post, class: 'form-horizontal' do |f| %>
+
+  <%= render partial: 'shared/error_message', locals: {errors: @post.errors} %>
+
+    <%= render 'shared/posts_form_fields', locals: {f: f} %>
+
+    <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
+      <br>
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
