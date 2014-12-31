@@ -17,6 +17,12 @@
         <%= linkify_mentions(linkify_hashtags(comment.content)) %>
       </div>
 
+      <%= link_to_like_unlike comment, :comment %>
+
+      <span class='count comment-margin'>
+        <%= comment.likes.count %>
+      </span>
+
       <% comment.document_files.each do |document| %>
       <!-- #FIX: Indentation -->
       <div class='attachment comment-margin'>

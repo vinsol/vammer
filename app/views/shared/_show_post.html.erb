@@ -5,20 +5,27 @@
       <%= image_tag(post.user.image.attachment.url(:thumb)) %>
     <% end %>
 
-  <span class='name-bold'>
-    <%= post.user.name.capitalize %>
-  </span>
+      <span class='name-bold'>
+        <%= post.user.name.capitalize %>
+      </span>
 
-    <br><br>
+        <br><br>
 
-    <div class='post-margin'>
+        <div class='post-margin'>
 
-      <%= linkify_mentions(linkify_hashtags(post.content)) %>
+          <%= linkify_mentions(linkify_hashtags(post.content)) %>
 
-        
-      <% post.documents.each do |document| %>
+          <% post.post_documents.each do |document| %>
 
-        <div class='attachment comment-margin'>
+            <div class='attachment comment-margin'>
+              <span>
+                <% if document.attachment_content_type.split('/').first == 'image' %>
+                  <%= render 'shared/show_attachment', image: document %>
+                <% else %>
+                  <%= document.attachment_file_name %>
+                  <%= link_to attachment_type(document), document.attachment.url %>
+                <% end %>
+              </span>
 
           <span>
             <% if document.attachment_content_type.split('/').first == 'image' %>
@@ -28,40 +35,38 @@
               <%= document.attachment_file_name %>
             <% end %>
           </span>
+              <% if can_edit_user?(post.user) %>
+                <%= link_to 'Delete', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+              <% end %>
+
+            </div>
+
+          <% end %>
+          <br>
+
+          <%= link_to_like_unlike post, :post %>
+
+          <span class='count'>
+            <%= post.likes.count %>
+          </span>
+
 
           <% if can_edit_user?(post.user) %>
-            <%= link_to 'Delete', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+
+            <%= link_to 'Delete', post_path(post.id), method: :delete, class: 'delete-post' %>
+
           <% end %>
 
         </div>
 
-      <% end %>
-      <br>
+        <%= render 'home/show_comments', post: post %>
 
-      <%= link_to_like_unlike post, :post %>
+        <% if( !post.group || current_user.groups.include?(post.group) ) %>
 
-      <div class='count'>
-        <%= post.likes.count %>
+          <%= render 'shared/post_comment_form', post: post %>
+
+        <% end %>
+
+        <br> <br> <br> <br>
       </div>
-
-      <%= link_to 'Show', post_path(post) %>
-
-      <% if can_edit_user?(post.user) %>
-
-        <%= link_to 'Delete', post_path(post.id), method: :delete, class: 'delete-post' %>
-
-      <% end %>
-
     </div>
-
-    <%= render 'home/show_comments', post: post %>
-
-    <% if( !post.group || current_user.groups.include?(post.group) ) %>
-
-      <%= render 'shared/create_comments', post: post %>
-
-    <% end %>
-
-    <br> <br> <br> <br>
-  </div>
-</div>

@@ -19,7 +19,7 @@ Comment.prototype.userDetails = function(response) {
 }
 
 Comment.prototype.likeDetails = function(response) {
-  return $('<a>').attr({ 
+  return $('<a>').attr({
     'href': response.like_path,
     'data-method': 'post',
     'data-remote': 'true',
@@ -27,7 +27,7 @@ Comment.prototype.likeDetails = function(response) {
   }).text('like');
 }
 Comment.prototype.numberOfLikesDetails = function(response) {
-  return $('<div>').attr( {'class': 'count comment-margin'} ).text(0);
+  return $('<span>').attr( {'class': 'count comment-margin'} ).text(0);
 }
 
 Comment.prototype.buildImage = function(response) {
@@ -37,7 +37,7 @@ Comment.prototype.buildImage = function(response) {
     'width': '35',
     'height': '35',
     'data-toggle': 'modal',
-    'data-target': '#' + response.attachment_id 
+    'data-target': '#' + response.attachment_id
   });
   return $('<div>').append($image).append($modal);
 }

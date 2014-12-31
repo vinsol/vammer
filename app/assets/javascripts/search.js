@@ -4,9 +4,9 @@ var Results = function() {
 
 Results.prototype.format = function(state) {
   if(state.is_user) {
-    return state.text + '<img src=' + state.image + '>' + ' U';
+    return '<img src=' + state.image + '>' + state.text;
   } else {
-    return state.text + ' G';
+    return '<img src=' + state.image + '>' + state.text;
   }
 }
 
@@ -32,7 +32,7 @@ Results.prototype.generateDropDown = function(results, heading, users, groups){
       results.push(results['GROUP']);
     }
     _this.addResults(results, index, item, false);
-  })  
+  })
 }
 
 $(function() {

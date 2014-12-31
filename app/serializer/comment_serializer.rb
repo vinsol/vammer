@@ -2,7 +2,7 @@ class CommentSerializer < BaseSerializer
 
   attributes :comment_description, :image_url, :like_path, :user_name, :post_id, :comment_destroy_path
 
-  has_many :document_files, serializer: DocumentFilesSerializer
+  has_many :comment_documents, serializer: CommentDocumentSerializer
 
   def comment_description
     object.content

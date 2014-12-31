@@ -64,7 +64,7 @@ class CommentsController < ApplicationController
 
     def unlike_unsuccessful
       like = { error: t('comments.unlike.failure', scope: :message) }
-      render_error_response_for_like_unlike(like)      
+      render_error_response_for_like_unlike(like)
     end
 
     def render_like_unlike_successful(like_path)
@@ -145,7 +145,7 @@ class CommentsController < ApplicationController
     end
 
     def authenticate_user_admin
-      fetch_comment
+      #FIXME_AB: I think this is a generic method and may need in other controllers, so can we move it to application controller
       unless current_user.admin? or @comment.user == current_user
         handle_response
       end

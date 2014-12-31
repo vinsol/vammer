@@ -75,7 +75,7 @@ class PostsController < ApplicationController
 
     def unlike_unsuccessful
       like = { error: t('comments.unlike.failure', scope: :message) }
-      render_error_response_for_like_unlike(like)      
+      render_error_response_for_like_unlike(like)
     end
 
     def like_unsuccessful
