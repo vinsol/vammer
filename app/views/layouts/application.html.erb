@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Vammer</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <div class='blue-color'>
+
+      <div class='container'>
+
+        <% if user_signed_in? %>
+
+          <div class='search-header'>
+            <%= render 'layouts/search_bar' %>
+          </div>
+
+        <% end %>
+
+      </div>
+
+      <div class='container-body'>
+        <br>
+        <!-- #FIX: Fade out flash messages after some time -->
+        <% if flash[:notice] %>
+          <div class="control-group alert alert-success col-lg-offset-4 col-lg-4">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+
+        <% if flash[:error] %>
+          <div class="control-group alert alert-danger col-lg-offset-4 col-lg-4">
+            <%= flash[:error] %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+
+      </div>
+    </div>
+  </body>
+</html>

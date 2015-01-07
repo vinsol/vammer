@@ -1,0 +1,14 @@
+<!-- Button trigger modal -->
+
+<%= image_tag image.attachment.url, {size: '35x35', 'data-toggle' => 'modal', 'data-target' => '#' + image.id.to_s} %>
+
+<!-- Modal -->
+<div class="modal fade" id=<%= image.id %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body post-image">
+        <%= image_tag(image.attachment.url, size: '200x200') %>  
+      </div>
+    </div>
+  </div>
+</div>

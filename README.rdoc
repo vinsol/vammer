@@ -1,0 +1,15 @@
+== README
+
+* Ruby version - 2.1.2
+
+* Rails version - 4.1.6
+
+* Postgresql version - 9.3.5
+
+* Configuration
+
+1) You have to create a config.yml file which will contain according to config.yml.example, database.yml from database.yml.example, also You can generate the secret token using command 'rake secret'
+
+2) run 'bundle'
+
+3) run 'rake db:setup'

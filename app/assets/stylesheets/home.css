@@ -1,0 +1,75 @@
+.sidebar-width {
+  width: 150px;
+}
+
+.group-width {
+  width: 300px;
+}
+
+.upload-logo {
+  margin-right: 410px;
+}
+
+.post-image {
+  margin: 0px 184px;
+}
+
+.search-user {
+  margin-top: -50px;
+}
+
+.more-link-color {
+  color: #ececec;
+}
+
+.name-bold {
+  font-size: 16px;
+  font-style: bold;
+}
+
+.logo-position {
+  margin-left: 15px;
+}
+
+.blue-color {
+  background: linear-gradient(#8DB1EF, #3b5998);
+  height: 54px;
+}
+.more-position {
+  float: right;
+  margin-right: 15px;
+}
+.user-name {
+  float: right;
+  margin: 20px 40px;
+}
+.search-header {
+  height: 50px;
+  border-top: 1px solid rgba(79, 170, 219, 1)
+}
+.search-input {
+  margin-left: 80px;
+  margin-top: 8px;
+}
+.navbar-position {
+  margin-right: -150px;
+  margin-top: -38px;
+}
+.flash-message {
+  background-color: red;
+}
+.dashboard-body{
+  width: 80%;
+  float: right;
+}
+.dashboard-sidebar{
+  float: left;
+  margin-left: 50px;
+}
+.navbar-center {
+  padding-top: 8px;
+}
+
+body{
+  background-color: #e9eaed;
+}

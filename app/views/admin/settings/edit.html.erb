@@ -1,0 +1,35 @@
+<div class='container'>
+  <div class='col-md-8 col-md-offset-2 vertical-center'>
+
+    <%= form_for [:admin, @setting], class: 'col-md-8' do |f| %>
+      <div class='control-group'>
+        <%= label_tag :company_name, 'Company Name', {class: 'control-label'} %>
+        <%= text_field_tag :company_name, COMPANY['name'], disabled: true, class: 'form-control'%>
+      </div>
+
+      <br>
+      <div class='control-group'>
+      <%= f.fields_for :image do |attach| %>
+
+        <%= attach.label :attachment, class: 'control-label' %>
+
+        <%= attach.file_field :attachment %>
+
+        <div class='pull-right upload-logo'>
+          <%= image_tag @logo.image.attachment.url(:thumb) %>
+        </div>
+
+
+      <% end %>
+
+      </div><br>
+
+      <div class='control-group'>
+        <%= f.submit %>
+      </div>
+
+
+    <% end %>
+
+  </div>
+</div>
