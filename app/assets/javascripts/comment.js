@@ -82,7 +82,7 @@ Comment.prototype.buildModal = function(element) {
 Comment.prototype.attachmentDetails = function(response) {
       _this = this,
       $attachments = [];
-  $.each(response.document_files, function(index, element) {
+  $.each(response.comment_documents, function(index, element) {
     var attachment = _this.isImage(element),
         destroy_attachment = $('<a>').attr({
           'href': element.attachment_destroy_paths,
@@ -118,12 +118,14 @@ Comment.prototype.CreateDom = function(element, data) {
         $content = this.contentDetails(response),
         $container = $('.' + response.post_id),
         $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
+        $image = $('<img>').attr( { href: '/assets/images/delete.png' } ),
         $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path,
           'data-method': 'delete',
           'data-remote': 'true',
           'class': 'delete-comment'
-        }).text('Delete');
-    $box.append($name).append($content).append($attachments).append($like).append($numberOfLikes).append($destroy_comment);
+        });
+    $image.append($destroy_comment);
+    $box.append($name).append($content).append($attachments).append($like).append($numberOfLikes).append($image);
     $container.append($box);
     this.resetForm(element);
   }

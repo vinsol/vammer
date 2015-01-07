@@ -92,13 +92,13 @@ class CommentsController < ApplicationController
     end
 
     def fetch_attachments
-      @comment.document_files.map do |attach|
+      @comment.comment_documents.map do |attach|
         attach.attachment
       end
     end
 
     def permitted_params
-      params.require(:comment).permit(:content, document_files_attributes: [:attachment, :id, :_destroy])
+      params.require(:comment).permit(:content, comment_documents_attributes: [:attachment, :id, :_destroy])
     end
 
     def fetch_comment
@@ -146,6 +146,7 @@ class CommentsController < ApplicationController
 
     def authenticate_user_admin
       #FIXME_AB: I think this is a generic method and may need in other controllers, so can we move it to application controller
+      fetch_comment
       unless current_user.admin? or @comment.user == current_user
         handle_response
       end

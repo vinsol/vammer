@@ -36,7 +36,7 @@
             <% end %>
           </span>
               <% if can_edit_user?(post.user) %>
-                <%= link_to 'Delete', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+                <%= link_to image_tag('delete.png'), attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
               <% end %>
 
             </div>
@@ -53,7 +53,7 @@
 
           <% if can_edit_user?(post.user) %>
 
-            <%= link_to 'Delete', post_path(post.id), method: :delete, class: 'delete-post' %>
+            <%= link_to image_tag('delete.png'), post_path(post.id), method: :delete, class: 'delete-post' %>
 
           <% end %>
 
@@ -63,7 +63,7 @@
 
         <% if( !post.group || current_user.groups.include?(post.group) ) %>
 
-          <%= render 'shared/post_comment_form', post: post %>
+          <%= render 'shared/create_comments', post: post %>
 
         <% end %>
 

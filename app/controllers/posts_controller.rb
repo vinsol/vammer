@@ -133,7 +133,7 @@ class PostsController < ApplicationController
       fetch_posts
       fetch_user_groups
       @group = Group.where(id: @post.group_id).first
-      @post.documents.build
+      @post.post_documents.build
       initialize_comment
     end
 

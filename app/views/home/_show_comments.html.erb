@@ -19,11 +19,11 @@
 
       <%= link_to_like_unlike comment, :comment %>
 
-      <span class='count comment-margin'>
+      <span class='count'>
         <%= comment.likes.count %>
       </span>
 
-      <% comment.document_files.each do |document| %>
+      <% comment.comment_documents.each do |document| %>
       <!-- #FIX: Indentation -->
       <div class='attachment comment-margin'>
         <span>
@@ -36,22 +36,16 @@
         </span>
 
         <% if can_edit_user?(comment.user) %>
-          <%= link_to 'Destroy', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+          <%= link_to image_tag('delete.png'), attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
         <% end %>
       </div>
 
       <% end %>
 
-      <%= link_to_like_unlike comment, :comment %>
-
-      <div class='count comment-margin'>
-        <%= comment.likes.count %>
-      </div>
-
       <div class='comment-margin'>
         <!-- #FIX: Move if condition outer div -->
         <% if can_edit_user?(comment.user) %>
-          <%= link_to 'Delete', post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
+          <%= link_to image_tag('delete.png'), post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
         <% end %>
       </div>
 
