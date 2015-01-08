@@ -38,6 +38,12 @@
             <%= flash[:error] %>
           </div>
         <% end %>
+        <% if current_user %>
+        <br><br><br><br>
+          <div class='col-md-2'>
+            <%= render 'shared/group' %>
+          </div>
+        <% end %>
 
         <%= yield %>
 

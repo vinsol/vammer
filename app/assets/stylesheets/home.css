@@ -6,6 +6,11 @@
   width: 300px;
 }
 
+.sidebar-group {
+  width: 15%;
+  float: left;
+}
+
 .upload-logo {
   margin-right: 410px;
 }

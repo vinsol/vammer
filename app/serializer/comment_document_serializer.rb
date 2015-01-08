@@ -1,4 +1,4 @@
-class DocumentFilesSerializer < BaseSerializer
+class CommentDocumentSerializer < BaseSerializer
 
   attributes :attachments_url, :attachment_destroy_paths, :attachment_id, :attachment_name, :attachment_logo, :is_image
 

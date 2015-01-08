@@ -16,14 +16,14 @@
 
         <%= linkify_mentions(linkify_hashtags(post.content)) %>
 
-        <% post.documents.each do |document| %>
+        <% post.post_documents.each do |document| %>
 
           <div class='attachment comment-margin'>
 
             <%= link_to document.attachment_file_name, document.attachment.url %>
 
             <% if can_edit_user?(post.user) %>
-              <%= link_to 'Delete', attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+              <%= link_to image_tag('delete.png'), attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
             <% end %>
 
           </div>
@@ -32,14 +32,14 @@
 
         <br>
         <%= link_to_like_unlike post, :post %>
-        <div class='count'>
+        <span class='count'>
           <%= post.likes.count %>
-        </div>
+        </span>
 
 
         <% if can_edit_user?(post.user) %>
 
-          <%= link_to 'Delete', post_path(post.id), method: :delete, class: 'delete-post' %>
+          <%= link_to image_tag('delete.png'), post_path(post.id), method: :delete, class: 'delete-post' %>
 
         <% end %>
 

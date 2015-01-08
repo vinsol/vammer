@@ -75,7 +75,7 @@ class PostsController < ApplicationController
 
     def unlike_unsuccessful
       like = { error: t('comments.unlike.failure', scope: :message) }
-      render_error_response_for_like_unlike(like)      
+      render_error_response_for_like_unlike(like)
     end
 
     def like_unsuccessful
@@ -133,7 +133,7 @@ class PostsController < ApplicationController
       fetch_posts
       fetch_user_groups
       @group = Group.where(id: @post.group_id).first
-      @post.documents.build
+      @post.post_documents.build
       initialize_comment
     end
 
