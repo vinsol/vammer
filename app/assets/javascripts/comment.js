@@ -90,10 +90,10 @@ Comment.prototype.attachmentDetails = function(response) {
           'data-remote': 'true',
           'class': 'delete-attachment'
         }),
-        $destroy_attachment_div = $('<div>').attr({ 'class': 'remove-attachment' }),
+        $destroy_attachment_div = $('<img>').attr({ 'src': '/assets/delete.png', 'class': 'attachment-destroy-image' }),
         $attachment_container = $('<div>').attr({ 'class': 'attachment' });
-    $destroy_attachment_div.append(destroy_attachment);
-    $attachment_container.append(attachment, $destroy_attachment_div);
+    destroy_attachment.append($destroy_attachment_div);
+    $attachment_container.append(attachment, destroy_attachment);
     $attachments.push($attachment_container);
   })
   return this.marginDiv().append($attachments);

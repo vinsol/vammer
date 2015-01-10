@@ -31,7 +31,6 @@ class CommentsController < ApplicationController
       render_on_error(comment)
   end
 
-
   def like
     #FIX: First initialize like object and then assign to user, then save. Handle success/failure DONE
     like = current_user.likes.build
@@ -143,6 +142,7 @@ class CommentsController < ApplicationController
     end
 
     def authenticate_user_admin
+      @comment = Comment.where(id: params[:id] || params[:comment_id]).first
       #FIXME_AB: I think this is a generic method and may need in other controllers, so can we move it to application controller
       unless current_user.admin? or @comment.try(:user) == current_user
         handle_response

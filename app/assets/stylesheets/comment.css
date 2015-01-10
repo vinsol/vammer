@@ -1,3 +1,9 @@
+.attachment-destroy-image{
+  position: relative;
+  bottom: 30px;
+  left: 45px;
+}
+
 .remove-comment {
   background-image: url('/assets/delete.png');
   max-width: 32px;
