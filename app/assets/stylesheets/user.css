@@ -1,3 +1,7 @@
+.side-options{
+  position: relative;
+  left: 910px;
+}
 .vertical-center {
   margin-top: 10%;
 }

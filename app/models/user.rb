@@ -1,4 +1,4 @@
-#FIXME_AB: Indexes missing on almost all tables
+#FIXME_AB: Indexes missing on almost all tables DONE
 class User < ActiveRecord::Base
 
   START_YEAR = 1970
@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
 
   has_one :image, as: :attachment, dependent: :destroy
   has_many :likes
-  #FIXME_AB: instead of groups_members, i think we should name it as group_memberships
+  #FIXME_AB: instead of groups_members, i think we should name it as group_memberships DONE
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :owned_groups, class_name: Group, foreign_key: :creator_id
-  #FIXME_AB: Are you sure we want to destroy all related records when we destroy user?. AFAIR we agreed to delete user if there is no record associated with him, else disable him. Please consult with your PM
+  #FIXME_AB: Are you sure we want to destroy all related records when we destroy user?. AFAIR we agreed to delete user if there is no record associated with him, else disable him. Please consult with your PM DONE
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   validates :name, presence: :true, format: { with: /\A([a-z]|\s)+\z/i, message: 'only letters' }, length: { maximum: 255 }
 
   validates_uniqueness_of :name, :case_sensitive => false
-  
+
   validate :email_matches_company_domain
 
   scope :enabled, -> { where(enabled: true) }
@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
 
   def number_of_followers
     followers.count
+  end
+
+  def self.fetch_users(term)
+    User.where('name ilike ? ', '%' + term + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] }
   end
 
   private

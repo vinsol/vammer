@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
   before_action :fetch_post, only: [:destroy, :show]
-  before_action :fetch_post_for_like, only: [:like, :unlike]
+  before_action :fetch_post_for_like, only: [:like]
+  before_action :fetch_post_for_unlike, only: [:unlike]
   before_action :fetch_like, only: [:unlike]
 
   def create
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   def like
-    #FIX: First initialize like object and then assign to user, then save. Handle success/failure
+    #FIX: First initialize like object and then assign to user, then save. Handle success/failure DONE
     like = current_user.likes.build
     @post.likes.push like
     if like.save
@@ -38,11 +39,9 @@ class PostsController < ApplicationController
   end
 
   def unlike
-    #FIX: Fetch in before_action
-    @post = @like.likeable
-    #FIX: Handle success/failure
+    #FIX: Fetch in before_action DONE
+    #FIX: Handle success/failure DONE
     if @like.destroy
-      # PostMailer.notify_on_like(current_user, @post.user, @post.id).deliver
       unlike_successful
     else
       unlike_unsuccessful
@@ -151,6 +150,10 @@ class PostsController < ApplicationController
 
     def permitted_params
       params.require(:post).permit(:content, :group_id, documents_attributes: [:attachment, :id])
+    end
+
+    def fetch_post_for_unlike
+      @post = @like.likeable
     end
 
 end

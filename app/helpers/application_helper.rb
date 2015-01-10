@@ -25,14 +25,11 @@ module ApplicationHelper
     current_user == user
   end
 
-  #FIXME_AB: should be used as group.owner?(current_user). Or use some other permission engine like can can
-  #FIX: Move to model
-  # def group_owner_logged_in?(group)
-  #   group.creator == current_user
-  # end
+  #FIXME_AB: should be used as group.owner?(current_user). Or use some other permission engine like can can DONE
+  #FIX: Move to model DONE
 
   def group_join_link(group)
-    #FIXME_AB: logic can be improved.
+    #FIXME_AB: logic can be improved. DONE
     if current_user.groups.include? group
       if group.creator != current_user
         link_to :unjoin, unjoin_group_path(group)
@@ -74,8 +71,8 @@ module ApplicationHelper
   def link_to_join_unjoin
     current_user.groups.include?(group) ? link_to(:unjoin, unjoin_group_path(group)) : link_to(:join, join_group_path(group))
   end
-    #FIX: This method should not return nil in any case
-    #FIX: This condition can be moved to view
+    #FIX: This method should not return nil in any case DONE
+    #FIX: This condition can be moved to view DONE
 
   def missing_image_tag
     image_tag('missing.jpg')

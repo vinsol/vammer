@@ -73,11 +73,11 @@ class GroupsController < ApplicationController
     initialize_post
     initialize_comment
     #FIX: Refactor #includes -DONE
-    @posts = @group.posts.order(created_at: :desc).includes(:user, :documents, :comments)
+    @posts = @group.posts.order(created_at: :desc).includes(:user, :post_documents, :comments)
   end
 
   def members
-    #FIX: We should not have post form on group members page. Please confirm with PM
+    #FIX: We should not have post form on group members page. Please confirm with PM DONE
     initialize_post
     @members = @group.members.page params[:page]
   end

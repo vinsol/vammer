@@ -22,6 +22,10 @@ class Group < ActiveRecord::Base
     creator == current_user
   end
 
+  def self.fetch_groups(term)
+    Group.where('name ilike ? ', '%' + term + '%').map { |u| [u, false] }
+  end
+
   private
 
     def add_creator_to_member

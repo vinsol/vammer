@@ -10,6 +10,7 @@ class HashtagsController < ApplicationController
     #FIX: Fetch hashtag in before_action. Handle failure case. DONE
     #FIX: Remove if condition. It will be handled in above before_action DONE
     #FIX: Use #compact! to remove any nil entries, if present DONE
+    initialize_comment
     collect_post_form_hashtags
     @hashtagged.uniq.compact!
     #FIX: Create a template show.html.erb and render partial from there DONE

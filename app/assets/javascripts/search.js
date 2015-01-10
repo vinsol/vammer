@@ -6,7 +6,7 @@ Results.prototype.format = function(state) {
   if(state.is_user) {
     return '<img src=' + state.image + '>' + state.text;
   } else {
-    return '<img src=' + state.image + '>' + state.text;
+    return state.text;
   }
 }
 

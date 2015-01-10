@@ -80,7 +80,7 @@ en:
         failure: 'Can not delete'
         success: 'Comment deleted'
       record:
-        failure: 'Can not remove attachment'
+        failure: 'Can not remove'
     attachments:
       destroy:
         success: 'Attachment deleted'

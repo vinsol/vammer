@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
 
-  before_action :authenticate_user_admin, :fetch_comment, only: [:destroy]
+  before_action :fetch_comment, :authenticate_user_admin, only: [:destroy]
   before_action :fetch_post
   before_action :fetch_like, only: :unlike
   before_action :fetch_comment, only: [:like]
+  before_action :fetch_unlike_comment, only: [:unlike]
 
   def create
     #FIX: fetching post should be in a before_action DONE
@@ -32,11 +33,10 @@ class CommentsController < ApplicationController
 
 
   def like
-    #FIX: First initialize like object and then assign to user, then save. Handle success/failure
+    #FIX: First initialize like object and then assign to user, then save. Handle success/failure DONE
     like = current_user.likes.build
     @comment.likes.push like
     if like.save
-      CommentMailer.notify_on_like(current_user, @comment.user, @comment.post.id).deliver
       like_successful(like)
     else
       like_unsuccessful
@@ -44,11 +44,9 @@ class CommentsController < ApplicationController
   end
 
   def unlike
-    #FIX: Fetch in before_action
-    @comment = @like.likeable
-    #FIX: Handle success/failure
+    #FIX: Fetch in before_action DONE
+    #FIX: Handle success/failure DONE
     if @like.destroy
-      # CommentMailer.notify_on_like(current_user, @comment.user, @comment.post.id).deliver
       unlike_successful
     else
       unlike_unsuccessful
@@ -146,8 +144,7 @@ class CommentsController < ApplicationController
 
     def authenticate_user_admin
       #FIXME_AB: I think this is a generic method and may need in other controllers, so can we move it to application controller
-      fetch_comment
-      unless current_user.admin? or @comment.user == current_user
+      unless current_user.admin? or @comment.try(:user) == current_user
         handle_response
       end
     end
@@ -155,6 +152,10 @@ class CommentsController < ApplicationController
     def initialize_comment
       @comment = @post.comments.new(permitted_params)
       @comment.user_id = current_user.id
+    end
+
+    def fetch_unlike_comment
+      @comment = @like.likeable
     end
 
 end

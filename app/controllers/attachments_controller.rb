@@ -10,7 +10,7 @@ class AttachmentsController < ApplicationController
     end
     render_on_error(comment)
     #FIX: What if #destroy fails DONE
-    #FIX: Render with some status code
+    #FIX: Render with some status code DONE
   end
 
   private
@@ -54,7 +54,7 @@ class AttachmentsController < ApplicationController
 
     def render_on_error(comment)
       respond_to do |format|
-        format.json { render json: comment }
+        format.json { render json: comment, status: 500 }
       end
     end
 

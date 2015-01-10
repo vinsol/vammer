@@ -1,3 +1,8 @@
+.user-posts {
+  position: relative;
+  left: 120px;
+  width: 80%;
+}
 .edit-user {
   width: 40px;
   font-size: 13px;

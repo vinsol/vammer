@@ -89,9 +89,11 @@ Comment.prototype.attachmentDetails = function(response) {
           'data-method': 'delete',
           'data-remote': 'true',
           'class': 'delete-attachment'
-        }).text('destroy '),
+        }),
+        $destroy_attachment_div = $('<div>').attr({ 'class': 'remove-attachment' }),
         $attachment_container = $('<div>').attr({ 'class': 'attachment' });
-    $attachment_container.append(attachment, destroy_attachment);
+    $destroy_attachment_div.append(destroy_attachment);
+    $attachment_container.append(attachment, $destroy_attachment_div);
     $attachments.push($attachment_container);
   })
   return this.marginDiv().append($attachments);
@@ -118,14 +120,13 @@ Comment.prototype.CreateDom = function(element, data) {
         $content = this.contentDetails(response),
         $container = $('.' + response.post_id),
         $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
-        $image = $('<img>').attr( { href: '/assets/images/delete.png' } ),
+        $image = $('<div>').attr( { 'class': 'remove-comment' } ),
         $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path,
           'data-method': 'delete',
-          'data-remote': 'true',
-          'class': 'delete-comment'
+          'data-remote': 'true'
         });
-    $image.append($destroy_comment);
-    $box.append($name).append($content).append($attachments).append($like).append($numberOfLikes).append($image);
+    $destroy_comment.append($image);
+    $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
     $container.append($box);
     this.resetForm(element);
   }

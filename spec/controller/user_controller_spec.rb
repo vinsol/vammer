@@ -46,10 +46,10 @@ describe UsersController, type: :controller do
 
   # end
 
-  # describe '#mentioned working' do
+  # describe '#search_mentionable working' do
 
   #   it 'has a success status' do
-  #     xhr :get, :mentioned, term: 'sawan'
+  #     xhr :get, :search_mentionable, term: 'sawan'
   #     expect(response).to have_http_status :success
   #   end
 

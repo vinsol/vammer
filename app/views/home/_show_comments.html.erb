@@ -24,7 +24,7 @@
       </span>
 
       <% comment.comment_documents.each do |document| %>
-      <!-- #FIX: Indentation -->
+      <!-- #FIX: Indentation DONE -->
       <div class='attachment comment-margin'>
         <span>
           <% if document.attachment_content_type.split('/').first == 'image' %>
@@ -42,12 +42,12 @@
 
       <% end %>
 
-      <div class='comment-margin'>
-        <!-- #FIX: Move if condition outer div -->
-        <% if can_edit_user?(comment.user) %>
+      <% if can_edit_user?(comment.user) %>
+        <div class='comment-margin'>
+        <!-- #FIX: Move if condition outer div DONE -->
           <%= link_to image_tag('delete.png'), post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
     </div>
   <% end %>

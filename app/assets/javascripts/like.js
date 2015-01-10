@@ -8,22 +8,22 @@ Like.prototype.checkError = function(data) {
   return error == undefined
 }
 
-Like.prototype.generateLink = function(element, data, like_or_unlike, http_method){
+Like.prototype.generateLink = function(element, data, like_or_unlike_text, like_or_unlike, http_method){
   var response = JSON.parse(data.responseText);
-  $(element).html(like_or_unlike);
-  $(element).attr( {'class': like_or_unlike, 'href': response.like_path } ).data('method', http_method).data('remote', 'true');
+  $(element).html(like_or_unlike_text);
+  $(element).attr( {'class': like_or_unlike + ' comment-margin', 'href': response.like_path } ).data('method', http_method).data('remote', 'true');
   $(element).next('.count').html(response.count);
 }
 
 Like.prototype.like = function(element, data) {
-  if(this.checkError(data)){ 
-    this.generateLink(element, data, 'unlike', 'delete');
+  if(this.checkError(data)){
+    this.generateLink(element, data, 'Unlike','unlike', 'delete');
   }
 }
 
 Like.prototype.unlike = function(element, data) {
-  if(this.checkError(data)){ 
-    this.generateLink(element, data, 'like', 'post');
+  if(this.checkError(data)){
+    this.generateLink(element, data, 'Like','like', 'post');
   }
 }
 

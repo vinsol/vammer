@@ -14,15 +14,15 @@
   </ul>
 
   <div class='container'>
-  <% #FIXME_AB: What if there were no users -%>
+  <% #FIXME_AB: What if there were no users DONE -%>
     <% if @users %>
       <% @users.each do |user| %>
 
         <%= render 'show_user_card', user: user %>
 
       <% end %>
-      <% else %>
-        No Users
+    <% else %>
+      No Users
     <% end %>
 
   </div>

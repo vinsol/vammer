@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       @user_groups = current_user.groups
     end
 
-    #FIX: This comment is not associated to any post. Add a post_id field in the form where it is being used.
+    #FIX: This comment is not associated to any post. Add a post_id field in the form where it is being used. -DONE
     def initialize_comment
       @comment = Comment.new
       @comment.comment_documents.build
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     end
 
     def fetch_posts
-      #FIX: All inludes can be written as a collection e.g. includes(:user, :documents, :comments)
+      #FIX: All inludes can be written as a collection e.g. includes(:user, :documents, :comments) -DONE
       @posts = Post.includes(:user, :post_documents, :comments).order(created_at: :desc)
     end
 
@@ -52,13 +52,13 @@ class ApplicationController < ActionController::Base
     end
 
     def sort_order
-      #FIXME_AB: Do we have a better way?
-      #FIX: Do not change params. You may use instance variable or directly return string from the method
+      #FIXME_AB: Do we have a better way? DONE
+      #FIX: Do not change params. You may use instance variable or directly return string from the method DONE
       params[:direction] == 'asc' ? 'asc' : 'desc'
     end
 
     def sort_column
-      #FIXME_AB: Can you identify potential issue?
+      #FIXME_AB: Can you identify potential issue? DONE
       params[:column].blank? ? 'created_at' : params[:column]
     end
 

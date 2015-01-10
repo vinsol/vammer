@@ -61,9 +61,9 @@
 
         <%= render 'home/show_comments', post: post %>
 
-        <% if( !post.group || current_user.groups.include?(post.group) ) %>
+        <% if( !post.group || current_user.groups.include?(post.group) || current_user.admin? ) %>
 
-          <%= render 'shared/create_comments', post: post %>
+          <%= render 'shared/post_comment_form', post: post %>
 
         <% end %>
 

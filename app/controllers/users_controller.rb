@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  #FIX: Use only instead of except
-  before_action :fetch_user, except: [:index, :mentioned, :mentioned_users]
+  #FIX: Use only instead of except DONE
+  before_action :fetch_user, only: [:follower, :following, :edit, :show, :update, :follow, :unfollow]
 
   before_action :allow_modify, only: [:update, :edit]
 
@@ -14,20 +14,15 @@ class UsersController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        #FIX: Move to a method #fetch_users. Inside that call #filter_users for filtering by letter
-        @user = current_user
-        @users = current_user.admin? ? User.all : User.enabled
-        @users = filtered_users
+        #FIX: Move to a method #fetch_users. Inside that call #filter_users for filtering by letter DONE
+        fetch_users
       end
       format.json do
-        #FIX: Make a method in User, Group for searching.
-        #FIX: Move json creation to a private method.
+        #FIX: Make a method in User, Group for searching. DONE
+        #FIX: Move json creation to a private method. DONE
         #FIX: Try to use serializer for creating this json.
-        #FIX: Group has no image. so no need to check
-        data = { users: User.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, u.image ? u.image.attachment.url(:logo) : false] },
-                groups: Group.where('name ilike ? ', '%' + params[:term] + '%').map { |u| [u, false] }
-               }
-        render json: data
+        #FIX: Group has no image. so no need to check DONE
+        render json: fetch_user_groups
       end
     end
 
@@ -35,27 +30,27 @@ class UsersController < ApplicationController
 
   def follower
     @users = @user.followers
-    #FIX: Use symbol syntax for rendering
-    render 'index'
+    #FIX: Use symbol syntax for rendering DONE
+    render :index
   end
 
   def following
     @users = @user.followed_users
-    #FIX: Use symbol syntax for rendering
-    render 'index'
+    #FIX: Use symbol syntax for rendering DONE
+    render :index
   end
 
-  #FIX: See if we can change the mentioned user link href to /users/:id. Then we can completely remove this action.
+  #FIX: See if we can change the search_mentionable user link href to /users/:id. Then we can completely remove this action.
   def mentioned_users
     initialize_posts_comments
-    render 'show'
+    render :show
   end
 
-  #FIX: Rename to #search_mentionable
-  def mentioned
+  #FIX: Rename to #search_mentionable DONE
+  def search_mentionable
     respond_to do |format|
       format.json do
-        #FIX: Search users with names beginning with term only
+        #FIX: Search users with names beginning with term only DONE
         data = { users: User.where('name ilike ? ',params[:term] + '%').pluck(:name) }
         render json: data
       end
@@ -82,7 +77,7 @@ class UsersController < ApplicationController
 
   def follow
     if @user.followers << current_user
-      #FIX: Use single method for follow/unfollow success just like in post controller #like
+      #FIX: Use single method for follow/unfollow success just like in post controller #like DONE
       data = { followed: true, unfollow_path: unfollow_user_path(@user) }
     else
       data = { followed: false }
@@ -138,9 +133,9 @@ class UsersController < ApplicationController
 
     def filtered_users
       if /[a-z]/i.match params[:letter]
-        #FIX: See if we can write this as #where('name ilike ?%', params[:letter][0])
-        #FIX: We don't need to take first letter from params[:letter]. Assume we will receive a single letter in params.
-        @users.where('name ilike ?', params[:letter][0] + '%').order(name: :asc)
+        #FIX: See if we can write this as #where('name ilike ?%', params[:letter][0]) DONE
+        #FIX: We don't need to take first letter from params[:letter]. Assume we will receive a single letter in params. DONE
+        @users.where('name ilike ?', params[:letter] + '%').order(name: :asc)
       else
         @users
       end
@@ -151,6 +146,17 @@ class UsersController < ApplicationController
         flash[:error] = t('access.failure', scope: :flash)
         redirect_to :users
       end
+    end
+
+    def fetch_users
+      @user = current_user
+      @users = current_user.admin? ? User.all : User.enabled
+      @users = filtered_users
+    end
+
+    def fetch_user_groups
+     { users: User.fetch_users(params[:term]),
+       groups: Group.fetch_groups(params[:term]) }
     end
 
 end

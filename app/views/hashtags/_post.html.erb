@@ -43,10 +43,18 @@
 
         <% end %>
 
-        <%= render 'home/show_comments', post: post %>
-
       </div>
+
+      <%= render 'home/show_comments', post: post %>
+
+      <% if( !post.group || current_user.groups.include?(post.group) || current_user.admin? ) %>
+
+        <%= render 'shared/post_comment_form', post: post %>
+
+      <% end %>
+
     </div>
+
   <% end %>
 
   <br>

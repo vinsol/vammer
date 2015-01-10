@@ -4,8 +4,8 @@
 puts 'enter name'
 name = STDIN.gets.chomp
 
-#FIXME_AB: You should tell that this email id should be the company id. Read domain from config.yml
-#FIXME_AB: Also make sure that your rails application doesn't boot if it doesn't have config.yml file with company name and domain.
+#FIXME_AB: You should tell that this email id should be the company id. Read domain from config.yml DONE
+#FIXME_AB: Also make sure that your rails application doesn't boot if it doesn't have config.yml file with company name and domain. DONE
 puts "enter email_id with domain name as #{COMPANY['domain']}"
 email_id = STDIN.gets.chomp
 
@@ -22,6 +22,6 @@ else
   puts user.errors.full_messages
 end
 
-#FIX: Show missing image if image not present. Do not build empty image. Remove message.
+#FIX: Show missing image if image not present. Do not build empty image. Remove message. DONE
 setting = Setting.create
-#FIXME_AB: Where is logo saved, where did we assigned? You just created setting and build image
+#FIXME_AB: Where is logo saved, where did we assigned? You just created setting and build image DONE

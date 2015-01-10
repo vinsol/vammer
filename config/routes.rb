@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :update, :show] do
     collection do
-      get 'mentioned'
+      get 'search_mentionable'
     end
     member do
       post 'follow', to: 'users#follow'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       get 'following', to: 'users#following'
     end
   end
-  get 'users/mentioned_users/:name', to: 'users#mentioned_users', as: :mentioned
+  get 'users/mentioned_users/:name', to: 'users#mentioned_users', as: :search_mentionable
 
   resources :groups, except: [:destroy] do
     member do
