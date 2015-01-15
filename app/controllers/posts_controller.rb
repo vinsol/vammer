@@ -2,8 +2,8 @@ class PostsController < ApplicationController
 
   before_action :fetch_post, only: [:destroy, :show]
   before_action :fetch_post_for_like, only: [:like]
-  before_action :fetch_post_for_unlike, only: [:unlike]
   before_action :fetch_like, only: [:unlike]
+  before_action :fetch_post_for_unlike, only: [:unlike]
 
   def create
     @post = current_user.posts.new(permitted_params)
