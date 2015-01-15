@@ -123,7 +123,8 @@ Comment.prototype.CreateDom = function(element, data) {
         $image = $('<div>').attr( { 'class': 'remove-comment' } ),
         $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path,
           'data-method': 'delete',
-          'data-remote': 'true'
+          'data-remote': 'true',
+          'class': 'delete-comm',
         });
     $destroy_comment.append($image);
     $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
@@ -152,7 +153,7 @@ Comment.prototype.bindEvents = function() {
   $('.create-comment').bind("ajax:complete", function(e, data){
     _this.CreateDom(this, data);
   });
-  $('.post-division').on('ajax:complete', '.delete-comment', function(e, data){
+  $('.post-division').on('ajax:complete', '.delete-comm', function(e, data){
     _this.destroy(this, data)
   })
 }

@@ -18,15 +18,6 @@
           <% post.post_documents.each do |document| %>
 
             <div class='attachment comment-margin'>
-              <span>
-                <% if document.attachment_content_type.split('/').first == 'image' %>
-                  <%= render 'shared/show_attachment', image: document %>
-                <% else %>
-                  <%= document.attachment_file_name %>
-                  <%= link_to attachment_type(document), document.attachment.url %>
-                <% end %>
-              </span>
-
           <span>
             <% if document.attachment_content_type.split('/').first == 'image' %>
               <%= render 'shared/show_attachment', image: document %>

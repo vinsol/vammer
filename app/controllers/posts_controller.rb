@@ -149,7 +149,7 @@ class PostsController < ApplicationController
     end
 
     def permitted_params
-      params.require(:post).permit(:content, :group_id, documents_attributes: [:attachment, :id])
+      params.require(:post).permit(:content, :group_id, post_documents_attributes: [:attachment, :id])
     end
 
     def fetch_post_for_unlike

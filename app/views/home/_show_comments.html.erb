@@ -45,7 +45,7 @@
       <% if can_edit_user?(comment.user) %>
         <div class='comment-margin'>
         <!-- #FIX: Move if condition outer div DONE -->
-          <%= link_to image_tag('delete.png'), post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment' %>
+          <%= link_to image_tag('delete.png'), post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment delete-comm' %>
         </div>
       <% end %>
 
