@@ -1,3 +1,7 @@
+.attachment-type {
+  font-size: 9px;
+  display: inline-block;
+}
 .user-posts {
   position: relative;
   left: 120px;
