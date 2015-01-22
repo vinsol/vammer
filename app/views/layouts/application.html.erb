@@ -39,6 +39,13 @@
           </div>
         <% end %>
         <% if current_user %>
+          <div class='col-md-offset-4 navigation-bar-new'>
+            <ul class="nav nav-tabs">
+              <li role="presentation" class=<%= 'active' if request.fullpath == '/' %>> <%= link_to 'Home', root_path %> </li>
+              <li role="presentation" class=<%= 'active' if request.fullpath == '/groups' %>> <%= link_to 'Group', groups_path %> </li>
+              <li role="presentation" class=<%= 'active' if request.fullpath == '/users' %>> <%= link_to 'People', users_path %> </li>
+            </ul>
+          </div>
         <br><br><br><br>
           <div class='col-md-2'>
             <%= render 'shared/group' %>

@@ -3,25 +3,15 @@
 
       <div class='pull-left logo-position'>
           <%= link_to(image_tag(@logo.image.attachment.url(:thumb)), :root) %>
-        <div class='user-name'>
-          Hi <%= current_user.name.capitalize %>
-        </div>
-
       </div>
 
     <li class='dropdown more-position'>
 
-      <a href='#' class='dropdown-toggle more-link-color' data-toggle='dropdown'>More
+      <a href='#' class='dropdown-toggle more-link-color' data-toggle='dropdown'><%= current_user.name.capitalize %>
         <b class='caret'></b>
       </a>
 
       <ul class='dropdown-menu'>
-        <li>
-          <%= link_to 'Group', groups_path %>
-        </li>
-        <li>
-          <%= link_to 'People', users_path %>
-        </li>
         <li>
           <%= link_to 'Edit Profile', edit_user_path(current_user) %>
         </li>

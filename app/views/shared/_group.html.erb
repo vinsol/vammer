@@ -1,4 +1,7 @@
+<div class='profile-image-container'>
   <%= current_user.image ? image_tag(current_user.image.attachment.url) : missing_image_tag %>
+</div>
+
   <br>
   <%= current_user.name.capitalize %>
 

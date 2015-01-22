@@ -1,3 +1,12 @@
+.navigation-bar-new{
+  display: inline-block;
+}
+
+.profile-image-container{
+  display: inline-block;
+  border: 1px #8D8796 solid;
+  padding: 3px !important;
+}
 .sidebar-width {
   width: 150px;
 }
@@ -20,7 +29,8 @@
 }
 
 .search-user {
-  margin-top: -50px;
+  margin-top: -31px;
+  margin-left: 72%;
 }
 
 .more-link-color {
