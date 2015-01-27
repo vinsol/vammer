@@ -23,11 +23,11 @@ Comment.prototype.likeDetails = function(response) {
     'href': response.like_path,
     'data-method': 'post',
     'data-remote': 'true',
-    'class': 'like comment-margin'
-  }).text('like');
+    'class': 'like'
+  }).text(' Likes');
 }
 Comment.prototype.numberOfLikesDetails = function(response) {
-  return $('<span>').attr( {'class': 'count comment-margin'} ).text(0);
+  return $('<span>').attr( {'class': 'count comment-count'} ).text(0);
 }
 
 Comment.prototype.buildImage = function(response) {
@@ -127,7 +127,7 @@ Comment.prototype.CreateDom = function(element, data) {
           'class': 'delete-comm',
         });
     $destroy_comment.append($image);
-    $box.append($name).append($content).append($like).append($numberOfLikes).append($attachments).append($destroy_comment);
+    $box.append($name).append($content).append($numberOfLikes).append($like).append($attachments).append($destroy_comment);
     $container.append($box);
     this.resetForm(element);
   }

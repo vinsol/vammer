@@ -11,7 +11,7 @@ Like.prototype.checkError = function(data) {
 Like.prototype.generateLink = function(element, data, like_or_unlike_text, like_or_unlike, http_method){
   var response = JSON.parse(data.responseText);
   $(element).html(like_or_unlike_text);
-  $(element).attr( {'class': like_or_unlike + ' comment-margin', 'href': response.like_path } ).data('method', http_method).data('remote', 'true');
+  $(element).attr( {'class': like_or_unlike, 'href': response.like_path } ).data('method', http_method).data('remote', 'true');
   $(element).next('.count').html(response.count);
 }
 

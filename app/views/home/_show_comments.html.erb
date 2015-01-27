@@ -17,11 +17,11 @@
         <%= linkify_mentions(linkify_hashtags(comment.content)) %>
       </div>
 
-      <%= link_to_like_unlike comment, :comment %>
 
-      <span class='count'>
+      <span class='comment-count count'>
         <%= comment.likes.count %>
       </span>
+      <%= link_to_like_unlike comment, :comment %>
 
       <% comment.comment_documents.each do |document| %>
       <!-- #FIX: Indentation DONE -->

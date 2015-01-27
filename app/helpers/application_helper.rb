@@ -51,9 +51,9 @@ module ApplicationHelper
   #FIX: Will see after moving #like/#unlike to posts, comments controllers
   def comment_like_unlike(like, likeable)
     if like.nil?
-      link_to 'Like', post_comment_like_path(likeable.post, likeable), method: :post, class: 'like comment-margin', remote: :true
+      link_to 'Like', post_comment_like_path(likeable.post, likeable), method: :post, class: 'like', remote: :true
     else
-      link_to 'Unlike', post_comment_unlike_path(likeable.post, likeable, like), method: :delete, class: 'unlike comment-margin', remote: :true
+      link_to 'Unlike', post_comment_unlike_path(likeable.post, likeable, like), method: :delete, class: 'unlike', remote: :true
     end
   end
 
