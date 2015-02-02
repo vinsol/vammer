@@ -11,9 +11,9 @@ class Like < ActiveRecord::Base
 
   def send_mail
     if likeable.try(:post)
-      CommentMailer.notify_on_like(user, likeable.user, likeable.post.id).deliver
+      # CommentMailer.notify_on_like(user, likeable.user, likeable.post.id).deliver
     else
-      CommentMailer.notify_on_like(user, likeable.user, likeable.id).deliver
+      # CommentMailer.notify_on_like(user, likeable.user, likeable.id).deliver
     end
   end
 

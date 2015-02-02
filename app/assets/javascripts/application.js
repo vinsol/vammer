@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery-ui
-//= require bootstrap
+//= require bootstrap.min
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require like

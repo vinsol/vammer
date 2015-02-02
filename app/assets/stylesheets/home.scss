@@ -28,11 +28,6 @@
   margin: 0px 184px;
 }
 
-.search-user {
-  margin-top: -31px;
-  margin-left: 790px;
-}
-
 .more-link-color {
   color: #ececec;
 }
@@ -41,11 +36,6 @@
   font-size: 16px;
   font-style: bold;
 }
-
-.logo-position {
-  margin-left: 15px;
-}
-
 .blue-color {
   background: linear-gradient(#8DB1EF, #3b5998);
   height: 54px;
@@ -84,4 +74,22 @@
 .navbar-center {
   padding-top: 8px;
 }
-
+ /*--- my css ---*/
+ .search-user{
+  .select2-container{
+    width: 100%;
+    .select2-choice{
+      background: #fff;
+      .select2-drop-active{
+        background: #fff;
+      }
+    }
+  }
+ }
+.more-position{
+  padding:5px 0 0;
+  a:hover{
+      background: #88ABE9;
+      border-radius: 8px;
+    }
+  }
