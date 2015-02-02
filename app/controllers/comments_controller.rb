@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     #FIX: Move to a method #initialize_comment DONE
     initialize_comment
     if @comment.save
-      CommentMailer.notify_on_create(current_user, @comment.post.user, @comment.post.id).deliver
+      # CommentMailer.notify_on_create(current_user, @comment.post.user, @comment.post.id).deliver
       respond_to do |format|
         format.json { render json: @comment, serializer: CommentSerializer }
       end
