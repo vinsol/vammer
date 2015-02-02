@@ -14,7 +14,7 @@
       </div>
 
       <div class='comment-margin'>
-        <%= linkify_mentions(linkify_hashtags(comment.content)) %>
+        <%= simple_format linkify_mentions(linkify_hashtags(comment.content)) %>
       </div>
 
 

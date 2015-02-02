@@ -5,7 +5,7 @@ module HashtagsHelper
     hashtagged_content = hashtaggable_content.to_s.gsub(regex) do
       link_to($&, hashtag_path($2), {class: :hashtag})
     end
-    hashtagged_content.html_safe
+    raw(hashtagged_content)
   end
 
   def render_hashtaggable(hashtaggable)
