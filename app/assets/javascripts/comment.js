@@ -111,7 +111,7 @@ Comment.prototype.resetForm = function(element) {
 }
 
 Comment.prototype.CreateDom = function(element, data) {
-  if(this.checkError(data)){
+  if(this.checkError(element, data)){
     var response = JSON.parse(data.responseText).comment,
         $name = this.userDetails(response),
         $like = this.likeDetails(response),
@@ -133,18 +133,18 @@ Comment.prototype.CreateDom = function(element, data) {
   }
 }
 
-Comment.prototype.checkError = function(data) {
+Comment.prototype.checkError = function(element, data) {
   error = JSON.parse(data.responseText).error
   if(error != undefined) {
-    alert(error)
+    $(element).closest('.comment-box').after(data)
   }
   return error == undefined
 }
 
 Comment.prototype.destroy = function(element, data) {
-  if(this.checkError(data)){
+  if(this.checkError(element, data)){
+    $(element).closest('.comment-box').after(JSON.parse(data.responseText).message)
     $(element).closest('.comment-box').remove();
-    alert(JSON.parse(data.responseText).message)
   }
 }
 

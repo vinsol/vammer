@@ -5,7 +5,7 @@ module PostsHelper
     hashtagged_content = hashtaggable_content.to_s.gsub(regex) do |content|
       link_to(content, search_mentionable_path(content))
     end
-    hashtagged_content.html_safe
+    raw(hashtagged_content)
   end
 
 end
