@@ -7,6 +7,17 @@
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%
 }
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fontawesome-webfont.eot?v=4.3.0');
+  src: url('fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
+  url('fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
+  url('fontawesome-webfont.woff?v=4.3.0') format('woff'),
+  url('ontawesome-webfont.ttf?v=4.3.0') format('truetype'),
+  url('fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
 	margin: 0
 }
@@ -213,8 +224,12 @@ select {
 }
 @font-face {
 	font-family: 'Glyphicons Halflings';
-	src: url(../fonts/glyphicons-halflings-regular.eot);
-	src: url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), url(../fonts/glyphicons-halflings-regular.woff2) format('woff2'), url(../fonts/glyphicons-halflings-regular.woff) format('woff'), url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'), url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+	src: url(glyphicons-halflings-regular.eot);
+	src: url(glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),
+	url(glyphicons-halflings-regular.woff2) format('woff2'),
+	url(glyphicons-halflings-regular.woff) format('woff'),
+	url(glyphicons-halflings-regular.ttf) format('truetype'),
+	url(glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
 }
 .glyphicon {
 	position: relative;
@@ -3240,12 +3255,13 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 }
 .nav>li {
 	position: relative;
-	display: block
+	display: block;
+	margin: 0 5px 0;
 }
 .nav>li>a {
-	position: relative;
 	display: block;
-	padding: 10px 15px
+	padding: 10px 5px 10px 20px;
+	position: relative;
 }
 .nav>li.disabled>a {
 	color: #777
@@ -3272,9 +3288,6 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 .nav>li>a>img {
 	max-width: none
 }
-.nav-tabs {
-	border-bottom: 1px solid #ddd
-}
 .nav-tabs>li {
 	float: left;
 	margin-bottom: -1px
@@ -3284,16 +3297,16 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	line-height: 1.42857143;
 	border: 1px solid transparent;
 	border-radius: 4px 4px 0 0
+	height: 40px;
 }
-.nav-tabs>li>a:hover {
-	border-color: #eee #eee #ddd
+.nav-tabs>li:hover,
+.nav-tabs>li.active{
+	border-bottom:#888 solid 3px;
+	height: 38px;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-	color: #555;
-	cursor: default;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-bottom-color: transparent
+.nav-tabs>li a:hover,
+.nav-tabs>li.active a{
+	color: #666;
 }
 .nav-tabs.nav-justified {
 	width: 100%;
