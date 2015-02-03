@@ -3257,8 +3257,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 	background-color: transparent
 }
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
-	background-color: #eee;
-	border-color: #337ab7
+	background: none repeat scroll 0 0 #f6f6f6;
+	border-radius: 5px;
+	color: #666;
+	margin: 10px 0 0;
+	padding: 4px 13px !important;
 }
 .nav .nav-divider {
 	height: 1px;
@@ -4360,7 +4363,6 @@ to {
 }
 .list-group {
 	padding-left: 0;
-	margin-bottom: 20px
 }
 .list-group-item {
 	position: relative;

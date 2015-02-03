@@ -1,8 +1,4 @@
-<div class='post-container'>
-  <%= nested_form_for @post, class: 'form-horizontal' do |f| %>
-
-    <%= render partial: 'shared/error_message', locals: {errors: @post.errors} %>
-
-      <%= render 'shared/posts_form_fields', locals: {f: f} %>
-  <% end %>
-</div>
+<%= nested_form_for @post, class: 'form-horizontal' do |f| %>
+	<%= render partial: 'shared/error_message', locals: {errors: @post.errors} %>
+	<%= render 'shared/posts_form_fields', locals: {f: f} %>
+<% end %>
