@@ -34,11 +34,11 @@
         <aside class='col-md-2'>
           <%= render 'shared/group' %>
         </aside>
-        <article class='navigation-bar-new col-md-7'>
+        <article class='navigation-bar-new col-md-6'>
           <ul class="nav nav-tabs">
-            <li role="presentation" class=<%= 'active' if request.fullpath == '/' %>> <%= link_to 'Home', root_path %> </li>
-            <li role="presentation" class=<%= 'active' if request.fullpath == '/groups' %>> <%= link_to 'Group', groups_path %> </li>
-            <li role="presentation" class=<%= 'active' if request.fullpath == '/users' %>> <%= link_to 'People', users_path %> </li>
+            <li role="presentation" class=<%= 'active' if request.fullpath == '/' %> > <small class='home-icon'></small><%= link_to 'Home', root_path %> </li>
+            <li role="presentation" class=group <%= 'active' if request.fullpath == '/groups' %>><small class='home-icon'></small> <%= link_to 'Group', groups_path %> </li>
+            <li role="presentation" class=people <%= 'active' if request.fullpath == '/users' %>><small class='home-icon'></small> <%= link_to 'People', users_path %> </li>
           </ul>
       <% end %>
       <%= yield %>

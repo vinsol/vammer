@@ -1,23 +1,12 @@
-<div class='col-lg-offset-1 col-lg-7'>
-
+<article>
   <% @posts.each do |post| %>
     <% if post.user.image %>
       <%= image_tag(post.user.image.attachment.url(:thumb)) %>
     <% end %>
-
     <%= post.user.name %>
-
-    <br><br>
-
     <%= post.content %>
-
     <% if post.document %>
       <%= link_to 'attachment', post.document.attachment.url %>
     <% end %>
-
-    <br> <br> <br> <br>
   <% end %>
-
-  <br>
-
-</div>
+</article>

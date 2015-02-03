@@ -5,6 +5,10 @@
 	color: #666;
 	font-family: arial;
 }
+.home-icon{
+	background-image:url('../../assets/images/home-sprite.png');
+
+}
 .width-full{
 	width:100%;
 }
