@@ -1,22 +1,22 @@
-<div class=' col-md-offset-1 col-md-8'>
+<section class='group-detail p-20 mt-10'>
   <%= render 'show_group_details' %>
-  <div>
-    <table class="table table-striped table-hover ">
+</section>
+<article class="group-block mt-20">
+  <table class="table table-striped table-hover ">
+    <tr>
+      <th>Name </th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+    <% @members.each do |member| %>
       <tr>
-        <th>Name </th>
-        <th>Description</th>
-        <th>Action</th>
+        <td> <%= member.name %> </td>
+        <td> <%= member.email %> </td>
+        <td>
+          <%= link_to '', user_path(member), class:'view fa fa-search' %>
+        </td>
       </tr>
-      <% @members.each do |member| %>
-        <tr>
-          <td> <%= member.name %> </td>
-          <td> <%= member.email %> </td>
-          <td>
-            <%= link_to 'View', user_path(member) %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-    <%= paginate @members %>
-  </div>
-</div>
+    <% end %>
+  </table>
+  <%= paginate @members %>
+</article>
