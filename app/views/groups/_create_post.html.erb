@@ -3,9 +3,4 @@
     <%= render 'shared/posts_form_fields', locals: {f: f} %>
     <%= f.hidden_field :group_id, value: @group.id %>
 
-    <div class='col-lg-4 col-lg-offset-1 post-submit-button'>
-      <br>
-      <%= f.submit %>
-    </div>
-  </div>
 <% end %>

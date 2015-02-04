@@ -5,8 +5,7 @@
 }
 .user-posts {
   position: relative;
-  left: 120px;
-  width: 80%;
+  width:65%;
 }
 .edit-user {
   width: 40px;
@@ -21,9 +20,6 @@
   background-color: #fff;
   border: 1px solid #eee;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-}
-.join-link {
-  margin: -60px 0px 0px 80px;
 }
 .delete-post {
   float: right;
