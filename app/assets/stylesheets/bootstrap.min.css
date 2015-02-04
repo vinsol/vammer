@@ -1270,7 +1270,6 @@ ol ol, ol ul, ul ol, ul ul {
 }
 .list-inline {
 	padding-left: 0;
-	margin-left: -5px;
 	list-style: none
 }
 .list-inline>li {
@@ -4378,12 +4377,14 @@ to {
 	padding-left: 0;
 }
 .list-group-item {
-	position: relative;
-	display: block;
-	padding: 10px 15px;
-	margin-bottom: -1px;
 	background-color: #fff;
-	border: 1px solid #ddd
+	border: 1px solid #ddd;
+	color: #666;
+	display: block;
+	font-size: 13px;
+	margin-bottom: -1px;
+	padding: 7px 15px;
+	position: relative;
 }
 .list-group-item:first-child {
 	border-top-left-radius: 4px;

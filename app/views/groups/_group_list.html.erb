@@ -1,7 +1,6 @@
-<div class='group-block'>
-
+<div class='group-block mt-10'>
   <ul class='nav group-sub'>
-    <li> <%= link_to 'My groups', :groups %> </li>
+    <li class='active'> <%= link_to 'My groups', :groups %> </li>
     <li> <%= link_to 'Other groups', :extraneous_groups %> </li>
     <li> <%= link_to 'Owned groups', :owned_groups %> </li>
   </ul>
@@ -28,10 +27,10 @@
             <td> <%= group.creator.name %> </td>
           <% end %>
           <td>
-            <%= link_to 'View', group_path(group) %>
+            <%= link_to '', group_path(group), title:'view', class:'view fa fa-search' %>
             <%= group_join_link(group) %>
             <% if admin_logged_in? || group.owner?(current_user) %>
-              <%= link_to :edit, edit_group_path(group) %>
+              <%= link_to :'', edit_group_path(group), title:'edit', class:'edit fa fa-edit' %>
             <% end %>
           </td>
         </tr>

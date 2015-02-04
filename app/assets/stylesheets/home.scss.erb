@@ -1,3 +1,18 @@
+/*--- mixins ---*/
+@mixin border-radius($radius) {
+ -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+     -ms-border-radius: $radius;
+         border-radius: $radius;
+}
+.button{
+  background: none repeat scroll 0 0 #219b48;
+  border: medium none;
+  color: #fff;
+  float: right;
+  padding: 5px 10px;
+  @include border-radius(5px);
+}
 /*--- header ---*/
 header {
   background: linear-gradient(#8DB1EF, #3b5998);
@@ -105,11 +120,9 @@ header {
   }
   .attachment-btn {
     background: none repeat scroll 0 0 #ff9900;
-    border-radius: 5px;
-    color: #fff;
-    padding: 5px 15px;
     top: 0;
     z-index: 1;
+    @extend .button
   }
   .attachment-btn:hover{
     opacity:0.8;
@@ -125,12 +138,7 @@ header {
 .post-submit-button{
   text-align: right;
   input {
-    background: none repeat scroll 0 0 #219b48;
-    border: medium none;
-    border-radius: 5px;
-    color: #fff;
-    padding: 5px 10px;
-    float: right;
+    @extend .button
   }
 }
 .post-submit-button {
@@ -153,15 +161,61 @@ header {
   }
 }
 .group-sub {
+  background: none repeat scroll 0 0 #fcf8e3;
+  border: 2px solid #fbeed5;
   li {
-    float: left;
-    width: auto;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    width: 31%;
     a{
-      color: #646464;
+      color: #c09853;
       font-size: 13px;
       padding: 10px 5px 5px;
+      font-weight: normal !important;
     }
   }
+  li.active{
+    a{
+      background:#F7ECB7;
+      font-weight: bold !important;
+    }
+  }
+}
+.group-block{
+  .table-striped {
+    border:solid 1px #fbeed5;
+    tr:nth-of-type(2n+1) {
+      background:#fcfaef;
+    }
+    th,
+    td{
+      border-color:#fbeed5;
+    }
+    tr:hover{
+      background:#fcfaef;
+    }
+  }
+}
+.group-people{
+  background: #fcfaef;
+}
+.list-inline{
+  color: #c09853;
+  li{
+    padding-left: 4px;
+    padding-right: 4px;
+    a{
+      color: #c09853;
+      font-size: 11px;
+    }
+  }
+}
+.user-block {
+  background: none repeat scroll 0 0 #fcfbf7;
+  border: 1px solid #fbeed5;
+  float: left;
+  width: 100%;
 }
 
 

@@ -1,29 +1,24 @@
-<br><br><br><br>
-<div class='col-md-8'>
-  <ul class='nav nav-tabs'>
+<div class="group-people mt-10">
+  <ul class='nav group-sub'>
     <li> <%= link_to 'All users', users_path %> </li>
     <li> <%= link_to 'Followers', follower_user_path(@user) %> </li>
     <li> <%= link_to 'Following', following_user_path(@user) %> </li>
   </ul>
-  <ul class='list-inline'>
+  <ul class='list-inline pb-10'>
     <% ApplicationHelper::ALPHABETS.each do |alphabet| %>
       <li>
         <%= link_to alphabet, users_path(letter: alphabet) %>
       </li>|
     <% end %>
   </ul>
-
-  <div class='container'>
+  <div class='user-block'>
   <% #FIXME_AB: What if there were no users DONE -%>
     <% if @users %>
       <% @users.each do |user| %>
-
         <%= render 'show_user_card', user: user %>
-
       <% end %>
     <% else %>
       No Users
     <% end %>
-
   </div>
 </div>
