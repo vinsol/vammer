@@ -1,15 +1,8 @@
-.side-options{
-  position: relative;
-  left: 910px;
-}
 .vertical-center {
   margin-top: 10%;
 }
 .center-align td, .center-align th{
   text-align: center;
-}
-.side-bar {
-  float: left;
 }
 .table-width {
    width: 80%;
