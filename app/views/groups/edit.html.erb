@@ -1,6 +1,8 @@
-<%= form_for @group, html: { class: 'form-horizontal col-lg-10'} do |f| %>
-
-  <h2>Update</h2>
-
-  <%= render 'form', {f: f} %>
-<% end %>
+<section class="edit-details pull-left">
+	<article class="col-md-12 col-md-offset-4 edit-det-inr mt-15 pb-15 chng-pwd">
+	  	<h2 class="mb-10">Update</h2>
+		<%= form_for @group, html: { class: 'form-horizontal'} do |f| %>
+	  	<%= render 'form', {f: f} %>
+		<% end %>
+	</article>
+</section>
