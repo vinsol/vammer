@@ -32,10 +32,10 @@ module ApplicationHelper
     #FIXME_AB: logic can be improved. DONE
     if current_user.groups.include? group
       if group.creator != current_user
-        link_to :unjoin, unjoin_group_path(group)
+        link_to '', unjoin_group_path(group), class: 'unjoin fa fa-unlink ml-10 mr-10', title:'unjoin'
       end
     else
-      link_to :join, join_group_path(group)
+      link_to '', join_group_path(group), class: 'join fa fa-link ml-10 mr-10', title:'join'
     end
   end
 

@@ -1,47 +1,30 @@
-<div>
-
-  <div class='col-md-8 col-md-offset-2 vertical-center'>
-
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-horizontal col-lg-8'}) do |f| %>
-
-      <h1> Log in </h1>
+<section class="edit-details pull-left mob-bot-margin">
+  <article class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 edit-det-inr mt-15 pb-15 chng-pwd">
+    <h2> Log in </h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-horizontal col-md-12'}) do |f| %>
       <% if flash[:alert] %>
-
-        <div class='control-group alert alert-danger'>
+        <fieldset class='form-group alert alert-danger'>
           <%= flash[:alert] %>
-        </div>
-
+        </fieldset>
       <% end %>
-
-      <br><br>
-
-      <div class='control-group'>
+      <fieldset class='form-group'>
         <%= f.label :email, 'Email', class: 'control-label' %>
         <%= f.email_field :email, class: 'form-control', autofocus: true %>
-      </div> <br>
-
-      <div class='control-group'>
+      </fieldset>
+      <fieldset class='form-group'>
         <%= f.label :password, class: 'control-label' %>
         <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
-      </div>
-
+      </fieldset>
       <% if devise_mapping.rememberable? -%>
-
-        <div>
+        <fieldset class='form-group'>
           <%= f.check_box :remember_me%>
           <%= f.label :remember_me, class: 'control-label' %>
-        </div>
-
+        </fieldset>
       <% end -%>
-
-      <div>
-        <%= f.submit 'Log in', class: 'btn btn-primary' %>
-      </div>
-
+      <fieldset class='form-group'>
+        <%= f.submit 'Log in', class: 'btn btn-success' %>
+      </fieldset>
       <%= render 'users/shared/links' %>
-
     <% end %>
-
-  </div>
-
-</div>
+  </article>
+</section>
