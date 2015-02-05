@@ -1,8 +1,8 @@
-<section class="edit-details pull-left">
+<section class="edit-details pull-left mob-bot-margin">
   <% if creator_logged_in?(@user) %>
     <%= render 'users/registrations/side_bar' %>
   <% end %>
-  <article class='col-md-8 col-md-offset-5 edit-det-inr mt-15 pb-15'>
+  <article class='col-md-5 col-md-offset-5 edit-det-inr mt-15 pb-15'>
     <%= form_for @user, html: { class: 'form-horizontal col-md-10'} do |f| %>
       <h2 class='mb-0'>edit user details</h2>
       <fieldset class='form-group col-md-offset-4'>

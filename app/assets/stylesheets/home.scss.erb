@@ -41,6 +41,10 @@ header {
     padding: 3px !important;
     vertical-align: middle;
     width:180px;
+    @media screen and (max-width: 700px){
+      width: 100%;
+      display: inline-block;
+    }
     img {
       max-height: 100%;
       max-width: 100%;
@@ -243,6 +247,9 @@ header {
 .follow-user {
   float: right;
   width: auto;
+  @media screen and (max-width: 700px){
+    clear:both;
+  }
 }
 .user-hed{
   color: #5a5a5a;
@@ -279,24 +286,37 @@ header {
     }
   }
 }
+.edit-details{
+  width: 100%;
+}
 .chng-pwd{
   h2{
     margin-left: 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.user-posts {
+  position: relative;
+  width:65%;
+  @media screen and (max-width: 700px){
+    width:100%;
+  }
+}
+@media screen and (max-width: 700px){
+  .edit-details{
+    width: 100%;
+  }
+  .mob-bot-margin{
+    margin-bottom:20px;
+  }
+}
+#edit_setting_1 {
+  .form-control{
+    background: #fff;
+  }
+  label{
+    width: 100%;
+  }
+  input[type="submit"]{
+    float: left;
+  }
+}

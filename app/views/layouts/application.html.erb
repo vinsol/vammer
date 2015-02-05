@@ -5,6 +5,7 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <header class='header'>
@@ -18,7 +19,7 @@
         </div>
       </div>
     </header>
-    <section class='bodycontainer ovr-hdn mt-20'>
+    <section class='bodycontainer ovr-hdn mt-20 pb-20'>
       <!-- #FIX: Fade out flash messages after some time -->
       <% if flash[:notice] %>
         <div class="control-group alert alert-success ml-15 mr-15">
@@ -31,10 +32,10 @@
         </div>
       <% end %>
       <% if current_user %>
-        <aside class='col-md-2'>
+        <aside class='col-md-2 col-sm-3'>
           <%= render 'shared/group' %>
         </aside>
-        <article class='navigation-bar-new col-md-6'>
+        <article class='navigation-bar-new col-md-6 col-sm-6'>
           <ul class="nav nav-tabs">
             <li role="presentation" class=<%= 'active' if request.fullpath == '/' %> > <small class='fa fa-home'></small><%= link_to 'Home', root_path %> </li>
             <li role="presentation" class=group <%= 'active' if request.fullpath == '/groups' %>><small class='fa fa-group'></small> <%= link_to 'Group', groups_path %> </li>

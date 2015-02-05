@@ -2,14 +2,14 @@
   <%= locals[:f].text_area :content, placeholder: 'What\'s on your mind?', class: 'form-control inputbox' %>
 </fieldset>
 <article class='post-submit pt-15 ovr-hdn'>
-  <fieldset class='col-md-3 pull-left'>
+  <fieldset class='col-md-3 col-sm-3 col-xs-3 pull-left pull-left'>
     <%= locals[:f].fields_for :post_documents do |attach| %>
       <%= attach.file_field :attachment %>
       <span class='attachment-btn absolute'>Browse</span>
     <% end %>
     <%= locals[:f].link_to_add 'Add attachment', :post_documents %>
   </fieldset>
-  <fieldset class='post-submit-button col-md-5 pull-right'>
+  <fieldset class='post-submit-button col-md-5 col-sm-5 col-xs-5 pull-right'>
     <%= locals[:f].submit %>
     <span class='attachment-type'>
       Only image, pdf, excel and doc files are supported.

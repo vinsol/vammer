@@ -1,6 +1,6 @@
-<section class='edit-details pull-left'>
+<section class='edit-details pull-left mob-bot-margin'>
   <%= render 'users/registrations/side_bar' %>
-  <article class='col-md-8 col-md-offset-4 edit-det-inr mt-15 pb-15 chng-pwd'>
+  <article class='col-md-6 col-md-offset-4 edit-det-inr mt-15 pb-15 chng-pwd'>
     <h2 class='mb-0'> Change password </h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
       <%= devise_error_messages! %>
