@@ -6,16 +6,17 @@
          border-radius: $radius;
 }
 .button{
+  @include border-radius(5px);
   background: none repeat scroll 0 0 #219b48;
   border: medium none;
   color: #fff;
   float: right;
   padding: 5px 10px;
-  @include border-radius(5px);
 }
 /*--- header ---*/
 header {
-  background: linear-gradient(#8DB1EF, #3b5998);
+  background: none repeat scroll 0 0 #7a9ddb;
+  border-bottom: 1px solid #337ab7;
   height: 54px;
 }
  .search-user{
@@ -42,8 +43,8 @@ header {
     vertical-align: middle;
     width:180px;
     @media screen and (max-width: 700px){
-      width: 100%;
       display: inline-block;
+      width: 100%;
     }
     img {
       max-height: 100%;
@@ -61,23 +62,23 @@ header {
 .navigation-bar-new{
   li{
     small{
+      color: #337ab7;
       font-family: "FontAwesome";
       font-size: 18px;
       position: absolute;
       top: 10px;
-      color: #337ab7;
     }
   }
   li.group{
     small{
-      top: 13px;
       font-size: 15px;
+      top: 13px;
     }
   }
   li.people{
     small{
-      top: 13px;
       font-size: 15px;
+      top: 13px;
     }
   }
   li.active{
@@ -113,8 +114,8 @@ header {
 
 /*--- nav tabs ---*/
 .fields{
-  position: relative;
   margin: 0 0 15px;
+  position: relative;
   input{
     cursor: pointer;
     opacity: 0;
@@ -153,6 +154,7 @@ header {
 .comment-margin {
   .name-bold {
     font-size: 14px;
+    margin: 0 0 0 10px;
   }
 }
 .comment-block {
@@ -175,8 +177,8 @@ header {
     a{
       color: #c09853;
       font-size: 13px;
-      padding: 10px 5px 5px;
       font-weight: normal !important;
+      padding: 10px 5px 5px;
     }
   }
   li.active{

@@ -35,7 +35,7 @@
         <aside class='col-md-2 col-sm-3'>
           <%= render 'shared/group' %>
         </aside>
-        <article class='navigation-bar-new col-md-6 col-sm-6'>
+        <article class='navigation-bar-new col-md-6 col-sm-9'>
           <ul class="nav nav-tabs">
             <li role="presentation" class=<%= 'active' if request.fullpath == '/' %> > <small class='fa fa-home'></small><%= link_to 'Home', root_path %> </li>
             <li role="presentation" class=group <%= 'active' if request.fullpath == '/groups' %>><small class='fa fa-group'></small> <%= link_to 'Group', groups_path %> </li>
