@@ -1,26 +1,28 @@
-<div class='profile-image-container'>
-  <%= current_user.image ? image_tag(current_user.image.attachment.url) : missing_image_tag %>
-</div>
-<br>
-<%= current_user.name.capitalize %>
-<div>
-  <%= link_to current_user.number_of_followers, follower_user_path(current_user) %> followers
-</div>
-<div>
-  <%= link_to current_user.followings.count, following_user_path(current_user), class: 'follower-numbers' %> followings
-</div>
-
-<br>
-<%= link_to 'New group', :new_group %>
-<br>
-<div class='list-group sidebar-width'>
-
-  <%= link_to 'My groups', groups_path, class: 'list-group-item active' %>
-
-  <% current_user.groups.each do |group| %>
-
-  <%= link_to group.name, group, class: 'list-group-item' %>
-  <% end %>
-
-
-</div>
+<fieldset class='user-container'>
+	<figure class='profile-image-container'>
+    <a href='#'>
+      <%= current_user.image ? image_tag(current_user.image.attachment.url) : missing_image_tag %>
+    </a>
+	</figure>
+  <label class="pt-5 pb-5 m-0">
+    <a href='#'>
+      <%= current_user.name.capitalize %>
+    </a>
+  </label>
+  <ul class='followers'>
+    <li>
+    <%= link_to current_user.number_of_followers, follower_user_path(current_user) %> followers
+    </li>
+    <li>
+    <%= link_to current_user.followings.count, following_user_path(current_user), class: 'follower-numbers' %> followings
+    </li>
+    <li>
+      <%= link_to 'New group', :new_group %>
+    </li>
+    <li class='list-group sidebar-width'>
+    <%= link_to 'My groups', groups_path, class: 'list-group-item active' %>
+    <% current_user.groups.each do |group| %>
+    <%= link_to group.name, group, class: 'list-group-item' %>
+    <% end %>
+  </ul>
+</fieldset>

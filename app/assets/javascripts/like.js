@@ -12,7 +12,7 @@ Like.prototype.generateLink = function(element, data, like_or_unlike_text, like_
   var response = JSON.parse(data.responseText);
   $(element).html(like_or_unlike_text);
   $(element).attr( {'class': like_or_unlike, 'href': response.like_path } ).data('method', http_method).data('remote', 'true');
-  $(element).next('.count').html(response.count);
+  $(element).siblings('.count').html(response.count);
 }
 
 Like.prototype.like = function(element, data) {

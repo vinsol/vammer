@@ -143,7 +143,8 @@ Comment.prototype.checkError = function(element, data) {
 
 Comment.prototype.destroy = function(element, data) {
   if(this.checkError(element, data)){
-    $(element).closest('.comment-box').after(JSON.parse(data.responseText).message)
+    var $comment_delete = $('<div>').attr({ 'class': 'comment-deleted' }).text(JSON.parse(data.responseText).message)
+    $(element).closest('.comment-box').after($comment_delete)
     $(element).closest('.comment-box').remove();
   }
 }

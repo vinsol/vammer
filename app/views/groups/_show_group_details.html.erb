@@ -1,7 +1,8 @@
 <h2> <%= @group.name.capitalize %> </h2>
-  <%= link_to 'Members', members_group_path(@group) %>
-<div> <%= @group.description %> </div>
-<br>
+  <%= link_to 'Members', members_group_path(@group), class:'pull-right' %>
+<div class="user-data pb-15">
+	<%= @group.description %>
+</div>
 <div class='join-link'>
   <% if @group.creator != current_user %>
     <%= group_join_link(@group) %>

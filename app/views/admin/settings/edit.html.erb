@@ -1,35 +1,25 @@
-<div class='container'>
-  <div class='col-md-8 col-md-offset-2 vertical-center'>
-
+<section class="edit-details pull-left mob-bot-margin">
+  <article class="col-md-6 col-md-offset-4 edit-det-inr mt-15 pb-15 chng-pwd pt-15">
     <%= form_for [:admin, @setting], class: 'col-md-8' do |f| %>
-      <div class='control-group'>
+      <fieldset class='form-group'>
         <%= label_tag :company_name, 'Company Name', {class: 'control-label'} %>
         <%= text_field_tag :company_name, COMPANY['name'], disabled: true, class: 'form-control'%>
-      </div>
-
-      <br>
-      <div class='control-group'>
-      <%= f.fields_for :image do |attach| %>
-
-        <%= attach.label :attachment, class: 'control-label' %>
-
-        <%= attach.file_field :attachment %>
-
-        <div class='pull-right upload-logo'>
-          <%= image_tag @logo.image.attachment.url(:thumb) %>
-        </div>
-
-
-      <% end %>
-
-      </div><br>
-
-      <div class='control-group'>
+      </fieldset>
+      <fieldset class='form-group'>
+        <%= f.fields_for :image do |attach| %>
+          <%= attach.label :attachment, class: 'control-label' %>
+          <span class="fields pull-left">
+            <%= attach.file_field :attachment %>
+            <span class="attachment-btn absolute">Browse</span>
+          </span>
+          <fieldset class='pull-left upload-logo'>
+            <%= image_tag @logo.image.attachment.url(:thumb) %>
+          </fieldset>
+        <% end %>
+      </fieldset>
+      <fieldset class="post-submit-button">
         <%= f.submit %>
-      </div>
-
-
-    <% end %>
-
-  </div>
-</div>
+      </fieldset>
+  </article>
+  <% end %>
+</section>

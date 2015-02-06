@@ -8,7 +8,7 @@
 }
 
 .remove-comment {
-  background-image: url('/assets/delete.png');
+  background: url('/assets/delete.png') no-repeat;
   max-width: 32px;
   min-height: 27px;
   margin-left: 480px;
@@ -34,5 +34,8 @@
   left: 115px;
 }
 .comment-margin {
-  margin: 5px 20px;
+  margin: 0px 20px;
+  p{
+    font-size: 13px;
+  }
 }

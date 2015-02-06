@@ -1,23 +1,18 @@
-<div class='form-group'>
-<div class='col-lg-9 col-lg-offset-1'>
+<fieldset>
   <%= locals[:f].text_area :content, placeholder: 'What\'s on your mind?', class: 'form-control inputbox' %>
-</div>
-<br><br><br>
-<div class='add-more-attachment col-lg-2'>
-
-  <%= locals[:f].fields_for :post_documents do |attach| %>
-
-    <%= attach.file_field :attachment %>
-
-  <% end %>
-  <%= locals[:f].link_to_add 'Add attachment', :post_documents %>
-    <div class='attachment-type'>
+</fieldset>
+<article class='post-submit pt-15 ovr-hdn'>
+  <fieldset class='col-md-3 col-sm-3 col-xs-3 pull-left pull-left pl-0'>
+    <%= locals[:f].fields_for :post_documents do |attach| %>
+      <%= attach.file_field :attachment %>
+      <span class='attachment-btn absolute'>Browse</span>
+    <% end %>
+    <%= locals[:f].link_to_add 'Add attachment', :post_documents %>
+  </fieldset>
+  <fieldset class='post-submit-button col-md-5 col-sm-5 col-xs-5 pull-right pr-0'>
+    <%= locals[:f].submit %>
+    <span class='attachment-type'>
       Only image, pdf, excel and doc files are supported.
-    </div>
-
-      <div class='post-submit-button'>
-        <br>
-        <%= locals[:f].submit %>
-      </div>
-
-</div>
+    </span>
+  </fieldset>
+</article>

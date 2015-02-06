@@ -1,11 +1,6 @@
-<div class='btn-group-vertical side-bar side-options'>
-
+<div class='btn-group-vertical side-bar side-options pull-right'>
   <% if creator_logged_in?(@user) %>
-
     <%= link_to 'Change password',edit_user_registration_path %>
-    <br> <br>
     <%= link_to 'Edit user details', edit_user_path(current_user) %>
-
   <% end %>
-
 </div>

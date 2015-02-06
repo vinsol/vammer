@@ -1,19 +1,16 @@
 <!-- #FIX: Rename to _post_comment_form.html.erb DONE -->
-<div class='col-lg-10'>
+<div>
   <%= nested_form_for [post, @comment], html: { class: 'form-horizontal col-lg-12' ,remote: true, class: 'create-comment'} do |f| %>
-
-    <div class='control-group'>
+    <div class='control-group mb-10'>
       <%= f.text_area :content, class: 'form-control inputbox' %>
     </div>
-
-      <%= f.hidden_field :post_id, value: post.id %>
-
-    <br>
+    <%= f.hidden_field :post_id, value: post.id %>
     <div class='comment-post'>
       <div class='control-group'>
         <%= f.fields_for :comment_documents do |doc| %>
-          <%= doc.file_field :attachment %>
-        <% end %>
+        <%= doc.file_field :attachment %>
+        <span class='attachment-btn absolute'>Browse</span>
+      <% end %>
       </div>
       <%= f.link_to_add 'Add attachment', :comment_documents %>
     </div>
@@ -21,9 +18,7 @@
       Only image, pdf, excel and doc files are supported.
     </div>
     <div class='control-group col-lg-offset-10'>
-      <%= f.submit 'ADD A COMMENT', class: 'btn btn-primary' %>
+      <%= f.submit 'Comment', class: 'btn btn-success add-comment' %>
     </div>
-
   <% end %>
-  <br> <br>
 </div>

@@ -1,61 +1,48 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>Vammer</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-
   <body>
-
-    <div class='blue-color'>
-
+    <header class='header'>
       <div class='container'>
-
-        <% if user_signed_in? %>
-
-          <div class='search-header'>
-            <%= render 'layouts/search_bar' %>
-          </div>
-
-        <% end %>
-
+        <div class='row'>
+          <% if user_signed_in? %>
+            <div class='search-header'>
+              <%= render 'layouts/search_bar' %>
+            </div>
+          <% end %>
+        </div>
       </div>
-
-      <div class='container-body'>
-        <br>
-        <!-- #FIX: Fade out flash messages after some time -->
-        <% if flash[:notice] %>
-          <div class="control-group alert alert-success col-lg-offset-4 col-lg-4">
-            <%= flash[:notice] %>
-          </div>
-          <br><br><br><br>
-        <% end %>
-
-        <% if flash[:error] %>
-          <div class="control-group alert alert-danger col-lg-offset-4 col-lg-4">
-            <%= flash[:error] %>
-          </div>
-          <br><br><br><br>
-        <% end %>
-        <% if current_user %>
-          <div class='col-md-2'>
-            <%= render 'shared/group' %>
-          </div>
-          <div class='col-md-offset-3 navigation-bar-new'>
-            <ul class="nav nav-tabs">
-              <li role="presentation" class=<%= 'active' if request.fullpath == '/' %>> <%= link_to 'Home', root_path %> </li>
-              <li role="presentation" class=<%= 'active' if request.fullpath == '/groups' %>> <%= link_to 'Group', groups_path %> </li>
-              <li role="presentation" class=<%= 'active' if request.fullpath == '/users' %>> <%= link_to 'People', users_path %> </li>
-            </ul>
-          </div>
-        <% end %>
-
-        <%= yield %>
-
-      </div>
-    </div>
+    </header>
+    <section class='bodycontainer ovr-hdn mt-20 pb-20'>
+      <!-- #FIX: Fade out flash messages after some time -->
+      <% if flash[:notice] %>
+        <div class="control-group alert alert-success ml-15 mr-15">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class="control-group alert alert-danger ml-15 mr-15">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+      <% if current_user %>
+        <aside class='col-md-2 col-sm-3'>
+          <%= render 'shared/group' %>
+        </aside>
+        <article class='navigation-bar-new col-md-6 col-sm-6'>
+          <ul class="nav nav-tabs">
+            <li role="presentation" class=<%= 'active' if request.fullpath == '/' %> > <small class='fa fa-home'></small><%= link_to 'Home', root_path %> </li>
+            <li role="presentation" class=group <%= 'active' if request.fullpath == '/groups' %>><small class='fa fa-group'></small> <%= link_to 'Group', groups_path %> </li>
+            <li role="presentation" class=people <%= 'active' if request.fullpath == '/users' %>><small class='fa fa-user'></small> <%= link_to 'People', users_path %> </li>
+          </ul>
+      <% end %>
+      <%= yield %>
+    </section>
   </body>
 </html>

@@ -1,45 +1,30 @@
-<div class='row row-margin-bottom'>
-
-  <div class='col-md-5 no-padding lib-item' data-category='view'>
-
+<div class='container-bottom clr-bth ovr-hdn pt-10 pb-10'>
+  <div class='no-padding lib-item' data-category='view'>
     <div class='lib-panel'>
-      <div class='row box-shadow'>
-        <div class='col-md-4'>
+      <div class='user-detail'>
+        <div class='col-md-2 col-sm-2 col-xs-6'>
           <% #FIXME_AB: I would prefer to move user.image.attachment.url(:large) to user model as a method: large_thumbnail_url DONE -%>
           <%= user.image ? image_tag(user.image.attachment.url, class: 'lib-img') : missing_image_tag %>
           <% #FIXME_AB: above if user don't have image, no image should not come as text, should be a missing image thumbnail DONE -%>
           <!-- #FIX: missing image tag can be returned from helper and used at all places DONE -->
         </div>
-
-        <div class='col-md-8'>
+        <div class='col-md-10 col-sm-10 col-x6-6'>
           <div class='lib-row lib-header'>
-
             <%= link_to user.name.capitalize, user_path(user) %>
-
             <%= render 'follow_unfollow', user: user %>
-
             <% if can_edit_user?(user) %>
-              <div class='pull-right edit-user'>
-                <%= link_to 'Edit', edit_user_path(user) %>
-              </div>
+            <div class='pull-right edit-user'>
+              <%= link_to '', edit_user_path(user), title:'edit', class:"edit fa fa-edit" %>
+            </div>
             <% end %>
-
-            <div class='lib-header-seperator'></div>
           </div>
-
-          <div class='lib-row lib-desc'>
-
-            <%= user.email %><br>
+          <div class='lib-row lib-desc pull-right clr-bth pt-15'>
+            <%= user.email %>
             <% #FIXME_AB: What is the format of date you are displaying? 2014-11-10 08:52:24 UTC DONE -%>
-            <%= user.joining_date.to_s(:long) %><br>
-
+            <%= user.joining_date.to_s(:long) %>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-
-  <div class='col-md-1'></div>
-
 </div>
