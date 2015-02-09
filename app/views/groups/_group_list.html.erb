@@ -1,8 +1,8 @@
 <div class='group-block mt-10'>
   <ul class='nav group-sub'>
-    <li class='active'> <%= link_to 'My groups', :groups %> </li>
-    <li> <%= link_to 'Other groups', :extraneous_groups %> </li>
-    <li> <%= link_to 'Owned groups', :owned_groups %> </li>
+    <li class=<%= 'active' if controller_name == 'groups' && action_name == 'index' %>><%= link_to 'My groups', :groups %> </li>
+    <li class=<%= 'active' if controller_name == 'groups' && action_name == 'extraneous' %>> <%= link_to 'Other groups', :extraneous_groups %> </li>
+    <li class=<%= 'active' if controller_name == 'groups' && action_name == 'owned' %>> <%= link_to 'Owned groups', :owned_groups %> </li>
   </ul>
   <div>
     <table class="table table-striped table-hover ">

@@ -48,6 +48,7 @@ User.prototype.bindEvents = function (){
   $('.followers').on('ajax:complete', '.unfollow', function(event, data){
     _this.unfollow(this, data)
   })
+  $('.list-groups-items').hover(function(){$(this).addClass('active')}, function(){ $(this).removeClass('active') })
 }
 
 $(function(){

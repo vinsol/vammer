@@ -38,8 +38,8 @@
         <article class='navigation-bar-new col-md-6 col-sm-6'>
           <ul class="nav nav-tabs">
             <li role="presentation" class=<%= 'active' if request.fullpath == '/' %> > <small class='fa fa-home'></small><%= link_to 'Home', root_path %> </li>
-            <li role="presentation" class=group <%= 'active' if request.fullpath == '/groups' %>><small class='fa fa-group'></small> <%= link_to 'Group', groups_path %> </li>
-            <li role="presentation" class=people <%= 'active' if request.fullpath == '/users' %>><small class='fa fa-user'></small> <%= link_to 'People', users_path %> </li>
+            <li role="presentation" class=<%= 'active' if request.fullpath == '/groups' %> ><small class='fa fa-group'></small> <%= link_to 'Group', groups_path %> </li>
+            <li role="presentation" class=<%= 'active' if request.fullpath == '/users' %>><small class='fa fa-user'></small> <%= link_to 'People', users_path %> </li>
           </ul>
       <% end %>
       <%= yield %>
