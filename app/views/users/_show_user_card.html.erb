@@ -10,7 +10,10 @@
         </div>
         <div class='col-md-10 col-sm-10 col-x6-6'>
           <div class='lib-row lib-header'>
-            <%= link_to user.name.capitalize, user_path(user) %>
+            <div class="username-n-email pull-left">
+              <%= link_to user.name.capitalize, user_path(user) %>
+              <small class='pull-left pt-5'><%= user.email %></small>
+            </div>
             <%= render 'follow_unfollow', user: user %>
             <% if can_edit_user?(user) %>
             <div class='pull-right edit-user'>
@@ -18,8 +21,7 @@
             </div>
             <% end %>
           </div>
-          <div class='lib-row lib-desc pull-right clr-bth pt-15'>
-            <%= user.email %>
+          <div class='lib-row lib-desc pull-right clr-bth pt-5'>
             <% #FIXME_AB: What is the format of date you are displaying? 2014-11-10 08:52:24 UTC DONE -%>
             <%= user.joining_date.to_s(:long) %>
           </div>
