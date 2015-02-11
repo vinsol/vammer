@@ -12,32 +12,34 @@
     <div class='comment-margin'>
       <%= simple_format linkify_mentions(linkify_hashtags(comment.content)) %>
     </div>
-    <span class='comment-count count'>
-      <%= comment.likes.count %>
-    </span>
-    <%= link_to_like_unlike comment, :comment %>
-    <% comment.comment_documents.each do |document| %>
-    <!-- #FIX: Indentation DONE -->
-    <div class='attachment comment-margin'>
-      <span>
-        <% if document.attachment_content_type.split('/').first == 'image' %>
-        <%= render 'shared/show_attachment', image: document %>
-        <% else %>
-        <%= link_to attachment_type(document), document.attachment.url %>
-        <%= document.attachment_file_name %>
-        <% end %>
+    <div class='like-n-dlt mt-10'>
+      <span class='comment-count count'>
+        <%= comment.likes.count %>
       </span>
-      <% if can_edit_user?(comment.user) %>
-      <%= link_to image_tag('delete.png'), attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+      <%= link_to_like_unlike comment, :comment %>
+      <% comment.comment_documents.each do |document| %>
+      <!-- #FIX: Indentation DONE -->
+      <div class='attachment comment-margin'>
+        <span>
+          <% if document.attachment_content_type.split('/').first == 'image' %>
+          <%= render 'shared/show_attachment', image: document %>
+          <% else %>
+          <%= link_to attachment_type(document), document.attachment.url %>
+          <%= document.attachment_file_name %>
+          <% end %>
+        </span>
+        <% if can_edit_user?(comment.user) %>
+        <%= link_to image_tag('delete.png'), attachment_path(document), method: :delete, remote: true, class: 'delete-attachment' %>
+        <% end %>
+      </div>
       <% end %>
-    </div>
-    <% end %>
-    <% if can_edit_user?(comment.user) %>
-    <div class='comment-margin'>
-      <!-- #FIX: Move if condition outer div DONE -->
-      <%= link_to image_tag('delete.png'), post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment delete-comm' %>
-    </div>
-    <% end %>
+      <% if can_edit_user?(comment.user) %>
+      <div class='comment-margin'>
+        <!-- #FIX: Move if condition outer div DONE -->
+        <%= link_to image_tag('delete.png'), post_comment_path(post, comment, comment: {group_id: @group.try(:id)} ), method: :delete, remote: true, class: 'delete-comment delete-comm' %>
+      </div>
+      <% end %>
+  </div>
   </div>
 <% end %>
 <!-- #FIX: Use id and a longer name to uniquely identify comment div -->

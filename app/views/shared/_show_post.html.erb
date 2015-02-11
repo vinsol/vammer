@@ -22,13 +22,17 @@
           <% end %>
         </div>
       <% end %>
-      <span class='count'>
-        <%= post.likes.count %>
-      </span>
-      <%= link_to_like_unlike post, :post %>
-      <% if can_edit_user?(post.user) %>
-      <%= link_to image_tag('delete.png'), post_path(post.id), method: :delete, class: 'delete-post' %>
-      <% end %>
+      <div class='like-n-dlt mt-10'>
+        <span class='count'>
+          <%= post.likes.count %>
+        </span>
+        <%= link_to_like_unlike post, :post %>
+        <% if can_edit_user?(post.user) %>
+        <span class='display-dlt'>
+          <%= link_to image_tag('delete.png'), post_path(post.id), method: :delete, class: 'delete-post' %>
+        </span>
+        <% end %>
+      </div>
     </div>
     <%= render 'home/show_comments', post: post %>
     <% if( !post.group || current_user.groups.include?(post.group) || current_user.admin? ) %>
