@@ -20,7 +20,7 @@
       <%= link_to 'New group', :new_group %>
     </li>
     <li class='list-group sidebar-width'>
-    <%= link_to 'My groups', groups_path, class: 'list-group-item active' %>
+    <%= link_to 'My groups', groups_path, class: 'list-group-item mainactive' %>
     <% current_user.groups.each do |group| %>
       <% if controller_name == 'groups' && action_name = 'show' && params['id'] == group.id.to_s %>
         <%= link_to group.name, group, class: 'list-group-item active' %>

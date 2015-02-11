@@ -4419,9 +4419,8 @@ a.list-group-item:focus, a.list-group-item:hover {
 }
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
 	z-index: 2;
-	color: #fff;
-	background-color: #337ab7;
-	border-color: #337ab7
+	color: #666;
+	background-color: #f5f5f5;
 }
 .list-group-item.active .list-group-item-heading, .list-group-item.active .list-group-item-heading>.small, .list-group-item.active .list-group-item-heading>small, .list-group-item.active:focus .list-group-item-heading, .list-group-item.active:focus .list-group-item-heading>.small, .list-group-item.active:focus .list-group-item-heading>small, .list-group-item.active:hover .list-group-item-heading, .list-group-item.active:hover .list-group-item-heading>.small, .list-group-item.active:hover .list-group-item-heading>small {
 	color: inherit
