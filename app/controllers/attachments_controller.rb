@@ -47,14 +47,14 @@ class AttachmentsController < ApplicationController
 
     def handle_response
       comment = {
-        error: t('comments.record.failure', scope: :message)
+        error: 'ss'
       }
       render_on_error(comment)
     end
 
     def render_on_error(comment)
       respond_to do |format|
-        format.json { render json: comment, status: 500 }
+        format.json { render json: comment, status: 404 }
       end
     end
 

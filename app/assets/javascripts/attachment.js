@@ -1,15 +1,16 @@
 var Attachment = function(){}
 
-Attachment.prototype.checkError = function(data) {
+Attachment.prototype.checkError = function(data, element) {
   error = JSON.parse(data.responseText).error
   if(error != undefined) {
-    alert(error)
+    var $comment_delete = $('<div>').attr({ 'class': 'comment-deleted' }).text('Could not delete this attachment')
+    $(element).closest('.comment-box').after($comment_delete)
   }
   return error == undefined
 }
 
 Attachment.prototype.destroy = function(element, data) {
-  if(this.checkError(data)){
+  if(this.checkError(data, element)){
     $(element).closest('.attachment').remove();
   }
 }

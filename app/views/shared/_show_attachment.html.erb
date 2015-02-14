@@ -7,7 +7,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body post-image">
-        <%= image_tag(image.attachment.url, size: '200x200') %>  
+        <button class="close" data-dismiss="modal">X</button>
+        <%= image_tag(image.attachment.url, size: '300x300') %>
+      </div>
+      <div class="modal-footer">
+        <a href="<%= image.attachment.url %>" download="<%= image.attachment.name %>"> Download </a>
       </div>
     </div>
   </div>

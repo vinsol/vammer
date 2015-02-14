@@ -42,10 +42,10 @@ User.prototype.unfollow = function(element, data) {
 
 User.prototype.bindEvents = function (){
   var _this = this;
-  $('.followers').on('ajax:complete', '.follow', function(event, data){
+  $('.follow-user').on('ajax:complete', '.follow', function(event, data){
     _this.follow(this, data)
   })
-  $('.followers').on('ajax:complete', '.unfollow', function(event, data){
+  $('.follow-user').on('ajax:complete', '.unfollow', function(event, data){
     _this.unfollow(this, data)
   })
   $('.list-groups-items').hover(function(){$(this).addClass('active')}, function(){ $(this).removeClass('active') })

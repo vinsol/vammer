@@ -81,7 +81,7 @@ module ApplicationHelper
   private
 
     def sort_direction_link(order, direction)
-      image = image_tag("#{direction}.png")
+      image = image_tag("#{direction}.png", class: 'group-sorting-image')
       link_to image, controller: controller_name, action: action_name, order: order, direction: direction, page: params[:page]
     end
 

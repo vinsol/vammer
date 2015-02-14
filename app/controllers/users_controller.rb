@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json do
         #FIX: Search users with names beginning with term only DONE
-        data = { users: User.where('name ilike ? ',params[:term] + '%').pluck(:name) }
+        data = { users: User.where('name ilike ? ',params[:term] + '%').map { |user| { name: user.name, image: user.image.attachment.url(:logo) } } }
         render json: data
       end
     end

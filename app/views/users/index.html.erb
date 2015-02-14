@@ -1,14 +1,32 @@
 <div class="group-people mt-10">
   <ul class='nav group-sub'>
-    <li> <%= link_to 'All users', users_path %> </li>
-    <li> <%= link_to 'Followers', follower_user_path(@user) %> </li>
-    <li> <%= link_to 'Following', following_user_path(@user) %> </li>
+    <% if controller_name == 'users' && action_name == 'index' %>
+      <li class='active'> <%= link_to 'All users', users_path %> </li>
+    <% else %>
+      <li class='list-groups-items'> <%= link_to 'All users', users_path %> </li>
+    <% end %>
+    <% if controller_name == 'users' && action_name == 'follower' %>
+      <li class='active'> <%= link_to 'Followers', follower_user_path(@user) %> </li>
+    <% else %>
+      <li class='list-groups-items'> <%= link_to 'Followers', follower_user_path(@user) %> </li>
+    <% end %>
+    <% if controller_name == 'users' && action_name == 'following' %>
+      <li class='active'> <%= link_to 'Following', following_user_path(@user) %> </li>
+    <% else %>
+      <li class='list-groups-items'> <%= link_to 'Following', following_user_path(@user) %> </li>
+    <% end %>
   </ul>
   <ul class='list-inline pb-10'>
     <% ApplicationHelper::ALPHABETS.each do |alphabet| %>
-      <li>
-        <%= link_to alphabet, users_path(letter: alphabet) %>
-      </li>|
+        <% if params[:letter] == alphabet %>
+          <li class='active'>
+            <%= link_to alphabet, users_path(letter: alphabet) %>
+          </li>|
+        <% else %>
+          <li class='list-groups-items'>
+            <%= link_to alphabet, users_path(letter: alphabet) %>
+          </li>|
+        <% end %>
     <% end %>
   </ul>
   <div class='user-block'>

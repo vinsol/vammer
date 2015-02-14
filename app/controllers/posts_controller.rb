@@ -141,7 +141,7 @@ class PostsController < ApplicationController
     end
 
     def redirect_path
-      if @post.group_id
+      if @post.try(:group_id)
         group_path(@post.group_id)
       else
         :root

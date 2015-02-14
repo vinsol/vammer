@@ -72,9 +72,14 @@ Comment.prototype.buildModal = function(element) {
       $modal_dialog = $('<div>').attr( { 'class': 'modal-dialog' } ),
       $modal_content = $('<div>').attr( { 'class': 'modal-content' } ),
       $modal_body = $('<div>').attr( { 'class': 'modal-body post-image' } ),
-      $image = $('<img>').attr( {'src': element.attachments_url, 'width': '200', 'height': '200'} );
+      $image = $('<img>').attr( {'src': element.attachments_url, 'width': '300', 'height': '300'} ),
+      $modal_dismiss = $('<div>').attr( {'class': 'close', 'data-dismiss': 'modal'} ).text('X'),
+      $modal_footer = $('<div>').attr( {'class': 'modal-footer'} ),
+      $download_link = $('<a>').attr( {'href': element.attachments_url, 'download': 'Attachment'} ).text('Download');
+  $modal_footer.append($download_link);
+  $modal_body.append($modal_dismiss);
   $modal_body.append($image);
-  $modal_content.append($modal_body);
+  $modal_content.append($modal_body).append($modal_footer);
   $modal_dialog.append($modal_content);
   return $modal_container.append($modal_dialog);
 }
@@ -120,14 +125,16 @@ Comment.prototype.CreateDom = function(element, data) {
         $content = this.contentDetails(response),
         $container = $('.' + response.post_id),
         $box = $('<div>').attr({ 'class': 'shadow comment-box' }),
-        $image = $('<div>').attr( { 'class': 'remove-comment' } ),
+        $image = $('<img>').attr( { 'alt': 'Delete', 'src': '/assets/delete.png' } ),
+        $margin_div = this.marginDiv(),
         $destroy_comment = $('<a>').attr({'href': response.comment_destroy_path,
           'data-method': 'delete',
           'data-remote': 'true',
-          'class': 'delete-comm',
+          'class': 'delete-comm delete-comment',
         });
     $destroy_comment.append($image);
-    $box.append($name).append($content).append($numberOfLikes).append($like).append($attachments).append($destroy_comment);
+    $margin_div.append($destroy_comment)
+    $box.append($name).append($content).append($numberOfLikes).append($like).append($attachments).append($margin_div);
     $container.append($box);
     this.resetForm(element);
   }
@@ -146,6 +153,10 @@ Comment.prototype.destroy = function(element, data) {
     var $comment_delete = $('<div>').attr({ 'class': 'comment-deleted' }).text(JSON.parse(data.responseText).message)
     $(element).closest('.comment-box').after($comment_delete)
     $(element).closest('.comment-box').remove();
+  }
+  else {
+    var $comment_delete = $('<div>').attr({ 'class': 'comment-deleted' }).text('Could not delete this comment')
+    $(element).closest('.comment-box').after($comment_delete)
   }
 }
 
